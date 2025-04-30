@@ -3,30 +3,40 @@ using System;
 namespace Menus
 {
     /// <summary>
-    /// Handles I/O for the user to navigate the program.
+    /// Safely handles input and output for the menus.
     /// </summary>
     public static class ConsoleDisplay
     {
         /// <summary>
-        /// Displays a message to the screen.
+        /// Writes the specified string message to the screen.
         /// </summary>
-        /// <param name="message">A string</param>
+        /// <param name="message">The string message to display to the screen.</param>
         public static void DisplayMessage(string message)
         {
             Console.WriteLine(message);
         }
         
+        /// <summary>
+        /// Reads a string input from the user via the console.
+        /// <para>
+        /// Attempts to convert the input into an integer.
+        /// </para>
+        /// Returns the integer value if valid, or a default value (-1) if the input
+        /// is invalid.
+        /// </summary>
+        /// <returns>The user's input as an integer, or -1 if the input is invalid.</returns>
         public static int GetChoice()
         {
             string? choice = Console.ReadLine();
             
+            // Check for valid input
             if (int.TryParse(choice, out int result))
             {
                 return result;
             }
             
-            // Handle invalid input
-            return 0;
+            // Return a default value if invalid
+            return -1;
         }
     }
 }

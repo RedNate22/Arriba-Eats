@@ -10,12 +10,13 @@ namespace Menus
         private const string REGISTER_STR = "2: Register as a new user";
         private const string EXIT_STR = "3: Exit";
         private const string ENTER_CHOICE_STR = "Please enter a choice between 1 and 3:";
-        private const string EXIT_MESSAGE_STR = "Thank you for using Arriba Eats!";
+        private const string GOODBYE_STR = "Thank you for using Arriba Eats!";
 
         // Int for each option
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
 
-        bool isRunning = true;  // Control flag for main program loop
+        // Control flag for main program loop
+        private bool _isRunning = true;  
         
         /// <summary>
         /// Displays the welcome message.
@@ -26,7 +27,7 @@ namespace Menus
         }
 
         /// <summary>
-        /// Display the main menu options and gets option choice from user.
+        /// Display the main menu options and gets choice from user.
         /// </summary>
         public void DisplayMenu()
         {
@@ -49,8 +50,8 @@ namespace Menus
                     ConsoleDisplay.DisplayMessage(MenusConstants.OPTION_2_SELECTED_STR);
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
-                    ConsoleDisplay.DisplayMessage(EXIT_MESSAGE_STR);
-                    isRunning = false;
+                    ConsoleDisplay.DisplayMessage(GOODBYE_STR);
+                    _isRunning = false;
                     break;
                 default:  // User has entered an invalid option
                     ConsoleDisplay.DisplayMessage("Invalid option. Please choose again.");
@@ -66,7 +67,7 @@ namespace Menus
         {
             WelcomeMessage();  // Welcome the user
             
-            while(isRunning)
+            while(_isRunning)
             {
                 DisplayMenu();
             }
