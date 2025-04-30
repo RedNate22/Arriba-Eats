@@ -7,9 +7,7 @@
     {
         static void Main(string[] args)
         {
-            // create the menu and runs it
-            Menu menu = new Menu();
-            menu.Run();
+            Console.WriteLine("Welcome to Arriba Eats!");
         }
     }
 }
