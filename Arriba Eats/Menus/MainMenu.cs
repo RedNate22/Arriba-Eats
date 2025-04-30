@@ -4,7 +4,7 @@ namespace Menus
 {
     public class MainMenu
     {
-        // Main menu strings
+        // Strings to display options and messages for the main menu
         private const string WELCOME_STR = "Welcome to Arriba Eats!";
         private const string LOGIN_STR = "1: Login as a registered user";
         private const string REGISTER_STR = "2: Register as a new user";
@@ -31,14 +31,14 @@ namespace Menus
         /// </summary>
         public void DisplayMenu()
         {
-            // Display choices to the screen.
+            // Display choices to the screen
             ConsoleDisplay.DisplayMessage(MenusConstants.MAKE_CHOICE_STR);
             ConsoleDisplay.DisplayMessage(LOGIN_STR);
             ConsoleDisplay.DisplayMessage(REGISTER_STR);
             ConsoleDisplay.DisplayMessage(EXIT_STR);
             ConsoleDisplay.DisplayMessage(ENTER_CHOICE_STR);
 
-            // Get choice from user.
+            // Get choice from user
             int option = ConsoleDisplay.GetChoice();
 
             switch (option)
@@ -61,11 +61,12 @@ namespace Menus
 
         
         /// <summary>
-        /// Entry method to start the program.
+        /// Entry point to start the program and begin the main input loop.
         /// </summary>
         public void Run()
         {
-            WelcomeMessage();  // Welcome the user
+            // Welcome the user and begin main input loop
+            WelcomeMessage(); 
             
             while(_isRunning)
             {
