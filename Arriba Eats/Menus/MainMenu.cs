@@ -15,7 +15,7 @@ namespace Menus
         // Int for each option
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
 
-        bool isRunning = true;  // Control flag for main loop
+        bool isRunning = true;  // Control flag for main program loop
         
         /// <summary>
         /// Displays the welcome message.
@@ -30,32 +30,41 @@ namespace Menus
         /// </summary>
         public void DisplayMenu()
         {
+            // Display choices to the screen.
             ConsoleDisplay.DisplayMessage(MenusConstants.MAKE_CHOICE_STR);
             ConsoleDisplay.DisplayMessage(LOGIN_STR);
             ConsoleDisplay.DisplayMessage(REGISTER_STR);
             ConsoleDisplay.DisplayMessage(EXIT_STR);
             ConsoleDisplay.DisplayMessage(ENTER_CHOICE_STR);
 
-            // Get choice of user
+            // Get choice from user.
             int option = ConsoleDisplay.GetChoice();
 
             switch (option)
             {
                 case LOGIN_INT:  // User chooses option 1: Go to login menu
+                    ConsoleDisplay.DisplayMessage(MenusConstants.OPTION_1_SELECTED_STR);
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
+                    ConsoleDisplay.DisplayMessage(MenusConstants.OPTION_2_SELECTED_STR);
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
-                    ConsoleDisplay.DisplayMessage(EXIT_MESSAGE_STR);  // Display exit message
+                    ConsoleDisplay.DisplayMessage(EXIT_MESSAGE_STR);
                     isRunning = false;
+                    break;
+                default:  // User has entered an invalid option
+                    ConsoleDisplay.DisplayMessage("Invalid option. Please choose again.");
                     break;
             }
         }
 
         
+        /// <summary>
+        /// Entry method to start the program.
+        /// </summary>
         public void Run()
         {
-            WelcomeMessage();
+            WelcomeMessage();  // Welcome the user
             
             while(isRunning)
             {
