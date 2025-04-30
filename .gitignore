@@ -1,0 +1,46 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.vs/
+*.vscode/
+
+# Ignore compiled assemblies
+*.dll
+*.exe
+
+# Ignore package-related files
+packages/
+*.nupkg
+*.snupkg
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.pdb
+
+# Ignore backup files
+*.bak
+
+# Ignore IDE-specific files
+*.suo
+*.cache
+*.userprefs
+
+# Ignore NuGet package restore results
+*.nuget/
+
+# Ignore git merge conflict files
+*.orig
+
+# Ignore folder for local dependencies or configurations
+.env/
+.env.*
+local.settings.json
+
+*.csproj
+*.sln
