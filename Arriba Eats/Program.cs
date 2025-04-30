@@ -10,8 +10,8 @@ namespace ArribaEats
     {
         static void Main(string[] args)
         {
-            LoginMenu loginMenu = new LoginMenu();
-            loginMenu.Run();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Run();
         }
     }
 }

@@ -15,5 +15,18 @@ namespace Menus
         {
             Console.WriteLine(message);
         }
+        
+        public static int GetChoice()
+        {
+            string? choice = Console.ReadLine();
+            
+            if (int.TryParse(choice, out int result))
+            {
+                return result;
+            }
+            
+            // Handle invalid input
+            return 0;
+        }
     }
 }
