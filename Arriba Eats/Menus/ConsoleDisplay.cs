@@ -3,7 +3,7 @@ using System;
 namespace Menus
 {
     /// <summary>
-    /// Handles output to the screen.
+    /// Handles I/O for the user to navigate the program.
     /// </summary>
     public static class ConsoleDisplay
     {

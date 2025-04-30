@@ -5,21 +5,24 @@ namespace Menus
     public class MainMenu
     {
         // Main menu strings
-        private const string WELCOME = "Welcome to Arriba Eats!";
-        private const string OPTION_1_STR = "1: Login as a registered user";
-        private const string OPTION_2_STR = "2: Register as a new user";
-        private const string OPTION_3_STR = "3: Exit";
-        private const string CHOICE_STR = "Please enter a choice between 1 and 3:";
+        private const string WELCOME_STR = "Welcome to Arriba Eats!";
+        private const string LOGIN_STR = "1: Login as a registered user";
+        private const string REGISTER_STR = "2: Register as a new user";
+        private const string EXIT_STR = "3: Exit";
+        private const string ENTER_CHOICE_STR = "Please enter a choice between 1 and 3:";
+        private const string EXIT_MESSAGE_STR = "Thank you for using Arriba Eats!";
 
         // Int for each option
-        private const int OPTION_1 = 1, OPTION_2 = 2, OPTION_3 = 3;
+        private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
 
+        bool isRunning = true;  // Control flag for main loop
+        
         /// <summary>
         /// Displays the welcome message.
         /// </summary>
         public void WelcomeMessage()
         {
-            ConsoleDisplay.DisplayMessage(WELCOME);
+            ConsoleDisplay.DisplayMessage(WELCOME_STR);
         }
 
         /// <summary>
@@ -27,31 +30,37 @@ namespace Menus
         /// </summary>
         public void DisplayMenu()
         {
-            ConsoleDisplay.DisplayMessage(OPTION_1_STR);
-            ConsoleDisplay.DisplayMessage(OPTION_2_STR);
-            ConsoleDisplay.DisplayMessage(OPTION_3_STR);
-            ConsoleDisplay.DisplayMessage(CHOICE_STR);
+            ConsoleDisplay.DisplayMessage(MenusConstants.MAKE_CHOICE_STR);
+            ConsoleDisplay.DisplayMessage(LOGIN_STR);
+            ConsoleDisplay.DisplayMessage(REGISTER_STR);
+            ConsoleDisplay.DisplayMessage(EXIT_STR);
+            ConsoleDisplay.DisplayMessage(ENTER_CHOICE_STR);
 
             // Get choice of user
             int option = ConsoleDisplay.GetChoice();
 
             switch (option)
             {
-                case 1:
-                    Console.WriteLine("Option 1 selected");
+                case LOGIN_INT:  // User chooses option 1: Go to login menu
                     break;
-                case 2:
-                    Console.WriteLine("Option 2 selected");
+                case REGISTER_INT:  // User chooses option 2: Go to register menu
                     break;
-                case 3:
+                case EXIT_INT:  // User chooses option 3: Exit program
+                    ConsoleDisplay.DisplayMessage(EXIT_MESSAGE_STR);  // Display exit message
+                    isRunning = false;
                     break;
             }
         }
 
+        
         public void Run()
         {
             WelcomeMessage();
-            DisplayMenu();
+            
+            while(isRunning)
+            {
+                DisplayMenu();
+            }
         }
     }
 }
