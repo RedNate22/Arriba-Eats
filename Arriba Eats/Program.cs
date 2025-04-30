@@ -1,4 +1,7 @@
-﻿namespace CAB201Menu
+﻿using System;
+using Menus;
+
+namespace ArribaEats
 {
     /// <summary>
     /// The main program
@@ -7,7 +10,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Arriba Eats!");
+            LoginMenu loginMenu = new LoginMenu();
+            loginMenu.Run();
         }
     }
 }
