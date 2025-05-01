@@ -46,6 +46,7 @@ namespace UI
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
                     ConsoleDisplay.DisplayMessage(GOODBYE_STR);
+                    MenuController.currentState = MenuState.Exit;
                     break;
                 default:  // User has entered an invalid option
                     ConsoleDisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);

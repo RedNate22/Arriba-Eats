@@ -4,14 +4,15 @@ namespace UI;
 
 public static class MenuController
 {    
+    public static MenuState currentState { get; set; }
+    
     public static void Run()
     {
         MainMenu mainMenu = new MainMenu();
         RegistrationMenu registrationMenu = new RegistrationMenu();
         //LoginMenu loginMenu = new LoginMenu();
 
-        
-        MenuState currentState = MenuState.MainMenu;
+        currentState = MenuState.MainMenu;
         mainMenu.WelcomeMessage(); 
             
         while(currentState != MenuState.Exit)
@@ -23,9 +24,11 @@ public static class MenuController
                 break;
 
                 case MenuState.RegistrationMenu:
+                registrationMenu.DisplayMenu();
                 break;
 
                 case MenuState.LoginMenu:
+                //loginMenu.DisplayMenu();
                 break;
             }
         }
