@@ -2,6 +2,9 @@ using System;
 
 namespace UI
 {
+    /// <summary>
+    /// Displays the main menu where the user can login, register or exit.
+    /// </summary>
     public class MainMenu : IMenu
     {
         // Strings to display options and messages for the main menu
@@ -12,7 +15,6 @@ namespace UI
         private const string ENTER_CHOICE_STR = "Please enter a choice between 1 and 3:";
         private const string GOODBYE_STR = "Thank you for using Arriba Eats!";
 
-        // Int for each option
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
        
         /// <summary>
