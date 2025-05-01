@@ -16,6 +16,8 @@ namespace ArribaEats
         {
             MainMenu mainMenu = new MainMenu();
             mainMenu.Run();
+            // Test comment
+            // Test comment again
         }
     }
 }
