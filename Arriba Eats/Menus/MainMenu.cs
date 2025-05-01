@@ -31,14 +31,12 @@ namespace Menus
         /// </summary>
         public void DisplayMenu()
         {
-            // Display choices to the screen
             ConsoleDisplay.DisplayMessage(MenusConstants.MAKE_CHOICE_STR);
             ConsoleDisplay.DisplayMessage(LOGIN_STR);
             ConsoleDisplay.DisplayMessage(REGISTER_STR);
             ConsoleDisplay.DisplayMessage(EXIT_STR);
             ConsoleDisplay.DisplayMessage(ENTER_CHOICE_STR);
 
-            // Get choice from user
             int option = ConsoleDisplay.GetChoice();
 
             switch (option)
@@ -65,7 +63,6 @@ namespace Menus
         /// </summary>
         public void Run()
         {
-            // Welcome the user and begin main input loop
             WelcomeMessage(); 
             
             while(_isRunning)

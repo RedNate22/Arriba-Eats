@@ -4,7 +4,11 @@ using Menus;
 namespace ArribaEats
 {
     /// <summary>
-    /// The main program
+    /// The main entry point to the program.
+    /// <para>
+    /// Creates an instance of MainMenu then runs the Run method
+    /// to start.
+    /// </para>
     /// </summary>
     internal class Program
     {

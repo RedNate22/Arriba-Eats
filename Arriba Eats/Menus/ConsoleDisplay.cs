@@ -29,13 +29,11 @@ namespace Menus
         {
             string? choice = Console.ReadLine();
             
-            // Check for valid input
             if (int.TryParse(choice, out int result))
             {
                 return result;
             }
             
-            // Return a default value if invalid
             return -1;
         }
     }
