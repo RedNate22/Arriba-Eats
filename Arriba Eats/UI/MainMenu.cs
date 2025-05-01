@@ -1,8 +1,8 @@
 using System;
 
-namespace Menus
+namespace UI
 {
-    public class MainMenu
+    public class MainMenu : IMenu
     {
         // Strings to display options and messages for the main menu
         private const string WELCOME_STR = "Welcome to Arriba Eats!";
@@ -14,10 +14,7 @@ namespace Menus
 
         // Int for each option
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
-
-        // Control flag for main program loop
-        private bool _isRunning = true;  
-        
+       
         /// <summary>
         /// Displays the welcome message.
         /// </summary>
@@ -31,7 +28,7 @@ namespace Menus
         /// </summary>
         public void DisplayMenu()
         {
-            ConsoleDisplay.DisplayMessage(MenusConstants.MAKE_CHOICE_STR);
+            ConsoleDisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
             ConsoleDisplay.DisplayMessage(LOGIN_STR);
             ConsoleDisplay.DisplayMessage(REGISTER_STR);
             ConsoleDisplay.DisplayMessage(EXIT_STR);
@@ -42,32 +39,17 @@ namespace Menus
             switch (option)
             {
                 case LOGIN_INT:  // User chooses option 1: Go to login menu
-                    ConsoleDisplay.DisplayMessage(MenusConstants.OPTION_1_SELECTED_STR);
+                    ConsoleDisplay.DisplayMessage(MenuConstants.OPTION_1_SELECTED_STR);
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
-                    ConsoleDisplay.DisplayMessage(MenusConstants.OPTION_2_SELECTED_STR);
+                    ConsoleDisplay.DisplayMessage(MenuConstants.OPTION_2_SELECTED_STR);
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
                     ConsoleDisplay.DisplayMessage(GOODBYE_STR);
-                    _isRunning = false;
                     break;
                 default:  // User has entered an invalid option
-                    ConsoleDisplay.DisplayMessage(MenusConstants.INVALID_CHOICE_STR);
+                    ConsoleDisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                     break;
-            }
-        }
-
-        
-        /// <summary>
-        /// Entry point to start the program and begin the main input loop.
-        /// </summary>
-        public void Run()
-        {
-            WelcomeMessage(); 
-            
-            while(_isRunning)
-            {
-                DisplayMenu();
             }
         }
     }

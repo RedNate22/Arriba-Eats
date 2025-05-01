@@ -1,5 +1,5 @@
 ﻿using System;
-using Menus;
+using UI;
 
 namespace ArribaEats
 {
@@ -14,8 +14,7 @@ namespace ArribaEats
     {
         static void Main(string[] args)
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Run();
+            MenuController.Run();
         }
     }
 }

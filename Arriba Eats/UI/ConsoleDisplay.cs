@@ -1,6 +1,6 @@
 using System;
 
-namespace Menus
+namespace UI
 {
     /// <summary>
     /// Safely handles input and output for the menus.
