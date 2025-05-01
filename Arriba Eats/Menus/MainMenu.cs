@@ -52,7 +52,7 @@ namespace Menus
                     _isRunning = false;
                     break;
                 default:  // User has entered an invalid option
-                    ConsoleDisplay.DisplayMessage("Invalid option. Please choose again.");
+                    ConsoleDisplay.DisplayMessage(MenusConstants.INVALID_CHOICE_STR);
                     break;
             }
         }
