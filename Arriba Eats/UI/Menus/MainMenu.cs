@@ -5,7 +5,7 @@ using Navigation;
 namespace Menus
 {
     /// <summary>
-    /// Displays the main menu where the user can login, register or exit.
+    /// Displays the main menu where the user can login, register or exit. 
     /// </summary>
     public class MainMenu : IMenu
     {
@@ -19,16 +19,14 @@ namespace Menus
 
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
         
-        /// <summary>
-        /// Displays the welcome message.
-        /// </summary>
+        /// <summary> Displays the welcome message. </summary>
         public static void WelcomeMessage()
         {
             ConsoleDisplay.DisplayMessage(WELCOME_STR);
         }
 
-        /// <summary>
-        /// Display the main menu options and gets choice from user.
+        /// <summary> 
+        /// Display the main menu options and gets choice from user. 
         /// </summary>
         public void DisplayMenu()
         {
@@ -50,7 +48,7 @@ namespace Menus
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
                     ConsoleDisplay.DisplayMessage(GOODBYE_STR);
-                    MenuController.currentState = MenuState.Exit;
+                    MenuController.CurrentState = MenuState.Exit;
                     break;
                 default:  // User has entered an invalid option
                     ConsoleDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);

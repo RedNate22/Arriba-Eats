@@ -4,7 +4,7 @@ using Menus;
 namespace Navigation
 {
     /// <summary>
-    /// <para>Initialises menu instances and transitions between menus.<para>
+    /// Handles menu state transitions and controls the flow of navigation within the application.
     /// </summary>
     public static class MenuController
     {    
@@ -12,6 +12,11 @@ namespace Navigation
         /// Tracks the currently active menu state.
         /// </summary>
         private static MenuState _currentState;
+        
+        /// <summary>
+        /// <para> Gets or sets the current menu state. </para>
+        /// <para> When updated, the application transitions to the corresponding menu. </para>
+        /// </summary>
         public static MenuState CurrentState 
         { 
             get { return _currentState; } 
@@ -19,11 +24,13 @@ namespace Navigation
         }
         
         /// <summary>
-        /// 
+        /// <para> Starts the menu system and handles navigation based on the current state. <para>
+        /// <para> Initialises the default menu and displays the welcome message. </para>
+        /// <para> Continously monitors state transitions and ensures the appropriate menu is displayed. </para>
         /// </summary>
-        public static void Run()
+        public static void StartMenus()
         {
-            CurrentState = MenuState.MainMenu;  // Default menu
+            CurrentState = MenuState.MainMenu;
             MainMenu.WelcomeMessage(); 
 
             while(CurrentState != MenuState.Exit)
@@ -32,27 +39,10 @@ namespace Navigation
                 {
                     MenuRegistry.menuMap[CurrentState].DisplayMenu();
                 }
-                else
+                else  // Fall back to main menu if the key doesn't exist
                 {
                     CurrentState = MenuState.MainMenu;
                 }
-                
-                /*
-                switch (currentState)
-                {
-                    case MenuState.MainMenu:
-                        //mainMenu.DisplayMenu();
-                        break;
-
-                    case MenuState.RegistrationMenu:
-                        registrationMenu.DisplayMenu();
-                        break;
-
-                    case MenuState.LoginMenu:
-                        //loginMenu.DisplayMenu();
-                        break;
-                }
-            */
             }
         }
     }

@@ -14,7 +14,7 @@ namespace ArribaEats
     {
         static void Main(string[] args)
         {
-            MenuController.Run();
+            MenuController.StartMenus();
         }
     }
 }
