@@ -11,36 +11,48 @@ namespace Navigation
         /// <summary>
         /// Tracks the currently active menu state.
         /// </summary>
-        public static MenuState currentState { get; set; }
+        private static MenuState _currentState;
+        public static MenuState CurrentState 
+        { 
+            get { return _currentState; } 
+            set { _currentState = value; } 
+        }
         
         /// <summary>
-        /// Tracks the current menu state and transitions based on the current state.
+        /// 
         /// </summary>
         public static void Run()
         {
-            MainMenu mainMenu = new MainMenu();
-            RegistrationMenu registrationMenu = new RegistrationMenu();
-            //LoginMenu loginMenu = new LoginMenu();
+            CurrentState = MenuState.MainMenu;  // Default menu
+            MainMenu.WelcomeMessage(); 
 
-            currentState = MenuState.MainMenu;  // Default menu
-            mainMenu.WelcomeMessage(); 
-
-            while(currentState != MenuState.Exit)
+            while(CurrentState != MenuState.Exit)
             {
+                if (MenuRegistry.menuMap.ContainsKey(CurrentState))
+                {
+                    MenuRegistry.menuMap[CurrentState].DisplayMenu();
+                }
+                else
+                {
+                    CurrentState = MenuState.MainMenu;
+                }
+                
+                /*
                 switch (currentState)
                 {
                     case MenuState.MainMenu:
-                    mainMenu.DisplayMenu();
-                    break;
+                        //mainMenu.DisplayMenu();
+                        break;
 
                     case MenuState.RegistrationMenu:
-                    registrationMenu.DisplayMenu();
-                    break;
+                        registrationMenu.DisplayMenu();
+                        break;
 
                     case MenuState.LoginMenu:
-                    //loginMenu.DisplayMenu();
-                    break;
+                        //loginMenu.DisplayMenu();
+                        break;
                 }
+            */
             }
         }
     }

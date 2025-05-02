@@ -22,7 +22,7 @@ namespace Menus
         /// <summary>
         /// Displays the welcome message.
         /// </summary>
-        public void WelcomeMessage()
+        public static void WelcomeMessage()
         {
             ConsoleDisplay.DisplayMessage(WELCOME_STR);
         }

@@ -3,9 +3,9 @@ using Menus;
 
 namespace Navigation;
 
-public class MenuRegistry
+public static class MenuRegistry
 {
-    Dictionary<MenuState, IMenu> menuRegistry = new Dictionary<MenuState, IMenu>
+    public static Dictionary<MenuState, IMenu> menuMap = new Dictionary<MenuState, IMenu>
     {
         { MenuState.MainMenu, new MainMenu() },
         { MenuState.RegistrationMenu, new RegistrationMenu() }
