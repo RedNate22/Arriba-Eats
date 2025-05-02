@@ -4,8 +4,7 @@ using Menus;
 namespace Navigation
 {
     /// <summary>
-    /// <para>Initialises menu instances and starts main input loop.<para>
-    /// <para>Tracks the current menu state and transitions based on user input.</para>
+    /// <para>Initialises menu instances and transitions between menus.<para>
     /// </summary>
     public static class MenuController
     {    
@@ -15,8 +14,7 @@ namespace Navigation
         public static MenuState currentState { get; set; }
         
         /// <summary>
-        /// Initialises all menus, tracks the active menu state,
-        /// and runs the main input loop.
+        /// Tracks the current menu state and transitions based on the current state.
         /// </summary>
         public static void Run()
         {
