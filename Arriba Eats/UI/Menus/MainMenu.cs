@@ -5,11 +5,12 @@ using Navigation;
 namespace Menus
 {
     /// <summary>
-    /// Displays the main menu where the user can login, register or exit. 
+    /// Represents the main menu.
+    /// <para> Allows users to login, register, or exit the application. </para>
+    /// <para> Handles user input and updates the application state accordingly. </para>
     /// </summary>
     public class MainMenu : IMenu
     {
-        // Strings to display options and messages for the main menu
         private const string WELCOME_STR = "Welcome to Arriba Eats!";
         private const string LOGIN_STR = "1: Login as a registered user";
         private const string REGISTER_STR = "2: Register as a new user";
@@ -19,14 +20,17 @@ namespace Menus
 
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
         
-        /// <summary> Displays the welcome message. </summary>
+        /// <summary> 
+        /// <para> Displays the welcome message. </para>
+        /// <para> To be called seperately from the menu transitions. </para>
+        /// </summary>
         public static void WelcomeMessage()
         {
             ConsoleDisplay.DisplayMessage(WELCOME_STR);
         }
 
         /// <summary> 
-        /// Display the main menu options and gets choice from user. 
+        /// Displays the main menu options and gets choice from user. 
         /// </summary>
         public void DisplayMenu()
         {

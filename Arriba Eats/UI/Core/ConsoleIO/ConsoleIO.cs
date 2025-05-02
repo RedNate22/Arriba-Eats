@@ -15,7 +15,7 @@ namespace ConsoleIO
         }
         
         /// <summary>
-        /// <para> Reads a string input from the user via the console. </para>
+        /// Reads a string input from the user via the console.
         /// <para> Attempts to convert the input into an integer. </para>
         /// </summary>
         /// <Returns> The integer value if valid, 

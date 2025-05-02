@@ -24,7 +24,7 @@ namespace Navigation
         }
         
         /// <summary>
-        /// <para> Starts the menu system and handles navigation based on the current state. <para>
+        /// Starts the menu system and handles navigation based on the current state.
         /// <para> Initialises the default menu and displays the welcome message. </para>
         /// <para> Continously monitors state transitions and ensures the appropriate menu is displayed. </para>
         /// </summary>
