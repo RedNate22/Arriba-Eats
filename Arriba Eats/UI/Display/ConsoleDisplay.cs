@@ -1,9 +1,9 @@
 using System;
 
-namespace UI
+namespace Display
 {
     /// <summary>
-    /// Safely handles input and output for the menus.
+    /// Handles input and output for the menus using the console.
     /// </summary>
     public static class ConsoleDisplay
     {

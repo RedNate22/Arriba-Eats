@@ -1,6 +1,8 @@
 using System;
+using Display;
+using Navigation;
 
-namespace UI
+namespace Menus
 {
     /// <summary>
     /// Displays the main menu where the user can login, register or exit.
@@ -16,7 +18,7 @@ namespace UI
         private const string GOODBYE_STR = "Thank you for using Arriba Eats!";
 
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
-       
+        
         /// <summary>
         /// Displays the welcome message.
         /// </summary>
@@ -30,7 +32,7 @@ namespace UI
         /// </summary>
         public void DisplayMenu()
         {
-            ConsoleDisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
+            ConsoleDisplay.DisplayMessage(UIConstants.MAKE_CHOICE_STR);
             ConsoleDisplay.DisplayMessage(LOGIN_STR);
             ConsoleDisplay.DisplayMessage(REGISTER_STR);
             ConsoleDisplay.DisplayMessage(EXIT_STR);
@@ -41,17 +43,17 @@ namespace UI
             switch (option)
             {
                 case LOGIN_INT:  // User chooses option 1: Go to login menu
-                    ConsoleDisplay.DisplayMessage(MenuConstants.OPTION_1_SELECTED_STR);
+                    ConsoleDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
-                    ConsoleDisplay.DisplayMessage(MenuConstants.OPTION_2_SELECTED_STR);
+                    ConsoleDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
                     ConsoleDisplay.DisplayMessage(GOODBYE_STR);
                     MenuController.currentState = MenuState.Exit;
                     break;
                 default:  // User has entered an invalid option
-                    ConsoleDisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+                    ConsoleDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
                     break;
             }
         }

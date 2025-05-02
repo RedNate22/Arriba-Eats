@@ -1,11 +1,11 @@
 using System;
 
-namespace UI;
+namespace Display;
 
 /// <summary>
 /// Define constants to be used across all menus.
 /// </summary>
-public static class MenuConstants
+public static class UIConstants
 {
     public const string MAKE_CHOICE_STR = "Please make a choice from the menu below:";
     public const string OPTION_1_SELECTED_STR = "Option 1 selected";

@@ -1,6 +1,7 @@
 using System;
+using Menus;
 
-namespace UI;
+namespace Navigation;
 
 /// <summary>
 /// <para>Initialises menu instances and starts main input loop.<para>

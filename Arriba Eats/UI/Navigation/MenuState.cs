@@ -1,6 +1,6 @@
 using System;
 
-namespace UI;
+namespace Navigation;
 
 /// <summary>
 /// <para>Represents the different states of the menu system.</para>
