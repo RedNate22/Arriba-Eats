@@ -1,8 +1,10 @@
 using System;
 
-namespace Menus;
-
-public interface IMenu
+namespace Menus
 {
-    public void DisplayMenu();
+    public interface IMenu
+    {
+        public void DisplayMenu();
+    }
 }
+

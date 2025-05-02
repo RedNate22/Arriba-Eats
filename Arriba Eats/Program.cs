@@ -1,5 +1,5 @@
 ﻿using System;
-using UI;
+using Navigation;
 
 namespace ArribaEats
 {

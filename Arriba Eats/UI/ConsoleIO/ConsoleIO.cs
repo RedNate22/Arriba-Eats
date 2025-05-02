@@ -1,6 +1,6 @@
 using System;
 
-namespace Display
+namespace ConsoleIO
 {
     /// <summary>
     /// Handles input and output for the menus using the console.

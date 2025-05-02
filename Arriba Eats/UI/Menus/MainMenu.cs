@@ -1,5 +1,5 @@
 using System;
-using Display;
+using ConsoleIO;
 using Navigation;
 
 namespace Menus
