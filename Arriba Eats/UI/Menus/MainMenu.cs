@@ -1,6 +1,6 @@
 using System;
-using ConsoleIO;
-using Navigation;
+using DisplayIO;
+using UINavigation;
 
 namespace Menus
 {
@@ -26,7 +26,7 @@ namespace Menus
         /// </summary>
         public static void WelcomeMessage()
         {
-            ConsoleDisplay.DisplayMessage(WELCOME_STR);
+            UIDisplay.DisplayMessage(WELCOME_STR);
         }
 
         /// <summary> 
@@ -34,28 +34,28 @@ namespace Menus
         /// </summary>
         public void DisplayMenu()
         {
-            ConsoleDisplay.DisplayMessage(UIConstants.MAKE_CHOICE_STR);
-            ConsoleDisplay.DisplayMessage(LOGIN_STR);
-            ConsoleDisplay.DisplayMessage(REGISTER_STR);
-            ConsoleDisplay.DisplayMessage(EXIT_STR);
-            ConsoleDisplay.DisplayMessage(ENTER_CHOICE_STR);
+            UIDisplay.DisplayMessage(UIConstants.MAKE_CHOICE_STR);
+            UIDisplay.DisplayMessage(LOGIN_STR);
+            UIDisplay.DisplayMessage(REGISTER_STR);
+            UIDisplay.DisplayMessage(EXIT_STR);
+            UIDisplay.DisplayMessage(ENTER_CHOICE_STR);
 
-            int option = ConsoleDisplay.GetChoice();
+            int option = UIDisplay.GetChoice();
 
             switch (option)
             {
                 case LOGIN_INT:  // User chooses option 1: Go to login menu
-                    ConsoleDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
+                    UIDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
-                    ConsoleDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
+                    UIDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
-                    ConsoleDisplay.DisplayMessage(GOODBYE_STR);
-                    MenuController.CurrentState = MenuState.Exit;
+                    UIDisplay.DisplayMessage(GOODBYE_STR);
+                    UIFlowController.CurrentState = MenuState.Exit;
                     break;
                 default:  // User has entered an invalid option
-                    ConsoleDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
+                    UIDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
                     break;
             }
         }

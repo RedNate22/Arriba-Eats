@@ -1,6 +1,6 @@
 using System;
 
-namespace Navigation
+namespace UINavigation
 {
     /// <summary>
     /// Defines the various states of the menu system.

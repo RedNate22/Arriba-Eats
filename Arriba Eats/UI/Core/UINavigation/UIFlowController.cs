@@ -1,12 +1,12 @@
 using System;
 using Menus;
 
-namespace Navigation
+namespace UINavigation
 {
     /// <summary>
     /// Handles menu state transitions and controls the flow of navigation within the application.
     /// </summary>
-    public static class MenuController
+    public static class UIFlowController
     {    
         /// <summary>
         /// Tracks the currently active menu state.
@@ -28,7 +28,7 @@ namespace Navigation
         /// <para> Initialises the default menu and displays the welcome message. </para>
         /// <para> Continously monitors state transitions and ensures the appropriate menu is displayed. </para>
         /// </summary>
-        public static void StartMenus()
+        public static void RunMenuSystem()
         {
             CurrentState = MenuState.MainMenu;
             MainMenu.WelcomeMessage(); 

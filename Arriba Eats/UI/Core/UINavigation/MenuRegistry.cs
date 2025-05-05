@@ -1,7 +1,7 @@
 using System;
 using Menus;
 
-namespace Navigation;
+namespace UINavigation;
 
 /// <summary>
 /// Registry to match Menu states to their respective menu instances.

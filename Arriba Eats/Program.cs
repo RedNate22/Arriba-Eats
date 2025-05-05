@@ -1,20 +1,21 @@
 ﻿using System;
-using Navigation;
+using UINavigation;
 
 namespace ArribaEats
 {
-    /// <summary>
+    /// <summary> 
     /// The main entry point to the program.
-    /// <para>
-    /// Creates an instance of MainMenu then runs the Run method
-    /// to start.
-    /// </para>
+    /// <para> Calls the <cref = "UIFlowController.RunMenuSystem"/> method on UIFlowController to begin the main loop, checking for menu state transitions and validating them. </para>
     /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            MenuController.StartMenus();
+            UIFlowController.RunMenuSystem();
         }
     }
 }

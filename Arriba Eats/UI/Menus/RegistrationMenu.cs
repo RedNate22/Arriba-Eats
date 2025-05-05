@@ -1,5 +1,5 @@
 using System;
-using Navigation;
+using UINavigation;
 
 namespace Menus
 {

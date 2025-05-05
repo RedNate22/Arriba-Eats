@@ -1,11 +1,11 @@
 using System;
 
-namespace ConsoleIO
+namespace DisplayIO
 {
     /// <summary>
     /// Handles input and output for the menus using the console.
     /// </summary>
-    public static class ConsoleDisplay
+    public static class UIDisplay
     {
         /// <summary> Writes the specified string message to the screen. </summary>
         /// <param name="message">The string message to display to the screen.</param>
@@ -28,7 +28,10 @@ namespace ConsoleIO
             {
                 return result;
             }
-            return -1;
+            else
+            {
+                return -1;
+            }
         }
     }
 }

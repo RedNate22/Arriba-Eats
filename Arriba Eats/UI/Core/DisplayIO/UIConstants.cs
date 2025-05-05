@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleIO
+namespace DisplayIO
 {
     /// <summary>
     /// Define constants to be used across all menus.
