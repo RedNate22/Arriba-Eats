@@ -1,6 +1,7 @@
 using System;
 using DisplayIO;
 using UINavigation;
+using Entities;
 
 namespace Menus
 {
@@ -65,8 +66,10 @@ namespace Menus
             switch (userType)
             {
                 case "CUSTOMER":
+                    Entities.User customer = new Customer();
                     break;
                 case "DELIVERER":
+                    Entities.User deliverer = new Deliverer();
                     break;
                 case "CLIENT":
                     break;
