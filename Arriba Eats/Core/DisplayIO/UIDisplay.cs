@@ -33,5 +33,10 @@ namespace DisplayIO
                 return -1;
             }
         }
+
+        public static string GetName()
+        {
+            return Console.ReadLine();
+        }
     }
 }

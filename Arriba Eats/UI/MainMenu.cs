@@ -49,6 +49,7 @@ namespace Menus
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
                     UIDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
+                    UIFlowController.CurrentState = MenuState.RegistrationMenu;
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program
                     UIDisplay.DisplayMessage(GOODBYE_STR);
