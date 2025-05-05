@@ -20,6 +20,10 @@ namespace Entities
             Password = password;
             Location = location;
         }
+
+        public static void AddUser(UserType userType, User user)
+        {
+            UserRegister.RegisterUser(userType, user);
+        }
     }
-    
 }

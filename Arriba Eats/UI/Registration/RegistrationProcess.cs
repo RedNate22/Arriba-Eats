@@ -11,8 +11,8 @@ public static class RegistrationProcess
         string name = UIDisplay.GetName();
         int age = UIDisplay.GetAge();
         string email = UIDisplay.GetEmail();
-        //string mobile = UIDisplay.GetMobile();
-        //string password = UIDisplay.GetPassword();
+        //TODO string mobile = UIDisplay.GetMobile();
+        //TODO string password = UIDisplay.GetPassword();
 
         switch (userType)
         {
@@ -22,7 +22,7 @@ public static class RegistrationProcess
                 /*
                 Customer customer = new Customer(name, age, email, mobile, password
                     location);
-                UserRegister.AddUser(UserType.Customer, customer);
+                Customer.AddUser(UserType.Customer, customer);
                 */
                 UIDisplay.DisplayMessage("You have been successfully registered as a customer, {name}!");
                 
@@ -32,7 +32,6 @@ public static class RegistrationProcess
                 //TODO string licensePlate = UIDisplay.GetLicense();
 
                 //Deliverer deliverer = new Deliverer();
-                //deliverer.CreateUser();
                 UIDisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
             
@@ -42,7 +41,6 @@ public static class RegistrationProcess
                 //TODO int location = UIDisplay.GetLocation();
             
                 //Restaurant restaurant = new Restaurant();
-                //restaurant.CreateUser();
 
                 UIDisplay.DisplayMessage($"You have been successfully registered as a client, {name}!");
                 break;
