@@ -33,7 +33,7 @@ namespace Menus
 
             int option = UIDisplay.GetChoice();
 
-            switch(option)
+            switch (option)
             {
                 case CUSTOMER_INT:  // User chooses option 1: Register as customer
                     UIDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
@@ -58,10 +58,10 @@ namespace Menus
 
         public void RegistrationProcess(string userType)
         {
-            string userName = UIDisplay.GetName();
-            //string userPassword = UIDisplay.GetPassword();
+            string name = UIDisplay.GetName();
+            //int age = UIDisplay.GetAge();
 
-            switch(userType)
+            switch (userType)
             {
                 case "CUSTOMER":
                     break;

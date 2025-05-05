@@ -34,9 +34,34 @@ namespace DisplayIO
             }
         }
 
+        /// <summary>
+        /// Reads a string input from the user via the console and ensures it meets
+        /// the validation criteria.
+        /// <para> 
+        /// Uses the <see cref="UIUtilities.IsValidName"/> verify the input contains only
+        /// valid characters and meets sanitisation requirements.
+        /// </para>
+        /// </summary>
+        /// <returns> The valid and sanitised name as a string. </returns>
         public static string GetName()
         {
-            return Console.ReadLine();
+            while (true)
+            {
+                DisplayMessage("Please enter your name:");
+                
+                string input = Console.ReadLine()?.Trim() ?? "";
+
+                if (UIUtilities.IsValidName(input))
+                {
+                    return input;
+                }
+                DisplayMessage("Invalid name.");
+            }
+        }
+        
+        public static int GetAge()
+        {
+            return 0;
         }
     }
 }

@@ -8,9 +8,6 @@ namespace DisplayIO;
 /// </summary>
 public static class UIUtilities
 {
-    /// <summary>
-    /// The template string to be used by <see cref="UIUtilities.EnterChoiceStr(int)">
-    /// </summary>
     private const string ENTER_CHOICE_TEMPLATE = "Please enter a choice between 1 and {0}:";
     
     /// <summary>
@@ -22,5 +19,34 @@ public static class UIUtilities
     public static string EnterChoiceStr(int maxChoice)
     {
         return string.Format(ENTER_CHOICE_TEMPLATE, maxChoice);
+    }
+
+    /// <summary>
+    /// Validates whether the provided string consists of at least one letter--and only letters,
+    /// spaces, apostrophes and hyphens.
+    /// </summary>
+    /// <param name="input"> The string to validate. </param>
+    /// <returns> 
+    /// <c>true</c> if the input contains at least one letter and consists of only the
+    /// allowed letters, otherwise <c>false</c>.
+    /// </returns>
+    public static bool IsValidName(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input)) return false;
+        
+        else if (input.Length > 0)
+        {
+            bool containsValidCharacters = false;
+            foreach (char character in input)
+            {
+                // Contains at least one letter 
+                if (char.IsLetter(character)) containsValidCharacters = true;
+                
+                // Contains invalid characters
+                else if (character != '-' && character != '\'' && character != ' ') return false;
+            }          
+            return containsValidCharacters;
+        }
+        return false;
     }
 }

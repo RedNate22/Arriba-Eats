@@ -4,7 +4,7 @@ namespace Entities
 {
     public class Customer : IUser
     {
-        public void myMethod()
+        public void CreateUser()
         {
             // Do nothing
         }

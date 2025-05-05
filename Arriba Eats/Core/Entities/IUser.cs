@@ -4,6 +4,6 @@ namespace Entities
 {
     public interface IUser
     {
-        void myMethod ();
+        public void CreateUser();
     }
 }

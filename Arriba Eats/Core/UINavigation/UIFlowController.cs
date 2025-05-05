@@ -33,7 +33,7 @@ namespace UINavigation
             CurrentState = MenuState.MainMenu;
             MainMenu.WelcomeMessage(); 
 
-            while(CurrentState != MenuState.Exit)
+            while (CurrentState != MenuState.Exit)
             {
                 if (MenuRegistry.menuMap.ContainsKey(CurrentState))
                 {
