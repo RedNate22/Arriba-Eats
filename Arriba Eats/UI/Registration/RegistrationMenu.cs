@@ -59,7 +59,8 @@ namespace Menus
         public void RegistrationProcess(string userType)
         {
             string name = UIDisplay.GetName();
-            //int age = UIDisplay.GetAge();
+            int age = UIDisplay.GetAge();
+            string email = UIDisplay.GetEmail();
 
             switch (userType)
             {

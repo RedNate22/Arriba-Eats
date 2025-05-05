@@ -22,7 +22,8 @@ public static class UIUtilities
     }
 
     /// <summary>
-    /// Validates whether the provided string consists of at least one letter--and only letters,
+    /// Validates whether the provided string input consists of 
+    /// at least one letter--and only letters,
     /// spaces, apostrophes and hyphens.
     /// </summary>
     /// <param name="input"> The string to validate. </param>
@@ -47,6 +48,26 @@ public static class UIUtilities
             }          
             return containsValidCharacters;
         }
+        return false;
+    }
+
+    /// <summary>
+    /// Validates whether the provided int input is within the
+    /// specified range.
+    /// </summary>
+    /// <param name="input"> The int to validate. </param>
+    /// <returns>
+    /// <c>true</c> if the input is within range (18-100 inclusive),
+    /// otherwise <c>false</c>
+    /// </returns>
+    public static bool IsValidAge(int input)
+    {
+        if (input < 18 || input > 100) return false;
+        return true;
+    }
+
+    public static bool IsValidEmail(string input)
+    {
         return false;
     }
 }

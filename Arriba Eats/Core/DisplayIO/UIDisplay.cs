@@ -4,6 +4,9 @@ namespace DisplayIO
 {
     /// <summary>
     /// Handles input and output for the menus using the console.
+    /// <para> 
+    /// Uses <see cref="DisplayIO.UIUtilities"/> for input formatting and validation. 
+    /// </para>
     /// </summary>
     public static class UIDisplay
     {
@@ -15,6 +18,17 @@ namespace DisplayIO
         }
         
         /// <summary>
+        /// Uses <see cref="Console.ReadLine"/> to read an input from the user and returns this as a string.
+        /// </summary>
+        /// <returns> The input as a string. </returns>
+        public static string ReadInput()
+        {
+            string input;
+            input = Console.ReadLine() ?? "";
+            return input;
+        }
+
+        /// <summary>
         /// Reads a string input from the user via the console.
         /// <para> Attempts to convert the input into an integer. </para>
         /// </summary>
@@ -22,16 +36,10 @@ namespace DisplayIO
         /// or a default value (-1) if the input is invalid. </Returns>
         public static int GetChoice()
         {
-            string? choice = Console.ReadLine();
+            string? choice = ReadInput();
             
-            if (int.TryParse(choice, out int result))
-            {
-                return result;
-            }
-            else
-            {
-                return -1;
-            }
+            if (int.TryParse(choice, out int result)) return result;
+            else return -1;
         }
 
         /// <summary>
@@ -49,19 +57,50 @@ namespace DisplayIO
             {
                 DisplayMessage("Please enter your name:");
                 
-                string input = Console.ReadLine()?.Trim() ?? "";
+                string input = ReadInput()?.Trim() ?? "";
 
-                if (UIUtilities.IsValidName(input))
-                {
-                    return input;
-                }
+                if (UIUtilities.IsValidName(input)) return input;
                 DisplayMessage("Invalid name.");
             }
         }
         
         public static int GetAge()
         {
-            return 0;
+            while (true)
+            {
+                DisplayMessage("Please enter your age (18-100):");
+
+                if (int.TryParse(ReadInput(), out int input))
+                {
+                    if (UIUtilities.IsValidAge(input)) return input;
+                }
+                DisplayMessage("Invalid age.");
+            }
+        }
+
+
+        // TODO Also add check against existing emails
+        public static string GetEmail()
+        {
+            while (true)
+            {
+                DisplayMessage("Please enter your email address:");
+
+                string input = ReadInput()?.Trim() ?? "";
+                
+                if (UIUtilities.IsValidEmail(input))
+                {
+                    /*
+                    if email already exists
+                    {
+                        DisplayMessage("This email address is already in use.");
+                    }
+                    */
+                    return input;
+                }
+                
+                else DisplayMessage("Invalid email address.");
+            }
         }
     }
 }
