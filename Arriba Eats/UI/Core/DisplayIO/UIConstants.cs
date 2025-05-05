@@ -16,6 +16,7 @@ namespace DisplayIO
         public const string OPTION_6_SELECTED_STR = "Option 6 selected";
         public const string OPTION_7_SELECTED_STR = "Option 7 selected";
         public const string INVALID_CHOICE_STR = "Invalid choice.";
+        private const string ENTER_CHOICE_STR = "Please enter a choice between 1 and 3:";
     }
 }
 

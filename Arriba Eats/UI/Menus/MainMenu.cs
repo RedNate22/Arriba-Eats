@@ -15,7 +15,7 @@ namespace Menus
         private const string LOGIN_STR = "1: Login as a registered user";
         private const string REGISTER_STR = "2: Register as a new user";
         private const string EXIT_STR = "3: Exit";
-        private const string ENTER_CHOICE_STR = "Please enter a choice between 1 and 3:";
+        private readonly string ENTER_CHOICE_STR = UIUtilities.EnterChoiceStr(3);
         private const string GOODBYE_STR = "Thank you for using Arriba Eats!";
 
         private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
