@@ -1,6 +1,6 @@
 using System;
 
-namespace Menus
+namespace UI
 {
     /// <summary>
     /// Defines the contract for all menus.

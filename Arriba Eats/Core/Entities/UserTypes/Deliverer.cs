@@ -4,10 +4,10 @@ namespace Entities
 {
     public class Deliverer : User
     {
-        // TODO
-        public void CreateUser(string name, int age, string email, string mobile, string password, string licensePlate)
+        public Deliverer(string name, int age, string email, string mobile, string password) 
+            : base(name, age, email, mobile, password)
         {
-            //list.add(Name, Age, Email etc....)
+            //
         }
     }
 }

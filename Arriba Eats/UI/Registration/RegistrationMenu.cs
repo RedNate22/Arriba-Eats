@@ -1,9 +1,8 @@
 using System;
 using DisplayIO;
-using UINavigation;
-using Entities;
+using UINavigation; 
 
-namespace Menus
+namespace UI
 {
     /// <summary>
     /// Represents the registration menu.
@@ -19,9 +18,18 @@ namespace Menus
         private readonly string ENTER_CHOICE_STR = UIUtilities.EnterChoiceStr(4);
 
         private const int CUSTOMER_INT = 1, DELIVERER_INT = 2, CLIENT_INT = 3, RETURN_INT = 4;
+        const string CUSTOMER = "CUSTOMER";
+        const string DELIVERER = "DELIVERER";
+        const string CLIENT = "CLIENT";
 
+        // TODO finish this xml
         /// <summary>
-        /// Displays the registration menu options and gets choice from using.
+        /// Displays the registration menu options and gets choice of which option 
+        /// to choose from the user. Calls th.
+        /// <para> Uses <see cref="UIDisplay.DisplayMessage()"/> to display the options. </para>
+        /// <para> Uses <see cref="UIDisplay.GetChoice()"/> to get a choice from the user in the form
+        /// of an integer.
+        /// <para> Matches the integer with the associated menu option and calls </para>
         /// </summary>
         public void DisplayMenu()
         {
@@ -38,40 +46,26 @@ namespace Menus
             {
                 case CUSTOMER_INT:  // User chooses option 1: Register as customer
                     UIDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
-                    const string CUSTOMER = "CUSTOMER";
-                    RegistrationProcess(CUSTOMER);
+                    RegistrationProcess.Register(CUSTOMER);
                     break;
+                
                 case DELIVERER_INT:  // User chooses option 2: Register as deliverer
                     UIDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
+                    RegistrationProcess.Register(DELIVERER);
                     break;
+                
                 case CLIENT_INT:  // User chooses option 3: Register as client
                     UIDisplay.DisplayMessage(UIConstants.OPTION_3_SELECTED_STR);
+                    RegistrationProcess.Register(CLIENT);
                     break;
+                
                 case RETURN_INT:  // User chooses option 4: Return to previous menu 
                     UIDisplay.DisplayMessage(UIConstants.OPTION_4_SELECTED_STR);
                     UIFlowController.CurrentState = MenuState.MainMenu;
                     break;
+                
                 default:  // User has entered an invalid option
                     UIDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
-                    break;
-            }
-        }
-
-        public void RegistrationProcess(string userType)
-        {
-            string name = UIDisplay.GetName();
-            int age = UIDisplay.GetAge();
-            string email = UIDisplay.GetEmail();
-
-            switch (userType)
-            {
-                case "CUSTOMER":
-                    Entities.User customer = new Customer();
-                    break;
-                case "DELIVERER":
-                    Entities.User deliverer = new Deliverer();
-                    break;
-                case "CLIENT":
                     break;
             }
         }

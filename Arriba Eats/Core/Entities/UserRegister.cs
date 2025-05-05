@@ -2,8 +2,12 @@ using System;
 
 namespace Entities;
 
-public class UserRegister
+public static class UserRegister
 {
-    //List<User> users = new List<User>();
-    
+    private static Dictionary<UserType, User> userDictionary = new();
+
+    public static void AddUser(UserType userType, User user)
+    {
+        userDictionary.Add(userType, user);
+    }
 }

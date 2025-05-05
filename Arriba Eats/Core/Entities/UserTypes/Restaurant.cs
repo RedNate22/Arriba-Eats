@@ -4,11 +4,10 @@ namespace Entities
 {
     public class Restaurant : User
     {
-        // TODO
-        public void CreateUser(string name, int age, string email, string mobile, string password, string restaurantName, 
-            string restaurantStyle, int location)
+        public Restaurant(string name, int age, string email, string mobile, string password) 
+            : base(name, age, email, mobile, password)
         {
-            //list.add(Name, Age, Email etc....)   
+            //
         }
     }
 }

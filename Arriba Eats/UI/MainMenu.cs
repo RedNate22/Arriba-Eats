@@ -2,7 +2,7 @@ using System;
 using DisplayIO;
 using UINavigation;
 
-namespace Menus
+namespace UI
 {
     /// <summary>
     /// Represents the main menu.

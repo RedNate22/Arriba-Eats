@@ -4,31 +4,22 @@ namespace Entities
 {
     public abstract class User
     {
-        private string? _name;
-        public string? Name 
-        { 
-            get { return _name; } 
-            set { _name = value ?? ""; }
-        }
-
-        private int _age;
-        public int Age 
-        { 
-            get { return _age; } 
-            set { _age = value; } 
-        }
-
-        private string? _email;
-        public string? Email 
-        { 
-            get { return _email; } 
-            set { _email = value; }
-        }
-
-        public void CreateUser(string name, int age, string email)
+        public string? Name { get; private set; }
+        public int Age { get; private set; }
+        public string? Email { get; private set; }
+        public string? Mobile { get; private set; }
+        public string? Password { get; private set; }
+        public string? Location { get; private set; }
+        
+        protected User(string name, int age, string email, string mobile, string password, string location)
         {
-            // TODO create user from registration menu and then
-            //list.add(Name, Age, Email etc....)
+            Name = name;
+            Age = age;
+            Email = email;
+            Mobile = mobile;
+            Password = password;
+            Location = location;
         }
     }
+    
 }
