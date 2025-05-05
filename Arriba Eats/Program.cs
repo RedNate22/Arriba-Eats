@@ -4,16 +4,16 @@ using UINavigation;
 namespace ArribaEats
 {
     /// <summary> 
-    /// The main entry point to the program.
-    /// <para> Calls the <cref = "UIFlowController.RunMenuSystem"/> method on UIFlowController to begin the main loop, checking for menu state transitions and validating them. </para>
+    /// Defines the main entry point to the program.
     /// </summary>
     internal class Program
     {
         /// <summary>
-        /// 
+        /// The main entry point to the program.
+        /// <para> Initializes the program and delegates UI flow control to <see cref="UIFlowController.RunMenuSystem"/>. </para>
+        /// <para> Starts the menu loop, ensuring state transitions and user interaction handling. </para>
         /// </summary>
-        /// <param name="args"></param>
-        static void Main(string[] args)
+        static void Main()
         {
             UIFlowController.RunMenuSystem();
         }
