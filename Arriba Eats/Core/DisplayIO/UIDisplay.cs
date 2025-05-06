@@ -155,7 +155,19 @@ namespace DisplayIO
             }
         }
 
-        // TODO XML
+        /// <summary>
+        /// Continously reads a string input from the user via the console until it meets
+        /// the validation criteria. Then reads a second string input from the user
+        /// and validates whether both inputs match.
+        /// <para> Passes the first input to <see cref="UIUtilities.IsValidPassword()"/> to
+        /// validate whether it meets the criteria. </para>
+        /// <para> Then passes the second input to <see cref="UIUtilities.IsValidPasswordMatch()"/>
+        /// to validate both inputs match.</para>
+        /// </summary>
+        /// <returns> 
+        /// The first input password as a string. This method loops until the 
+        /// first input is valid, and matches the second input.
+        /// </returns>
         public static string GetPassword()
         {
             const string PASSWORD_PROMPT = """
@@ -171,15 +183,40 @@ namespace DisplayIO
             {
                 DisplayMessage(PASSWORD_PROMPT);
 
-                string input = ReadInput();
+                string firstInput = ReadInput();
 
-                if (UIUtilities.IsValidPassword(input))
+                if (UIUtilities.IsValidPassword(firstInput))
                 {
-                    return input;
+                    DisplayMessage("Please confirm your password:");
+                    string secondInput = ReadInput();
+
+                    if (UIUtilities.IsValidPasswordMatch(firstInput, secondInput))
+                    {
+                        return firstInput;
+                    }
+
+                    else
+                    {
+                        DisplayMessage("Passwords do not match.");
+                        continue;
+                    }
                 }
 
                 else DisplayMessage("Invalid Password");
             }
+        }
+
+        public static string GetLocation()
+        {
+            DisplayMessage("Please enter your location (in the form of X,Y):");
+
+            string input = ReadInput();
+
+            if (UIUtilities.IsValidLocation(input))
+            {
+                
+            }
+            
         }
     }
 }

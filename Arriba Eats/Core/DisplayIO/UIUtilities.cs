@@ -100,8 +100,8 @@ public static class UIUtilities
     /// <summary>
     /// Validates whether the provided string input meets the following criteria:
     /// <para> - Contains only digits. </para>
-    /// <para> - Starts with a <c>0</c> </para>
-    /// <para> - Contains exactly 10 characters </para>
+    /// <para> - Starts with a <c>0</c>. </para>
+    /// <para> - Contains exactly 10 digits.</para>
     /// </summary>
     /// <param name="input"> The string to validate. </param>
     /// <returns>
@@ -126,9 +126,63 @@ public static class UIUtilities
         else return false;
     }
 
-    // TODO
+    /// <summary>
+    /// Validates whether the provided string input meets the following criteria:
+    /// <para> - Be at least 8 characters long. </para>
+    /// <para> - Contain a number </para>
+    /// <para> - Contain a lowercase letter </para>
+    /// <para> - Contain an uppercase letter </para>
+    /// <para> 
+    /// Use <see cref="UIUtilities.IsValidPasswordMatch()"/> to validate inputs match.
+    /// </para>
+    /// </summary>
+    /// <param name="input"> The string to validate. </param>
+    /// <returns>
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
+    /// </returns>
     public static bool IsValidPassword(string input)
     {
-        return false;
+        bool isValidLength = input.Length >= 8;
+        bool containsUpperCase = false;
+        bool containsLowerCase = false;
+        bool containsNumber = false;
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (char.IsUpper(input[i]))
+            {
+                containsUpperCase = true;
+            }
+            else if (char.IsLower(input[i]))
+            {
+                containsLowerCase = true;
+            }
+            else if (char.IsDigit(input[i]))
+            {
+                containsNumber = true;
+            }
+        }
+        
+        if (isValidLength && containsUpperCase && containsLowerCase && containsNumber)
+        {
+            return true;
+        }
+
+        else return false;
+    }
+
+    /// <summary>
+    /// Validates whether both provided string inputs match.
+    /// </summary>
+    /// <param name="firstInput"> The first string. </param>
+    /// <param name="secondInput"> The second string. </param>
+    /// <returns>
+    /// <c>true</c> if first input matches the second input, otherwise <c>false</c>.
+    /// </returns>
+    public static bool IsValidPasswordMatch(string firstInput, string secondInput)
+    {
+        bool passwordsMatch = firstInput == secondInput;
+        if (passwordsMatch) return true;
+        else return false;
     }
 }

@@ -16,7 +16,7 @@ public static class RegistrationProcess
         switch (userType)
         {
             case "CUSTOMER":
-                //TODO int location = UIDisplay.GetLocation();
+                string location = UIDisplay.GetLocation();
 
                 /*
                 Customer customer = new Customer(name, age, email, mobile, password
