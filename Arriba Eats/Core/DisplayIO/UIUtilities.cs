@@ -53,12 +53,11 @@ public static class UIUtilities
 
     /// <summary>
     /// Validates whether the provided int input is within the
-    /// specified range.
+    /// specified range (18-100 inclusive).
     /// </summary>
     /// <param name="input"> The int to validate. </param>
     /// <returns>
-    /// <c>true</c> if the input is within range (18-100 inclusive),
-    /// otherwise <c>false</c>
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
     /// </returns>
     public static bool IsValidAge(int input)
     {
@@ -66,7 +65,69 @@ public static class UIUtilities
         return true;
     }
 
+    /// <summary>
+    /// Validates whether the provided string input meets the following criteria:
+    /// <para> - Contains exactly one instance of the target symbol (<c>@</c>). </para>
+    /// <para> - Contains at least one character on both sides of the target symbol. </para>
+    /// </summary>
+    /// <param name="input"> The string to validate. </param>
+    /// <returns> 
+    /// <c>true</c> if input meets the criteria, otherwise <c>false</c>. 
+    /// </returns>
     public static bool IsValidEmail(string input)
+    {
+        char targetSymbol = '@';
+        int targetLocation = -1;
+        int targetCount = 0;
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (input[i] == targetSymbol)
+            {
+                targetLocation = i;
+                targetCount++;
+            }
+        }
+        
+        bool containsTarget = input.Contains(targetSymbol);
+        bool targetOccursOnce = targetCount == 1;
+        bool isPositionValid = targetLocation > 0 && targetLocation < input.Length - 1;
+
+        if (containsTarget && targetOccursOnce && isPositionValid) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Validates whether the provided string input meets the following criteria:
+    /// <para> - Contains only digits. </para>
+    /// <para> - Starts with a <c>0</c> </para>
+    /// <para> - Contains exactly 10 characters </para>
+    /// </summary>
+    /// <param name="input"> The string to validate. </param>
+    /// <returns>
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
+    /// </returns>
+    public static bool IsValidMobile(string input)
+    {
+        bool isNumeric = true;
+        foreach (char c in input)
+        {
+            if (!char.IsDigit(c))
+            {
+                isNumeric = false;
+                break;
+            }
+        }
+
+        bool startsWithZero = input.StartsWith('0');
+        bool isValidLength = input.Length == 10;
+
+        if (isNumeric && startsWithZero && isValidLength) return true;
+        else return false;
+    }
+
+    // TODO
+    public static bool IsValidPassword(string input)
     {
         return false;
     }

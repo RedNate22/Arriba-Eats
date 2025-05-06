@@ -10,8 +10,8 @@ public static class RegistrationProcess
         string name = UIDisplay.GetName();
         int age = UIDisplay.GetAge();
         string email = UIDisplay.GetEmail();
-        //TODO string mobile = UIDisplay.GetMobile();
-        //TODO string password = UIDisplay.GetPassword();
+        string mobile = UIDisplay.GetMobile();
+        string password = UIDisplay.GetPassword();
 
         switch (userType)
         {

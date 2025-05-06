@@ -10,6 +10,14 @@ namespace DisplayIO
     /// </summary>
     public static class UIDisplay
     {
+        /// <summary>
+        /// Writes an empty line to the screen, to be used as a line break between selections and menus.
+        /// </summary>
+        public static void DisplayEmptyLine()
+        {
+            Console.WriteLine();
+        }
+        
         /// <summary> Writes the specified string message to the screen. </summary>
         /// <param name="message">The string message to display to the screen.</param>
         public static void DisplayMessage(string message)
@@ -18,13 +26,16 @@ namespace DisplayIO
         }
         
         /// <summary>
-        /// Uses <see cref="Console.ReadLine"/> to read an input from the user and returns this as a string.
+        /// Uses <see cref="Console.ReadLine"/> to read an input from the user and 
+        /// returns this as a string.
+        /// <para> Trims any leading and trailing whitespace from the string. </para>
+        /// <para> Assigns an empty value if the original input is empty. </para>
         /// </summary>
         /// <returns> The input as a string. </returns>
         public static string ReadInput()
         {
             string input;
-            input = Console.ReadLine() ?? "";
+            input = Console.ReadLine()?.Trim() ?? "";
             return input;
         }
 
@@ -43,27 +54,39 @@ namespace DisplayIO
         }
 
         /// <summary>
-        /// Reads a string input from the user via the console and ensures it meets
+        /// Continously reads a string input from the user via the console until it meets
         /// the validation criteria.
         /// <para> 
-        /// Uses the <see cref="UIUtilities.IsValidName"/> verify the input contains only
+        /// Passes the string to <see cref="UIUtilities.IsValidName"/> to verify the input contains only
         /// valid characters and meets sanitisation requirements.
         /// </para>
         /// </summary>
-        /// <returns> The valid and sanitised name as a string. </returns>
+        /// <returns> The validated and sanitised name as a string. This method loops
+        /// until a valid input is provided. </returns>
         public static string GetName()
         {
             while (true)
             {
                 DisplayMessage("Please enter your name:");
                 
-                string input = ReadInput()?.Trim() ?? "";
+                string input = ReadInput();
 
                 if (UIUtilities.IsValidName(input)) return input;
                 DisplayMessage("Invalid name.");
             }
         }
         
+        /// <summary>
+        /// Continously reads a string input from the user via the console until it meets 
+        /// the validation criteria.
+        /// <para> Attempts to convert input to int using <see cref="int.TryParse()"/>.</para>
+        /// <para> 
+        /// If successful, passes the integer to <see cref="UIUtilities.IsValidAge()"/>
+        /// to validate whether it falls within range.
+        /// </para>
+        /// </summary>
+        /// <returns> The validated age as an integer. This method loops
+        /// until a valid input is provided. </returns>
         public static int GetAge()
         {
             while (true)
@@ -80,13 +103,14 @@ namespace DisplayIO
 
 
         // TODO Also add check against existing emails
+        // TODO XML
         public static string GetEmail()
         {
             while (true)
             {
                 DisplayMessage("Please enter your email address:");
 
-                string input = ReadInput()?.Trim() ?? "";
+                string input = ReadInput();
                 
                 if (UIUtilities.IsValidEmail(input))
                 {
@@ -94,12 +118,67 @@ namespace DisplayIO
                     if email already exists
                     {
                         DisplayMessage("This email address is already in use.");
+                        continue;
                     }
                     */
                     return input;
                 }
                 
                 else DisplayMessage("Invalid email address.");
+            }
+        }
+
+        /// <summary>
+        /// Continously reads a string input from the user via the console until it meets 
+        /// the validation criteria.
+        /// <para> 
+        /// Passes the string to <see cref="UIUtilities.IsValidMobile()"/>
+        /// to validate whether it meets the criteria.
+        /// </para>
+        /// </summary>
+        /// <returns> The validated mobile number as a string. This method loops
+        /// until a valid input is provided. </returns>
+        public static string GetMobile()
+        {
+            while (true)
+            {
+                DisplayMessage("Please enter your mobile phone number:");
+
+                string input = ReadInput();
+
+                if (UIUtilities.IsValidMobile(input))
+                {
+                    return input;
+                }
+
+                else DisplayMessage("Invalid phone number.");
+            }
+        }
+
+        // TODO XML
+        public static string GetPassword()
+        {
+            const string PASSWORD_PROMPT = """
+                Your password must:
+                - be at least 8 characters long
+                - contain a number
+                - contain a lowercase letter
+                - contain an uppercase letter
+                Please enter a password:
+                """;
+
+            while (true)
+            {
+                DisplayMessage(PASSWORD_PROMPT);
+
+                string input = ReadInput();
+
+                if (UIUtilities.IsValidPassword(input))
+                {
+                    return input;
+                }
+
+                else DisplayMessage("Invalid Password");
             }
         }
     }

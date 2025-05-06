@@ -45,10 +45,10 @@ namespace UI
             switch (option)
             {
                 case LOGIN_INT:  // User chooses option 1: Go to login menu
-                    UIDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
+                    UIDisplay.DisplayEmptyLine();
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
-                    UIDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
+                    UIDisplay.DisplayEmptyLine();
                     UIFlowController.CurrentState = MenuState.RegistrationMenu;
                     break;
                 case EXIT_INT:  // User chooses option 3: Exit program

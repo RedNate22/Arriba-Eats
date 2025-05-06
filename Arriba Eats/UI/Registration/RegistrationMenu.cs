@@ -7,6 +7,10 @@ namespace UI
     /// <summary>
     /// Represents the registration menu.
     /// <para> Allows users to register as different types, or return to the main menu. </para>
+    /// <para> 
+    /// The types are selected by calling <see cref="RegistrationProcess.Register()"/> and parsing
+    /// a string parameter, named after the user type.
+    /// </para>
     /// </summary>
     public class RegistrationMenu : IMenu
     {
@@ -45,22 +49,22 @@ namespace UI
             switch (option)
             {
                 case CUSTOMER_INT:  // User chooses option 1: Register as customer
-                    UIDisplay.DisplayMessage(UIConstants.OPTION_1_SELECTED_STR);
+                    UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(CUSTOMER);
                     break;
                 
                 case DELIVERER_INT:  // User chooses option 2: Register as deliverer
-                    UIDisplay.DisplayMessage(UIConstants.OPTION_2_SELECTED_STR);
+                    UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(DELIVERER);
                     break;
                 
                 case CLIENT_INT:  // User chooses option 3: Register as client
-                    UIDisplay.DisplayMessage(UIConstants.OPTION_3_SELECTED_STR);
+                    UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(CLIENT);
                     break;
                 
                 case RETURN_INT:  // User chooses option 4: Return to previous menu 
-                    UIDisplay.DisplayMessage(UIConstants.OPTION_4_SELECTED_STR);
+                    UIDisplay.DisplayEmptyLine();
                     UIFlowController.CurrentState = MenuState.MainMenu;
                     break;
                 
