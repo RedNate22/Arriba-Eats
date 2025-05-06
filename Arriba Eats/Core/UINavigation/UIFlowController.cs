@@ -1,5 +1,5 @@
 using System;
-using Menus;
+using UI;
 
 namespace UINavigation
 {
