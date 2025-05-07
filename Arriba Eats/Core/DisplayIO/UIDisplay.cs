@@ -1,10 +1,11 @@
 using System;
+using Entities;
 
 namespace DisplayIO;
 
 /// <summary>
 /// Handles input and output for the menus using the console.
-/// <para> Uses <see cref="UIUtilities"/> for input & output formatting and validation. </para>
+/// <para> Uses <see cref="DisplayIO.UIUtilities"/> for input & output formatting and validation. </para>
 /// </summary>
 public static class UIDisplay
 {
@@ -32,8 +33,7 @@ public static class UIDisplay
     /// <returns> The input as a string. </returns>
     public static string ReadInput()
     {
-        string input;
-        input = Console.ReadLine()?.Trim() ?? "";
+        string input = Console.ReadLine()?.Trim() ?? "";
         return input;
     }
 
@@ -70,7 +70,7 @@ public static class UIDisplay
             string input = ReadInput();
 
             if (UIUtilities.IsValidName(input)) return input;
-            DisplayMessage("Invalid name.");
+            else DisplayMessage("Invalid name.");
         }
     }
     
@@ -95,7 +95,7 @@ public static class UIDisplay
             {
                 if (UIUtilities.IsValidAge(input)) return input;
             }
-            DisplayMessage("Invalid age.");
+            else DisplayMessage("Invalid age.");
         }
     }
 
@@ -144,11 +144,7 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidMobile(input))
-            {
-                return input;
-            }
-
+            if (UIUtilities.IsValidMobile(input)) return input;
             else DisplayMessage("Invalid phone number.");
         }
     }
@@ -220,16 +216,19 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidLocation(input))
-            {
-                return input;
-            }
-
+            if (UIUtilities.IsValidLocation(input)) return input;
             else DisplayMessage("Invalid location.");
         }
     }
 
-    // TODO XML
+    /// <summary>
+    /// Continously reads a string input from the user via the console until it meets
+    /// the validation criteria.
+    /// <para> Passes the string to <see cref="UIUtilities.IsValidLicencePlate()"/> to
+    /// validate wheter it meets the criteria. </para>
+    /// </summary>
+    /// <returns> The validated licence plate as a string. This method loops
+    /// until a valid input is provided. </returns>
     public static string GetLicencePlate()
     {
         while (true)
@@ -238,12 +237,54 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidLicencePlate(input))
-            {
-                return input;
-            }
-
+            if (UIUtilities.IsValidLicencePlate(input)) return input;
             else DisplayMessage("Invalid licence plate.");
+        }
+    }
+
+    /// <summary>
+    /// Continously reads a string input from the user via the console until it meets
+    /// the validation criteria.
+    /// <para> Passes the string to <see cref="UIUtilities.isValidRestaurantName()"/> to
+    /// validate wheter it meets the criteria. </para>
+    /// </summary>
+    /// <returns> The validated restaurant name as a string. This method loops
+    /// until a valid input is provided. </returns>
+    public static string GetRestaurantName()
+    {
+        while (true)
+        {
+            DisplayMessage("Please enter your restaurant's name:");
+
+            string input = ReadInput();
+
+            if (UIUtilities.isValidRestaurantName(input)) return input;
+            else DisplayMessage("Invalid restaurant name.");
+        }
+    }
+    
+    // TODO XML
+    // TODO Complete
+    public static RestaurantStyles GetRestaurantStyle()
+    {
+        const string STYLE_PROMPT = """
+            Please select your restaurant's style:
+            1: Italian
+            2: French
+            3: Chinese
+            4: Japanese
+            5: American
+            6: Australian
+            Please enter a choice between 1 and 6:
+            """;
+
+        while (true)
+        {
+            DisplayMessage(STYLE_PROMPT);
+
+            int choice = GetChoice();
+
+
         }
     }
 }

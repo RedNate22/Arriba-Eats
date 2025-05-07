@@ -213,7 +213,6 @@ public static class UIUtilities
         return isCorrectFormat;
     }
 
-    // TODO XML
     /// <summary>
     /// Validates whether the provided string input meets the following criteria:
     /// <para> - Must be between 1 and 8 characters long. </para>
@@ -227,5 +226,28 @@ public static class UIUtilities
     public static bool IsValidLicencePlate(string input)
     {
         return true;
+    }
+
+    /// <summary>
+    /// Validates whether the provided string input meets the following criteria:
+    /// <para> - Contains at least one non-whitespace character. </para>
+    /// </summary>
+    /// <param name="input"> The string to validate. </param>
+    /// <returns>
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
+    /// </returns>
+    public static bool isValidRestaurantName(string input)
+    {
+        bool containsWhiteSpaceChar = false;
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (!char.IsWhiteSpace(input[i]))
+            {
+                containsWhiteSpaceChar = true;
+            }
+        }
+
+        return containsWhiteSpaceChar;
     }
 }

@@ -37,7 +37,7 @@ public abstract class User
     /// <summary>
     /// Gets the user's location.
     /// </summary>
-    public string Location { get; private set; } = "0,0";  // Default value, intended for deliverer.
+    public string Location { get; private set; }
     
     /// <summary>
     /// Initialises a new instance of the <see cref="User"/> class with

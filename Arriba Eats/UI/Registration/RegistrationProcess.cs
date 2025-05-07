@@ -28,15 +28,13 @@ public static class RegistrationProcess
             
             case "DELIVERER":
                 string licencePlate = UIDisplay.GetLicencePlate();
-                string delivererLocation = "0,0";
 
-                Deliverer deliverer = new Deliverer(name, age, email, mobile, password,
-                    delivererLocation, licencePlate);
+                Deliverer deliverer = new Deliverer(name, age, email, mobile, password, licencePlate);
                 UIDisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
             
             case "CLIENT":
-                //TODO string restaurantName = UIDisplay.GetRestaurantName();
+                string restaurantName = UIDisplay.GetRestaurantName();
                 //TODO enum restaurantStyle = UIDisplay.GetRestaurantStyle();
                 //TODO int location = UIDisplay.GetLocation();
             
