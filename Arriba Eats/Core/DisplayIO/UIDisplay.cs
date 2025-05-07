@@ -5,7 +5,7 @@ namespace DisplayIO
     /// <summary>
     /// Handles input and output for the menus using the console.
     /// <para> 
-    /// Uses <see cref="DisplayIO.UIUtilities"/> for input formatting and validation. 
+    /// Uses <see cref="DisplayIO.UIUtilities"/> for input & output formatting and validation. 
     /// </para>
     /// </summary>
     public static class UIDisplay
@@ -228,6 +228,24 @@ namespace DisplayIO
                 }
 
                 else DisplayMessage("Invalid location.");
+            }
+        }
+
+        // TODO XML
+        public static string GetLicencePlate()
+        {
+            while (true)
+            {
+                DisplayMessage("Please enter your licence plate:");
+
+                string input = ReadInput();
+
+                if (UIUtilities.IsValidLicencePlate(input))
+                {
+                    return input;
+                }
+
+                else DisplayMessage("Invalid licence plate.");
             }
         }
     }

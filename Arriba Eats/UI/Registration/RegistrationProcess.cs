@@ -27,9 +27,10 @@ public static class RegistrationProcess
                 break;
             
             case "DELIVERER":
-                //TODO string licensePlate = UIDisplay.GetLicense();
+                string licencePlate = UIDisplay.GetLicencePlate();
 
-                //Deliverer deliverer = new Deliverer();
+                Deliverer deliverer = new Deliverer(name, age, email, mobile, password,
+                    licencePlate);
                 UIDisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
             

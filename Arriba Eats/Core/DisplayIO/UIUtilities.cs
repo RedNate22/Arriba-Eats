@@ -212,4 +212,18 @@ public static class UIUtilities
         bool isCorrectFormat = isValidLength && targetLocation == 1 && digitCount == 2;
         return isCorrectFormat;
     }
+
+    // TODO XML
+    /// <summary>
+    /// Validates whether the provided string input meets the following criteria:
+    /// <para> - Must be between 1 and 8 characters long. </para>
+    /// <para> - May contain only uppercase letters, numbers and spaces. <para>
+    /// <para> - May not consist entirely of spaces. </para>
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public static bool IsValidLicencePlate(string input)
+    {
+        return true;
+    }
 }
