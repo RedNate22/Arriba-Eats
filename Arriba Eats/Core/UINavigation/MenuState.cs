@@ -1,20 +1,18 @@
 using System;
 
-namespace UINavigation
-{
-    /// <summary>
-    /// Defines the various states of the menu system.
-    /// <para> Used to determine which menu should be displayed. </para>
-    /// </summary>
-    public enum MenuState
-    {
-        Exit,
-        MainMenu,
-        RegistrationMenu,
-        LoginMenu,
-        CustomerMenu,
-        DelivererMenu,
-        ClientMenu
-    }
-}
+namespace UINavigation;
 
+/// <summary>
+/// Defines the various states of the menu system.
+/// <para> Used to determine which menu should be displayed. </para>
+/// </summary>
+public enum MenuState
+{
+    Exit,
+    MainMenu,
+    RegistrationMenu,
+    LoginMenu,
+    CustomerMenu,
+    DelivererMenu,
+    ClientMenu
+}
