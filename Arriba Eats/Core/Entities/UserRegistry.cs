@@ -4,7 +4,7 @@ namespace Entities;
 
 /// <summary>
 /// Provides a centralised registry for storing and retrieving users 
-/// based on their user type.
+/// based on their <see cref="UserType"/>.
 /// </summary>
 public static class UserRegistry
 {

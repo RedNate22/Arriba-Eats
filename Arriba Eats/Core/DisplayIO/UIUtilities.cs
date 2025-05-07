@@ -4,7 +4,7 @@ namespace DisplayIO;
 
 /// <summary>
 /// Provides helper methods for managing user interface interactions.
-/// <para> Contains utility methods for dynamically formatting UI messages. </para>
+/// <para> Also contains utility methods for dynamically formatting UI messages. </para>
 /// </summary>
 public static class UIUtilities
 {
@@ -22,14 +22,13 @@ public static class UIUtilities
     }
 
     /// <summary>
-    /// Validates whether the provided string input consists of 
-    /// at least one letter--and only letters,
-    /// spaces, apostrophes and hyphens.
+    /// Validates whether the provided string input meets the following criteria:
+    /// - Consists of at least one letter.
+    /// - Only letters, spaces, apostrophes, and hyphens.
     /// </summary>
     /// <param name="input"> The string to validate. </param>
     /// <returns> 
-    /// <c>true</c> if the input contains at least one letter and consists of only the
-    /// allowed letters, otherwise <c>false</c>.
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
     /// </returns>
     public static bool IsValidName(string input)
     {
@@ -62,7 +61,7 @@ public static class UIUtilities
     public static bool IsValidAge(int input)
     {
         if (input < 18 || input > 100) return false;
-        return true;
+        else return true;
     }
 
     /// <summary>
@@ -92,9 +91,9 @@ public static class UIUtilities
         bool containsTarget = input.Contains(targetSymbol);
         bool targetOccursOnce = targetCount == 1;
         bool isPositionValid = targetLocation > 0 && targetLocation < input.Length - 1;
+        bool isCorrectFormat = containsTarget && targetOccursOnce && isPositionValid;
 
-        if (containsTarget && targetOccursOnce && isPositionValid) return true;
-        else return false;
+        return isCorrectFormat;
     }
 
     /// <summary>
@@ -121,17 +120,17 @@ public static class UIUtilities
 
         bool startsWithZero = input.StartsWith('0');
         bool isValidLength = input.Length == 10;
+        bool isCorrectFormat = isNumeric && startsWithZero && isValidLength;
 
-        if (isNumeric && startsWithZero && isValidLength) return true;
-        else return false;
+        return isCorrectFormat;
     }
 
     /// <summary>
     /// Validates whether the provided string input meets the following criteria:
     /// <para> - Be at least 8 characters long. </para>
-    /// <para> - Contain a number </para>
-    /// <para> - Contain a lowercase letter </para>
-    /// <para> - Contain an uppercase letter </para>
+    /// <para> - Contain a number. </para>
+    /// <para> - Contain a lowercase letter. </para>
+    /// <para> - Contain an uppercase letter. </para>
     /// <para> 
     /// Use <see cref="UIUtilities.IsValidPasswordMatch()"/> to validate inputs match.
     /// </para>
@@ -163,12 +162,8 @@ public static class UIUtilities
             }
         }
         
-        if (isValidLength && containsUpperCase && containsLowerCase && containsNumber)
-        {
-            return true;
-        }
-
-        else return false;
+        bool isCorrectFormat = isValidLength && containsUpperCase && containsLowerCase && containsNumber;
+        return isCorrectFormat;
     }
 
     /// <summary>
@@ -182,11 +177,18 @@ public static class UIUtilities
     public static bool IsValidPasswordMatch(string firstInput, string secondInput)
     {
         bool passwordsMatch = firstInput == secondInput;
-        if (passwordsMatch) return true;
-        else return false;
+        return passwordsMatch;
     }
 
-    // TODO XML
+    /// <summary>
+    /// Validates whether the provided string input meets the following criteria:
+    /// <para> - Must be of the format <c>X,Y</c>. </para>
+    /// <para> - <c>X</c> and <c>Y</c> must be integer values. </para>
+    /// </summary>
+    /// <param name="input"> The string to validate. </param>
+    /// <returns> 
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
+    /// </returns>
     public static bool IsValidLocation(string input)
     {
         bool isValidLength = input.Length == 3;
@@ -208,8 +210,6 @@ public static class UIUtilities
         }
 
         bool isCorrectFormat = isValidLength && targetLocation == 1 && digitCount == 2;
-
-        if (isCorrectFormat) return true;
-        else return false;
+        return isCorrectFormat;
     }
 }
