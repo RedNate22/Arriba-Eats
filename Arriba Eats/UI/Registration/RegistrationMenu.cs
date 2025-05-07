@@ -48,28 +48,30 @@ namespace UI
 
             switch (option)
             {
-                case CUSTOMER_INT:  // User chooses option 1: Register as customer
+                case CUSTOMER_INT:
                     UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(CUSTOMER);
-                    UIFlowController.CurrentState = MenuState.MainMenu;
+                    UIFlowController.CurrentState = MenuState.MainMenu; // TODO .CustomerMenu
                     break;
                 
-                case DELIVERER_INT:  // User chooses option 2: Register as deliverer
+                case DELIVERER_INT:
                     UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(DELIVERER);
+                    // TODO UIFlowController.CurrentState = MenuState.DelivererMenu;
                     break;
                 
-                case CLIENT_INT:  // User chooses option 3: Register as client
+                case CLIENT_INT:
                     UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(CLIENT);
+                    //TODO UIFlowController.CurrentState = MenuState.ClientMenu;
                     break;
                 
-                case RETURN_INT:  // User chooses option 4: Return to previous menu 
+                case RETURN_INT:
                     UIDisplay.DisplayEmptyLine();
                     UIFlowController.CurrentState = MenuState.MainMenu;
                     break;
                 
-                default:  // User has entered an invalid option
+                default:
                     UIDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
                     break;
             }

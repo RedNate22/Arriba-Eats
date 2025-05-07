@@ -206,7 +206,14 @@ namespace DisplayIO
             }
         }
 
-        // TODO XML
+        /// <summary>
+        /// Continously reads a string input from the user via the console until it meets
+        /// the validation criteria.
+        /// <para> Passes the string to <see cref="UIUtilities.IsValidLocation()"/> to
+        /// validate whether it meets the criteria. </para>
+        /// </summary>
+        /// <returns> The validated location as a string. This method loops
+        /// until a valid input is provided. </returns>
         public static string GetLocation()
         {
             while (true)
@@ -222,7 +229,6 @@ namespace DisplayIO
 
                 else DisplayMessage("Invalid location.");
             }
-            
         }
     }
 }

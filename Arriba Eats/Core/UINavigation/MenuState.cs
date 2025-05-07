@@ -12,7 +12,9 @@ namespace UINavigation
         MainMenu,
         RegistrationMenu,
         LoginMenu,
-        CustomerMainMenu
+        CustomerMenu,
+        DelivererMenu,
+        ClientMenu
     }
 }
 

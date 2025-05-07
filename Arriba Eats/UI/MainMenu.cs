@@ -30,7 +30,7 @@ namespace UI
         }
 
         /// <summary> 
-        /// Displays the main menu options and gets choice from user. 
+        /// Displays the main menu options and gets choice from user.
         /// </summary>
         public void DisplayMenu()
         {
@@ -44,19 +44,19 @@ namespace UI
 
             switch (option)
             {
-                case LOGIN_INT:  // User chooses option 1: Go to login menu
+                case LOGIN_INT:  
                     UIDisplay.DisplayEmptyLine();
                     // TryGetValue(?)
                     break;
-                case REGISTER_INT:  // User chooses option 2: Go to register menu
+                case REGISTER_INT:  
                     UIDisplay.DisplayEmptyLine();
                     UIFlowController.CurrentState = MenuState.RegistrationMenu;
                     break;
-                case EXIT_INT:  // User chooses option 3: Exit program
+                case EXIT_INT:  
                     UIDisplay.DisplayMessage(GOODBYE_STR);
                     UIFlowController.CurrentState = MenuState.Exit;
                     break;
-                default:  // User has entered an invalid option
+                default:  
                     UIDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
                     break;
             }

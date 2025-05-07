@@ -38,7 +38,7 @@ public static class RegistrationProcess
                 //TODO enum restaurantStyle = UIDisplay.GetRestaurantStyle();
                 //TODO int location = UIDisplay.GetLocation();
             
-                //Restaurant restaurant = new Restaurant();
+                //Client client = new Client();
 
                 UIDisplay.DisplayMessage($"You have been successfully registered as a client, {name}!");
                 break;
