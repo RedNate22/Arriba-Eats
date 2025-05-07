@@ -11,7 +11,8 @@ namespace UINavigation
         Exit,
         MainMenu,
         RegistrationMenu,
-        LoginMenu
+        LoginMenu,
+        CustomerMainMenu
     }
 }
 

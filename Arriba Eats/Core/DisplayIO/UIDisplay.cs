@@ -202,19 +202,25 @@ namespace DisplayIO
                     }
                 }
 
-                else DisplayMessage("Invalid Password");
+                else DisplayMessage("Invalid password.");
             }
         }
 
+        // TODO XML
         public static string GetLocation()
         {
-            DisplayMessage("Please enter your location (in the form of X,Y):");
-
-            string input = ReadInput();
-
-            if (UIUtilities.IsValidLocation(input))
+            while (true)
             {
-                
+                DisplayMessage("Please enter your location (in the form of X,Y):");
+
+                string input = ReadInput();
+
+                if (UIUtilities.IsValidLocation(input))
+                {
+                    return input;
+                }
+
+                else DisplayMessage("Invalid location.");
             }
             
         }

@@ -1,5 +1,6 @@
 using System;
 using DisplayIO;
+using Entities;
 
 namespace UI;
 
@@ -18,13 +19,11 @@ public static class RegistrationProcess
             case "CUSTOMER":
                 string location = UIDisplay.GetLocation();
 
-                /*
-                Customer customer = new Customer(name, age, email, mobile, password
+                Customer customer = new Customer(name, age, email, mobile, password,
                     location);
                 Customer.AddUser(UserType.Customer, customer);
-                */
-                UIDisplay.DisplayMessage("You have been successfully registered as a customer, {name}!");
-                
+
+                UIDisplay.DisplayMessage($"You have been successfully registered as a customer, {name}!");
                 break;
             
             case "DELIVERER":

@@ -51,6 +51,7 @@ namespace UI
                 case CUSTOMER_INT:  // User chooses option 1: Register as customer
                     UIDisplay.DisplayEmptyLine();
                     RegistrationProcess.Register(CUSTOMER);
+                    UIFlowController.CurrentState = MenuState.MainMenu;
                     break;
                 
                 case DELIVERER_INT:  // User chooses option 2: Register as deliverer

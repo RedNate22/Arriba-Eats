@@ -185,4 +185,31 @@ public static class UIUtilities
         if (passwordsMatch) return true;
         else return false;
     }
+
+    // TODO XML
+    public static bool IsValidLocation(string input)
+    {
+        bool isValidLength = input.Length == 3;
+        char targetSymbol = ',';
+        int targetLocation = -1;
+        int digitCount = 0;
+
+        for (int i = 0; i < input.Length ; i++)
+        {
+            if (char.IsDigit(input[i]))
+            {
+                digitCount++;
+            }
+            
+            else if (input[i] == targetSymbol)
+            {
+                targetLocation = i;
+            }
+        }
+
+        bool isCorrectFormat = isValidLength && targetLocation == 1 && digitCount == 2;
+
+        if (isCorrectFormat) return true;
+        else return false;
+    }
 }
