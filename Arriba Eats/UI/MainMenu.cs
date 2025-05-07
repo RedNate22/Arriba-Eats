@@ -46,6 +46,7 @@ namespace UI
             {
                 case LOGIN_INT:  // User chooses option 1: Go to login menu
                     UIDisplay.DisplayEmptyLine();
+                    // TryGetValue(?)
                     break;
                 case REGISTER_INT:  // User chooses option 2: Go to register menu
                     UIDisplay.DisplayEmptyLine();
