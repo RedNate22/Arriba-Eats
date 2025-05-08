@@ -236,7 +236,7 @@ public static class UIUtilities
     /// <returns>
     /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
     /// </returns>
-    public static bool isValidRestaurantName(string input)
+    public static bool IsValidRestaurantName(string input)
     {
         bool containsWhiteSpaceChar = false;
 
@@ -249,5 +249,21 @@ public static class UIUtilities
         }
 
         return containsWhiteSpaceChar;
+    }
+
+    /// <summary>
+    /// Validates whether the provided int input meets the following criteria:
+    /// <para> - Is a whole integer value between 1 and 6, inclusive. </para>
+    /// </summary>
+    /// <param name="choice"> The int to validate. </param>
+    /// <returns>
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
+    /// </returns>
+    public static bool IsValidRestaurantStyle(int choice)
+    {
+        List<int> validNumbers = new List<int> { 1, 2, 3, 4, 5, 6 };
+
+        if (validNumbers.Contains(choice)) return true;
+        else return false;
     }
 }

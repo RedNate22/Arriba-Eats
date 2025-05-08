@@ -52,12 +52,14 @@ public static class UIDisplay
     }
 
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets
+    /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
     /// <para> 
     /// Passes the string to <see cref="UIUtilities.IsValidName"/> to verify the input contains only
     /// valid characters and meets sanitisation requirements.
     /// </para>
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> The validated and sanitised name as a string. This method loops
     /// until a valid input is provided. </returns>
@@ -75,13 +77,15 @@ public static class UIDisplay
     }
     
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets 
+    /// Continuously reads a string input from the user via the console until it meets 
     /// the validation criteria.
     /// <para> Attempts to convert input to int using <see cref="int.TryParse()"/>.</para>
     /// <para> 
     /// If successful, passes the integer to <see cref="UIUtilities.IsValidAge()"/>
     /// to validate whether it falls within range.
     /// </para>
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> The validated age as an integer. This method loops
     /// until a valid input is provided. </returns>
@@ -94,6 +98,7 @@ public static class UIDisplay
             if (int.TryParse(ReadInput(), out int input))
             {
                 if (UIUtilities.IsValidAge(input)) return input;
+                else DisplayMessage("Invalid age.");
             }
             else DisplayMessage("Invalid age.");
         }
@@ -102,6 +107,8 @@ public static class UIDisplay
 
     // TODO Also add check against existing emails
     // TODO XML
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     public static string GetEmail()
     {
         while (true)
@@ -127,12 +134,14 @@ public static class UIDisplay
     }
 
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets 
+    /// Continuously reads a string input from the user via the console until it meets 
     /// the validation criteria.
     /// <para> 
     /// Passes the string to <see cref="UIUtilities.IsValidMobile()"/>
     /// to validate whether it meets the criteria.
     /// </para>
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> The validated mobile number as a string. This method loops
     /// until a valid input is provided. </returns>
@@ -150,13 +159,16 @@ public static class UIDisplay
     }
 
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets
+    /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria. Then reads a second string input from the user
     /// and validates whether both inputs match.
     /// <para> Passes the first input to <see cref="UIUtilities.IsValidPassword()"/> to
     /// validate whether it meets the criteria. </para>
     /// <para> Then passes the second input to <see cref="UIUtilities.IsValidPasswordMatch()"/>
     /// to validate both inputs match.</para>
+    /// <para> If the input is invalid, or the passwords do not match, 
+    /// an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> 
     /// The first input password as a string. This method loops until the 
@@ -201,10 +213,12 @@ public static class UIDisplay
     }
 
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets
+    /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
     /// <para> Passes the string to <see cref="UIUtilities.IsValidLocation()"/> to
     /// validate whether it meets the criteria. </para>
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> The validated location as a string. This method loops
     /// until a valid input is provided. </returns>
@@ -222,10 +236,12 @@ public static class UIDisplay
     }
 
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets
+    /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
     /// <para> Passes the string to <see cref="UIUtilities.IsValidLicencePlate()"/> to
     /// validate wheter it meets the criteria. </para>
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> The validated licence plate as a string. This method loops
     /// until a valid input is provided. </returns>
@@ -243,10 +259,12 @@ public static class UIDisplay
     }
 
     /// <summary>
-    /// Continously reads a string input from the user via the console until it meets
+    /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
-    /// <para> Passes the string to <see cref="UIUtilities.isValidRestaurantName()"/> to
-    /// validate wheter it meets the criteria. </para>
+    /// <para> Passes the string to <see cref="UIUtilities.IsValidRestaurantName()"/> to
+    /// validate whether it meets the criteria. </para>
+    /// <para> If the input is invalid, an error message is displayed and the user
+    /// is prompted again until a valid input is given. </para>
     /// </summary>
     /// <returns> The validated restaurant name as a string. This method loops
     /// until a valid input is provided. </returns>
@@ -258,13 +276,19 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.isValidRestaurantName(input)) return input;
+            if (UIUtilities.IsValidRestaurantName(input)) return input;
             else DisplayMessage("Invalid restaurant name.");
         }
     }
     
-    // TODO XML
-    // TODO Complete
+    /// <summary>
+    /// Continuously reads a string input from the user and attempts to convert it using
+    /// <see cref="GetChoice"/> via the console until it meets the validation criteria.
+    /// <para> Passes the string to <see cref="UIUtilities.IsValidRestaurantStyle()"/>
+    /// to validate whether it meets the criteria. </para>
+    /// </summary>
+    /// <returns> The validated restaurant style as a <see cref="RestaurantStyles"/> object.
+    /// This method loops until a valid input is provided. </returns>
     public static RestaurantStyles GetRestaurantStyle()
     {
         const string STYLE_PROMPT = """
@@ -284,7 +308,11 @@ public static class UIDisplay
 
             int choice = GetChoice();
 
-
+            if (UIUtilities.IsValidRestaurantStyle(choice))
+            {
+                DisplayMessage($"{(RestaurantStyles)choice}");
+                return (RestaurantStyles)choice;
+            }
         }
     }
 }
