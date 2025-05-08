@@ -51,19 +51,19 @@ public class RegistrationMenu : IMenu
             case CUSTOMER_INT:
                 UIDisplay.DisplayEmptyLine();
                 RegistrationProcess.Register(CUSTOMER);
-                UIFlowController.CurrentState = MenuState.MainMenu; // TODO .CustomerMenu
+                UIFlowController.CurrentState = MenuState.MainMenu;
                 break;
             
             case DELIVERER_INT:
                 UIDisplay.DisplayEmptyLine();
                 RegistrationProcess.Register(DELIVERER);
-                // TODO UIFlowController.CurrentState = MenuState.DelivererMenu;
+                UIFlowController.CurrentState = MenuState.MainMenu; 
                 break;
             
             case CLIENT_INT:
                 UIDisplay.DisplayEmptyLine();
                 RegistrationProcess.Register(CLIENT);
-                //TODO UIFlowController.CurrentState = MenuState.ClientMenu;
+                UIFlowController.CurrentState = MenuState.MainMenu;
                 break;
             
             case RETURN_INT:
