@@ -26,7 +26,7 @@ public static class RegistrationProcess
     /// </para>
     /// </summary>
     /// <param name="userType"> The type of user to register.
-    /// Expected values: "CUSTOMER", "DELIVERER", or "CLIENT". </param>
+    /// Expected values: "CUSTOMER_CHOICE", "DELIVERER_CHOICE", or "CLIENT_CHOICE". </param>
     public static void Register(string userType)
     {
         string name = IODisplay.GetName();
@@ -37,7 +37,7 @@ public static class RegistrationProcess
 
         switch (userType)
         {
-            case "CUSTOMER":
+            case MenuConstants.CUSTOMER_CHOICE:
                 string customerLocation = IODisplay.GetLocation();
 
                 Customer customer = new Customer(name, age, email, mobile, password,
@@ -47,7 +47,7 @@ public static class RegistrationProcess
                 IODisplay.DisplayMessage($"You have been successfully registered as a customer, {name}!");
                 break;
             
-            case "DELIVERER":
+            case MenuConstants.DELIVERER_CHOICE:
                 string licencePlate = IODisplay.GetLicencePlate();
 
                 Deliverer deliverer = new Deliverer(name, age, email, mobile, password, licencePlate);
@@ -56,7 +56,7 @@ public static class RegistrationProcess
                 IODisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
             
-            case "CLIENT":
+            case MenuConstants.CLIENT_CHOICE:
                 string restaurantName = IODisplay.GetRestaurantName();
                 RestaurantStyles restaurantStyle = IODisplay.GetRestaurantStyle();
                 string clientLocation = IODisplay.GetLocation();

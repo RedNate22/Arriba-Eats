@@ -30,8 +30,7 @@ internal static class UserRegistry
         {
             userDictionary[userType] = new List<User>();
         }
-        
-        else userDictionary[userType].Add(user);
+        userDictionary[userType].Add(user);
     }
 
     /// <summary>

@@ -17,11 +17,18 @@ public static class IODisplay
         Console.WriteLine();
     }
     
-    /// <summary> Writes the specified string message to the screen. </summary>
-    /// <param name="message">The string message to display to the screen.</param>
+    /// <summary> Writes the specified string message to the screen on a new line. </summary>
+    /// <param name="message"> The string message to display to the screen. </param>
     public static void DisplayMessage(string message)
     {
         Console.WriteLine(message);
+    }
+
+    /// <summary> Writes the specified string message to the screen on the same line. </summary>
+    /// <param name="message"> The string message to display to the screen. </param>
+    public static void DisplayMessageSingleLine(string message)
+    {
+        Console.Write(message);
     }
     
     /// <summary>
@@ -309,7 +316,6 @@ public static class IODisplay
 
             if (IOUtilities.IsValidRestaurantStyle(choice))
             {
-                DisplayMessage($"{(RestaurantStyles)choice}");
                 return (RestaurantStyles)choice;
             }
         }

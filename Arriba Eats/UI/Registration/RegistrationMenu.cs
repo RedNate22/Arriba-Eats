@@ -14,17 +14,9 @@ namespace UI;
 /// </summary>
 public class RegistrationMenu : IMenu
 {
-    private const string USER_TYPE_STR = "Which type of user would you like to register as?";
-    private const string CUSTOMER_STR = "1: Customer";
-    private const string DELIVERER_STR = "2: Deliverer";
-    private const string CLIENT_STR = "3: Client";
-    private const string RETURN_STR = "4: Return to the previous menu";
     private readonly string ENTER_CHOICE_STR = IOUtilities.EnterChoiceStr(4);
 
     private const int CUSTOMER_INT = 1, DELIVERER_INT = 2, CLIENT_INT = 3, RETURN_INT = 4;
-    const string CUSTOMER = "CUSTOMER";
-    const string DELIVERER = "DELIVERER";
-    const string CLIENT = "CLIENT";
 
     /// <summary>
     /// Displays the registration menu options and prompts the user to select a user type to register as.
@@ -39,11 +31,11 @@ public class RegistrationMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(USER_TYPE_STR);
-        IODisplay.DisplayMessage(CUSTOMER_STR);
-        IODisplay.DisplayMessage(DELIVERER_STR);
-        IODisplay.DisplayMessage(CLIENT_STR);
-        IODisplay.DisplayMessage(RETURN_STR);
+        IODisplay.DisplayMessage(MenuConstants.USER_TYPE_STR);
+        IODisplay.DisplayMessage(MenuConstants.CUSTOMER_STR);
+        IODisplay.DisplayMessage(MenuConstants.DELIVERER_STR);
+        IODisplay.DisplayMessage(MenuConstants.CLIENT_STR);
+        IODisplay.DisplayMessage(MenuConstants.RETURN_STR);
         IODisplay.DisplayMessage(ENTER_CHOICE_STR);
 
         int option = IODisplay.GetChoice();
@@ -52,19 +44,19 @@ public class RegistrationMenu : IMenu
         {
             case CUSTOMER_INT:
                 IODisplay.DisplayEmptyLine();
-                RegistrationProcess.Register(CUSTOMER);
+                RegistrationProcess.Register(MenuConstants.CUSTOMER_CHOICE);
                 UIFlowController.CurrentState = MenuState.MainMenu;
                 break;
             
             case DELIVERER_INT:
                 IODisplay.DisplayEmptyLine();
-                RegistrationProcess.Register(DELIVERER);
+                RegistrationProcess.Register(MenuConstants.DELIVERER_CHOICE);
                 UIFlowController.CurrentState = MenuState.MainMenu; 
                 break;
             
             case CLIENT_INT:
                 IODisplay.DisplayEmptyLine();
-                RegistrationProcess.Register(CLIENT);
+                RegistrationProcess.Register(MenuConstants.CLIENT_CHOICE);
                 UIFlowController.CurrentState = MenuState.MainMenu;
                 break;
             
