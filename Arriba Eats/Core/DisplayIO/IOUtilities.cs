@@ -1,5 +1,4 @@
 using System;
-using Entities;
 
 namespace DisplayIO;
 
@@ -7,7 +6,7 @@ namespace DisplayIO;
 /// Provides helper methods for managing user interface interactions.
 /// <para> Also contains utility methods for dynamically formatting UI messages. </para>
 /// </summary>
-public static class UIUtilities
+public static class IOUtilities
 {
     private const string ENTER_CHOICE_TEMPLATE = "Please enter a choice between 1 and {0}:";
     
@@ -131,7 +130,7 @@ public static class UIUtilities
     /// <para> - Contain a lowercase letter. </para>
     /// <para> - Contain an uppercase letter. </para>
     /// <para> 
-    /// Use <see cref="UIUtilities.IsValidPasswordMatch()"/> to validate inputs match.
+    /// Use <see cref="IOUtilities.IsValidPasswordMatch()"/> to validate inputs match.
     /// </para>
     /// </summary>
     /// <param name="input"> The string to validate. </param>

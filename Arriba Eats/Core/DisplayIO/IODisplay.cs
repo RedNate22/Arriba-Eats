@@ -5,9 +5,9 @@ namespace DisplayIO;
 
 /// <summary>
 /// Handles input and output for the menus using the console.
-/// <para> Uses <see cref="DisplayIO.UIUtilities"/> for input & output formatting and validation. </para>
+/// <para> Uses <see cref="DisplayIO.IOUtilities"/> for input & output formatting and validation. </para>
 /// </summary>
-public static class UIDisplay
+public static class IODisplay
 {
     /// <summary>
     /// Writes an empty line to the screen, to be used as a line break between selections and menus.
@@ -55,7 +55,7 @@ public static class UIDisplay
     /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
     /// <para> 
-    /// Passes the string to <see cref="UIUtilities.IsValidName"/> to verify the input contains only
+    /// Passes the string to <see cref="IOUtilities.IsValidName"/> to verify the input contains only
     /// valid characters and meets sanitisation requirements.
     /// </para>
     /// <para> If the input is invalid, an error message is displayed and the user
@@ -71,7 +71,7 @@ public static class UIDisplay
             
             string input = ReadInput();
 
-            if (UIUtilities.IsValidName(input)) return input;
+            if (IOUtilities.IsValidName(input)) return input;
             else DisplayMessage("Invalid name.");
         }
     }
@@ -81,7 +81,7 @@ public static class UIDisplay
     /// the validation criteria.
     /// <para> Attempts to convert input to int using <see cref="int.TryParse()"/>.</para>
     /// <para> 
-    /// If successful, passes the integer to <see cref="UIUtilities.IsValidAge()"/>
+    /// If successful, passes the integer to <see cref="IOUtilities.IsValidAge()"/>
     /// to validate whether it falls within range.
     /// </para>
     /// <para> If the input is invalid, an error message is displayed and the user
@@ -97,7 +97,7 @@ public static class UIDisplay
 
             if (int.TryParse(ReadInput(), out int input))
             {
-                if (UIUtilities.IsValidAge(input)) return input;
+                if (IOUtilities.IsValidAge(input)) return input;
                 else DisplayMessage("Invalid age.");
             }
             else DisplayMessage("Invalid age.");
@@ -117,10 +117,10 @@ public static class UIDisplay
 
             string input = ReadInput();
             
-            if (UIUtilities.IsValidEmail(input))
+            if (IOUtilities.IsValidEmail(input))
             {
                 /*
-                if (UIUtilities.IsUniqueEmail(input))
+                if (IOUtilities.IsUniqueEmail(input))
                 {
                     DisplayMessage("This email address is already in use.");
                     continue;
@@ -138,7 +138,7 @@ public static class UIDisplay
     /// Continuously reads a string input from the user via the console until it meets 
     /// the validation criteria.
     /// <para> 
-    /// Passes the string to <see cref="UIUtilities.IsValidMobile()"/>
+    /// Passes the string to <see cref="IOUtilities.IsValidMobile()"/>
     /// to validate whether it meets the criteria.
     /// </para>
     /// <para> If the input is invalid, an error message is displayed and the user
@@ -154,7 +154,7 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidMobile(input)) return input;
+            if (IOUtilities.IsValidMobile(input)) return input;
             else DisplayMessage("Invalid phone number.");
         }
     }
@@ -163,9 +163,9 @@ public static class UIDisplay
     /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria. Then reads a second string input from the user
     /// and validates whether both inputs match.
-    /// <para> Passes the first input to <see cref="UIUtilities.IsValidPassword()"/> to
+    /// <para> Passes the first input to <see cref="IOUtilities.IsValidPassword()"/> to
     /// validate whether it meets the criteria. </para>
-    /// <para> Then passes the second input to <see cref="UIUtilities.IsValidPasswordMatch()"/>
+    /// <para> Then passes the second input to <see cref="IOUtilities.IsValidPasswordMatch()"/>
     /// to validate both inputs match.</para>
     /// <para> If the input is invalid, or the passwords do not match, 
     /// an error message is displayed and the user
@@ -192,12 +192,12 @@ public static class UIDisplay
 
             string firstInput = ReadInput();
 
-            if (UIUtilities.IsValidPassword(firstInput))
+            if (IOUtilities.IsValidPassword(firstInput))
             {
                 DisplayMessage("Please confirm your password:");
                 string secondInput = ReadInput();
 
-                if (UIUtilities.IsValidPasswordMatch(firstInput, secondInput))
+                if (IOUtilities.IsValidPasswordMatch(firstInput, secondInput))
                 {
                     return firstInput;
                 }
@@ -216,7 +216,7 @@ public static class UIDisplay
     /// <summary>
     /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
-    /// <para> Passes the string to <see cref="UIUtilities.IsValidLocation()"/> to
+    /// <para> Passes the string to <see cref="IOUtilities.IsValidLocation()"/> to
     /// validate whether it meets the criteria. </para>
     /// <para> If the input is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
@@ -231,7 +231,7 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidLocation(input)) return input;
+            if (IOUtilities.IsValidLocation(input)) return input;
             else DisplayMessage("Invalid location.");
         }
     }
@@ -239,7 +239,7 @@ public static class UIDisplay
     /// <summary>
     /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
-    /// <para> Passes the string to <see cref="UIUtilities.IsValidLicencePlate()"/> to
+    /// <para> Passes the string to <see cref="IOUtilities.IsValidLicencePlate()"/> to
     /// validate wheter it meets the criteria. </para>
     /// <para> If the input is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
@@ -254,7 +254,7 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidLicencePlate(input)) return input;
+            if (IOUtilities.IsValidLicencePlate(input)) return input;
             else DisplayMessage("Invalid licence plate.");
         }
     }
@@ -262,7 +262,7 @@ public static class UIDisplay
     /// <summary>
     /// Continuously reads a string input from the user via the console until it meets
     /// the validation criteria.
-    /// <para> Passes the string to <see cref="UIUtilities.IsValidRestaurantName()"/> to
+    /// <para> Passes the string to <see cref="IOUtilities.IsValidRestaurantName()"/> to
     /// validate whether it meets the criteria. </para>
     /// <para> If the input is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
@@ -277,7 +277,7 @@ public static class UIDisplay
 
             string input = ReadInput();
 
-            if (UIUtilities.IsValidRestaurantName(input)) return input;
+            if (IOUtilities.IsValidRestaurantName(input)) return input;
             else DisplayMessage("Invalid restaurant name.");
         }
     }
@@ -285,7 +285,7 @@ public static class UIDisplay
     /// <summary>
     /// Continuously reads a string input from the user and attempts to convert it using
     /// <see cref="GetChoice"/> via the console until it meets the validation criteria.
-    /// <para> Passes the string to <see cref="UIUtilities.IsValidRestaurantStyle()"/>
+    /// <para> Passes the string to <see cref="IOUtilities.IsValidRestaurantStyle()"/>
     /// to validate whether it meets the criteria. </para>
     /// </summary>
     /// <returns> The validated restaurant style as a <see cref="RestaurantStyles"/> object.
@@ -309,7 +309,7 @@ public static class UIDisplay
 
             int choice = GetChoice();
 
-            if (UIUtilities.IsValidRestaurantStyle(choice))
+            if (IOUtilities.IsValidRestaurantStyle(choice))
             {
                 DisplayMessage($"{(RestaurantStyles)choice}");
                 return (RestaurantStyles)choice;

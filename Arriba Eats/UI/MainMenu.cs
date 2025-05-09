@@ -15,7 +15,7 @@ public class MainMenu : IMenu
     private const string LOGIN_STR = "1: Login as a registered user";
     private const string REGISTER_STR = "2: Register as a new user";
     private const string EXIT_STR = "3: Exit";
-    private readonly string ENTER_CHOICE_STR = UIUtilities.EnterChoiceStr(3);
+    private readonly string ENTER_CHOICE_STR = IOUtilities.EnterChoiceStr(3);
     private const string GOODBYE_STR = "Thank you for using Arriba Eats!";
 
     private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
@@ -26,7 +26,7 @@ public class MainMenu : IMenu
     /// </summary>
     public static void WelcomeMessage()
     {
-        UIDisplay.DisplayMessage(WELCOME_STR);
+        IODisplay.DisplayMessage(WELCOME_STR);
     }
 
     /// <summary> 
@@ -34,30 +34,30 @@ public class MainMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        UIDisplay.DisplayMessage(UIConstants.MAKE_CHOICE_STR);
-        UIDisplay.DisplayMessage(LOGIN_STR);
-        UIDisplay.DisplayMessage(REGISTER_STR);
-        UIDisplay.DisplayMessage(EXIT_STR);
-        UIDisplay.DisplayMessage(ENTER_CHOICE_STR);
+        IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
+        IODisplay.DisplayMessage(LOGIN_STR);
+        IODisplay.DisplayMessage(REGISTER_STR);
+        IODisplay.DisplayMessage(EXIT_STR);
+        IODisplay.DisplayMessage(ENTER_CHOICE_STR);
 
-        int option = UIDisplay.GetChoice();
+        int option = IODisplay.GetChoice();
 
         switch (option)
         {
             case LOGIN_INT:  
-                UIDisplay.DisplayEmptyLine();
+                IODisplay.DisplayEmptyLine();
                 // TryGetValue(?)
                 break;
             case REGISTER_INT:  
-                UIDisplay.DisplayEmptyLine();
+                IODisplay.DisplayEmptyLine();
                 UIFlowController.CurrentState = MenuState.RegistrationMenu;
                 break;
             case EXIT_INT:  
-                UIDisplay.DisplayMessage(GOODBYE_STR);
+                IODisplay.DisplayMessage(GOODBYE_STR);
                 UIFlowController.CurrentState = MenuState.Exit;
                 break;
             default:  
-                UIDisplay.DisplayMessage(UIConstants.INVALID_CHOICE_STR);
+                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                 break;
         }
     }

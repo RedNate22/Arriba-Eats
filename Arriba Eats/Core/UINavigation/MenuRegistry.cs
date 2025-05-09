@@ -8,10 +8,14 @@ namespace UINavigation;
 /// </summary>
 public static class MenuRegistry
 {
+    /// <summary>
+    /// Maps each <see cref="MenuState"/> to its corresponding <see cref="IMenu"/> instance.
+    /// <para> Allows dynamic menu selection based on the current state of <see cref="UIFlowController.CurrentState"/>. </para>
+    /// </summary>
     public static Dictionary<MenuState, IMenu> menuMap = new Dictionary<MenuState, IMenu>
     {
         { MenuState.MainMenu, new MainMenu() },
-        { MenuState.RegistrationMenu, new RegistrationMenu() }
-        //{ MenuState.LoginMenu, new LoginMenu},
+        { MenuState.RegistrationMenu, new RegistrationMenu() },
+        { MenuState.LoginMenu, new LoginMenu() }
     };
 }

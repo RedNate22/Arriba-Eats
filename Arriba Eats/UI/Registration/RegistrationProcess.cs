@@ -15,8 +15,8 @@ public static class RegistrationProcess
     /// Registers a new user based on the specified type selected in
     /// <see cref="RegistrationMenu"/>.
     /// <para> 
-    /// Uses multiple methods defined in <see cref="UIDisplay"/> to
-    /// prompt the user for input, which in turn use <see cref="UIUtilities"/>
+    /// Uses multiple methods defined in <see cref="IODisplay"/> to
+    /// prompt the user for input, which in turn use <see cref="IOUtilities"/>
     /// to check for valid formatting and input before returning the value here to
     /// be assigned. 
     /// </para>
@@ -29,42 +29,42 @@ public static class RegistrationProcess
     /// Expected values: "CUSTOMER", "DELIVERER", or "CLIENT". </param>
     public static void Register(string userType)
     {
-        string name = UIDisplay.GetName();
-        int age = UIDisplay.GetAge();
-        string email = UIDisplay.GetEmail();
-        string mobile = UIDisplay.GetMobile();
-        string password = UIDisplay.GetPassword();
+        string name = IODisplay.GetName();
+        int age = IODisplay.GetAge();
+        string email = IODisplay.GetEmail();
+        string mobile = IODisplay.GetMobile();
+        string password = IODisplay.GetPassword();
 
         switch (userType)
         {
             case "CUSTOMER":
-                string customerLocation = UIDisplay.GetLocation();
+                string customerLocation = IODisplay.GetLocation();
 
                 Customer customer = new Customer(name, age, email, mobile, password,
                     customerLocation);
                 UserRegistry.AddUser(UserType.Customer, customer);
 
-                UIDisplay.DisplayMessage($"You have been successfully registered as a customer, {name}!");
+                IODisplay.DisplayMessage($"You have been successfully registered as a customer, {name}!");
                 break;
             
             case "DELIVERER":
-                string licencePlate = UIDisplay.GetLicencePlate();
+                string licencePlate = IODisplay.GetLicencePlate();
 
                 Deliverer deliverer = new Deliverer(name, age, email, mobile, password, licencePlate);
                 UserRegistry.AddUser(UserType.Deliverer, deliverer);
                 
-                UIDisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
+                IODisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
             
             case "CLIENT":
-                string restaurantName = UIDisplay.GetRestaurantName();
-                RestaurantStyles restaurantStyle = UIDisplay.GetRestaurantStyle();
-                string clientLocation = UIDisplay.GetLocation();
+                string restaurantName = IODisplay.GetRestaurantName();
+                RestaurantStyles restaurantStyle = IODisplay.GetRestaurantStyle();
+                string clientLocation = IODisplay.GetLocation();
             
                 Client client = new Client(name, age, email, mobile, password, clientLocation, restaurantName, restaurantStyle);
                 UserRegistry.AddUser(UserType.Client, client);
                 
-                UIDisplay.DisplayMessage($"You have been successfully registered as a client, {name}!");
+                IODisplay.DisplayMessage($"You have been successfully registered as a client, {name}!");
                 break;
             
             default:

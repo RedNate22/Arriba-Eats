@@ -1,5 +1,4 @@
 using System;
-using UI;
 
 namespace UINavigation;
     
@@ -15,7 +14,7 @@ public static class UIFlowController
     
     /// <summary>
     /// <para> Gets or sets the current menu state. </para>
-    /// <para> When updated, the application transitions to the corresponding menu. </para>
+    /// <para> When updated, <see cref="RunMenuSystem()"/> transitions to the corresponding menu. </para>
     /// </summary>
     public static MenuState CurrentState 
     { 
@@ -25,13 +24,12 @@ public static class UIFlowController
     
     /// <summary>
     /// Starts the menu system and handles navigation based on the current state.
-    /// <para> Initialises the default menu and displays the welcome message. </para>
-    /// <para> Continously monitors state transitions and ensures the appropriate menu is displayed. </para>
+    /// <para> Initialises the default menu to display first. </para>
+    /// <para> Continously monitors state transitions based on <see cref="CurrentState"/> and ensures the appropriate menu is displayed. </para>
     /// </summary>
     public static void RunMenuSystem()
     {
         CurrentState = MenuState.MainMenu;
-        MainMenu.WelcomeMessage(); 
 
         while (CurrentState != MenuState.Exit)
         {
