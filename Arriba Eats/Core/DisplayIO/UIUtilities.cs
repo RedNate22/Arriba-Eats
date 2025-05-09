@@ -95,14 +95,6 @@ public static class UIUtilities
         return isCorrectFormat;
     }
 
-    // TODO
-    public static bool IsUniqueEmail(string input)
-    {
-        //userDictionary;
-        
-        return true;
-    }
-
     /// <summary>
     /// Validates whether the provided string input meets the following criteria:
     /// <para> - Contains only digits. </para>

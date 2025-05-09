@@ -58,15 +58,4 @@ public abstract class User
         Password = password;
         Location = location;
     }
-
-    /// <summary>
-    /// Adds a user to the registry by passing the specified parameters
-    /// to <see cref="UserRegister.RegisterUser()"/>.
-    /// </summary>
-    /// <param name="userType"> The type of user being registered. </param>
-    /// <param name="user"> The user instance to associate with the specified user type. </param>
-    public static void AddUser(UserType userType, User user)
-    {
-        UserRegistry.RegisterUser(userType, user);
-    }
 }
