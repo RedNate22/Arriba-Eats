@@ -1,4 +1,5 @@
 using System;
+using Entities;
 
 namespace DisplayIO;
 
@@ -39,10 +40,8 @@ public static class UIUtilities
             bool containsValidCharacters = false;
             foreach (char character in input)
             {
-                // Contains at least one letter 
                 if (char.IsLetter(character)) containsValidCharacters = true;
                 
-                // Contains invalid characters
                 else if (character != '-' && character != '\'' && character != ' ') return false;
             }          
             return containsValidCharacters;
@@ -94,6 +93,14 @@ public static class UIUtilities
         bool isCorrectFormat = containsTarget && targetOccursOnce && isPositionValid;
 
         return isCorrectFormat;
+    }
+
+    // TODO
+    public static bool IsUniqueEmail(string input)
+    {
+        //userDictionary;
+        
+        return true;
     }
 
     /// <summary>
@@ -225,7 +232,28 @@ public static class UIUtilities
     /// </returns>
     public static bool IsValidLicencePlate(string input)
     {
-        return true;
+        bool isValidLength = input.Length >= 1 && input.Length <= 8;
+        bool isNotEmpty = !String.IsNullOrWhiteSpace(input);
+        bool containsValidSymbols = true; 
+        bool isOnlyUpperCase = true;
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (!char.IsLetterOrDigit(input[i]) && !char.IsWhiteSpace(input[i]))
+            {
+                containsValidSymbols = false;
+                break;
+            }
+            
+            if (char.IsLetter(input[i]) && char.IsLower(input[i]))
+            {
+                isOnlyUpperCase = false;
+                break;
+            }
+        }
+        
+        bool isCorrectFormat = isValidLength && isNotEmpty && containsValidSymbols && isOnlyUpperCase;
+        return isCorrectFormat;
     }
 
     /// <summary>
@@ -238,17 +266,18 @@ public static class UIUtilities
     /// </returns>
     public static bool IsValidRestaurantName(string input)
     {
-        bool containsWhiteSpaceChar = false;
+        bool containsNonWhiteSpaceChar = false;
 
         for (int i = 0; i < input.Length; i++)
         {
             if (!char.IsWhiteSpace(input[i]))
             {
-                containsWhiteSpaceChar = true;
+                containsNonWhiteSpaceChar = true;
+                break;
             }
         }
 
-        return containsWhiteSpaceChar;
+        return containsNonWhiteSpaceChar;
     }
 
     /// <summary>

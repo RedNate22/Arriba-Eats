@@ -119,14 +119,13 @@ public static class UIDisplay
             
             if (UIUtilities.IsValidEmail(input))
             {
-                /*
-                if email already exists
+                if (UIUtilities.IsUniqueEmail(input))
                 {
                     DisplayMessage("This email address is already in use.");
                     continue;
                 }
-                */
-                return input;
+                
+                else return input;
             }
             
             else DisplayMessage("Invalid email address.");

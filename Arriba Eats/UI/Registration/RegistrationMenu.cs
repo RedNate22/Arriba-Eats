@@ -26,14 +26,16 @@ public class RegistrationMenu : IMenu
     const string DELIVERER = "DELIVERER";
     const string CLIENT = "CLIENT";
 
-    // TODO finish this xml
     /// <summary>
-    /// Displays the registration menu options and gets choice of which option 
-    /// to choose from the user. Calls th.
+    /// Displays the registration menu options and prompts the user to select a user type to register as.
+    /// <para> The appropriate user type is registered depending on the user's choice. </para>
     /// <para> Uses <see cref="UIDisplay.DisplayMessage()"/> to display the options. </para>
     /// <para> Uses <see cref="UIDisplay.GetChoice()"/> to get a choice from the user in the form
-    /// of an integer.
-    /// <para> Matches the integer with the associated menu option and calls </para>
+    /// of an integer. </para>
+    /// <para> Matches the given integer with the associated menu option and passes the correct
+    /// argument to <see cref="RegistrationProcess.Register"/> to begin the registration
+    /// process. 
+    /// </para>
     /// </summary>
     public void DisplayMenu()
     {
