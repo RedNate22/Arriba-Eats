@@ -113,9 +113,20 @@ public static class IODisplay
     }
 
 
-    // TODO XML
-    /// <para> If the input is invalid, an error message is displayed and the user
+    /// <summary>
+    /// Continously reads a string input from the user via the console until it meets
+    /// the validation criteria.
+    /// <para> If the email is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
+    /// <para> If the email is valid, it then checks the <see cref="UserRegistry.userDictionary"/>
+    /// to determine if the email already currently exists amongst the registered users. </para>
+    /// <para> If the email is already registered, it returns an error, prompting the user
+    /// that email is already in use. </para>
+    /// <para> If the email is not registered yet, it returns the string input to the calling code.
+    /// Allowing it to be stored and passed to <see cref="User.AddUser()"/> later. </para>
+    /// </summary>
+    /// <returns> The validated email as a string. This method loops 
+    /// until a valid input is provided. </returns>
     public static string GetEmail()
     {
         while (true)
@@ -319,5 +330,12 @@ public static class IODisplay
                 return (RestaurantStyles)choice;
             }
         }
+    }
+    
+    // TODO XML
+    
+    public static void Login(string email, string password)
+    {
+
     }
 }

@@ -5,6 +5,10 @@ namespace Entities;
 /// <summary>
 /// Provides a centralised registry for storing and retrieving users 
 /// based on their <see cref="UserType"/>.
+/// <para> 
+/// Provides several internal methods to safely store and retrieve user data
+/// from <see cref="userDictionary"/>.
+/// </para> 
 /// </summary>
 internal static class UserRegistry
 {
@@ -24,7 +28,7 @@ internal static class UserRegistry
     /// <param name="userType"> The type of user being registered. </param>
     /// <param name="user"> The user instance to be stored into the list,
     /// associated with the specified user type. </param>
-    public static void RegisterUser(UserType userType, User user)
+    internal static void RegisterUser(UserType userType, User user)
     {
         if (!userDictionary.ContainsKey(userType))
         {
@@ -41,7 +45,7 @@ internal static class UserRegistry
     /// <returns>
     /// <c>true</c> if a match is found within the registry, otherwise <c>false</c>.
     /// </returns>
-    public static bool EmailInRegistry(string input)
+    internal static bool EmailInRegistry(string input)
     {
         foreach (List<User> userList in userDictionary.Values)
         {
@@ -54,5 +58,10 @@ internal static class UserRegistry
             }
         }
         return false;
+    }
+
+    internal static void UserExists(string email, string password)
+    {
+
     }
 }
