@@ -10,28 +10,50 @@ internal static class UserRegistry
 {
     /// <summary>
     /// A dictionary that maps user types to their corresponding user instances.
+    /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/>.</para>
     /// </summary>
-    private static Dictionary<UserType, User> userDictionary = new();
+    private static Dictionary<UserType, List<User>> userDictionary = new();
 
     /// <summary>
-    /// Registers a new user in the registry using the specified user type.
+    /// Registers a new user in the registry using the specified <see cref="UserType"/> to 
+    /// dynamically add the user into the appropriate list.
+    /// <para> Checks if a list associated with the given <see cref="UserType"/>
+    /// exists, and if <c>true</c>, stores the user into the existing list. If <c>false</c>,
+    /// creates a new list for the new <see cref="UserType"/> and stores the instance into this list. </para>
     /// </summary>
     /// <param name="userType"> The type of user being registered. </param>
-    /// <param name="user"> The user instance to associate with the specified user type. </param>
-    private static void RegisterUser(UserType userType, User user)
+    /// <param name="user"> The user instance to be stored into the list,
+    /// associated with the specified user type. </param>
+    public static void RegisterUser(UserType userType, User user)
     {
-        userDictionary.Add(userType, user);
+        if (!userDictionary.ContainsKey(userType))
+        {
+            userDictionary[userType] = new List<User>();
+        }
+        
+        else userDictionary[userType].Add(user);
     }
 
     /// <summary>
-    /// Adds a user to the registry by passing the specified parameters
-    /// to <see cref="UserRegistry.RegisterUser()"/>.
+    /// Searches the <see cref="userDictionary"/> to determine if any registered
+    /// <see cref="User"/> contains an email address matching the provided input.
     /// </summary>
-    /// <param name="userType"> The type of user being registered. </param>
-    /// <param name="user"> The user instance to associate with the specified user type. </param>
-    public static void AddUser(UserType userType, User user)
+    /// <param name="input"> The email address to check against existing users. </param>
+    /// <returns>
+    /// <c>true</c> if a match is found within the registry, otherwise <c>false</c>.
+    /// </returns>
+    public static bool EmailInRegistry(string input)
     {
-        RegisterUser(userType, user);
+        foreach (List<User> userList in userDictionary.Values)
+        {
+            foreach (User user in userList)
+            {
+                if (user.Email == input)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-    // TODO add check (try/except(?)) for adding a user already registered^^^
 }

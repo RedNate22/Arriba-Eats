@@ -42,7 +42,7 @@ public static class RegistrationProcess
 
                 Customer customer = new Customer(name, age, email, mobile, password,
                     customerLocation);
-                UserRegistry.AddUser(UserType.Customer, customer);
+                User.AddUser(UserType.Customer, customer);
 
                 IODisplay.DisplayMessage($"You have been successfully registered as a customer, {name}!");
                 break;
@@ -51,7 +51,7 @@ public static class RegistrationProcess
                 string licencePlate = IODisplay.GetLicencePlate();
 
                 Deliverer deliverer = new Deliverer(name, age, email, mobile, password, licencePlate);
-                UserRegistry.AddUser(UserType.Deliverer, deliverer);
+                User.AddUser(UserType.Deliverer, deliverer);
                 
                 IODisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
@@ -62,7 +62,7 @@ public static class RegistrationProcess
                 string clientLocation = IODisplay.GetLocation();
             
                 Client client = new Client(name, age, email, mobile, password, clientLocation, restaurantName, restaurantStyle);
-                UserRegistry.AddUser(UserType.Client, client);
+                User.AddUser(UserType.Client, client);
                 
                 IODisplay.DisplayMessage($"You have been successfully registered as a client, {name}!");
                 break;

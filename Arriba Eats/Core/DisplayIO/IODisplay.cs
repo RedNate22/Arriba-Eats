@@ -100,12 +100,12 @@ public static class IODisplay
                 if (IOUtilities.IsValidAge(input)) return input;
                 else DisplayMessage("Invalid age.");
             }
+            
             else DisplayMessage("Invalid age.");
         }
     }
 
 
-    // TODO Also add check against existing emails
     // TODO XML
     /// <para> If the input is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
@@ -119,15 +119,13 @@ public static class IODisplay
             
             if (IOUtilities.IsValidEmail(input))
             {
-                /*
-                if (IOUtilities.IsUniqueEmail(input))
+                if (User.EmailExists(input))
                 {
                     DisplayMessage("This email address is already in use.");
                     continue;
                 }
+
                 else return input;
-                */
-                return input;
             }
             
             else DisplayMessage("Invalid email address.");

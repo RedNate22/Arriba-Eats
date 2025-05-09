@@ -58,4 +58,32 @@ public abstract class User
         Password = password;
         Location = location;
     }
+
+    /// <summary>
+    /// Adds a user to the registry by passing the specified parameters
+    /// to <see cref="UserRegistry.RegisterUser()"/>.
+    /// </summary>
+    /// <param name="userType"> The type of user being registered. </param>
+    /// <param name="user"> The user instance to associate with the specified user type. </param>
+    public static void AddUser(UserType userType, User user)
+    {
+        UserRegistry.RegisterUser(userType, user);
+    }
+    
+    /// <summary>
+    /// Checks whether the provided email exists with the <see cref="UserRegistry.userDictionary"/>.
+    /// </summary>
+    /// <param name="input"> The email address to search for in the registry. </param>
+    /// <returns>
+    /// <c>true</c> if a user with the specified email address currently exists in the registry,
+    /// otherwise, <c>false</c>.
+    /// </returns>
+    public static bool EmailExists(string input)
+    {
+        if (UserRegistry.EmailInRegistry(input))
+        {
+            return true;
+        }
+        else return false;
+    }
 }
