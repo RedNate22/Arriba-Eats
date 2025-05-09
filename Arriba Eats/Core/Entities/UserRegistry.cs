@@ -1,4 +1,5 @@
 using System;
+using UINavigation;
 
 namespace Entities;
 
@@ -51,7 +52,7 @@ internal static class UserRegistry
         {
             foreach (User user in userList)
             {
-                if (user.Email == email)
+                if (email == user.Email)
                 {
                     return true;
                 }
@@ -60,8 +61,22 @@ internal static class UserRegistry
         return false;
     }
 
-    internal static void FindUserByCredentials(string email, string password)
+    // TODO xml
+    internal static bool TryVerifyUserCredentials(string email, string password, out User? foundUser)
     {
-
+        foreach (List<User> userList in userDictionary.Values)
+        {
+            foreach (User user in userList)
+            {
+                if (email == user.Email && password == user.Password)
+                {
+                    foundUser = user;
+                    Console.WriteLine($"Match found! Email: {user.Email}, Password: {user.Password}");
+                    return true;
+                }
+            }    
+        }
+        foundUser = null;
+        return false;
     }
 }

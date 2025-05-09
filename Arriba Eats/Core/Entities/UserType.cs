@@ -8,6 +8,9 @@ namespace Entities;
 /// </summary>
 public enum UserType
 {
+    // TODO xml
+    Default,
+
     /// <summary>
     /// Represents a standard customer who places orders from restaurants.
     /// </summary>

@@ -333,9 +333,19 @@ public static class IODisplay
     }
     
     // TODO XML
-    
-    public static void Login(string email, string password)
+    public static User Login(string email, string password)
     {
+        while (true)
+        {
+            User? user = User.AuthenticateUser(email, password);
+            if (user == null)
+            {
+                DisplayMessage("Invalid email or password.");
+                continue;
+            }
 
+            else return user;
+        }
+        
     }
 }

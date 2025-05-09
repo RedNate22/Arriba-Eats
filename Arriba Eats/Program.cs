@@ -1,6 +1,7 @@
 ﻿using System;
 using UINavigation;
 using UI;
+using Entities;
 
 namespace ArribaEats
 {

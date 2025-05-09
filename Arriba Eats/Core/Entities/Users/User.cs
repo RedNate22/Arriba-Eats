@@ -88,8 +88,13 @@ public abstract class User
     }
 
     // TODO
-    public static void AuthenticateUser(string email, string password)
+    public static User? AuthenticateUser(string email, string password)
     {
-        UserRegistry.FindUserByCredentials(email, password);
+        if (UserRegistry.TryVerifyUserCredentials(email, password, out User? foundUser))
+        {
+            return foundUser;
+        }
+        
+        else return null;
     }
 }
