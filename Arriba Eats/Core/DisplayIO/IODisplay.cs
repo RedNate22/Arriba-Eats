@@ -76,9 +76,9 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your name:");
             
-            string input = ReadInput();
+            string name = ReadInput();
 
-            if (IOUtilities.IsValidName(input)) return input;
+            if (IOUtilities.IsValidName(name)) return name;
             else DisplayMessage("Invalid name.");
         }
     }
@@ -102,9 +102,9 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your age (18-100):");
 
-            if (int.TryParse(ReadInput(), out int input))
+            if (int.TryParse(ReadInput(), out int age))
             {
-                if (IOUtilities.IsValidAge(input)) return input;
+                if (IOUtilities.IsValidAge(age)) return age;
                 else DisplayMessage("Invalid age.");
             }
             
@@ -133,17 +133,17 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your email address:");
 
-            string input = ReadInput();
+            string email = ReadInput();
             
-            if (IOUtilities.IsValidEmail(input))
+            if (IOUtilities.IsValidEmail(email))
             {
-                if (User.EmailExists(input))
+                if (User.EmailExists(email))
                 {
                     DisplayMessage("This email address is already in use.");
                     continue;
                 }
 
-                else return input;
+                else return email;
             }
             
             else DisplayMessage("Invalid email address.");
@@ -168,9 +168,9 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your mobile phone number:");
 
-            string input = ReadInput();
+            string mobile = ReadInput();
 
-            if (IOUtilities.IsValidMobile(input)) return input;
+            if (IOUtilities.IsValidMobile(mobile)) return mobile;
             else DisplayMessage("Invalid phone number.");
         }
     }
@@ -206,16 +206,16 @@ public static class IODisplay
         {
             DisplayMessage(PASSWORD_PROMPT);
 
-            string firstInput = ReadInput();
+            string firstPasswordInput = ReadInput();
 
-            if (IOUtilities.IsValidPassword(firstInput))
+            if (IOUtilities.IsValidPassword(firstPasswordInput))
             {
                 DisplayMessage("Please confirm your password:");
-                string secondInput = ReadInput();
+                string secondPasswordInput = ReadInput();
 
-                if (IOUtilities.IsValidPasswordMatch(firstInput, secondInput))
+                if (IOUtilities.IsValidPasswordMatch(firstPasswordInput, secondPasswordInput))
                 {
-                    return firstInput;
+                    return firstPasswordInput;
                 }
 
                 else
@@ -245,9 +245,9 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your location (in the form of X,Y):");
 
-            string input = ReadInput();
+            string location = ReadInput();
 
-            if (IOUtilities.IsValidLocation(input)) return input;
+            if (IOUtilities.IsValidLocation(location)) return location;
             else DisplayMessage("Invalid location.");
         }
     }
@@ -268,9 +268,9 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your licence plate:");
 
-            string input = ReadInput();
+            string licencePlate = ReadInput();
 
-            if (IOUtilities.IsValidLicencePlate(input)) return input;
+            if (IOUtilities.IsValidLicencePlate(licencePlate)) return licencePlate;
             else DisplayMessage("Invalid licence plate.");
         }
     }
@@ -291,9 +291,9 @@ public static class IODisplay
         {
             DisplayMessage("Please enter your restaurant's name:");
 
-            string input = ReadInput();
+            string restaurantName = ReadInput();
 
-            if (IOUtilities.IsValidRestaurantName(input)) return input;
+            if (IOUtilities.IsValidRestaurantName(restaurantName)) return restaurantName;
             else DisplayMessage("Invalid restaurant name.");
         }
     }
@@ -323,11 +323,11 @@ public static class IODisplay
         {
             DisplayMessage(STYLE_PROMPT);
 
-            int choice = GetChoice();
+            int restaurantStyle = GetChoice();
 
-            if (IOUtilities.IsValidRestaurantStyle(choice))
+            if (IOUtilities.IsValidRestaurantStyle(restaurantStyle))
             {
-                return (RestaurantStyles)choice;
+                return (RestaurantStyles)restaurantStyle;
             }
         }
     }

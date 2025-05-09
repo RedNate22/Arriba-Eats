@@ -41,17 +41,17 @@ internal static class UserRegistry
     /// Searches the <see cref="userDictionary"/> to determine if any registered
     /// <see cref="User"/> contains an email address matching the provided input.
     /// </summary>
-    /// <param name="input"> The email address to check against existing users. </param>
+    /// <param name="email"> The email address to check against existing users. </param>
     /// <returns>
     /// <c>true</c> if a match is found within the registry, otherwise <c>false</c>.
     /// </returns>
-    internal static bool EmailInRegistry(string input)
+    internal static bool EmailInRegistry(string email)
     {
         foreach (List<User> userList in userDictionary.Values)
         {
             foreach (User user in userList)
             {
-                if (user.Email == input)
+                if (user.Email == email)
                 {
                     return true;
                 }
@@ -60,7 +60,7 @@ internal static class UserRegistry
         return false;
     }
 
-    internal static void UserExists(string email, string password)
+    internal static void FindUserByCredentials(string email, string password)
     {
 
     }

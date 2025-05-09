@@ -73,19 +73,23 @@ public abstract class User
     /// <summary>
     /// Checks whether the provided email exists with the <see cref="UserRegistry.userDictionary"/>.
     /// </summary>
-    /// <param name="input"> The email address to search for in the registry. </param>
+    /// <param name="email"> The email address to search for in the registry. </param>
     /// <returns>
     /// <c>true</c> if a user with the specified email address currently exists in the registry,
     /// otherwise, <c>false</c>.
     /// </returns>
-    public static bool EmailExists(string input)
+    public static bool EmailExists(string email)
     {
-        if (UserRegistry.EmailInRegistry(input))
+        if (UserRegistry.EmailInRegistry(email))
         {
             return true;
         }
         else return false;
     }
 
-    
+    // TODO
+    public static void AuthenticateUser(string email, string password)
+    {
+        UserRegistry.FindUserByCredentials(email, password);
+    }
 }

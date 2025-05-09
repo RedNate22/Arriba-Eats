@@ -20,7 +20,9 @@ public class LoginMenu : IMenu
         // TODO method(email, password) check if email and password match to an existing user, 
         // TODO then return that user here,
         // TODO Call a new method(user) to login - switch case, call appropriate menu
+        IODisplay.Login(email, password);
 
-        IODisplay.DisplayMessage($"You have logged in with {email}, {password}!");
+
+        //IODisplay.DisplayMessage($"You have logged in with {email}, {password}!");
     }
 }
