@@ -12,19 +12,33 @@ public class LoginMenu : IMenu
     // TODO XML
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessageSingleLine(MenuConstants.EMAIL_STR);
-        string email = IODisplay.ReadInput();
+        User? currentUser = SessionManager.Login();
 
-        IODisplay.DisplayMessageSingleLine(MenuConstants.PASSWORD_STR);
-        string password = IODisplay.ReadInput();
+        if (currentUser == null)
+        {
+            UIFlowController.CurrentState = MenuState.MainMenu;
+        }
 
-        User currentUser = IODisplay.Login(email, password);
-        // TODO Call a new method(user) to login - switch case, call appropriate menu
-        SessionManager.AuthenticateSession(currentUser);
+        else
+        {
+            SessionManager.AuthenticateSession(currentUser);
+            UserType userType = SessionManager.GetUserType(currentUser);
 
-        IODisplay.DisplayMessage($"You have logged in with {email}, {password}!");
-
-        // ! Remove later
-        UIFlowController.CurrentState = MenuState.MainMenu;
+            switch (userType)
+            {
+                case UserType.Customer:
+                    UIFlowController.CurrentState = MenuState.CustomerMainMenu;
+                    break;
+                case UserType.Deliverer:
+                    UIFlowController.CurrentState = MenuState.DelivererMainMenu;
+                    break;
+                case UserType.Client:
+                    UIFlowController.CurrentState = MenuState.CustomerMainMenu;
+                    break;
+                default:
+                    UIFlowController.CurrentState = MenuState.MainMenu;
+                    return;
+            }
+        }
     }
 }

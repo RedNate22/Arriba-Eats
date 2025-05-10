@@ -12,7 +12,7 @@ public enum MenuState
     MainMenu,
     RegistrationMenu,
     LoginMenu,
-    CustomerMenu,
-    DelivererMenu,
-    ClientMenu
+    CustomerMainMenu,
+    DelivererMainMenu,
+    ClientMainMenu
 }

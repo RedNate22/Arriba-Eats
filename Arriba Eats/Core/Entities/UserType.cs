@@ -9,6 +9,9 @@ namespace Entities;
 public enum UserType
 {
     // TODO xml
+    /// <summary>
+    /// Represents the state of the application when a user has not yet been authenticated.
+    /// </summary>
     Default,
 
     /// <summary>

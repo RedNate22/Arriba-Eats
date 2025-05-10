@@ -61,7 +61,14 @@ internal static class UserRegistry
         return false;
     }
 
-    // TODO xml
+    /// <summary>
+    /// Attempts to verify the user credentials by searching the <see cref="userDictionary"/>
+    /// and finding a match.
+    /// </summary>
+    /// <param name="email"> The email address to match with the registered user. </param>
+    /// <param name="password"> The password to match with the registered user. </param>
+    /// <param name="foundUser"> The instance of the user if both email and password match. </param>
+    /// <returns> <c>true</c> if a match is found, otherwise, <c>false</c>. </returns>
     internal static bool TryVerifyUserCredentials(string email, string password, out User? foundUser)
     {
         foreach (List<User> userList in userDictionary.Values)
@@ -71,11 +78,11 @@ internal static class UserRegistry
                 if (email == user.Email && password == user.Password)
                 {
                     foundUser = user;
-                    Console.WriteLine($"Match found! Email: {user.Email}, Password: {user.Password}");
                     return true;
                 }
             }    
         }
+
         foundUser = null;
         return false;
     }

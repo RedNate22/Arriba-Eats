@@ -1,5 +1,6 @@
 using System;
 using Entities;
+using UI;
 
 namespace DisplayIO;
 
@@ -330,22 +331,5 @@ public static class IODisplay
                 return (RestaurantStyles)restaurantStyle;
             }
         }
-    }
-    
-    // TODO XML
-    public static User Login(string email, string password)
-    {
-        while (true)
-        {
-            User? user = User.AuthenticateUser(email, password);
-            if (user == null)
-            {
-                DisplayMessage("Invalid email or password.");
-                continue;
-            }
-
-            else return user;
-        }
-        
     }
 }

@@ -26,10 +26,6 @@ public static class MenuConstants
     public const string CUSTOMER_CHOICE = "CUSTOMER_CHOICE";
     public const string DELIVERER_CHOICE = "DELIVERER_CHOICE";
     public const string CLIENT_CHOICE = "CLIENT_CHOICE";
-
-    // Login Menu
-    public const string EMAIL_STR = "Email: ";
-    public const string PASSWORD_STR = "Password: ";
 }
 
 

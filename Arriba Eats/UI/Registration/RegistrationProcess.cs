@@ -18,7 +18,7 @@ public static class RegistrationProcess
     /// Uses multiple methods defined in <see cref="IODisplay"/> to
     /// prompt the user for input, which in turn use <see cref="IOUtilities"/>
     /// to check for valid formatting and input before returning the value here to
-    /// be assigned. 
+    /// be assigned safely. 
     /// </para>
     /// <para> 
     /// Based on the <see cref="UserType"/> specified, further prompts for

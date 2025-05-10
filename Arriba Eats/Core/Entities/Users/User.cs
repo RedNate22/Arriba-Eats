@@ -87,7 +87,14 @@ public abstract class User
         else return false;
     }
 
-    // TODO
+    /// <summary>
+    /// Passes the user credentials to <see cref="UserRegistry.TryVerifyUserCredentials()"/>
+    /// in an attempt to find a matching user. If successful, returns the instance of 
+    /// the authenticated user.
+    /// </summary>
+    /// <param name="email"> The email to verify. </param>
+    /// <param name="password"> The password to verify. </param>
+    /// <returns> The instance of the authenticated user, otherwise <c>null</c>. </returns>
     public static User? AuthenticateUser(string email, string password)
     {
         if (UserRegistry.TryVerifyUserCredentials(email, password, out User? foundUser))
