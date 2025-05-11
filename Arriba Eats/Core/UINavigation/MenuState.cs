@@ -8,11 +8,13 @@ namespace UINavigation;
 /// </summary>
 public enum MenuState
 {
+    // TODO xml for these...
     Exit,
     MainMenu,
     RegistrationMenu,
     LoginMenu,
     CustomerMainMenu,
     DelivererMainMenu,
-    ClientMainMenu
+    ClientMainMenu,
+    RestaurantListOrdered
 }

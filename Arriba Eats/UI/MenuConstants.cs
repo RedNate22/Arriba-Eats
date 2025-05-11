@@ -51,6 +51,14 @@ public static class MenuConstants
         3: See the status of your orders
         4: Rate a restaurant you've ordered from
         """;
+    
+    public const string RESTAURANT_LIST_ORDERED_STR = """
+        How would you like the list of restaurants ordered?
+        1: Sorted alphabetically by name
+        2: Sorted by distance
+        3: Sorted by style
+        4: Sorted by average rating
+        """;
 }
 
 

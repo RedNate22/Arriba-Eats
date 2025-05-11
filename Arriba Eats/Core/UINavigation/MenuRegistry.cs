@@ -20,6 +20,7 @@ public static class MenuRegistry
         { MenuState.LoginMenu, new LoginMenu() },
         { MenuState.CustomerMainMenu, new CustomerMainMenu() },
         { MenuState.DelivererMainMenu, new DelivererMainMenu() },
-        { MenuState.ClientMainMenu, new ClientMainMenu() }
+        { MenuState.ClientMainMenu, new ClientMainMenu() },
+        { MenuState.RestaurantListOrdered, new RestaurantListOrdered() }
     };
 }
