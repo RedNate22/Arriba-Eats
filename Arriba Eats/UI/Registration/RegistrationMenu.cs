@@ -45,24 +45,24 @@ public class RegistrationMenu : IMenu
             case CUSTOMER_INT:
                 IODisplay.DisplayEmptyLine();
                 RegistrationProcess.Register(MenuConstants.CUSTOMER_CHOICE);
-                UIFlowController.CurrentState = MenuState.MainMenu;
+                UIFlowController.ChangeMenu("MainMenu");
                 break;
             
             case DELIVERER_INT:
                 IODisplay.DisplayEmptyLine();
                 RegistrationProcess.Register(MenuConstants.DELIVERER_CHOICE);
-                UIFlowController.CurrentState = MenuState.MainMenu; 
+                UIFlowController.ChangeMenu("MainMenu"); 
                 break;
             
             case CLIENT_INT:
                 IODisplay.DisplayEmptyLine();
                 RegistrationProcess.Register(MenuConstants.CLIENT_CHOICE);
-                UIFlowController.CurrentState = MenuState.MainMenu;
+                UIFlowController.ChangeMenu("MainMenu");
                 break;
             
             case RETURN_INT:
                 IODisplay.DisplayEmptyLine();
-                UIFlowController.CurrentState = MenuState.MainMenu;
+                UIFlowController.ChangeMenu("MainMenu");
                 break;
             
             default:

@@ -87,7 +87,14 @@ internal static class UserRegistry
         return false;
     }
 
-    // TODO xml
+    /// <summary>
+    /// Attempts to find the <see cref="UserType"/> associated with the 
+    /// given <see cref="User"/> instance within <see cref="userDictionary"/>.
+    /// </summary>
+    /// <param name="user"> The user instance whose type is being identified. </param>
+    /// <param name="foundUserType"> Outputs the associated <see cref="UserType"/>
+    /// if the user is found. Otherwise returns <see cref="UserType.Default"/>. </param>
+    /// <returns> <c>true</c> if the user is found, otherwise <c>false</c>. </returns>
     internal static bool TryFindUserType (User user, out UserType foundUserType)
     {
         foreach (KeyValuePair<UserType, List<User>> pair in userDictionary)

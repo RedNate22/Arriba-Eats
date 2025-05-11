@@ -40,15 +40,15 @@ public class MainMenu : IMenu
         {
             case LOGIN_INT:  
                 IODisplay.DisplayEmptyLine();
-                UIFlowController.CurrentState = MenuState.LoginMenu;
+                UIFlowController.ChangeMenu("LoginMenu");
                 break;
             case REGISTER_INT:  
                 IODisplay.DisplayEmptyLine();
-                UIFlowController.CurrentState = MenuState.RegistrationMenu;
+                UIFlowController.ChangeMenu("RegistrationMenu");
                 break;
             case EXIT_INT:  
                 IODisplay.DisplayMessage(MenuConstants.GOODBYE_STR);
-                UIFlowController.CurrentState = MenuState.Exit;
+                UIFlowController.ChangeMenu("Exit");
                 break;
             default:  
                 IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);

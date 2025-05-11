@@ -16,7 +16,7 @@ public class LoginMenu : IMenu
 
         if (currentUser == null)
         {
-            UIFlowController.CurrentState = MenuState.MainMenu;
+            UIFlowController.ChangeMenu("MainMenu");
         }
 
         else
@@ -28,16 +28,16 @@ public class LoginMenu : IMenu
             switch (userType)
             {
                 case UserType.Customer:
-                    UIFlowController.CurrentState = MenuState.CustomerMainMenu;
+                    UIFlowController.ChangeMenu("CustomerMainMenu");
                     break;
                 case UserType.Deliverer:
-                    UIFlowController.CurrentState = MenuState.DelivererMainMenu;
+                    UIFlowController.ChangeMenu("DelivererMainMenu");
                     break;
                 case UserType.Client:
-                    UIFlowController.CurrentState = MenuState.CustomerMainMenu;
+                    UIFlowController.ChangeMenu("CustomerMainMenu");
                     break;
                 default:
-                    UIFlowController.CurrentState = MenuState.MainMenu;
+                    UIFlowController.ChangeMenu("MainMenu");
                     break;
             }
         }
