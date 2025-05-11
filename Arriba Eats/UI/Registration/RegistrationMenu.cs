@@ -14,7 +14,8 @@ namespace UI;
 /// </summary>
 public class RegistrationMenu : IMenu
 {
-    private readonly string ENTER_CHOICE_STR = IOUtilities.EnterChoiceStr(4);
+    private string _enterChoice = IOUtilities.EnterChoiceStr(4);
+    private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(4);
 
     private const int CUSTOMER_INT = 1, DELIVERER_INT = 2, CLIENT_INT = 3, RETURN_INT = 4;
 
@@ -31,12 +32,9 @@ public class RegistrationMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(MenuConstants.USER_TYPE_STR);
-        IODisplay.DisplayMessage(MenuConstants.CUSTOMER_STR);
-        IODisplay.DisplayMessage(MenuConstants.DELIVERER_STR);
-        IODisplay.DisplayMessage(MenuConstants.CLIENT_STR);
-        IODisplay.DisplayMessage(MenuConstants.RETURN_STR);
-        IODisplay.DisplayMessage(ENTER_CHOICE_STR);
+        IODisplay.DisplayMessage(MenuConstants.REGISTRATION_MENU_CHOICES_STR);
+        IODisplay.DisplayMessage(_returnPreviousMenu);
+        IODisplay.DisplayMessage(_enterChoice);
 
         int option = IODisplay.GetChoice();
 

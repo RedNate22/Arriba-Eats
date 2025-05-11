@@ -7,8 +7,8 @@ namespace UI;
 // TODO xml
 public class CustomerMainMenu : IMenu
 {
-    private readonly string ENTER_CHOICE_STR = IOUtilities.EnterChoiceStr(5);
-    private readonly string LOG_OUT_STR = IOUtilities.LogOutStr(5);
+    private string _enterChoice = IOUtilities.EnterChoiceStr(5);
+    private string _logOut = IOUtilities.LogOutStr(5);
 
     private const int DISPLAY_USER_INFO_INT = 1, SELECT_RESTAURANTS_LIST_INT = 2, SEE_ORDERS_STATUS_INT = 3,
         RATE_RESTAURANT_INT = 4, LOG_OUT_INT = 5;
@@ -31,11 +31,9 @@ public class CustomerMainMenu : IMenu
 
         IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
         IODisplay.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
-        IODisplay.DisplayMessage(MenuConstants.SELECT_RESTAURANTS_LIST_STR);
-        IODisplay.DisplayMessage(MenuConstants.SEE_ORDERS_STATUS_STR);
-        IODisplay.DisplayMessage(MenuConstants.RATE_RESTAURANT_STR);
-        IODisplay.DisplayMessage(LOG_OUT_STR);
-        IODisplay.DisplayMessage(ENTER_CHOICE_STR);
+        IODisplay.DisplayMessage(MenuConstants.CUSTOMER_MAIN_MENU_CHOICES_STR);
+        IODisplay.DisplayMessage(_logOut);
+        IODisplay.DisplayMessage(_enterChoice);
 
         int option = IODisplay.GetChoice();
 

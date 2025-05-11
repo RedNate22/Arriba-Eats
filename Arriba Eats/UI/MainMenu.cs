@@ -11,7 +11,7 @@ namespace UI;
 /// </summary>
 public class MainMenu : IMenu
 {
-    private readonly string ENTER_CHOICE_STR = IOUtilities.EnterChoiceStr(3);
+    private string _enterChoice = IOUtilities.EnterChoiceStr(3);
     private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
     
     /// <summary> 
@@ -29,10 +29,8 @@ public class MainMenu : IMenu
     public void DisplayMenu()
     {
         IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
-        IODisplay.DisplayMessage(MenuConstants.LOGIN_STR);
-        IODisplay.DisplayMessage(MenuConstants.REGISTER_STR);
-        IODisplay.DisplayMessage(MenuConstants.EXIT_STR);
-        IODisplay.DisplayMessage(ENTER_CHOICE_STR);
+        IODisplay.DisplayMessage(MenuConstants.MAIN_MENU_CHOICES_STR);
+        IODisplay.DisplayMessage(_enterChoice);
 
         int option = IODisplay.GetChoice();
 
