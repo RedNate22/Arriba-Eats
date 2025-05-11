@@ -43,7 +43,7 @@ public class LoginMenu : IMenu
                     UIFlowController.ChangeMenu("DelivererMainMenu");
                     break;
                 case UserType.Client:
-                    UIFlowController.ChangeMenu("CustomerMainMenu");
+                    UIFlowController.ChangeMenu("ClientMainMenu");
                     break;
                 default:
                     UIFlowController.ChangeMenu("MainMenu");

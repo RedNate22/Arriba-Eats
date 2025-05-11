@@ -17,14 +17,11 @@ namespace ArribaEats
         /// </summary>
         static void Main()
         {
-            MainMenu.WelcomeMessage();
-            UIFlowController.RunMenuSystem();
-            
             // ! Test data REMOVE LATER
             // Customer
             string customerName = "CustomerTest";
             int customerAge = 0;
-            string customerEmail = "CustomerTest@gmail.com";
+            string customerEmail = "Customer@gmail.com";
             string customerMobile = "0000000000";
             string customerPassword = "Password123";
             string customerLocation = "0,0";
@@ -36,7 +33,7 @@ namespace ArribaEats
             // Deliverer
             string delivererName = "DelivererTest";
             int delivererAge = 0;
-            string delivererEmail = "DelivererTest@gmail.com";
+            string delivererEmail = "Deliverer@gmail.com";
             string delivererMobile = "0000000000";
             string delivererPassword = "Password123";
             string delivererLicencePlate = "DELIVERER123";
@@ -48,7 +45,7 @@ namespace ArribaEats
             // Client
             string clientName = "ClientTest";
             int clientAge = 0;
-            string clientEmail = "ClientTest@gmail.com";
+            string clientEmail = "Client@gmail.com";
             string clientMobile = "0000000000";
             string clientPassword = "Password123";
             string restaurantName = "ClientTest's Restaurant";
@@ -58,6 +55,9 @@ namespace ArribaEats
             Client clientTest = new Client(clientName, clientAge, clientEmail, clientMobile,
                 clientPassword, clientLocation, restaurantName, restaurantStyle); 
             User.AddUser(UserType.Client, clientTest);
+            
+            MainMenu.WelcomeMessage();
+            UIFlowController.RunMenuSystem();
         }
     }
 }
