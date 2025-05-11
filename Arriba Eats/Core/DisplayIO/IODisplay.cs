@@ -342,6 +342,7 @@ public static class IODisplay
     {
         UserType userType = SessionManager.ReturnUserType();
 
+        DisplayMessage("Your user details are as follows:");
         DisplayMessage($"Name: {user.Name}");
         DisplayMessage($"Age: {user.Age}");
         DisplayMessage($"Email: {user.Email}");
@@ -352,12 +353,13 @@ public static class IODisplay
             case UserType.Customer:
                 var customer = (Customer)user;
                 DisplayMessage($"Location: {customer.Location}");
-                DisplayMessage($"You've made {0} order(s) and spent a total of ${1} here.");
+                DisplayMessage($"You've made 0 order(s) and spent a total of $0.00 here.");
                 break;
             
             case UserType.Deliverer:
                 var deliverer = (Deliverer)user;
                 DisplayMessage($"Licence plate: {deliverer.LicencePlate}");
+                
                 // If (the deliverer has an order not yet delivered)
                 DisplayMessage($"""
                     Current delivery:
@@ -372,6 +374,22 @@ public static class IODisplay
                 DisplayMessage($"Restaurant style: {client.RestaurantStyle}");
                 DisplayMessage($"Restaurant location: {client.Location}");
                 break;
+        }
+    }
+    
+    /// <summary>
+    /// Welcomes the current <see cref="User"/> by their <see cref="User.Name"/>.
+    /// </summary>
+    public static void WelcomeUser()
+    {
+        if (SessionManager.CurrentUser != null) 
+        {
+            DisplayMessage($"Welcome back, {SessionManager.CurrentUser.Name}!");
+        }
+
+        else
+        {
+            DisplayMessage("No user is currently logged in.");
         }
     }
 }

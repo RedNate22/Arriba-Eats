@@ -51,14 +51,12 @@ public static class SessionManager
         const string PASSWORD_STR = "Password: ";
         const string INVALID_EMAIL_PASSWORD = "Invalid email or password.";
 
-        IODisplay.DisplayMessageSingleLine(EMAIL_STR);
+        IODisplay.DisplayMessage(EMAIL_STR);
         string email = IODisplay.ReadInput();
         
-        IODisplay.DisplayMessageSingleLine(PASSWORD_STR);
+        IODisplay.DisplayMessage(PASSWORD_STR);
         string password = IODisplay.ReadInput();
         
-        IODisplay.DisplayEmptyLine();
-
         User? user = User.AuthenticateUser(email, password);
         if (user == null)
         {
@@ -76,6 +74,7 @@ public static class SessionManager
     public static void Logout()
     {
         CurrentUser = null;
+        IODisplay.DisplayMessage("You are now logged out.");
         UIFlowController.ChangeMenu("MainMenu");
     }
 

@@ -12,10 +12,23 @@ public class CustomerMainMenu : IMenu
 
     private const int DISPLAY_USER_INFO_INT = 1, SELECT_RESTAURANTS_LIST_INT = 2, SEE_ORDERS_STATUS_INT = 3,
         RATE_RESTAURANT_INT = 4, LOG_OUT_INT = 5;
+    
+    /// <summary>
+    /// A count to track if the <see cref="IODisplay.WelcomeUser()"/>
+    /// method has been run. This is to prevent the message from being displayed
+    /// more than once.
+    /// </summary>
+    private int _welcomeLimit = 0;  // ? Turn this into a common IMenu field?
 
     // TODO xml
     public void DisplayMenu()
     {
+        if (_welcomeLimit == 0)
+        {
+            IODisplay.WelcomeUser();
+            _welcomeLimit++;
+        }
+
         IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
         IODisplay.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
         IODisplay.DisplayMessage(MenuConstants.SELECT_RESTAURANTS_LIST_STR);
