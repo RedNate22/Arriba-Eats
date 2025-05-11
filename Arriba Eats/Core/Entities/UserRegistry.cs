@@ -15,7 +15,7 @@ internal static class UserRegistry
 {
     /// <summary>
     /// A dictionary that maps user types to their corresponding user instances.
-    /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/>.</para>
+    /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/> as the key.</para>
     /// </summary>
     private static Dictionary<UserType, List<User>> userDictionary = new();
 
@@ -88,13 +88,14 @@ internal static class UserRegistry
     }
 
     /// <summary>
-    /// Attempts to find the <see cref="UserType"/> associated with the 
-    /// given <see cref="User"/> instance within <see cref="userDictionary"/>.
+    /// Attempts to determine the <see cref="UserType"/> associated with a given
+    /// <see cref="User"/> by searching the <see cref="userDictionary"/>.
     /// </summary>
     /// <param name="user"> The user instance whose type is being identified. </param>
     /// <param name="foundUserType"> Outputs the associated <see cref="UserType"/>
-    /// if the user is found. Otherwise returns <see cref="UserType.Default"/>. </param>
-    /// <returns> <c>true</c> if the user is found, otherwise <c>false</c>. </returns>
+    /// if the user is found. Otherwise assigns <see cref="UserType.Default"/>. </param>
+    /// <returns> <c>true</c> if the user is found in the registry and their <see cref="UserType"/>, 
+    /// is assigned. Otherwise <c>false</c>, with <see cref="UserType.Default"/> assigned. </returns>
     internal static bool TryFindUserType (User user, out UserType foundUserType)
     {
         foreach (KeyValuePair<UserType, List<User>> pair in userDictionary)

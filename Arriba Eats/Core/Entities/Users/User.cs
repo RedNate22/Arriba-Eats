@@ -105,14 +105,18 @@ public abstract class User
         else return null;
     }
 
-    //TODO xml
+    /// <summary>
+    /// Retrieves the <see cref="UserType"/> associated with the given <see cref="User"/>
+    /// by searching the <see cref="UserRegistry"/>.
+    /// </summary>
+    /// <param name="user"> The user instance whose type is being determined. </param>
+    /// <returns> 
+    /// The corresponding <see cref="UserType"/> of the user, otherwise <see cref="UserType.Default"/>.
+    /// </returns>
     public static UserType GetUserType(User user)
     {
-        if (UserRegistry.TryFindUserType(user, out UserType foundUserType))
-        {
-            return foundUserType;
-        }
-
-        else return UserType.Default;
+        return UserRegistry.TryFindUserType(user, out UserType foundUserType)
+            ? foundUserType
+            : UserType.Default;
     } 
 }

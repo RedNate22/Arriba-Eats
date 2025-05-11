@@ -9,14 +9,22 @@ public static class SessionManager
 {
     private static User? _currentUser = null;
 
-    // TODO xml
+    /// <summary>
+    /// Gets the current <see cref="User"/> logged into the application.
+    /// </summary>
     public static User? CurrentUser 
     { 
         get { return _currentUser; } 
         private set { _currentUser = value; } 
     }
 
-    // TODO xml
+    /// <summary>
+    /// Updates the application to recognise the current user logged into the application.
+    /// <para> Based on the <see cref="UserType"/> of the active user, directs
+    /// the application to display the appropriate menus. 
+    /// i.e. <see cref="MenuState.CustomerMainMenu"/>.</para>
+    /// </summary>
+    /// <param name="currentUser"> The currently authenticated <see cref="User"/>. </param>
     public static void AuthenticateSession(User currentUser)
     {
         CurrentUser = currentUser;
@@ -28,8 +36,8 @@ public static class SessionManager
     /// then pass them to <see cref="UserRegistry.TryVerifyUserCredentials()"/>. </para>
     /// <para> 
     /// If a match is found within the registry, the associated user instance
-    /// is passed back up the chain to this method, which should then be assigned to 
-    /// <see cref="CurrentUser"/> to finalise the authentication process. 
+    /// is passed back up the chain to this method, which should then be assigned
+    /// via <see cref="AuthenticateSession()"/> to finalise the authentication process. 
     /// </para>
     /// <para>
     /// If the credentials are invalid a <c>null</c> value is returned, and the user is prompted. 
@@ -61,9 +69,20 @@ public static class SessionManager
         else return user;
     }
 
-    // TODO xml
-    public static UserType ReturnUserType(User user)
+    /// <summary>
+    /// Retrieves the <see cref="UserType"/> of the currently authenticated user.
+    /// </summary>
+    /// <returns> 
+    /// The associated <see cref="UserType"/> if a user is logged in,
+    /// otherwise, returns <see cref="UserType.Default"/>.
+    /// </returns>
+    public static UserType ReturnUserType()
     {
-        return User.GetUserType(user);
+        if (CurrentUser == null)
+        {
+            return UserType.Default;
+        }
+
+        else return User.GetUserType(CurrentUser);
     }
 }
