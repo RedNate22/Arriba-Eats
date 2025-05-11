@@ -70,6 +70,16 @@ public static class SessionManager
     }
 
     /// <summary>
+    /// Logs the user out by removing the referenced <see cref="User"/> from <see cref="CurrentUser"/>.
+    /// Then changes to the Main Menu via <see cref="UIFlowController.ChangeMenu()"/>. 
+    /// </summary>
+    public static void Logout()
+    {
+        CurrentUser = null;
+        UIFlowController.ChangeMenu("MainMenu");
+    }
+
+    /// <summary>
     /// Retrieves the <see cref="UserType"/> of the currently authenticated user.
     /// </summary>
     /// <returns> 

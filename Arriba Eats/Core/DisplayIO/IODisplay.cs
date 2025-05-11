@@ -1,6 +1,7 @@
 using System;
 using Entities;
 using UI;
+using UINavigation;
 
 namespace DisplayIO;
 
@@ -330,6 +331,47 @@ public static class IODisplay
             {
                 return (RestaurantStyles)restaurantStyle;
             }
+        }
+    }
+
+    /// <summary>
+    /// Displays the relevant user information, depending on the <see cref="UserType"/>.
+    /// </summary>
+    /// <param name="user"></param>
+    public static void DisplayUserInfo(User user)
+    {
+        UserType userType = SessionManager.ReturnUserType();
+
+        DisplayMessage($"Name: {user.Name}");
+        DisplayMessage($"Age: {user.Age}");
+        DisplayMessage($"Email: {user.Email}");
+        DisplayMessage($"Mobile: {user.Mobile}");
+    
+        switch (userType)
+        {
+            case UserType.Customer:
+                var customer = (Customer)user;
+                DisplayMessage($"Location: {customer.Location}");
+                DisplayMessage($"You've made {0} order(s) and spent a total of ${1} here.");
+                break;
+            
+            case UserType.Deliverer:
+                var deliverer = (Deliverer)user;
+                DisplayMessage($"Licence plate: {deliverer.LicencePlate}");
+                // If (the deliverer has an order not yet delivered)
+                DisplayMessage($"""
+                    Current delivery:
+                    Order #ORDER_NO from RESTAURANT_NAME at RX,RY.
+                    To be delivered to CUSTOMER_NAME at CX,CY.
+                    """); 
+                break;
+            
+            case UserType.Client:
+                var client = (Client)user;
+                DisplayMessage($"Restaurant name: {client.RestaurantName}");
+                DisplayMessage($"Restaurant style: {client.RestaurantStyle}");
+                DisplayMessage($"Restaurant location: {client.Location}");
+                break;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using UI;
 
 namespace DisplayIO;
 
@@ -8,17 +9,27 @@ namespace DisplayIO;
 /// </summary>
 public static class IOUtilities
 {
-    private const string ENTER_CHOICE_TEMPLATE = "Please enter a choice between 1 and {0}:";
     
     /// <summary>
     /// Generates a string prompt asking for input within a specified range.
     /// <para> Formats a message based on the provided upper limit for user choices. </para>
     /// </summary>
     /// <param name="maxChoice"> The maximum valid choice a user can select. </param>
-    /// <returns> A formatted string, prompting the user to enter a valid choice. </returns>
+    /// <returns> The formatted string, prompting the user to enter a valid choice. </returns>
     public static string EnterChoiceStr(int maxChoice)
     {
-        return string.Format(ENTER_CHOICE_TEMPLATE, maxChoice);
+        return string.Format(MenuConstants.ENTER_CHOICE_TEMPLATE, maxChoice);
+    }
+
+    /// <summary>
+    /// Formats the <see cref="MenuConstants.LOG_OUT_TEMPLATE"/> string
+    /// to dynamically display it in the correctly numbered position of the menu.
+    /// </summary>
+    /// <param name="menuChoiceNum"> The position number for the Log out option. </param>
+    /// <returns> The formatted string, with the correctly numbered position. </returns>
+    public static string LogOutStr(int menuChoiceNum)
+    {
+        return string.Format(MenuConstants.LOG_OUT_TEMPLATE, menuChoiceNum);
     }
 
     /// <summary>

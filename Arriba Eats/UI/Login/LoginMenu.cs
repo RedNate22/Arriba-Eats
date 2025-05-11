@@ -33,7 +33,6 @@ public class LoginMenu : IMenu
         {
             SessionManager.AuthenticateSession(currentUser);
             UserType userType = SessionManager.ReturnUserType();
-            IODisplay.DisplayMessage("User type is: " + userType);
 
             switch (userType)
             {
