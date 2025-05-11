@@ -69,7 +69,7 @@ internal static class UserRegistry
     /// <param name="password"> The password to match with the registered user. </param>
     /// <param name="foundUser"> The instance of the user if both email and password match. </param>
     /// <returns> <c>true</c> if a match is found, otherwise, <c>false</c>. </returns>
-    internal static bool TryVerifyUserCredentials(string email, string password, out User? foundUser)
+    internal static bool TryVerifyUserCredentials (string email, string password, out User? foundUser)
     {
         foreach (List<User> userList in userDictionary.Values)
         {
@@ -84,6 +84,22 @@ internal static class UserRegistry
         }
 
         foundUser = null;
+        return false;
+    }
+
+    // TODO xml
+    internal static bool TryFindUserType (User user, out UserType foundUserType)
+    {
+        foreach (KeyValuePair<UserType, List<User>> pair in userDictionary)
+        {
+            if (pair.Value.Contains(user))
+            {
+                foundUserType = pair.Key;
+                return true;
+            }
+        }
+        
+        foundUserType = UserType.Default;
         return false;
     }
 }

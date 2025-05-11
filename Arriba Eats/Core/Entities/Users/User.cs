@@ -104,4 +104,15 @@ public abstract class User
         
         else return null;
     }
+
+    //TODO xml
+    public static UserType GetUserType(User user)
+    {
+        if (UserRegistry.TryFindUserType(user, out UserType foundUserType))
+        {
+            return foundUserType;
+        }
+
+        else return UserType.Default;
+    } 
 }

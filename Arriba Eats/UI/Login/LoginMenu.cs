@@ -22,7 +22,8 @@ public class LoginMenu : IMenu
         else
         {
             SessionManager.AuthenticateSession(currentUser);
-            UserType userType = SessionManager.GetUserType(currentUser);
+            UserType userType = SessionManager.ReturnUserType(currentUser);
+            IODisplay.DisplayMessage("User type is: " + userType);
 
             switch (userType)
             {
@@ -37,7 +38,7 @@ public class LoginMenu : IMenu
                     break;
                 default:
                     UIFlowController.CurrentState = MenuState.MainMenu;
-                    return;
+                    break;
             }
         }
     }

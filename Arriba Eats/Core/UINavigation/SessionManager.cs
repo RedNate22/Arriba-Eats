@@ -48,6 +48,8 @@ public static class SessionManager
         
         IODisplay.DisplayMessageSingleLine(PASSWORD_STR);
         string password = IODisplay.ReadInput();
+        
+        IODisplay.DisplayEmptyLine();
 
         User? user = User.AuthenticateUser(email, password);
         if (user == null)
@@ -59,8 +61,9 @@ public static class SessionManager
         else return user;
     }
 
-    public static UserType GetUserType(User currentUser)
+    // TODO xml
+    public static UserType ReturnUserType(User user)
     {
-        return UserType.Customer;
+        return User.GetUserType(user);
     }
 }
