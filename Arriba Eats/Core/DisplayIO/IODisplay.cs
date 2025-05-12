@@ -120,7 +120,7 @@ public static class IODisplay
     /// the validation criteria.
     /// <para> If the email is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
-    /// <para> If the email is valid, it then checks the <see cref="UserRegistry.userDictionary"/>
+    /// <para> If the email is valid, it then checks the <see cref="UserRegistry._userDictionary"/>
     /// to determine if the email already currently exists amongst the registered users. </para>
     /// <para> If the email is already registered, it returns an error, prompting the user
     /// that email is already in use. </para>
@@ -340,41 +340,50 @@ public static class IODisplay
     /// <param name="user"></param>
     public static void DisplayUserInfo(User user)
     {
-        UserType userType = SessionManager.ReturnUserType();
-
-        DisplayMessage("Your user details are as follows:");
-        DisplayMessage($"Name: {user.Name}");
-        DisplayMessage($"Age: {user.Age}");
-        DisplayMessage($"Email: {user.Email}");
-        DisplayMessage($"Mobile: {user.Mobile}");
-    
-        switch (userType)
+        if (SessionManager.CurrentUser != null)
         {
-            case UserType.Customer:
-                var customer = (Customer)user;
-                DisplayMessage($"Location: {customer.Location}");
-                DisplayMessage($"You've made 0 order(s) and spent a total of $0.00 here.");
-                break;
-            
-            case UserType.Deliverer:
-                var deliverer = (Deliverer)user;
-                DisplayMessage($"Licence plate: {deliverer.LicencePlate}");
+            UserType userType = SessionManager.ReturnUserType();
+
+            DisplayMessage("Your user details are as follows:");
+            DisplayMessage($"Name: {user.Name}");
+            DisplayMessage($"Age: {user.Age}");
+            DisplayMessage($"Email: {user.Email}");
+            DisplayMessage($"Mobile: {user.Mobile}");
+        
+            switch (userType)
+            {
+                case UserType.Customer:
+                    var customer = (Customer)user;
+                    DisplayMessage($"Location: {customer.Location}");
+                    DisplayMessage($"You've made 0 order(s) and spent a total of $0.00 here.");
+                    break;
                 
-                // If (the deliverer has an order not yet delivered)
-                DisplayMessage($"""
-                    Current delivery:
-                    Order #ORDER_NO from RESTAURANT_NAME at RX,RY.
-                    To be delivered to CUSTOMER_NAME at CX,CY.
-                    """); 
-                break;
-            
-            case UserType.Client:
-                var client = (Client)user;
-                DisplayMessage($"Restaurant name: {client.RestaurantName}");
-                DisplayMessage($"Restaurant style: {client.RestaurantStyle}");
-                DisplayMessage($"Restaurant location: {client.Location}");
-                break;
+                case UserType.Deliverer:
+                    var deliverer = (Deliverer)user;
+                    DisplayMessage($"Licence plate: {deliverer.LicencePlate}");
+                    
+                    // If (the deliverer has an order not yet delivered)
+                    DisplayMessage($"""
+                        Current delivery:
+                        Order #ORDER_NO from RESTAURANT_NAME at RX,RY.
+                        To be delivered to CUSTOMER_NAME at CX,CY.
+                        """); 
+                    break;
+                
+                case UserType.Client:
+                    var client = (Client)user;
+                    DisplayMessage($"Restaurant name: {client.RestaurantName}");
+                    DisplayMessage($"Restaurant style: {client.RestaurantStyle}");
+                    DisplayMessage($"Restaurant location: {client.Location}");
+                    break;
+                    
+                default:
+                    DisplayMessage("User's type is not defined.");
+                    break;
+            }
         }
+
+        else DisplayMessage("No user is currently logged in.");
     }
     
     /// <summary>
@@ -391,5 +400,11 @@ public static class IODisplay
         {
             DisplayMessage("No user is currently logged in.");
         }
+    }
+
+    // TODO xml
+    public static void AddItemsToRestaurant()
+    {
+        // TODO
     }
 }

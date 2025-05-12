@@ -4,11 +4,67 @@ using UINavigation;
 
 namespace UI;
 
+// TODO xml
 public class ClientMainMenu : IMenu
 {  
+    private string _logOut = IOUtilities.LogOutStr(7);
+    private string _enterChoice = IOUtilities.EnterChoiceStr(7);
+    private const int DISPLAY_USER_INFO_INT = 1, ADD_ITEM_RESTAURANT_INT = 2, SEE_CURRENT_ORDERS_INT = 3,
+        START_COOKING_ORDER_INT = 4, FINISH_COOKING_ORDER_INT = 5, HANDLE_DELIVERERS_INT = 6, LOG_OUT_INT = 7;
+
+    /// <summary>
+    /// A count to track if the <see cref="IODisplay.WelcomeUser()"/>
+    /// method has been run. This is to prevent the message from being displayed
+    /// more than once.
+    /// </summary>
+    private int _welcomeCount = 0;
+
+    // TODO xml
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage("Welcome to the client menu!");
-        UIFlowController.ChangeMenu("MainMenu");
+        if (_welcomeCount == 0)
+        {
+            IODisplay.WelcomeUser();
+            _welcomeCount++;
+        }
+
+        IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
+        IODisplay.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
+        IODisplay.DisplayMessage(MenuConstants.CLIENT_MAIN_MENU_CHOICES_STR);
+        IODisplay.DisplayMessage(_logOut);
+        IODisplay.DisplayMessage(_enterChoice);
+
+        int choice = IODisplay.GetChoice();
+
+        switch (choice)
+        {
+            case DISPLAY_USER_INFO_INT:
+                IODisplay.DisplayUserInfo(SessionManager.CurrentUser!);
+                break;
+            
+            case ADD_ITEM_RESTAURANT_INT:
+                // TODO
+                break;
+
+            case SEE_CURRENT_ORDERS_INT:
+                // TODO
+                break;
+
+            case START_COOKING_ORDER_INT:
+                // TODO
+                break;
+            
+            case FINISH_COOKING_ORDER_INT:
+                // TODO
+                break;
+            
+            case HANDLE_DELIVERERS_INT:
+                // TODO
+                break;
+            
+            case LOG_OUT_INT:
+                SessionManager.Logout();
+                break;
+        }
     }
 }

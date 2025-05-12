@@ -1,5 +1,4 @@
 using System;
-using UINavigation;
 
 namespace Entities;
 
@@ -8,7 +7,7 @@ namespace Entities;
 /// based on their <see cref="UserType"/>.
 /// <para> 
 /// Provides several internal methods to safely store and retrieve user data
-/// from <see cref="userDictionary"/>.
+/// from <see cref="_userDictionary"/>.
 /// </para> 
 /// </summary>
 internal static class UserRegistry
@@ -17,7 +16,7 @@ internal static class UserRegistry
     /// A dictionary that maps user types to their corresponding user instances.
     /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/> as the key.</para>
     /// </summary>
-    private static Dictionary<UserType, List<User>> userDictionary = new();
+    private static Dictionary<UserType, List<User>> _userDictionary = new Dictionary<UserType, List<User>>();
 
     /// <summary>
     /// Registers a new user in the registry using the specified <see cref="UserType"/> to 
@@ -31,15 +30,15 @@ internal static class UserRegistry
     /// associated with the specified user type. </param>
     internal static void RegisterUser(UserType userType, User user)
     {
-        if (!userDictionary.ContainsKey(userType))
+        if (!_userDictionary.ContainsKey(userType))
         {
-            userDictionary[userType] = new List<User>();
+            _userDictionary[userType] = new List<User>();
         }
-        userDictionary[userType].Add(user);
+        _userDictionary[userType].Add(user);
     }
 
     /// <summary>
-    /// Searches the <see cref="userDictionary"/> to determine if any registered
+    /// Searches the <see cref="_userDictionary"/> to determine if any registered
     /// <see cref="User"/> contains an email address matching the provided input.
     /// </summary>
     /// <param name="email"> The email address to check against existing users. </param>
@@ -48,7 +47,7 @@ internal static class UserRegistry
     /// </returns>
     internal static bool EmailInRegistry(string email)
     {
-        foreach (List<User> userList in userDictionary.Values)
+        foreach (List<User> userList in _userDictionary.Values)
         {
             foreach (User user in userList)
             {
@@ -62,7 +61,7 @@ internal static class UserRegistry
     }
 
     /// <summary>
-    /// Attempts to verify the user credentials by searching the <see cref="userDictionary"/>
+    /// Attempts to verify the user credentials by searching the <see cref="_userDictionary"/>
     /// and finding a match.
     /// </summary>
     /// <param name="email"> The email address to match with the registered user. </param>
@@ -71,7 +70,7 @@ internal static class UserRegistry
     /// <returns> <c>true</c> if a match is found, otherwise, <c>false</c>. </returns>
     internal static bool TryVerifyUserCredentials (string email, string password, out User? foundUser)
     {
-        foreach (List<User> userList in userDictionary.Values)
+        foreach (List<User> userList in _userDictionary.Values)
         {
             foreach (User user in userList)
             {
@@ -89,7 +88,7 @@ internal static class UserRegistry
 
     /// <summary>
     /// Attempts to determine the <see cref="UserType"/> associated with a given
-    /// <see cref="User"/> by searching the <see cref="userDictionary"/>.
+    /// <see cref="User"/> by searching the <see cref="_userDictionary"/>.
     /// </summary>
     /// <param name="user"> The user instance whose type is being identified. </param>
     /// <param name="foundUserType"> Outputs the associated <see cref="UserType"/>
@@ -98,7 +97,7 @@ internal static class UserRegistry
     /// is assigned. Otherwise <c>false</c>, with <see cref="UserType.Default"/> assigned. </returns>
     internal static bool TryFindUserType (User user, out UserType foundUserType)
     {
-        foreach (KeyValuePair<UserType, List<User>> pair in userDictionary)
+        foreach (KeyValuePair<UserType, List<User>> pair in _userDictionary)
         {
             if (pair.Value.Contains(user))
             {

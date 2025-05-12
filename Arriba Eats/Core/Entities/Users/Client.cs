@@ -36,5 +36,8 @@ public class Client : User
         {
             RestaurantName = restaurantName;
             RestaurantStyle = restaurantStyle; 
+
+            Restaurant restaurant = new Restaurant(restaurantName, restaurantStyle);
+            // TODO AddRestaurant(this, restaurant)
         }
 }

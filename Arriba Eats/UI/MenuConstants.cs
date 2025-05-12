@@ -59,6 +59,23 @@ public static class MenuConstants
         3: Sorted by style
         4: Sorted by average rating
         """;
+
+    // DelivererMainMenu
+    public const string DELIVERER_MAIN_MENU_CHOICES_STR = """
+        2: List orders available to deliver
+        3: Arrived at restaurant to pick up order
+        4: Mark this delivery as complete
+        """;
+
+    // ClientMainMenu
+    public const string CLIENT_MAIN_MENU_CHOICES_STR = """
+        2: Add item to restaurant menu
+        3: See current orders
+        4: Start cooking order
+        5: Finish cooking order
+        6: Handle deliverers who have arrived
+        """; 
+
 }
 
 

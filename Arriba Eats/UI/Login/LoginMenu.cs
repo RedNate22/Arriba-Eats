@@ -39,14 +39,17 @@ public class LoginMenu : IMenu
                 case UserType.Customer:
                     UIFlowController.ChangeMenu("CustomerMainMenu");
                     break;
+                    
                 case UserType.Deliverer:
                     UIFlowController.ChangeMenu("DelivererMainMenu");
                     break;
+                
                 case UserType.Client:
                     UIFlowController.ChangeMenu("ClientMainMenu");
                     break;
+                
                 default:
-                    UIFlowController.ChangeMenu("MainMenu");
+                    IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                     break;
             }
         }

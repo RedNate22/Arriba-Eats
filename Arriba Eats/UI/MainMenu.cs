@@ -32,22 +32,25 @@ public class MainMenu : IMenu
         IODisplay.DisplayMessage(MenuConstants.MAIN_MENU_CHOICES_STR);
         IODisplay.DisplayMessage(_enterChoice);
 
-        int option = IODisplay.GetChoice();
+        int choice = IODisplay.GetChoice();
 
-        switch (option)
+        switch (choice)
         {
             case LOGIN_INT:  
                 IODisplay.DisplayEmptyLine();
                 UIFlowController.ChangeMenu("LoginMenu");
                 break;
+            
             case REGISTER_INT:  
                 IODisplay.DisplayEmptyLine();
                 UIFlowController.ChangeMenu("RegistrationMenu");
                 break;
+            
             case EXIT_INT:  
                 IODisplay.DisplayMessage(MenuConstants.GOODBYE_STR);
                 UIFlowController.ChangeMenu("Exit");
                 break;
+            
             default:  
                 IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                 break;

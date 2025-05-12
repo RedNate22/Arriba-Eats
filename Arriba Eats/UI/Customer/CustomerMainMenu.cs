@@ -7,9 +7,8 @@ namespace UI;
 // TODO xml
 public class CustomerMainMenu : IMenu
 {
-    private string _enterChoice = IOUtilities.EnterChoiceStr(5);
     private string _logOut = IOUtilities.LogOutStr(5);
-
+    private string _enterChoice = IOUtilities.EnterChoiceStr(5);
     private const int DISPLAY_USER_INFO_INT = 1, SELECT_RESTAURANTS_LIST_INT = 2, SEE_ORDERS_STATUS_INT = 3,
         RATE_RESTAURANT_INT = 4, LOG_OUT_INT = 5;
     
@@ -18,15 +17,15 @@ public class CustomerMainMenu : IMenu
     /// method has been run. This is to prevent the message from being displayed
     /// more than once.
     /// </summary>
-    private int _welcomeLimit = 0;  // ? Turn this into a common IMenu field?
+    private int _welcomeCount = 0;  // ? Turn this into a common IMenu field?
 
     // TODO xml
     public void DisplayMenu()
     {
-        if (_welcomeLimit == 0)
+        if (_welcomeCount == 0)
         {
             IODisplay.WelcomeUser();
-            _welcomeLimit++;
+            _welcomeCount++;
         }
 
         IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
@@ -35,26 +34,26 @@ public class CustomerMainMenu : IMenu
         IODisplay.DisplayMessage(_logOut);
         IODisplay.DisplayMessage(_enterChoice);
 
-        int option = IODisplay.GetChoice();
+        int choice = IODisplay.GetChoice();
 
-        switch (option)
+        switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                if (SessionManager.CurrentUser != null)
-                {
-                    IODisplay.DisplayUserInfo(SessionManager.CurrentUser);
-                }
-                else
-                {
-                    IODisplay.DisplayMessage("No user is currently logged in.");
-                }
+                IODisplay.DisplayUserInfo(SessionManager.CurrentUser!);
                 break;
+            
             case SELECT_RESTAURANTS_LIST_INT:
+                UIFlowController.ChangeMenu("RestaurantListOrdered");
                 break;
+            
             case SEE_ORDERS_STATUS_INT:
+                // TODO
                 break;
+            
             case RATE_RESTAURANT_INT:
+                // TODO
                 break;
+            
             case LOG_OUT_INT:
                 SessionManager.Logout();
                 break;
