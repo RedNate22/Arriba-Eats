@@ -13,13 +13,13 @@ namespace Entities;
 internal static class UserRegistry
 {
     /// <summary>
-    /// A dictionary that maps user types to their corresponding user instances.
+    /// A dictionary that maps <see cref="UserType"/>'s to their corresponding <see cref="User"/> instances.
     /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/> as the key.</para>
     /// </summary>
     private static Dictionary<UserType, List<User>> _userDictionary = new Dictionary<UserType, List<User>>();
 
     /// <summary>
-    /// Registers a new user in the registry using the specified <see cref="UserType"/> to 
+    /// Registers a new <see cref="User"/> into the registry using the specified <see cref="UserType"/> to 
     /// dynamically add the user into the appropriate list.
     /// <para> Checks if a list associated with the given <see cref="UserType"/>
     /// exists, and if <c>true</c>, stores the user into the existing list. If <c>false</c>,
@@ -87,12 +87,11 @@ internal static class UserRegistry
     }
 
     /// <summary>
-    /// Attempts to determine the <see cref="UserType"/> associated with a given
+    /// Attempts to determine the <see cref="UserType"/> associated with the given
     /// <see cref="User"/> by searching the <see cref="_userDictionary"/>.
     /// </summary>
     /// <param name="user"> The user instance whose type is being identified. </param>
-    /// <param name="foundUserType"> Outputs the associated <see cref="UserType"/>
-    /// if the user is found. Otherwise assigns <see cref="UserType.Default"/>. </param>
+    /// <param name="foundUserType"> The found <see cref="UserType"/> associated with the user. </param> 
     /// <returns> <c>true</c> if the user is found in the registry and their <see cref="UserType"/>, 
     /// is assigned. Otherwise <c>false</c>, with <see cref="UserType.Default"/> assigned. </returns>
     internal static bool TryFindUserType (User user, out UserType foundUserType)

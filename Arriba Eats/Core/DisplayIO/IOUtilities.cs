@@ -308,4 +308,21 @@ public static class IOUtilities
         if (validNumbers.Contains(restaurantStyleChoice)) return true;
         else return false;
     }
+
+    /// <summary>
+    /// Validates whether the provided decimal input meets the following criteria:
+    /// <para> - Is between $0.00 and $999.99 </para>
+    /// </summary>
+    /// <param name="itemPrice"> The decimal to validate. </param>
+    /// <returns>
+    /// <c>true</c> if the input meets the criteria, otherwise <c>false</c>.
+    /// </returns>
+    public static bool IsValidItemPrice(decimal itemPrice)
+    {
+        decimal lowerLimit = 0.00M;
+        decimal upperLimit = 999.99M;
+
+        bool isValidRange = itemPrice > lowerLimit && itemPrice < upperLimit;
+        return isValidRange;
+    }
 }

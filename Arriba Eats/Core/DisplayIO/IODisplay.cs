@@ -402,9 +402,73 @@ public static class IODisplay
         }
     }
 
-    // TODO xml
+    /// <summary>
+    /// To be called by <see cref="AddItemsToRestaurant()"/>, and continously
+    /// reads a string input from the user via the console until it is successfully parsed
+    /// into a decimal price. 
+    /// <para> If the input is valid, parses the price to <see cref="IOUtilities.IsValidItemPrice()"/> 
+    /// to verify if it is within the valid range. </para>
+    /// </summary>
+    /// <returns> The validated item price. This method loops until a valid input is provided. </returns>
+    public static decimal GetMenuItemPrice()
+    {        
+        DisplayMessage("Please enter the price of the new item (without the $):");
+        
+        while (true)
+        {
+            if (decimal.TryParse(ReadInput(), out decimal itemPriceInput))
+            {
+                decimal itemPrice = itemPriceInput;
+            
+                if (IOUtilities.IsValidItemPrice(itemPrice))
+                {
+                    return itemPrice; 
+                }
+                
+                else
+                {
+                    DisplayMessage("Invalid price.");
+                    continue;
+                } 
+            }
+
+            else DisplayMessage("Invalid price.");
+        }
+    }
+
+    /// <summary>
+    /// Allows the logged-in (<see cref="Client"/>) <see cref="User"/> to add a new item to their <see cref="Restaurant._restaurantMenu"/>.
+    /// If the user owns a restaurant, displays the current menu and prompts for a new item.
+    /// <para> If the user enters a non-blank input, this becomes the item name, and it then prompts for an 
+    /// item price using <see cref="GetMenuItemPrice()"/>. </para>
+    /// <para> 
+    /// The item name and price are then registered into the <see cref="Restaurant._restaurantMenu"/>. 
+    /// </para> 
+    /// </summary>
     public static void AddItemsToRestaurant()
     {
-        // TODO
+        if (SessionManager.CurrentUser != null)
+        {
+            if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.CurrentUser, out Restaurant? restaurant))
+            {
+                DisplayMessage("This is your restaurant's current menu:");
+                restaurant?.DisplayCurrentMenu();
+
+                DisplayMessage("Please enter the name of the new item (blank to cancel):");
+                
+                string itemName = ReadInput();
+
+                if (!string.IsNullOrWhiteSpace(itemName))  // User is adding an item to menu
+                {
+                    decimal itemPrice = GetMenuItemPrice();
+                    restaurant?.RegisterMenuItem(itemPrice, itemName);
+                    DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
+                }
+            }
+            
+            else DisplayMessage("You currently have no restaurants.");
+        }
+
+        else DisplayMessage("No user is currently logged in.");
     }
 }

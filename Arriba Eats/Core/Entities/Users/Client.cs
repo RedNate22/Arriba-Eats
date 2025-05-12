@@ -38,6 +38,8 @@ public class Client : User
             RestaurantStyle = restaurantStyle; 
 
             Restaurant restaurant = new Restaurant(restaurantName, restaurantStyle);
-            // TODO AddRestaurant(this, restaurant)
+            RestaurantRegistry.AddRestaurant(this, restaurant);
         }
+    
+    
 }

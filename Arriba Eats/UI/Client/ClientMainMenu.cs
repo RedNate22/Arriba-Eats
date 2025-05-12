@@ -43,7 +43,7 @@ public class ClientMainMenu : IMenu
                 break;
             
             case ADD_ITEM_RESTAURANT_INT:
-                // TODO
+                IODisplay.AddItemsToRestaurant();
                 break;
 
             case SEE_CURRENT_ORDERS_INT:

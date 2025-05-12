@@ -4,7 +4,7 @@ namespace Entities;
 
 /// <summary>
 /// Defines the various types of users within the application.
-/// </para> Used to associate a user instance with their appropriate type. </para>
+/// Used to associate a user instance with their appropriate type.
 /// </summary>
 public enum UserType
 {
