@@ -11,7 +11,7 @@ public class CustomerOrderStatusMenu : IMenu
     // TODO xml
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(MenuConstants.NOT_PLACED_ORDERS_STR);
+        IODisplay.DisplayMessage(CustomerConstants.NOT_PLACED_ORDERS_STR);
         UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
     }
 }

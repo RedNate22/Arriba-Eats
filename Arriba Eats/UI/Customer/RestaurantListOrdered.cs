@@ -15,7 +15,7 @@ public class RestaurantListOrdered : IMenu
     // TODO xml
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(MenuConstants.RESTAURANT_LIST_ORDERED_STR);
+        IODisplay.DisplayMessage(CustomerConstants.RESTAURANT_LIST_ORDERED_STR);
         IODisplay.DisplayMessage(_returnPreviousMenu);
         IODisplay.DisplayMessage(_enterChoice);
         

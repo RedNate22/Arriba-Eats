@@ -75,7 +75,7 @@ public static class SessionManager
     {
         CurrentUser = null;
         IODisplay.DisplayMessage("You are now logged out.");
-        UIFlowController.ChangeMenu("MainMenu");
+        UIFlowController.ChangeMenu(MenuState.MainMenu);
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ public class RegistrationMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(MenuConstants.REGISTRATION_MENU_CHOICES_STR);
+        IODisplay.DisplayMessage(RegistrationConstants.REGISTRATION_MENU_CHOICES_STR);
         IODisplay.DisplayMessage(_returnPreviousMenu);
         IODisplay.DisplayMessage(_enterChoice);
 
@@ -41,19 +41,19 @@ public class RegistrationMenu : IMenu
         {
             case CUSTOMER_INT:
                 IODisplay.DisplayEmptyLine();
-                RegistrationProcess.Register(MenuConstants.CUSTOMER_CHOICE);
+                RegistrationProcess.Register(RegistrationConstants.CUSTOMER_CHOICE);
                 UIFlowController.ChangeMenu(MenuState.MainMenu);
                 break;
             
             case DELIVERER_INT:
                 IODisplay.DisplayEmptyLine();
-                RegistrationProcess.Register(MenuConstants.DELIVERER_CHOICE);
+                RegistrationProcess.Register(RegistrationConstants.DELIVERER_CHOICE);
                 UIFlowController.ChangeMenu(MenuState.MainMenu); 
                 break;
             
             case CLIENT_INT:
                 IODisplay.DisplayEmptyLine();
-                RegistrationProcess.Register(MenuConstants.CLIENT_CHOICE);
+                RegistrationProcess.Register(RegistrationConstants.CLIENT_CHOICE);
                 UIFlowController.ChangeMenu(MenuState.MainMenu);
                 break;
             

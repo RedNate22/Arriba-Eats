@@ -37,7 +37,7 @@ public static class RegistrationProcess
 
         switch (userType)
         {
-            case MenuConstants.CUSTOMER_CHOICE:
+            case RegistrationConstants.CUSTOMER_CHOICE:
                 string customerLocation = RegistrationIO.GetLocation();
 
                 Customer customer = new Customer(name, age, email, mobile, password,
@@ -47,7 +47,7 @@ public static class RegistrationProcess
                 IODisplay.DisplayMessage($"You have been successfully registered as a customer, {name}!");
                 break;
             
-            case MenuConstants.DELIVERER_CHOICE:
+            case RegistrationConstants.DELIVERER_CHOICE:
                 string licencePlate = RegistrationIO.GetLicencePlate();
 
                 Deliverer deliverer = new Deliverer(name, age, email, mobile, password, licencePlate);
@@ -56,7 +56,7 @@ public static class RegistrationProcess
                 IODisplay.DisplayMessage($"You have been successfully registered as a deliverer, {name}!");
                 break;
             
-            case MenuConstants.CLIENT_CHOICE:
+            case RegistrationConstants.CLIENT_CHOICE:
                 string restaurantName = RegistrationIO.GetRestaurantName();
                 RestaurantStyles restaurantStyle = RegistrationIO.GetRestaurantStyle();
                 string clientLocation = RegistrationIO.GetLocation();
