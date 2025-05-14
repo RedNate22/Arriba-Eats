@@ -27,7 +27,7 @@ public class Client : User
     /// <param name="email"> The client's email. </param>
     /// <param name="mobile"> The client's mobile. </param>
     /// <param name="password"> The client's password. </param>
-    /// <param name="location"> The client's location. </param>
+    /// <param name="location"> The client's restaurant's location. </param>
     /// <param name="restaurantName"> The client's restaurant's name. </param>
     /// <param name="restaurantStyle"> The client's restaurant's style. </param>
     public Client(string name, int age, string email, string mobile, string password, string location,
@@ -37,7 +37,7 @@ public class Client : User
             RestaurantName = restaurantName;
             RestaurantStyle = restaurantStyle; 
 
-            Restaurant restaurant = new Restaurant(restaurantName, restaurantStyle);
+            Restaurant restaurant = new Restaurant(restaurantName, restaurantStyle, location);
             RestaurantRegistry.AddRestaurant(this, restaurant);
         }
     

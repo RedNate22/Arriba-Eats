@@ -25,6 +25,7 @@ public class CustomerListRestaurantsMenu: IMenu
         {
             case SORTED_ALPHABETICALLY_INT:
                 IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                CustomerIO.DisplayRestaurantsList();
                 // TODO method
                 break;
             

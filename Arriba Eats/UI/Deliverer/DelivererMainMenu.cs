@@ -19,9 +19,22 @@ public class DelivererMainMenu : IMenu
     private const int DISPLAY_USER_INFO_INT = 1, LIST_ORDERS_AVAILABLE_INT = 2, ARRIVED_RESTAURANT_INT = 3,
         MARK_DELIVERY_COMPLETE_INT = 4, LOG_OUT_INT = 5;
     
+    /// <summary>
+    /// A count to track if the <see cref="IODisplay.WelcomeUser()"/>
+    /// method has been run. This is to prevent the message from being displayed
+    /// more than once.
+    /// </summary>
+    private int _welcomeCount = 0;  // ? Turn this into a common IMenu field?
+    
     // TODO xml
     public void DisplayMenu()
     {
+        if (_welcomeCount == 0)
+        {
+            IODisplay.WelcomeUser();
+            _welcomeCount++;
+        }
+
         IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
         IODisplay.DisplayMessage(DelivererConstants.DELIVERER_MAIN_MENU_CHOICES_STR);
         IODisplay.DisplayMessage(_logOut);
@@ -48,6 +61,7 @@ public class DelivererMainMenu : IMenu
                 break;
 
             case LOG_OUT_INT:
+                _welcomeCount = 0;
                 SessionManager.Logout();
                 break;
         }

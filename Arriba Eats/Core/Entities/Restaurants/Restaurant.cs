@@ -17,16 +17,22 @@ public class Restaurant
     public RestaurantStyles RestaurantStyle { get; private set; }
 
     /// <summary>
+    /// Get the restaurant's location.
+    /// </summary>
+    public string Location { get; private set; }
+
+    /// <summary>
     /// Called within the <see cref="Client"/> constructor.
     /// <para> Creates a <see cref="Restaurant"/> to hold a <see cref="_restaurantMenu"/>
     /// and allow <see cref="Client"/>'s to register new menu items and manage orders. </para>
     /// </summary>
     /// <param name="restaurantName"> The name of the restaurant. Parsed from <see cref="Client"/>. </param>
     /// <param name="restaurantStyle"> The style of the restaurant. Parsed from <see cref="Client"/>. </param>
-    public Restaurant (string restaurantName, RestaurantStyles restaurantStyle)
+    public Restaurant (string restaurantName, RestaurantStyles restaurantStyle, string location)
     {
         RestaurantName = restaurantName;
         RestaurantStyle = restaurantStyle;
+        Location = location;
     }
 
     /// <summary>

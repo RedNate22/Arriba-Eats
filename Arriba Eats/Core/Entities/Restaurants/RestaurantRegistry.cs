@@ -59,4 +59,17 @@ internal static class RestaurantRegistry
         foundRestaurant = null;
         return false;
     } 
+    
+    // TODO xml
+    public static bool TryListRestaurants (out List<Restaurant> restaurantsList)
+    {
+        restaurantsList = new List<Restaurant>();
+
+        foreach (Restaurant restaurant in _restaurantDictionary.Values)
+        {
+            restaurantsList.Add(restaurant);
+        }
+
+        return restaurantsList.Count > 0;  // returns false if no restaurants are found
+    }
 }

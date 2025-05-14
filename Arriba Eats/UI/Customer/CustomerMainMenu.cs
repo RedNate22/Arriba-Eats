@@ -62,6 +62,7 @@ public class CustomerMainMenu : IMenu
                 break;
             
             case LOG_OUT_INT:
+                _welcomeCount = 0;
                 SessionManager.Logout();
                 break;
         }
