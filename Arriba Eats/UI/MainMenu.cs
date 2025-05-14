@@ -38,17 +38,17 @@ public class MainMenu : IMenu
         {
             case LOGIN_INT:  
                 IODisplay.DisplayEmptyLine();
-                UIFlowController.ChangeMenu("LoginMenu");
+                UIFlowController.ChangeMenu(MenuState.LoginMenu);
                 break;
             
             case REGISTER_INT:  
                 IODisplay.DisplayEmptyLine();
-                UIFlowController.ChangeMenu("RegistrationMenu");
+                UIFlowController.ChangeMenu(MenuState.RegistrationMenu);
                 break;
             
             case EXIT_INT:  
                 IODisplay.DisplayMessage(MenuConstants.GOODBYE_STR);
-                UIFlowController.ChangeMenu("Exit");
+                UIFlowController.ChangeMenu(MenuState.Exit);
                 break;
             
             default:  

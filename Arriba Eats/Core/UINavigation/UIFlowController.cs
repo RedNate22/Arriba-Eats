@@ -24,30 +24,11 @@ public static class UIFlowController
 
     /// <summary>
     /// Changes the current menu state based on the provided input.
-    /// <para> Attempts to parse the given string into a <see cref="MenuState"/> enum value. </para>
-    /// <para> 
-    /// If the value exists, updates <see cref="CurrentState"/>, which then
-    /// causes <see cref="RunMenuSystem()"/> to appropriately call the
-    /// <see cref="IMenu.DisplayMenu()"/> method, displaying the menu to the user.
-    /// </para>
-    /// <para> If the menu does not exist, falls back to <see cref="MenuState.MainMenu"/>.</para>
     /// </summary>
-    /// <param name="menu"> 
-    /// The string representing the desired <see cref="MenuState"/>.
-    /// Case-insensitive, meaning values such as <c>"MainMenu"</c> 
-    /// and <c>"MAINMENU"</c> both work.
-    /// </param>
-    public static void ChangeMenu(string menu)
+    /// <param name="menu"> The the desired <see cref="MenuState"/> to change to. </param>
+    public static void ChangeMenu(MenuState menu)
     {
-        if (Enum.TryParse(menu, true, out MenuState parsedMenu))
-        {
-            CurrentState = parsedMenu;
-        }
-        
-        else
-        {
-            CurrentState = MenuState.MainMenu;
-        }
+        CurrentState = menu;
     }
     
     /// <summary>

@@ -4,7 +4,15 @@ using UINavigation;
 
 namespace UI;
 
-// TODO xml
+/// <summary>
+/// Represents the <see cref="Entities.Client"/> main menu.
+/// <para>
+/// From here, the <see cref="Entities.Client"/> can view their user information,
+/// add items to their <see cref="Entities.Restaurant"/> menu, see current orders,
+/// start cooking an order, finish cooking an order, and handle <see cref="Entities.Deliverer"/>s
+/// who have arrived.
+/// </para>
+/// </summary>
 public class ClientMainMenu : IMenu
 {  
     private string _logOut = IOUtilities.LogOutStr(7);
@@ -43,7 +51,7 @@ public class ClientMainMenu : IMenu
                 break;
             
             case ADD_ITEM_RESTAURANT_INT:
-                IODisplay.AddItemsToRestaurant();
+                ClientIO.AddItemsToRestaurant();
                 break;
 
             case SEE_CURRENT_ORDERS_INT:

@@ -40,7 +40,7 @@ public class RestaurantListOrdered : IMenu
                 break;
 
             case RETURN_PREVIOUS_MENU_INT:
-                UIFlowController.ChangeMenu("CustomerMainMenu");
+                UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
                 break;
 
             default:

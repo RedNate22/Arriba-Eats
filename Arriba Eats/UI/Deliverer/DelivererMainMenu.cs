@@ -4,7 +4,14 @@ using UINavigation;
 
 namespace UI;
 
-// TODO xml
+/// <summary>
+/// Represents the <see cref="Entities.Deliverer"/> main menu.
+/// <para>
+/// From here, the <see cref="Entities.Deliverer"/> can view their <see cref="Entities.User"/> information,
+/// view a list of orders available to deliver, mark their arrival at a <see cref="Entities.Restaurant"/> to pick up an order,
+/// and mark their delivery as complete. 
+/// </para>
+/// </summary>
 public class DelivererMainMenu : IMenu
 {
     private string _logOut = IOUtilities.LogOutStr(5);

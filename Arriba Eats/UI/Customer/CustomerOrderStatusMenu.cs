@@ -12,6 +12,6 @@ public class CustomerOrderStatusMenu : IMenu
     public void DisplayMenu()
     {
         IODisplay.DisplayMessage(MenuConstants.NOT_PLACED_ORDERS_STR);
-        UIFlowController.ChangeMenu("CustomerMainMenu");
+        UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
     }
 }

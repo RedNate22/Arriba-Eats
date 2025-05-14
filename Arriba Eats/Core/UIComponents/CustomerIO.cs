@@ -17,12 +17,12 @@ public static class CustomerIO
         if (SessionManager.CurrentUser != null)
         {
             int n = 2; // TODO int needs to dynamically change
-            string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(n);                  
-            string _enterChoice = IOUtilities.EnterChoiceStr(n);
+            string returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(n);                  
+            string enterChoice = IOUtilities.EnterChoiceStr(n);
             
             // TODO list restaurants ordered from
-            IODisplay.DisplayMessage(_returnPreviousMenu);
-            IODisplay.DisplayMessage(_enterChoice);
+            IODisplay.DisplayMessage(returnPreviousMenu);
+            IODisplay.DisplayMessage(enterChoice);
         }
 
         else IODisplay.DisplayMessage("No user is currently logged in.");  // ? turn this into a const?

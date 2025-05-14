@@ -4,7 +4,14 @@ using UINavigation;
 
 namespace UI;
 
-// TODO xml
+/// <summary>
+/// Represents the <see cref="Entities.Customer"/> main menu.
+/// <para> 
+/// From here, the <see cref="Entities.Customer"/> can view their <see cref="Entities.User"/> information,
+/// select a list of <see cref="Entities.Restaurant"/>s to order from, see the status of their orders, and
+/// rate a <see cref="Entities.Restaurant"/> they've ordered from.
+/// </para>
+/// </summary>
 public class CustomerMainMenu : IMenu
 {
     private string _logOut = IOUtilities.LogOutStr(5);
@@ -43,15 +50,15 @@ public class CustomerMainMenu : IMenu
                 break;
             
             case SELECT_RESTAURANTS_LIST_INT:
-                UIFlowController.ChangeMenu("RestaurantListOrdered");
+                UIFlowController.ChangeMenu(MenuState.RestaurantListOrdered);
                 break;
             
             case SEE_ORDERS_STATUS_INT:
-                UIFlowController.ChangeMenu("CustomerOrderStatusMenu");
+                UIFlowController.ChangeMenu(MenuState.CustomerOrderStatusMenu);
                 break;
             
             case RATE_RESTAURANT_INT:
-                UIFlowController.ChangeMenu("CustomerRateRestaurantMenu");  // ? Make these consts
+                UIFlowController.ChangeMenu(MenuState.CustomerRateRestaurantMenu);
                 break;
             
             case LOG_OUT_INT:
