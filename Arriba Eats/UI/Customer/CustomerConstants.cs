@@ -21,6 +21,7 @@ public static class CustomerConstants
         4: Sorted by average rating
         """;
 
+    public const string YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR = "You can order from the following restaurants:";
     public const string NOT_PLACED_ORDERS_STR = "You have not placed any orders.";
     public const string SELECT_PREVIOUS_ORDER_TO_RATE_STR = "Select a previous order to rate the restaurant it came from:";
 }

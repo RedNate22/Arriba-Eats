@@ -50,7 +50,7 @@ public class CustomerMainMenu : IMenu
                 break;
             
             case SELECT_RESTAURANTS_LIST_INT:
-                UIFlowController.ChangeMenu(MenuState.RestaurantListOrdered);
+                UIFlowController.ChangeMenu(MenuState.CustomerListRestaurantsMenu);
                 break;
             
             case SEE_ORDERS_STATUS_INT:

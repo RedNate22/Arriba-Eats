@@ -14,7 +14,7 @@ public enum MenuState
     RegistrationMenu,
     LoginMenu,
     CustomerMainMenu,
-    RestaurantListOrdered,
+    CustomerListRestaurantsMenu,
     CustomerOrderStatusMenu,
     CustomerRateRestaurantMenu,
     DelivererMainMenu,

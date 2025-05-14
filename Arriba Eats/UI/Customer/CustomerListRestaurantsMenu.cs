@@ -5,7 +5,7 @@ using UINavigation;
 namespace UI;
 
 // TODO xml
-public class RestaurantListOrdered : IMenu
+public class CustomerListRestaurantsMenu: IMenu
 {
     private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(5);
     private string _enterChoice = IOUtilities.EnterChoiceStr(5);
@@ -24,19 +24,23 @@ public class RestaurantListOrdered : IMenu
         switch (choice)
         {
             case SORTED_ALPHABETICALLY_INT:
-                // method
+                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                // TODO method
                 break;
             
             case SORTED_DISTANCE_INT:
-                // method
+                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                // TODO method
                 break;
 
             case SORTED_STYLE_INT:
-                // method
+                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                // TODO method
                 break;
                 
             case SORTED_AVERAGE_RATING_INT:
-                // method
+                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                // TODO method
                 break;
 
             case RETURN_PREVIOUS_MENU_INT:
