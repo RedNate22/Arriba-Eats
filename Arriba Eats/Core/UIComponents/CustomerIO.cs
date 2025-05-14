@@ -4,7 +4,10 @@ using UINavigation;
 
 namespace UIComponents;
 
-// TODO xml
+/// <summary>
+/// Contains various static methods for handling I/O with <see cref="Customer"/> users.
+/// <para> Uses <see cref="IOUtilities"/> for input & output formatting and validation. </para>
+/// </summary>
 public static class CustomerIO
 {
     // TODO xml

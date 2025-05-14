@@ -5,8 +5,7 @@ using UINavigation;
 namespace UIComponents;
 
 /// <summary>
-/// Handles general input and output for the menus using the console.
-/// <para> Uses <see cref="IOUtilities"/> for input & output formatting and validation. </para>
+/// Contains various static methods for handling general I/O with the user.
 /// </summary>
 public static class IODisplay
 {
@@ -60,7 +59,8 @@ public static class IODisplay
     }
 
     /// <summary>
-    /// Displays the relevant user information, depending on the <see cref="UserType"/>.
+    /// Displays the relevant user information, depending on the <see cref="UserType"/>
+    /// of the <see cref="User"/>.
     /// </summary>
     /// <param name="user"></param>
     public static void DisplayUserInfo(User user)
