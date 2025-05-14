@@ -1,5 +1,5 @@
 using System;
-using DisplayIO;
+using UIComponents;
 
 namespace Entities;
 
@@ -16,7 +16,13 @@ public class Restaurant
     /// </summary>
     public RestaurantStyles RestaurantStyle { get; private set; }
 
-    // TODO xml
+    /// <summary>
+    /// Called within the <see cref="Client"/> constructor.
+    /// <para> Creates a <see cref="Restaurant"/> to hold a <see cref="_restaurantMenu"/>
+    /// and allow <see cref="Client"/>'s to register new menu items and manage orders. </para>
+    /// </summary>
+    /// <param name="restaurantName"> The name of the restaurant. Parsed from <see cref="Client"/>. </param>
+    /// <param name="restaurantStyle"> The style of the restaurant. Parsed from <see cref="Client"/>. </param>
     public Restaurant (string restaurantName, RestaurantStyles restaurantStyle)
     {
         RestaurantName = restaurantName;
@@ -41,7 +47,9 @@ public class Restaurant
         _restaurantMenu.Add(itemPrice, itemName);
     }
 
-    // TODO xml
+    /// <summary>
+    /// Displays each menu item from the current <see cref="Client"/>'s <see cref="Restaurant._restaurantMenu"/>.
+    /// </summary>
     public void DisplayCurrentMenu()
     {
         foreach (KeyValuePair<decimal, string> menuItem in _restaurantMenu)

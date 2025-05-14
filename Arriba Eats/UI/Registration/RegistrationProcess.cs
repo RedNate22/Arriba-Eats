@@ -1,5 +1,5 @@
 using System;
-using DisplayIO;
+using UIComponents;
 using Entities;
 
 namespace UI;
@@ -29,16 +29,16 @@ public static class RegistrationProcess
     /// Expected values: "CUSTOMER_CHOICE", "DELIVERER_CHOICE", or "CLIENT_CHOICE". </param>
     public static void Register(string userType)
     {
-        string name = IODisplay.GetName();
-        int age = IODisplay.GetAge();
-        string email = IODisplay.GetEmail();
-        string mobile = IODisplay.GetMobile();
-        string password = IODisplay.GetPassword();
+        string name = RegistrationIO.GetName();
+        int age = RegistrationIO.GetAge();
+        string email = RegistrationIO.GetEmail();
+        string mobile = RegistrationIO.GetMobile();
+        string password = RegistrationIO.GetPassword();
 
         switch (userType)
         {
             case MenuConstants.CUSTOMER_CHOICE:
-                string customerLocation = IODisplay.GetLocation();
+                string customerLocation = RegistrationIO.GetLocation();
 
                 Customer customer = new Customer(name, age, email, mobile, password,
                     customerLocation);
@@ -48,7 +48,7 @@ public static class RegistrationProcess
                 break;
             
             case MenuConstants.DELIVERER_CHOICE:
-                string licencePlate = IODisplay.GetLicencePlate();
+                string licencePlate = RegistrationIO.GetLicencePlate();
 
                 Deliverer deliverer = new Deliverer(name, age, email, mobile, password, licencePlate);
                 User.AddUser(UserType.Deliverer, deliverer);
@@ -57,9 +57,9 @@ public static class RegistrationProcess
                 break;
             
             case MenuConstants.CLIENT_CHOICE:
-                string restaurantName = IODisplay.GetRestaurantName();
-                RestaurantStyles restaurantStyle = IODisplay.GetRestaurantStyle();
-                string clientLocation = IODisplay.GetLocation();
+                string restaurantName = RegistrationIO.GetRestaurantName();
+                RestaurantStyles restaurantStyle = RegistrationIO.GetRestaurantStyle();
+                string clientLocation = RegistrationIO.GetLocation();
             
                 Client client = new Client(name, age, email, mobile, password, clientLocation, restaurantName, restaurantStyle);
                 User.AddUser(UserType.Client, client);

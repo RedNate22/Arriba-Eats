@@ -1,5 +1,5 @@
 using System;
-using DisplayIO;
+using UIComponents;
 using UINavigation;
 
 namespace UI;
@@ -47,11 +47,11 @@ public class CustomerMainMenu : IMenu
                 break;
             
             case SEE_ORDERS_STATUS_INT:
-                // TODO
+                UIFlowController.ChangeMenu("CustomerOrderStatusMenu");
                 break;
             
             case RATE_RESTAURANT_INT:
-                // TODO
+                UIFlowController.ChangeMenu("CustomerRateRestaurantMenu");  // ? Make these consts
                 break;
             
             case LOG_OUT_INT:

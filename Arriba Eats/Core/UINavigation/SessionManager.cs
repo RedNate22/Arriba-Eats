@@ -1,6 +1,6 @@
 using System;
 using Entities;
-using DisplayIO;
+using UIComponents;
 
 namespace UINavigation;
 

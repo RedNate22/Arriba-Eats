@@ -1,5 +1,5 @@
 using System;
-using DisplayIO;
+using UIComponents;
 
 namespace Entities;
 

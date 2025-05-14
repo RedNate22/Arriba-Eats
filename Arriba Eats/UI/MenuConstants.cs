@@ -1,5 +1,5 @@
 using System;
-using DisplayIO;
+using UIComponents;
 
 namespace UI;
 
@@ -8,6 +8,7 @@ namespace UI;
 /// </summary>
 public static class MenuConstants
 {
+    // TODO add xml for every const
     // Global
     public const string WELCOME_STR = "Welcome to Arriba Eats!";
     public const string MAKE_CHOICE_STR = "Please make a choice from the menu below:";
@@ -60,6 +61,9 @@ public static class MenuConstants
         4: Sorted by average rating
         """;
 
+    public const string NOT_PLACED_ORDERS_STR = "You have not placed any orders.";
+    public const string SELECT_PREVIOUS_ORDER_TO_RATE_STR = "Select a previous order to rate the restaurant it came from:";
+
     // DelivererMainMenu
     public const string DELIVERER_MAIN_MENU_CHOICES_STR = """
         2: List orders available to deliver
@@ -74,8 +78,7 @@ public static class MenuConstants
         4: Start cooking order
         5: Finish cooking order
         6: Handle deliverers who have arrived
-        """; 
-
+        """;
 }
 
 

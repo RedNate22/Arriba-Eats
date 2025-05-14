@@ -1,7 +1,7 @@
 using System;
 using UI;
 
-namespace DisplayIO;
+namespace UIComponents;
 
 /// <summary>
 /// Provides helper methods for managing user interface interactions.
@@ -9,7 +9,6 @@ namespace DisplayIO;
 /// </summary>
 public static class IOUtilities
 {
-    
     /// <summary>
     /// Generates a string prompt asking for input within a specified range.
     /// <para> Formats a message based on the provided upper limit for user choices. </para>
@@ -320,7 +319,7 @@ public static class IOUtilities
     public static bool IsValidItemPrice(decimal itemPrice)
     {
         decimal lowerLimit = 0.00M;
-        decimal upperLimit = 999.99M;
+        decimal upperLimit = 1000.00M;
 
         bool isValidRange = itemPrice > lowerLimit && itemPrice < upperLimit;
         return isValidRange;
