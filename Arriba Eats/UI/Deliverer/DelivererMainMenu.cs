@@ -36,6 +36,7 @@ public class DelivererMainMenu : IMenu
         }
 
         IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
+        IODisplay.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
         IODisplay.DisplayMessage(DelivererConstants.DELIVERER_MAIN_MENU_CHOICES_STR);
         IODisplay.DisplayMessage(_logOut);
         IODisplay.DisplayMessage(_enterChoice);

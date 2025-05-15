@@ -25,22 +25,25 @@ public class CustomerListRestaurantsMenu: IMenu
         {
             case SORTED_ALPHABETICALLY_INT:
                 IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-                CustomerIO.DisplayRestaurantsList();
+                CustomerIO.DisplayRestaurantsList(SortOption.Alphabetically);
                 // TODO method
                 break;
             
             case SORTED_DISTANCE_INT:
                 IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                CustomerIO.DisplayRestaurantsList(SortOption.ByDistance);
                 // TODO method
                 break;
 
             case SORTED_STYLE_INT:
                 IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                CustomerIO.DisplayRestaurantsList(SortOption.ByStyle);
                 // TODO method
                 break;
                 
             case SORTED_AVERAGE_RATING_INT:
                 IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+                CustomerIO.DisplayRestaurantsList(SortOption.ByAverageRating);
                 // TODO method
                 break;
 
