@@ -40,7 +40,7 @@ public class Restaurant
     /// <para> Menu items are stored with their <c>decimal</c> price as the key, 
     /// and their <c>string</c> name as the value. </para>
     /// </summary>
-    private static Dictionary<decimal, string> _restaurantMenu = new Dictionary<decimal, string>();
+    private Dictionary<decimal, string> _restaurantMenu = new Dictionary<decimal, string>();
 
     /// <summary>
     /// Registers a new menu item in the <see cref="Restaurant"/>'s menu.

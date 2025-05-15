@@ -18,6 +18,7 @@ namespace ArribaEats
         static void Main()
         {
             // ! Test data REMOVE LATER
+            /*
             // Customer
             string customerName = "CustomerTest";
             int customerAge = 0;
@@ -55,6 +56,7 @@ namespace ArribaEats
             Client clientTest = new Client(clientName, clientAge, clientEmail, clientMobile,
                 clientPassword, clientLocation, restaurantName, restaurantStyle); 
             User.AddUser(UserType.Client, clientTest);
+            */
             
             MainMenu.WelcomeMessage();
             UIFlowController.RunMenuSystem();

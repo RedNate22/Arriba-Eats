@@ -210,26 +210,14 @@ public static class IOUtilities
     /// </returns>
     public static bool IsValidLocation(string location)
     {
-        bool isValidLength = location.Length == 3;
-        char targetSymbol = ',';
-        int targetLocation = -1;
-        int digitCount = 0;
+        string[] coords = location.Split(',');
+        if (coords.Length != 2) return false;  // Too many commas
 
-        for (int i = 0; i < location.Length ; i++)
-        {
-            if (char.IsDigit(location[i]))
-            {
-                digitCount++;
-            }
-            
-            else if (location[i] == targetSymbol)
-            {
-                targetLocation = i;
-            }
-        }
+        // Validate if integers
+        bool isFirstCoordValid = int.TryParse(coords[0], out _);
+        bool isSecondCoordValid = int.TryParse(coords[1], out _);
 
-        bool isCorrectFormat = isValidLength && targetLocation == 1 && digitCount == 2;
-        return isCorrectFormat;
+        return isFirstCoordValid && isSecondCoordValid;
     }
 
     /// <summary>
