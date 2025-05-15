@@ -1,7 +1,6 @@
 using System;
-using UIComponents;
 
-namespace UI;
+namespace UIComponents;
 
 /// <summary>
 /// Defines the various sorthing methods when 
