@@ -20,7 +20,10 @@ public class CustomerSortRestaurantsMenu: IMenu
     private const int SORTED_ALPHABETICALLY_INT = 1, SORTED_DISTANCE_INT = 2, SORTED_STYLE_INT = 3,
         SORTED_AVERAGE_RATING_INT = 4, RETURN_PREVIOUS_MENU_INT = 5;
 
-    // TODO xml
+    /// <summary>
+    /// Displays the <see cref="CustomerSortRestaurantsMenu"/> options and prompts the <see cref="Entities.Customer"/>
+    /// to choose an option.
+    /// </summary>
     public void DisplayMenu()
     {
         IODisplay.DisplayMessage(CustomerConstants.RESTAURANT_LIST_ORDERED_STR);

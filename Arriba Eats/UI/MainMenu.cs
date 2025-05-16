@@ -25,6 +25,7 @@ public class MainMenu : IMenu
 
     /// <summary> 
     /// Displays the <see cref="MainMenu"/> options and prompts the user to choose an option.
+    /// This menu serves as the main entry point for the <see cref="Entities.User"/>.
     /// </summary>
     public void DisplayMenu()
     {

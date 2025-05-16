@@ -32,7 +32,10 @@ public class ClientMainMenu : IMenu
     /// </summary>
     private int _welcomeCount = 0;
 
-    // TODO xml
+    /// <summary>
+    /// Displays the <see cref="ClientMainMenu"/> options and prompts the <see cref="Entities.Client"/>
+    /// to choose an option.
+    /// </summary>
     public void DisplayMenu()
     {
         if (_welcomeCount == 0)

@@ -24,7 +24,7 @@ public class RegistrationMenu : IMenu
     private const int CUSTOMER_INT = 1, DELIVERER_INT = 2, CLIENT_INT = 3, RETURN_INT = 4;
 
     /// <summary>
-    /// Displays the registration menu options and prompts the user to select a user type to register as.
+    /// Displays the <see cref="RegistrationMenu"/> options and prompts the <see cref="Entities.User"/> to select a user type to register as.
     /// <para> The appropriate user type is registered depending on the user's choice. </para>
     /// <para> Uses <see cref="IODisplay.DisplayMessage()"/> to display the options. </para>
     /// <para> Uses <see cref="IODisplay.GetChoice()"/> to get a choice from the user in the form

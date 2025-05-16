@@ -4,7 +4,13 @@ using UIComponents;
 
 namespace UINavigation;
 
-// TODO xml
+/// <summary>
+/// Manages the authentication state of a <see cref="User"/> within the application.
+/// This class tracks the currently logged-in <see cref="User"/> and defines the methods for 
+/// login and logout functionality.
+/// <para> The session state is updated upon authentication and determines access to relevant menus
+/// based on the <see cref="User"/>'s <see cref="UserType"/> through the <see cref="UI.LoginMenu"/>. </para> 
+/// </summary>
 public static class SessionManager
 {
     private static User? _currentUser = null;

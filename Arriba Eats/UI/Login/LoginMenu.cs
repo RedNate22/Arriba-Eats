@@ -13,7 +13,7 @@ namespace UI;
 public class LoginMenu : IMenu
 {
     /// <summary>
-    /// Displays the login menu to authenticate the user.
+    /// Displays the <see cref="LoginMenu"/> to authenticate the <see cref="User"/>.
     /// <para> - Prompts the user for their <see cref="User.Email"/> and <see cref="User.Password"/>. </para>
     /// <para> - Authenticates the session using <see cref="SessionManager.AuthenticateSession()"/>,
     /// updating <see cref="SessionManager.CurrentUser"/>. </para>
