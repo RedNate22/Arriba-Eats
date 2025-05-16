@@ -5,13 +5,19 @@ using UINavigation;
 namespace UIComponents;
 
 /// <summary>
-/// Contains various static methods for handling I/O with <see cref="Customer"/> users.
-/// <para> Uses <see cref="IOUtilities"/> for input & output formatting and validation. </para>
+/// Contains various static methods for handling IO with <see cref="Customer"/> users. 
+/// Uses <see cref="IOUtilities"/> for input and output formatting and validation. 
 /// </summary>
 public static class CustomerIO
 {
-    // TODO xml
-    public static List<Restaurant> GetRestaurantsList(SortOption sortType) 
+    /// <summary>
+    /// Extracts a list of the currently registered <see cref="Restaurant"/>s from
+    /// <see cref="RestaurantRegistry"/> using <see cref="RestaurantRegistry.TryListRestaurants()"/>. 
+    /// Based on the parsed <see cref="SortOption"/>, sorts the list appropriately.
+    /// </summary>
+    /// <param name="sortType"> The <see cref="SortOption"/> to be selected for ordering the list. </param>
+    /// <returns> The sorted <see cref="Restaurant"/>s list, ordered by the given <see cref="SortOption"/>. </returns>
+    public static List<Restaurant> GetRestaurantsList(SortOption sortType)
     {
         if (RestaurantRegistry.TryListRestaurants(out List<Restaurant> restaurantsList))
         {
@@ -57,23 +63,5 @@ public static class CustomerIO
             return restaurantsList;
         }
         return new List<Restaurant>();
-    }
-
-    // TODO xml
-    // TODO complete functionality
-    public static void DisplayRestaurantsToRate(User user)
-    {
-        if (SessionManager.CurrentUser != null)
-        {
-            int n = 1; // TODO int needs to dynamically change
-            string returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(n);                  
-            string enterChoice = IOUtilities.EnterChoiceStr(n);
-            
-            // TODO list restaurants ordered from
-            IODisplay.DisplayMessage(returnPreviousMenu);
-            IODisplay.DisplayMessage(enterChoice);
-        }
-
-        else IODisplay.DisplayMessage("No user is currently logged in.");
     }
 }

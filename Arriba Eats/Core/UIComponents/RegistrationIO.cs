@@ -70,7 +70,7 @@ public static class RegistrationIO
     /// the validation criteria.
     /// <para> If the email is invalid, an error message is displayed and the user
     /// is prompted again until a valid input is given. </para>
-    /// <para> If the email is valid, it then checks the <see cref="UserRegistry._userDictionary"/>
+    /// <para> If the email is valid, it then checks the <see cref="UserRegistry._userRegistry"/>
     /// to determine if the email already currently exists amongst the registered users. </para>
     /// <para> If the email is already registered, it returns an error, prompting the user
     /// that email is already in use. </para>

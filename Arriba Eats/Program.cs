@@ -55,7 +55,10 @@ namespace ArribaEats
             Client clientTest = new Client(clientName, clientAge, clientEmail, clientMobile,
                 clientPassword, clientLocation, restaurantName, restaurantStyle); 
             User.AddUser(UserType.Client, clientTest);
+
+
             
+                       
             MainMenu.WelcomeMessage();
             UIFlowController.RunMenuSystem();
         }

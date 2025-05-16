@@ -17,6 +17,11 @@ public class ClientMainMenu : IMenu
 {  
     private string _logOut = IOUtilities.LogOutStr(7);
     private string _enterChoice = IOUtilities.EnterChoiceStr(7);
+
+    /// <summary>
+    /// Defines the <see cref="int"/> constants representing menu options for use in a
+    /// <see cref="switch"/> statement.
+    /// </summary>
     private const int DISPLAY_USER_INFO_INT = 1, ADD_ITEM_RESTAURANT_INT = 2, SEE_CURRENT_ORDERS_INT = 3,
         START_COOKING_ORDER_INT = 4, FINISH_COOKING_ORDER_INT = 5, HANDLE_DELIVERERS_INT = 6, LOG_OUT_INT = 7;
 
@@ -49,7 +54,7 @@ public class ClientMainMenu : IMenu
             case DISPLAY_USER_INFO_INT:
                 IODisplay.DisplayUserInfo(SessionManager.CurrentUser!);
                 break;
-            
+
             case ADD_ITEM_RESTAURANT_INT:
                 ClientIO.AddItemsToRestaurant();
                 break;
@@ -61,18 +66,22 @@ public class ClientMainMenu : IMenu
             case START_COOKING_ORDER_INT:
                 // TODO
                 break;
-            
+
             case FINISH_COOKING_ORDER_INT:
                 // TODO
                 break;
-            
+
             case HANDLE_DELIVERERS_INT:
                 // TODO
                 break;
-            
+
             case LOG_OUT_INT:
                 _welcomeCount = 0;
                 SessionManager.Logout();
+                break;
+            
+            default:  
+                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                 break;
         }
     }

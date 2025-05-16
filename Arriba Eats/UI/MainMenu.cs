@@ -24,7 +24,7 @@ public class MainMenu : IMenu
     }
 
     /// <summary> 
-    /// Displays the main menu options and gets choice from user.
+    /// Displays the <see cref="MainMenu"/> options and prompts the user to choose an option.
     /// </summary>
     public void DisplayMenu()
     {

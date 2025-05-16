@@ -12,18 +12,14 @@ namespace UI;
 public static class RegistrationProcess
 {   
     /// <summary>
-    /// Registers a new user based on the specified type selected in
-    /// <see cref="RegistrationMenu"/>.
+    /// Registers a new user based on the specified type selected in <see cref="RegistrationMenu"/>.
     /// <para> 
     /// Uses multiple methods defined in <see cref="IODisplay"/> to
     /// prompt the user for input, which in turn use <see cref="IOUtilities"/>
-    /// to check for valid formatting and input before returning the value here to
-    /// be assigned safely. 
+    /// to check for valid formatting and input before returning the value here to be assigned safely. 
     /// </para>
-    /// <para> 
-    /// Based on the <see cref="UserType"/> specified, further prompts for
-    /// more specific data to be assigned before registering the user. 
-    /// </para>
+    /// <para> Based on the <see cref="UserType"/> specified, further prompts for more specific 
+    /// data to be assigned before registering the user. </para>
     /// </summary>
     /// <param name="userType"> The type of user to register.
     /// Expected values: "CUSTOMER_CHOICE", "DELIVERER_CHOICE", or "CLIENT_CHOICE". </param>
@@ -65,9 +61,6 @@ public static class RegistrationProcess
                 User.AddUser(UserType.Client, client);
                 
                 IODisplay.DisplayMessage($"You have been successfully registered as a client, {name}!");
-                break;
-            
-            default:
                 break;
         }
     }

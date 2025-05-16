@@ -11,7 +11,7 @@ public class CustomerRateRestaurantMenu : IMenu
     public void DisplayMenu()
     {
         IODisplay.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
-        CustomerIO.DisplayRestaurantsToRate(SessionManager.CurrentUser!);
+        //TODO CustomerIO.DisplayRestaurantsToRate(SessionManager.CurrentUser!);
                
         int choice = IODisplay.GetChoice();
 
@@ -19,6 +19,10 @@ public class CustomerRateRestaurantMenu : IMenu
         {
             case 1:
                 UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+                break;
+
+            default:  
+                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                 break;
         }
     }

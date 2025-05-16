@@ -3,7 +3,10 @@ using UIComponents;
 
 namespace Entities;
 
-// TODO xml
+/// <summary>
+/// Represents a restaurant owned by a <see cref="Client"/>.
+/// <para> A restaurant has a name, style, location and menu. </para>
+/// </summary>
 public class Restaurant
 {
     /// <summary>

@@ -4,11 +4,19 @@ using UINavigation;
 
 namespace UI;
 
-// TODO xml
+/// <summary>
+/// Represents the menu where a <see cref="Entities.Customer"/> chooses
+/// how the displayed restaurants shall be ordered.
+/// </summary>
 public class CustomerSortRestaurantsMenu: IMenu
 {
     private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(5);
     private string _enterChoice = IOUtilities.EnterChoiceStr(5);
+
+    /// <summary>
+    /// Defines the <see cref="int"/> constants representing menu options for use in a
+    /// <see cref="switch"/> statement.
+    /// </summary>
     private const int SORTED_ALPHABETICALLY_INT = 1, SORTED_DISTANCE_INT = 2, SORTED_STYLE_INT = 3,
         SORTED_AVERAGE_RATING_INT = 4, RETURN_PREVIOUS_MENU_INT = 5;
 

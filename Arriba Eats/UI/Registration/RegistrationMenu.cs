@@ -16,6 +16,11 @@ public class RegistrationMenu : IMenu
 {
     private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(4);
     private string _enterChoice = IOUtilities.EnterChoiceStr(4);
+
+    /// <summary>
+    /// Defines the <see cref="int"/> constants representing menu options for use in a
+    /// <see cref="switch"/> statement.
+    /// </summary>
     private const int CUSTOMER_INT = 1, DELIVERER_INT = 2, CLIENT_INT = 3, RETURN_INT = 4;
 
     /// <summary>

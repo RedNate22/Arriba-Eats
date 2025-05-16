@@ -3,11 +3,11 @@ using System;
 namespace Entities;
 
 /// <summary>
-/// Provides a centralised registry for storing and retrieving users 
+/// Provides a centralised registry for storing and retrieving <see cref="User"/>s
 /// based on their <see cref="UserType"/>.
 /// <para> 
 /// Provides several internal methods to safely store and retrieve user data
-/// from <see cref="_userDictionary"/>.
+/// from <see cref="_userRegistry"/>.
 /// </para> 
 /// </summary>
 internal static class UserRegistry
@@ -16,7 +16,7 @@ internal static class UserRegistry
     /// A dictionary that maps <see cref="UserType"/>'s to their corresponding <see cref="User"/> instances.
     /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/> as the key.</para>
     /// </summary>
-    private static Dictionary<UserType, List<User>> _userDictionary = new Dictionary<UserType, List<User>>();
+    private static Dictionary<UserType, List<User>> _userRegistry = new Dictionary<UserType, List<User>>();
 
     /// <summary>
     /// Registers a new <see cref="User"/> into the registry using the specified <see cref="UserType"/> to 
@@ -30,15 +30,15 @@ internal static class UserRegistry
     /// associated with the specified user type. </param>
     internal static void RegisterUser(UserType userType, User user)
     {
-        if (!_userDictionary.ContainsKey(userType))
+        if (!_userRegistry.ContainsKey(userType))
         {
-            _userDictionary[userType] = new List<User>();
+            _userRegistry[userType] = new List<User>();
         }
-        _userDictionary[userType].Add(user);
+        _userRegistry[userType].Add(user);
     }
 
     /// <summary>
-    /// Searches the <see cref="_userDictionary"/> to determine if any registered
+    /// Searches the <see cref="_userRegistry"/> to determine if any registered
     /// <see cref="User"/> contains an email address matching the provided input.
     /// </summary>
     /// <param name="email"> The email address to check against existing users. </param>
@@ -47,7 +47,7 @@ internal static class UserRegistry
     /// </returns>
     internal static bool EmailInRegistry(string email)
     {
-        foreach (List<User> userList in _userDictionary.Values)
+        foreach (List<User> userList in _userRegistry.Values)
         {
             foreach (User user in userList)
             {
@@ -61,7 +61,7 @@ internal static class UserRegistry
     }
 
     /// <summary>
-    /// Attempts to verify the user credentials by searching the <see cref="_userDictionary"/>
+    /// Attempts to verify the user credentials by searching the <see cref="_userRegistry"/>
     /// and finding a match.
     /// </summary>
     /// <param name="email"> The email address to match with the registered user. </param>
@@ -70,7 +70,7 @@ internal static class UserRegistry
     /// <returns> <c>true</c> if a match is found, otherwise, <c>false</c>. </returns>
     internal static bool TryVerifyUserCredentials (string email, string password, out User? foundUser)
     {
-        foreach (List<User> userList in _userDictionary.Values)
+        foreach (List<User> userList in _userRegistry.Values)
         {
             foreach (User user in userList)
             {
@@ -88,7 +88,7 @@ internal static class UserRegistry
 
     /// <summary>
     /// Attempts to determine the <see cref="UserType"/> associated with the given
-    /// <see cref="User"/> by searching the <see cref="_userDictionary"/>.
+    /// <see cref="User"/> by searching the <see cref="_userRegistry"/>.
     /// </summary>
     /// <param name="user"> The user instance whose type is being identified. </param>
     /// <param name="foundUserType"> The found <see cref="UserType"/> associated with the user. </param> 
@@ -96,7 +96,7 @@ internal static class UserRegistry
     /// is assigned. Otherwise <c>false</c>, with <see cref="UserType.Default"/> assigned. </returns>
     internal static bool TryFindUserType (User user, out UserType foundUserType)
     {
-        foreach (KeyValuePair<UserType, List<User>> pair in _userDictionary)
+        foreach (KeyValuePair<UserType, List<User>> pair in _userRegistry)
         {
             if (pair.Value.Contains(user))
             {

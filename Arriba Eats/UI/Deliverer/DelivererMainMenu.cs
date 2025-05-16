@@ -16,6 +16,11 @@ public class DelivererMainMenu : IMenu
 {
     private string _logOut = IOUtilities.LogOutStr(5);
     private string _enterChoice = IOUtilities.EnterChoiceStr(5);
+
+    /// <summary>
+    /// Defines the <see cref="int"/> constants representing menu options for use in a
+    /// <see cref="switch"/> statement.
+    /// </summary>
     private const int DISPLAY_USER_INFO_INT = 1, LIST_ORDERS_AVAILABLE_INT = 2, ARRIVED_RESTAURANT_INT = 3,
         MARK_DELIVERY_COMPLETE_INT = 4, LOG_OUT_INT = 5;
     
@@ -24,7 +29,7 @@ public class DelivererMainMenu : IMenu
     /// method has been run. This is to prevent the message from being displayed
     /// more than once.
     /// </summary>
-    private int _welcomeCount = 0;  // ? Turn this into a common IMenu field?
+    private int _welcomeCount = 0;
     
     // TODO xml
     public void DisplayMenu()
@@ -64,6 +69,10 @@ public class DelivererMainMenu : IMenu
             case LOG_OUT_INT:
                 _welcomeCount = 0;
                 SessionManager.Logout();
+                break;
+            
+            default:  
+                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                 break;
         }
     }    

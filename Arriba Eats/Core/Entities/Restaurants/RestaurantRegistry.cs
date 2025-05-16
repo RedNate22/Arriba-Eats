@@ -3,13 +3,16 @@ using UIComponents;
 
 namespace Entities;
 
-// TODO xml
+/// <summary>
+/// Provides a centeralised registry for storing and retrieving <see cref="Restaurant"/>s,
+/// along with their respective <see cref="Client"/> (owners).
+/// </summary>
 internal static class RestaurantRegistry
 {
     /// <summary>
     /// A dictionary that maps <see cref="Client"/>'s to their owned <see cref="Restaurant"/>'s. 
     /// </summary>
-    private static Dictionary<Client, Restaurant> _restaurantDictionary = new Dictionary<Client, Restaurant>();
+    private static Dictionary<Client, Restaurant> _restaurantRegistry = new Dictionary<Client, Restaurant>();
 
     /// <summary>
     /// Registers a new <see cref="Client"/> and their associated <see cref="Restaurant"/>
@@ -21,33 +24,33 @@ internal static class RestaurantRegistry
     /// <param name="restaurant"> The <see cref="Restaurant"/> instance being registered. </param>
     internal static void AddRestaurant(Client client, Restaurant restaurant)
     {
-        if (_restaurantDictionary.ContainsKey(client))
+        if (_restaurantRegistry.ContainsKey(client))
         {
             IODisplay.DisplayMessage("This client already owns a restaurant!");
         }
 
-        else if (_restaurantDictionary.ContainsValue(restaurant))
+        else if (_restaurantRegistry.ContainsValue(restaurant))
         {
             IODisplay.DisplayMessage("This restaurant is already registered!");
         }
 
         else
         {
-            _restaurantDictionary.Add(client, restaurant);
+            _restaurantRegistry.Add(client, restaurant);
         }
     }
 
     /// <summary>
     /// Attempts to determine the <see cref="Restaurant"/> instance associated with the
-    /// given <see cref="Client"/> by searching the <see cref="_restaurantDictionary"/>.
+    /// given <see cref="Client"/> by searching the <see cref="_restaurantRegistry"/>.
     /// </summary>
     /// <param name="client"> The client instance whose restaurant instance is being identified. </param>
     /// <param name="foundRestaurant"> Outputs the associated <see cref=""/></param>
     /// <returns> <c>true</c> if the client is found in the registry and their <see cref="Restaurant"/>
     /// is assigned. Otherwise <c>false</c>. </returns>
-    public static bool TryFindClientsRestaurant (User client, out Restaurant? foundRestaurant)
+    public static bool TryFindClientsRestaurant(User client, out Restaurant? foundRestaurant)
     {
-        foreach (KeyValuePair<Client, Restaurant> pair in _restaurantDictionary)
+        foreach (KeyValuePair<Client, Restaurant> pair in _restaurantRegistry)
         {
             if (pair.Key == client)
             {
@@ -58,14 +61,20 @@ internal static class RestaurantRegistry
 
         foundRestaurant = null;
         return false;
-    } 
-    
-    // TODO xml
-    public static bool TryListRestaurants (out List<Restaurant> restaurantsList)
+    }
+
+    /// <summary>
+    /// Attempts to extract all current <see cref="Restaurant"/>s in the <see cref="_restaurantRegistry"/>
+    /// into a list.
+    /// </summary>
+    /// <param name="restaurantsList"> The list of <see cref="Restaurant"/>s currently registered. </param>
+    /// <returns> <c>true</c> if at least one <see cref="Restaurant"/> is found and added to the list,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool TryListRestaurants(out List<Restaurant> restaurantsList)
     {
         restaurantsList = new List<Restaurant>();
 
-        foreach (Restaurant restaurant in _restaurantDictionary.Values)
+        foreach (Restaurant restaurant in _restaurantRegistry.Values)
         {
             restaurantsList.Add(restaurant);
         }

@@ -71,7 +71,7 @@ public abstract class User
     }
     
     /// <summary>
-    /// Checks whether the provided email exists with the <see cref="UserRegistry._userDictionary"/>.
+    /// Checks whether the provided email exists with the <see cref="UserRegistry._userRegistry"/>.
     /// </summary>
     /// <param name="email"> The email address to search for in the registry. </param>
     /// <returns>
