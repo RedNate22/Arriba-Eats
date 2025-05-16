@@ -11,7 +11,7 @@ namespace UIComponents;
 public static class CustomerIO
 {
     // TODO xml
-    public static void DisplayRestaurantsList(SortOption sortType)  // Return list, use list[index] for customer choice
+    public static List<Restaurant> GetRestaurantsList(SortOption sortType) 
     {
         if (RestaurantRegistry.TryListRestaurants(out List<Restaurant> restaurantsList))
         {
@@ -21,7 +21,6 @@ public static class CustomerIO
                 {
                     return a.RestaurantName.CompareTo(b.RestaurantName);
                 }
-
                 restaurantsList.Sort(SortAlphabetically);
             }
 
@@ -36,7 +35,6 @@ public static class CustomerIO
                     // If distances are the same (returning 0), instead sort by name
                     return distanceComparison != 0 ? distanceComparison : a.RestaurantName.CompareTo(b.RestaurantName);
                 }
-
                 restaurantsList.Sort(SortByDistance);
             }
 
@@ -49,7 +47,6 @@ public static class CustomerIO
                     // If styles are the same (returning 0), instead sort by name 
                     return styleComparison != 0 ? styleComparison : a.RestaurantName.CompareTo(b.RestaurantName);
                 }
-
                 restaurantsList.Sort(SortByStyle);
             }
 
@@ -57,56 +54,9 @@ public static class CustomerIO
             {
                 // TODO
             }
-
-            const string RESTAURANT_NAME_HEADING = "Restaurant Name";
-            const string LOCATION_HEADING = "Loc";
-            const string DISTANCE_HEADING = "Dist";
-            const string STYLE_HEADING = "Style";
-            const string RATING_HEADING = "Rating";
-
-            int restaurantColumnWidth = 7;
-            int locationColumnWidth = LOCATION_HEADING.Length + 4;
-            int distanceColumnWidth = DISTANCE_HEADING.Length + 2;
-            int styleColumnWidth = STYLE_HEADING.Length + 7;
-
-            // Dynamically increase width of restaurant name column
-            int maxRestaurantNameWidth = RESTAURANT_NAME_HEADING.Length + restaurantColumnWidth;
-
-            foreach (Restaurant restaurant in restaurantsList)  
-            {
-                if (restaurant.RestaurantName.Length > maxRestaurantNameWidth)
-                {
-                    maxRestaurantNameWidth = restaurant.RestaurantName.Length + 1;
-                }
-            }
-
-            int restaurantChoiceIndex = 1;
-
-            IODisplay.DisplayMessage("   " +
-                RESTAURANT_NAME_HEADING.PadRight(maxRestaurantNameWidth) 
-                + LOCATION_HEADING.PadRight(locationColumnWidth) 
-                + DISTANCE_HEADING.PadRight(distanceColumnWidth)
-                + STYLE_HEADING.PadRight(styleColumnWidth) 
-                + RATING_HEADING);
-            for (int i = 0; i < restaurantsList.Count(); i++)
-            {
-                
-                IODisplay.DisplayMessage($"{restaurantChoiceIndex}: " 
-                    + $"{restaurantsList[i].RestaurantName}".PadRight(maxRestaurantNameWidth) 
-                    + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth) 
-                    + $"{IODisplay.GetDistance(SessionManager.CurrentUser!, restaurantsList[i])}".PadRight(distanceColumnWidth) 
-                    + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth) 
-                    + "-");
-
-                restaurantChoiceIndex++;
-            }
-
-            string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(restaurantChoiceIndex);
-            string _enterChoice = IOUtilities.EnterChoiceStr(restaurantChoiceIndex);
-            
-            IODisplay.DisplayMessage(_returnPreviousMenu);
-            IODisplay.DisplayMessage(_enterChoice);
+            return restaurantsList;
         }
+        return new List<Restaurant>();
     }
 
     // TODO xml
