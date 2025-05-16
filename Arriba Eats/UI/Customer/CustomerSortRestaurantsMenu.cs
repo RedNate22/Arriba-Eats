@@ -5,7 +5,7 @@ using UINavigation;
 namespace UI;
 
 // TODO xml
-public class CustomerListRestaurantsMenu: IMenu
+public class CustomerSortRestaurantsMenu: IMenu
 {
     private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(5);
     private string _enterChoice = IOUtilities.EnterChoiceStr(5);
@@ -24,23 +24,23 @@ public class CustomerListRestaurantsMenu: IMenu
         switch (choice)
         {
             case SORTED_ALPHABETICALLY_INT:
-                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-                CustomerIO.DisplayRestaurantsList(SortOption.Alphabetically);  // TODO make these go to the same menu
+                CustomerBrowseRestaurantsMenu.SortOption = SortOption.Alphabetically;
+                UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
             
             case SORTED_DISTANCE_INT:
-                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-                CustomerIO.DisplayRestaurantsList(SortOption.ByDistance);
+                CustomerBrowseRestaurantsMenu.SortOption = SortOption.ByDistance; 
+                UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
 
             case SORTED_STYLE_INT:
-                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-                CustomerIO.DisplayRestaurantsList(SortOption.ByStyle);
+                CustomerBrowseRestaurantsMenu.SortOption = SortOption.ByStyle; 
+                UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
                 
             case SORTED_AVERAGE_RATING_INT:
-                IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-                CustomerIO.DisplayRestaurantsList(SortOption.ByAverageRating);
+                CustomerBrowseRestaurantsMenu.SortOption = SortOption.ByAverageRating; 
+                UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
 
             case RETURN_PREVIOUS_MENU_INT:

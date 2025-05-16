@@ -31,8 +31,10 @@ public static class CustomerIO
                 {
                     int distanceA = IODisplay.GetDistance(SessionManager.CurrentUser!, a);
                     int distanceB = IODisplay.GetDistance(SessionManager.CurrentUser!, b);
+                    int distanceComparison = distanceA.CompareTo(distanceB);
 
-                    return distanceA.CompareTo(distanceB);
+                    // If distances are the same (returning 0), instead sort by name
+                    return distanceComparison != 0 ? distanceComparison : a.RestaurantName.CompareTo(b.RestaurantName);
                 }
 
                 restaurantsList.Sort(SortByDistance);
@@ -44,7 +46,7 @@ public static class CustomerIO
                 {
                     int styleComparison = a.RestaurantStyle.CompareTo(b.RestaurantStyle);
 
-                    // If styles are the same (returning 0), instead compare by name 
+                    // If styles are the same (returning 0), instead sort by name 
                     return styleComparison != 0 ? styleComparison : a.RestaurantName.CompareTo(b.RestaurantName);
                 }
 
