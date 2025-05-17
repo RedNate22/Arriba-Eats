@@ -7,7 +7,7 @@ namespace Entities;
 /// Provides a centeralised registry for storing and retrieving <see cref="Restaurant"/>s,
 /// along with their respective <see cref="Client"/> (owners).
 /// </summary>
-internal static class RestaurantRegistry
+public static class RestaurantRegistry
 {
     /// <summary>
     /// A dictionary that maps <see cref="Client"/>'s to their owned <see cref="Restaurant"/>'s. 
@@ -22,7 +22,7 @@ internal static class RestaurantRegistry
     /// </summary>
     /// <param name="client"> The <see cref="Client"/> instance being registered. </param>
     /// <param name="restaurant"> The <see cref="Restaurant"/> instance being registered. </param>
-    internal static void AddRestaurant(Client client, Restaurant restaurant)
+    public static void AddRestaurant(Client client, Restaurant restaurant)
     {
         if (_restaurantRegistry.ContainsKey(client))
         {

@@ -6,11 +6,11 @@ namespace Entities;
 /// Provides a centralised registry for storing and retrieving <see cref="User"/>s
 /// based on their <see cref="UserType"/>.
 /// <para> 
-/// Provides several internal methods to safely store and retrieve user data
+/// Provides several static methods to safely store and retrieve user data
 /// from <see cref="_userRegistry"/>.
 /// </para> 
 /// </summary>
-internal static class UserRegistry
+public static class UserRegistry
 {
     /// <summary>
     /// A dictionary that maps <see cref="UserType"/>'s to their corresponding <see cref="User"/> instances.
@@ -28,7 +28,7 @@ internal static class UserRegistry
     /// <param name="userType"> The type of user being registered. </param>
     /// <param name="user"> The user instance to be stored into the list,
     /// associated with the specified user type. </param>
-    internal static void RegisterUser(UserType userType, User user)
+    public static void RegisterUser(UserType userType, User user)
     {
         if (!_userRegistry.ContainsKey(userType))
         {
@@ -45,7 +45,7 @@ internal static class UserRegistry
     /// <returns>
     /// <c>true</c> if a match is found within the registry, otherwise <c>false</c>.
     /// </returns>
-    internal static bool EmailInRegistry(string email)
+    public static bool EmailInRegistry(string email)
     {
         foreach (List<User> userList in _userRegistry.Values)
         {
@@ -68,7 +68,7 @@ internal static class UserRegistry
     /// <param name="password"> The password to match with the registered user. </param>
     /// <param name="foundUser"> The instance of the user if both email and password match. </param>
     /// <returns> <c>true</c> if a match is found, otherwise, <c>false</c>. </returns>
-    internal static bool TryVerifyUserCredentials (string email, string password, out User? foundUser)
+    public static bool TryVerifyUserCredentials (string email, string password, out User? foundUser)
     {
         foreach (List<User> userList in _userRegistry.Values)
         {
@@ -94,7 +94,7 @@ internal static class UserRegistry
     /// <param name="foundUserType"> The found <see cref="UserType"/> associated with the user. </param> 
     /// <returns> <c>true</c> if the user is found in the registry and their <see cref="UserType"/>, 
     /// is assigned. Otherwise <c>false</c>, with <see cref="UserType.Default"/> assigned. </returns>
-    internal static bool TryFindUserType (User user, out UserType foundUserType)
+    public static bool TryFindUserType (User user, out UserType foundUserType)
     {
         foreach (KeyValuePair<UserType, List<User>> pair in _userRegistry)
         {

@@ -26,7 +26,7 @@ public static class ClientIO
             if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.CurrentUser, out Restaurant? restaurant))
             {
                 IODisplay.DisplayMessage("This is your restaurant's current menu:");
-                restaurant?.DisplayCurrentMenu();
+                restaurant?.DisplayCurrentlyRegisteredMenuItems();
 
                 IODisplay.DisplayMessage("Please enter the name of the new item (blank to cancel):");
                 
@@ -35,8 +35,11 @@ public static class ClientIO
                 if (!string.IsNullOrWhiteSpace(itemName))
                 {
                     decimal itemPrice = GetMenuItemPrice();
-                    restaurant?.RegisterMenuItem(itemPrice, itemName);
-                    IODisplay.DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
+                    if (restaurant!.TryRegisterMenuItem(itemName, itemPrice))
+                    {
+                        IODisplay.DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
+                    }
+                    else IODisplay.DisplayMessage("This item is already added to the menu.");
                 }
             }
             

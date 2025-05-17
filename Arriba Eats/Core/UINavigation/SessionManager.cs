@@ -93,11 +93,6 @@ public static class SessionManager
     /// </returns>
     public static UserType ReturnUserType()
     {
-        if (CurrentUser == null)
-        {
-            return UserType.Default;
-        }
-
-        else return User.GetUserType(CurrentUser);
+        return User.GetUserType(CurrentUser!);
     }
 }
