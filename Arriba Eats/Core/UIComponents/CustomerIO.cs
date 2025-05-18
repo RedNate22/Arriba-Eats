@@ -1,6 +1,7 @@
 using System;
 using Entities;
 using UINavigation;
+using UI;
 
 namespace UIComponents;
 
@@ -63,5 +64,65 @@ public static class CustomerIO
             return restaurantsList;
         }
         return new List<Restaurant>();
+    }
+
+    /// <summary>
+    /// Gets the list of registered <see cref="Restaurant"/>s via <see cref="GetRestaurantsList()"/>, 
+    /// and then displays the restaurants and their details under the respective headings. 
+    /// The <see cref="Restaurant"/>s are sorted by the <see cref="Customer"/>'s selected <see cref="SortOption"/>
+    /// previously set in <see cref="CustomerSortRestaurantsMenu"/> and the list is then returned.
+    /// <para> As the restaurant list is suspectible to dynamically changing whenever a new <see cref="Restaurant"/>
+    /// is registered, the number for selecting the option to return to the previous menu is therefore dynamic, 
+    /// and must be assigned in the <c>out</c> parameter. </para>
+    /// </summary>
+    /// <param name="returnPreviousMenuChoice"> The index number for the option to return to the previous menu. </param>
+    /// <returns> The list of currently registered <see cref="Restaurant"/>'s. </returns>
+    public static List<Restaurant> DisplayRestaurantsList(out int returnPreviousMenuChoice)
+    {
+        IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+        List<Restaurant> restaurantsList = GetRestaurantsList(CustomerSortRestaurantsMenu.SortOption);
+
+        int restaurantColumnWidth = 7;
+        int locationColumnWidth = CustomerConstants.LOCATION_HEADING_STR.Length + 4;
+        int distanceColumnWidth = CustomerConstants.DISTANCE_HEADING_STR.Length + 2;
+        int styleColumnWidth = CustomerConstants.STYLE_HEADING_STR.Length + 7;
+
+        // Dynamically increase width of restaurant name column
+        int maxRestaurantNameWidth = CustomerConstants.RESTAURANT_NAME_HEADING_STR.Length + restaurantColumnWidth;
+
+        foreach (Restaurant restaurant in restaurantsList)
+        {
+            if (restaurant.RestaurantName.Length > maxRestaurantNameWidth)
+            {
+                maxRestaurantNameWidth = restaurant.RestaurantName.Length + 1;
+            }
+        }
+
+        IODisplay.DisplayMessage("   " +
+            CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(maxRestaurantNameWidth)
+            + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
+            + CustomerConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
+            + CustomerConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
+            + CustomerConstants.RATING_HEADING_STR);
+
+        int restaurantChoiceIndex = 1;
+        for (int i = 0; i < restaurantsList.Count(); i++)
+        {
+            IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
+                + $"{restaurantsList[i].RestaurantName}".PadRight(maxRestaurantNameWidth)
+                + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
+                + $"{IODisplay.GetDistance(SessionManager.CurrentUser!, restaurantsList[i])}".PadRight(distanceColumnWidth)
+                + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
+                + "-");
+
+            restaurantChoiceIndex++;
+        }
+
+        returnPreviousMenuChoice = restaurantChoiceIndex;
+        int enterChoiceInt = restaurantChoiceIndex;
+        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(returnPreviousMenuChoice));
+        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(enterChoiceInt));
+
+        return restaurantsList;
     }
 }

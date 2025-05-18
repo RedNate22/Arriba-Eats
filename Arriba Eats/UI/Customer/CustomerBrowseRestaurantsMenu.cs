@@ -12,69 +12,25 @@ namespace UI;
 public class CustomerBrowseRestaurantsMenu : IMenu
 {
     /// <summary>
-    /// Gets the <see cref="UIComponents.SortOption"/> from <see cref="CustomerSortRestaurantsMenu"/>,
-    /// based on <see cref="Customer"/> input.
-    /// </summary>
-    public static SortOption SortOption { private get; set; }
-
-    /// <summary>
     /// The currently selected <see cref="Restaurant"/> by the <see cref="Customer"/>.
     /// </summary>
     public static Restaurant? SelectedRestaurant { get; private set; }
-
+    
     /// <summary>
-    /// Displays a list of registered <see cref="Restaurant"/>s, sorted by the customer's selected <see cref="SortOption"/>.
-    /// The customer can choose a restaurant or return to <see cref="CustomerSortRestaurantsMenu"/>.
-    /// <para> After selecting a restaurant, the customer can view its menu, check ratings, or return to <see cref="CustomerMainMenu"/>. </para>
+    /// Displays the <see cref="CustomerBrowseRestaurantsMenu"/> menu.
+    /// <para> Gets the <see cref="Restaurant"/>s as a list from <see cref="CustomerIO.DisplayRestaurantsList()"/>, then
+    /// prompts the <see cref="Customer"/> to either choose a <see cref="Restaurant"/> from the list or return to
+    /// the previous menu, taking them back to <see cref="CustomerSortRestaurantsMenu"/>. </para>
+    /// <para> After selecting a restaurant, the <see cref="Customer"/> can view its menu (taking them to
+    /// <see cref="CustomerPlaceOrderMenu"/>) or check reviews. </para>
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-        List<Restaurant> restaurantsList = CustomerIO.GetRestaurantsList(SortOption);
-
-        int restaurantColumnWidth = 7;
-        int locationColumnWidth = CustomerConstants.LOCATION_HEADING_STR.Length + 4;
-        int distanceColumnWidth = CustomerConstants.DISTANCE_HEADING_STR.Length + 2;
-        int styleColumnWidth = CustomerConstants.STYLE_HEADING_STR.Length + 7;
-
-        // Dynamically increase width of restaurant name column
-        int maxRestaurantNameWidth = CustomerConstants.RESTAURANT_NAME_HEADING_STR.Length + restaurantColumnWidth;
-
-        foreach (Restaurant restaurant in restaurantsList)
-        {
-            if (restaurant.RestaurantName.Length > maxRestaurantNameWidth)
-            {
-                maxRestaurantNameWidth = restaurant.RestaurantName.Length + 1;
-            }
-        }
-
-        IODisplay.DisplayMessage("   " +
-            CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(maxRestaurantNameWidth)
-            + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
-            + CustomerConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
-            + CustomerConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
-            + CustomerConstants.RATING_HEADING_STR);
-
-        int restaurantChoiceIndex = 1;
-        for (int i = 0; i < restaurantsList.Count(); i++)
-        {
-            IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
-                + $"{restaurantsList[i].RestaurantName}".PadRight(maxRestaurantNameWidth)
-                + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
-                + $"{IODisplay.GetDistance(SessionManager.CurrentUser!, restaurantsList[i])}".PadRight(distanceColumnWidth)
-                + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
-                + "-");
-
-            restaurantChoiceIndex++;
-        }
-
-        int returnPreviousMenuInt = restaurantChoiceIndex;
-        int enterChoiceInt = restaurantChoiceIndex;
-        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(returnPreviousMenuInt));
-        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(enterChoiceInt));
+        List<Restaurant> restaurantsList = CustomerIO.DisplayRestaurantsList(out int returnPreviousMenuChoice);
 
         int choice = IODisplay.GetChoice();
-        if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.CustomerSortRestaurantsMenu);
+
+        if (choice == returnPreviousMenuChoice) UIFlowController.ChangeMenu(MenuState.CustomerSortRestaurantsMenu);
         else
         {
             SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing
@@ -102,8 +58,8 @@ public class CustomerBrowseRestaurantsMenu : IMenu
                 case RETURN_MAIN_MENU_INT:
                     UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
                     break;
-                
-                default:  
+
+                default:
                     IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
                     break;
             }

@@ -14,6 +14,11 @@ public class CustomerSortRestaurantsMenu: IMenu
     private string _enterChoice = IOUtilities.EnterChoiceStr(5);
 
     /// <summary>
+    /// Gets the <see cref="UIComponents.SortOption"/> from the <see cref="Entities.Customer"/>.
+    /// </summary>
+    public static SortOption SortOption { get; private set; }
+
+    /// <summary>
     /// Defines the <see cref="int"/> constants representing menu options for use in a
     /// <see cref="switch"/> statement.
     /// </summary>
@@ -35,22 +40,22 @@ public class CustomerSortRestaurantsMenu: IMenu
         switch (choice)
         {
             case SORTED_ALPHABETICALLY_INT:
-                CustomerBrowseRestaurantsMenu.SortOption = SortOption.Alphabetically;
+                SortOption = SortOption.Alphabetically;
                 UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
             
             case SORTED_DISTANCE_INT:
-                CustomerBrowseRestaurantsMenu.SortOption = SortOption.ByDistance; 
+                SortOption = SortOption.ByDistance; 
                 UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
 
             case SORTED_STYLE_INT:
-                CustomerBrowseRestaurantsMenu.SortOption = SortOption.ByStyle; 
+                SortOption = SortOption.ByStyle; 
                 UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
                 
             case SORTED_AVERAGE_RATING_INT:
-                CustomerBrowseRestaurantsMenu.SortOption = SortOption.ByAverageRating; 
+                SortOption = SortOption.ByAverageRating; 
                 UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                 break;
 

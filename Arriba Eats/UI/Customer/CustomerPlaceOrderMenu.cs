@@ -18,6 +18,20 @@ public class CustomerPlaceOrderMenu : IMenu
     /// </summary>
     private decimal _currentOrderTotalDec = 0M;
 
+    /// <summary>
+    /// Order number assigned to each order in the system. Each number shall be unique, and never reused.
+    /// </summary>
+    private static int _orderNumber = 1;
+    
+    /// <summary>
+    /// Get the next order number.
+    /// </summary>
+    public int OrderNumber
+    {
+        get { return _orderNumber; }
+        private set { _orderNumber = value; }
+    }
+
     // TODO xml
     public void DisplayMenu()
     {
@@ -29,49 +43,57 @@ public class CustomerPlaceOrderMenu : IMenu
 
             IODisplay.DisplayMessage(string.Format(_currentOrderTotalStr, _currentOrderTotalDec));
 
-            int index = 1;  // ! need a separate index int for the list itself, otherwise out of range
+            int choiceIndex = 1;
+            int menuIndex = 0;
             foreach (string item in restaurantMenuItemNames)
             {
-                IODisplay.DisplayMessage($"{index}:   ${restaurantMenuPrices[index]}  {restaurantMenuItemNames[index]}");
-                index++;
+                IODisplay.DisplayMessage($"{choiceIndex}:   ${restaurantMenuPrices[menuIndex]}  {restaurantMenuItemNames[menuIndex]}");
+                choiceIndex++;
+                menuIndex++;
             }
 
-            int completeOrder = index;
-            int cancelOrder = index + 1;
+            int completeOrder = choiceIndex;
+            int cancelOrder = choiceIndex + 1;
             IODisplay.DisplayMessage($"{completeOrder}: Complete order");
             IODisplay.DisplayMessage($"{cancelOrder}: Cancel order");
+
+            // ? tied directly to Customer?
+            Dictionary<string, decimal> customerOrder = new Dictionary<string, decimal>();
 
             int choice = IODisplay.GetChoice();
 
             if (choice == completeOrder)
             {
-
+                // ? if (customerOrder is empty?)
+                // (customerOrder)
             }
 
             else if (choice == cancelOrder)
             {
-
+                customerOrder.Clear();  // Empties the order
             }
 
             else
             {
                 decimal selectedMenuItemPrice = restaurantMenuPrices[choice - 1];
                 string selectedMenuItemName = restaurantMenuItemNames[choice - 1];
+
                 IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
                 choice = IODisplay.GetChoice();
 
                 bool isInvalidChoice = choice > restaurantMenuItemNames.Count
                     || choice < restaurantMenuItemNames.Count;
 
+                if (choice == 0)
+                {
+                    // Go back to order menu
+                }
+
                 if (isInvalidChoice)
                 {
                     IODisplay.DisplayMessage("Invalid quantity.");
                 }
 
-                else if (choice == 0)
-                {
-                    // Go back to order menu
-                }
 
                 else
                 {
@@ -82,6 +104,10 @@ public class CustomerPlaceOrderMenu : IMenu
             }
         }
 
-        else UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+        else
+        {
+            IODisplay.DisplayMessage("No restaurant currently selected.");
+            UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+        }
     }
 }
