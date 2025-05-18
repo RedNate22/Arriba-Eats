@@ -83,19 +83,27 @@ public class Restaurant
     }
 
     // TODO xml
-    public void GetMenu(out List<decimal> getRestaurantMenuPrices, out List<string> getRestaurantMenuItemNames)
+    /// <summary>
+    /// Attempts to retrieve the menu of a <see cref="Restaurant"/>.
+    /// </summary>
+    /// <param name="getRestaurantMenuPrices"></param>
+    /// <param name="getRestaurantMenuItems"></param>
+    /// <returns></returns>
+    public bool TryGetMenu(out List<decimal> getRestaurantMenuPrices, out List<string> getRestaurantMenuItems)
     {
         getRestaurantMenuPrices = new List<decimal>();
-        getRestaurantMenuItemNames = new List<string>();
+        getRestaurantMenuItems = new List<string>();
 
         if (_restaurantMenu.Count != 0)
         {
             foreach (KeyValuePair<string, decimal> menuItem in _restaurantMenu)
             {
                 getRestaurantMenuPrices.Add(menuItem.Value);
-                getRestaurantMenuItemNames.Add(menuItem.Key);
+                getRestaurantMenuItems.Add(menuItem.Key);
             }
+            return true;
         }
+        else return false;
     }
 
     // TODO xml

@@ -22,6 +22,15 @@ public class Customer : User
     {
 
     }
-    
-    //private List<> _customerOrder
+
+    // TODO xml
+    private List<CustomerOrder> _pastOrders = new List<CustomerOrder>();
+
+    // TODO xml
+    public bool TryAddCurrentOrder(CustomerOrder customerOrder)
+    {
+        _pastOrders.Add(customerOrder);
+        
+        return true;
+    }
 }

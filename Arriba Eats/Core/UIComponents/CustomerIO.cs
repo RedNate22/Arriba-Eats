@@ -123,4 +123,93 @@ public static class CustomerIO
 
         return restaurantsList;
     }
+
+    // TODO xml
+    public static int GetOrderFromCustomer(int orderNumber)
+    {
+        string currentOrderTotalStr = "Current order total: ${0:F2}";
+        decimal currentOrderTotalDec = 0.00M;
+        
+        Restaurant selectedRestaurant = CustomerBrowseRestaurantsMenu.SelectedRestaurant;
+        if (selectedRestaurant!.TryGetMenu(out List<decimal> foundRestaurantMenuPrices, out List<string> foundRestaurantMenuItems))
+        {
+            CustomerOrder customerOrder = new CustomerOrder(orderNumber);
+
+            while (true)
+            {
+                int choiceIndex = 1;
+                int menuIndex = 0;
+
+                foreach (string item in restaurantMenuItems)
+                {
+                    IODisplay.DisplayMessage($"{choiceIndex}:   ${foundRestaurantMenuPrices[menuIndex]}  {foundRestaurantMenuItems[menuIndex]}");
+                    choiceIndex++;
+                    menuIndex++;
+                }
+
+                // choiceIndex will always be the last menu item's index + 1
+                // e.g. if "3: Item" is the last item on the menu, then "Complete Order" will be 4, "4: Complete Order"
+                int completeOrder = choiceIndex;
+                int cancelOrder = choiceIndex + 1;  // Comes after "Complete Order"
+
+                IODisplay.DisplayMessage(string.Format(currentOrderTotalStr, currentOrderTotalDec));
+                
+                IODisplay.DisplayMessage($"{completeOrder}: Complete order");
+                IODisplay.DisplayMessage($"{cancelOrder}: Cancel order");
+
+                int choice = IODisplay.GetChoice();
+
+                if (choice == completeOrder)
+                {
+                    if (customerOrder.IsOrderEmpty())
+                    {
+                        IODisplay.DisplayMessage("You have not added any items.");
+                    }
+
+                    else
+                    {
+                        ((Customer)SessionManager.CurrentUser!).TryAddCurrentOrder(customerOrder);
+                        return orderNumber++;  // Advance to next (future) order number    
+                    }
+                }
+
+                else if (choice == cancelOrder)
+                {
+                    customerOrder = null!;  // Empties the cart
+                    UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
+                    return orderNumber;
+                }
+
+                else
+                {
+                    decimal selectedMenuItemPrice = restaurantMenuPrices[choice - 1];
+                    string selectedMenuItemName = restaurantMenuItems[choice - 1];
+
+                    IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
+                    choice = IODisplay.GetChoice();
+
+                    bool isInvalidChoice = choice > restaurantMenuItems.Count
+                        || choice < restaurantMenuItems.Count;
+
+                    if (choice == 0)
+                    {
+                        // Go back to order menu
+                    }
+
+                    else if (isInvalidChoice)
+                    {
+                        IODisplay.DisplayMessage("Invalid quantity.");
+                    }
+
+
+                    else
+                    {
+                        currentOrderTotalDec += choice * selectedMenuItemPrice;
+                        IODisplay.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
+                    }
+                }
+            }
+        }
+        else return orderNumber;
+    }
 }
