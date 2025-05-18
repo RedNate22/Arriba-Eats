@@ -9,7 +9,7 @@ namespace UI;
 public class CustomerPlaceOrderMenu : IMenu
 {
     /// <summary>
-    /// Displays the current total of the <see cref="Customer"/>'s order.
+    /// Dynamically displays the current total of the <see cref="Customer"/>'s order.
     /// </summary>
     private string _currentOrderTotalStr = "Current order total: ${0:F2}";
 
@@ -24,7 +24,7 @@ public class CustomerPlaceOrderMenu : IMenu
     private static int _orderNumber = 1;
     
     /// <summary>
-    /// Get the next order number.
+    /// Get and set <see cref="_orderNumber"/>.
     /// </summary>
     public int OrderNumber
     {

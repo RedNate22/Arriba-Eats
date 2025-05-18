@@ -79,7 +79,6 @@ public static class CustomerIO
     /// <returns> The list of currently registered <see cref="Restaurant"/>'s. </returns>
     public static List<Restaurant> DisplayRestaurantsList(out int returnPreviousMenuChoice)
     {
-        IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
         List<Restaurant> restaurantsList = GetRestaurantsList(CustomerSortRestaurantsMenu.SortOption);
 
         int restaurantColumnWidth = 7;
@@ -89,7 +88,6 @@ public static class CustomerIO
 
         // Dynamically increase width of restaurant name column
         int maxRestaurantNameWidth = CustomerConstants.RESTAURANT_NAME_HEADING_STR.Length + restaurantColumnWidth;
-
         foreach (Restaurant restaurant in restaurantsList)
         {
             if (restaurant.RestaurantName.Length > maxRestaurantNameWidth)

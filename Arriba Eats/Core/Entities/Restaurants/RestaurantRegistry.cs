@@ -79,6 +79,6 @@ public static class RestaurantRegistry
             restaurantsList.Add(restaurant);
         }
 
-        return restaurantsList.Count > 0;  // returns false if no restaurants are found
+        return restaurantsList.Count > 0;
     }
 }

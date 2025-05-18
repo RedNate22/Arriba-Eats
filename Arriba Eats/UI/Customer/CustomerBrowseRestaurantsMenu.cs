@@ -26,6 +26,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
+        IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
         List<Restaurant> restaurantsList = CustomerIO.DisplayRestaurantsList(out int returnPreviousMenuChoice);
 
         int choice = IODisplay.GetChoice();
@@ -52,7 +53,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
 
                 case SEE_REVIEWS_INT:
                     // TODO
-                    IODisplay.DisplayMessage("Placeholder!");
+                    IODisplay.DisplayMessage("(Placeholder) See reviews option selected.");  // !
                     break;
 
                 case RETURN_MAIN_MENU_INT:
@@ -65,5 +66,4 @@ public class CustomerBrowseRestaurantsMenu : IMenu
             }
         }
     }
-    
 }

@@ -97,4 +97,19 @@ public class Restaurant
             }
         }
     }
+
+    // TODO xml
+    private Dictionary<int, RestaurantReview> _restaurantReviews = new Dictionary<int, RestaurantReview>();
+
+    // TODO xml
+    public bool TryAddReview(int orderNumber, RestaurantReview restaurantReview)
+    {
+        if (!_restaurantReviews.ContainsKey(orderNumber))
+        {
+            _restaurantReviews.Add(orderNumber, restaurantReview);
+            return true;
+        }
+
+        else return false;
+    }
 }
