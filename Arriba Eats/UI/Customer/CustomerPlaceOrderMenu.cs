@@ -29,11 +29,13 @@ public class CustomerPlaceOrderMenu : IMenu
         if (newOrderNumber != OrderNumber)
         {
             OrderNumber = newOrderNumber;   // Update order number for future orders
-            UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+            CustomerBrowseRestaurantsMenu.ReturningFromMenu = true;
+            UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
         }
         else
         {
-            UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+            CustomerBrowseRestaurantsMenu.ReturningFromMenu = true;
+            UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
         }
     }
 }
