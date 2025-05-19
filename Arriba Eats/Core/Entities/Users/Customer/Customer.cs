@@ -27,10 +27,13 @@ public class Customer : User
     private List<CustomerOrder> _pastOrders = new List<CustomerOrder>();
 
     // TODO xml
-    public bool TryAddCurrentOrder(CustomerOrder customerOrder)
+    public bool TryAddCompletedOrder(CustomerOrder customerOrder)  // ? to be called after an order is complete?
     {
-        _pastOrders.Add(customerOrder);
-        
-        return true;
+        if (!_pastOrders.Contains(customerOrder))
+        {
+            _pastOrders.Add(customerOrder);
+            return true;
+        }
+        else return false;
     }
 }

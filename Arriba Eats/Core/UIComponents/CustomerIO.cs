@@ -127,49 +127,48 @@ public static class CustomerIO
     // TODO xml
     public static int GetOrderFromCustomer(int orderNumber)
     {
+        if (CustomerBrowseRestaurantsMenu.SelectedRestaurant == null) return orderNumber;
+        Restaurant selectedRestaurant = CustomerBrowseRestaurantsMenu.SelectedRestaurant;
+        
         string currentOrderTotalStr = "Current order total: ${0:F2}";
         decimal currentOrderTotalDec = 0.00M;
         
-        Restaurant selectedRestaurant = CustomerBrowseRestaurantsMenu.SelectedRestaurant;
-        if (selectedRestaurant!.TryGetMenu(out List<decimal> foundRestaurantMenuPrices, out List<string> foundRestaurantMenuItems))
+        if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
         {
-            CustomerOrder customerOrder = new CustomerOrder(orderNumber);
+            CustomerOrder customerOrder = new CustomerOrder(orderNumber);  // * Begin order
 
             while (true)
             {
+                IODisplay.DisplayMessage(string.Format(currentOrderTotalStr, currentOrderTotalDec));
+
                 int choiceIndex = 1;
                 int menuIndex = 0;
 
                 foreach (string item in restaurantMenuItems)
                 {
-                    IODisplay.DisplayMessage($"{choiceIndex}:   ${foundRestaurantMenuPrices[menuIndex]}  {foundRestaurantMenuItems[menuIndex]}");
+                    IODisplay.DisplayMessage($"{choiceIndex}:   ${restaurantMenuPrices[menuIndex]}  {restaurantMenuItems[menuIndex]}");
                     choiceIndex++;
                     menuIndex++;
                 }
 
-                // choiceIndex will always be the last menu item's index + 1
-                // e.g. if "3: Item" is the last item on the menu, then "Complete Order" will be 4, "4: Complete Order"
+                // * choiceIndex will always be the last menu item's index + 1
+                // * e.g. if "3: Item" is the last item on the menu, then "Complete Order" will be 4, "4: Complete Order"
                 int completeOrder = choiceIndex;
-                int cancelOrder = choiceIndex + 1;  // Comes after "Complete Order"
+                int cancelOrder = choiceIndex + 1;
 
-                IODisplay.DisplayMessage(string.Format(currentOrderTotalStr, currentOrderTotalDec));
-                
                 IODisplay.DisplayMessage($"{completeOrder}: Complete order");
                 IODisplay.DisplayMessage($"{cancelOrder}: Cancel order");
 
                 int choice = IODisplay.GetChoice();
-
                 if (choice == completeOrder)
                 {
-                    if (customerOrder.IsOrderEmpty())
-                    {
-                        IODisplay.DisplayMessage("You have not added any items.");
-                    }
-
+                    if (customerOrder.IsOrderEmpty()) IODisplay.DisplayMessage("You have not added any items.");
                     else
                     {
-                        ((Customer)SessionManager.CurrentUser!).TryAddCurrentOrder(customerOrder);
-                        return orderNumber++;  // Advance to next (future) order number    
+                        // ! Doesn't complete order properly
+                        // TODO
+                        //((Customer)SessionManager.CurrentUser!).TryAddCurrentOrder(customerOrder);  // !
+                        return orderNumber++;  // * Update for future (next) orders    
                     }
                 }
 
@@ -177,23 +176,26 @@ public static class CustomerIO
                 {
                     customerOrder = null!;  // Empties the cart
                     UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
-                    return orderNumber;
+                    return orderNumber;  // * Return original order number, to be reused until a confirmed order
                 }
 
                 else
                 {
+                    // * Adjust for index-based referencing
                     decimal selectedMenuItemPrice = restaurantMenuPrices[choice - 1];
                     string selectedMenuItemName = restaurantMenuItems[choice - 1];
 
+                    // ? Make this a while loop?, then add continue after invalid choice?
                     IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
                     choice = IODisplay.GetChoice();
 
+                    // ! Depreciated, doesn't accept any numbers higher than the menu
                     bool isInvalidChoice = choice > restaurantMenuItems.Count
                         || choice < restaurantMenuItems.Count;
 
                     if (choice == 0)
                     {
-                        // Go back to order menu
+                        continue;  // Go back to viewing menu
                     }
 
                     else if (isInvalidChoice)
@@ -201,10 +203,11 @@ public static class CustomerIO
                         IODisplay.DisplayMessage("Invalid quantity.");
                     }
 
-
                     else
                     {
-                        currentOrderTotalDec += choice * selectedMenuItemPrice;
+                        currentOrderTotalDec += choice * selectedMenuItemPrice;  // * Update cart total
+                        // TODO add to order
+                        customerOrder.AddItemToOrder(selectedMenuItemName, choice, selectedMenuItemPrice);
                         IODisplay.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
                     }
                 }
