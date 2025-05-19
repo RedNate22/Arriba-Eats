@@ -82,13 +82,13 @@ public class Restaurant
         }
     }
 
-    // TODO xml
     /// <summary>
-    /// Attempts to retrieve the menu of a <see cref="Restaurant"/>.
+    /// Attempts to retrieve the menu of a <see cref="Restaurant"/> via <see cref="_restaurantMenu"/>. The menu is split into two lists,
+    /// one for the prices, and one for the items.
     /// </summary>
-    /// <param name="getRestaurantMenuPrices"></param>
-    /// <param name="getRestaurantMenuItems"></param>
-    /// <returns></returns>
+    /// <param name="getRestaurantMenuPrices"> The list of menu prices. </param>
+    /// <param name="getRestaurantMenuItems"> The list of menu items (names). </param>
+    /// <returns> <c>true</c> if the menu is successfully extracted, otherwise <c>false</c>. </returns>
     public bool TryGetMenu(out List<decimal> getRestaurantMenuPrices, out List<string> getRestaurantMenuItems)
     {
         getRestaurantMenuPrices = new List<decimal>();

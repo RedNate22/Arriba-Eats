@@ -124,15 +124,31 @@ public static class CustomerIO
         return restaurantsList;
     }
 
+    /// <summary>
+    /// Reads a string input from the user via the console.
+    /// <para> Attempts to convert the input into an integer. </para>
+    /// </summary>
+    /// <returns> The valid integer quantity, otherwise <c>-1</c>. </returns>
+    public static int GetItemQuantity()
+    {
+        string? quantity = IODisplay.ReadInput();
+
+        if (int.TryParse(quantity, out int result)) return result;
+        else
+        {
+            return -1;
+        }
+    }
+
     // TODO xml
     public static int GetOrderFromCustomer(int orderNumber)
     {
         if (CustomerBrowseRestaurantsMenu.SelectedRestaurant == null) return orderNumber;
         Restaurant selectedRestaurant = CustomerBrowseRestaurantsMenu.SelectedRestaurant;
-        
+
         string currentOrderTotalStr = "Current order total: ${0:F2}";
         decimal currentOrderTotalDec = 0.00M;
-        
+
         if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
         {
             CustomerOrder customerOrder = new CustomerOrder(orderNumber);  // * Begin order
@@ -168,7 +184,8 @@ public static class CustomerIO
                         // ! Doesn't complete order properly
                         // TODO
                         //((Customer)SessionManager.CurrentUser!).TryAddCurrentOrder(customerOrder);  // !
-                        return orderNumber++;  // * Update for future (next) orders    
+                        orderNumber = orderNumber + 1;
+                        return orderNumber;  // * Update for future (next) orders    
                     }
                 }
 
@@ -185,34 +202,31 @@ public static class CustomerIO
                     decimal selectedMenuItemPrice = restaurantMenuPrices[choice - 1];
                     string selectedMenuItemName = restaurantMenuItems[choice - 1];
 
-                    // ? Make this a while loop?, then add continue after invalid choice?
-                    IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
-                    choice = IODisplay.GetChoice();
-
-                    // ! Depreciated, doesn't accept any numbers higher than the menu
-                    bool isInvalidChoice = choice > restaurantMenuItems.Count
-                        || choice < restaurantMenuItems.Count;
-
-                    if (choice == 0)
+                    while (choice != 0)
                     {
-                        continue;  // Go back to viewing menu
-                    }
+                        IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
+                        choice = GetItemQuantity();
 
-                    else if (isInvalidChoice)
-                    {
-                        IODisplay.DisplayMessage("Invalid quantity.");
-                    }
+                        if (choice > 0)
+                        {
+                            customerOrder.AddItemToOrder(selectedMenuItemName, choice, selectedMenuItemPrice);
+                            currentOrderTotalDec += choice * selectedMenuItemPrice;  // * Update cart total
+                            IODisplay.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
+                            break;
+                        }
 
-                    else
-                    {
-                        currentOrderTotalDec += choice * selectedMenuItemPrice;  // * Update cart total
-                        // TODO add to order
-                        customerOrder.AddItemToOrder(selectedMenuItemName, choice, selectedMenuItemPrice);
-                        IODisplay.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
+                        else if (choice != 0)
+                        {
+                            IODisplay.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                        }
                     }
                 }
             }
         }
-        else return orderNumber;
+        else
+        {
+            IODisplay.DisplayMessage($"{selectedRestaurant.RestaurantName} currently has no items on the menu.");
+            return orderNumber;
+        }
     }
 }

@@ -30,7 +30,7 @@ public static class IOUtilities
     {
         return string.Format(MenuConstants.LOG_OUT_TEMPLATE, menuChoiceNum);
     }
-    
+
     /// <summary>
     /// Formats the <see cref="MenuConstants.RETURN_PREVIOUS_MENU_TEMPLATE"/> string
     /// to dynamically display it in the correctly numbered position of the menu.
@@ -54,16 +54,16 @@ public static class IOUtilities
     public static bool IsValidName(string name)
     {
         if (string.IsNullOrWhiteSpace(name)) return false;
-        
+
         else if (name.Length > 0)
         {
             bool containsValidCharacters = false;
             foreach (char character in name)
             {
                 if (char.IsLetter(character)) containsValidCharacters = true;
-                
+
                 else if (character != '-' && character != '\'' && character != ' ') return false;
-            }          
+            }
             return containsValidCharacters;
         }
         return false;
@@ -106,7 +106,7 @@ public static class IOUtilities
                 targetCount++;
             }
         }
-        
+
         bool containsTarget = email.Contains(targetSymbol);
         bool targetOccursOnce = targetCount == 1;
         bool isPositionValid = targetLocation > 0 && targetLocation < email.Length - 1;
@@ -180,7 +180,7 @@ public static class IOUtilities
                 containsNumber = true;
             }
         }
-        
+
         bool isCorrectFormat = isValidLength && containsUpperCase && containsLowerCase && containsNumber;
         return isCorrectFormat;
     }
@@ -234,7 +234,7 @@ public static class IOUtilities
     {
         bool isValidLength = licencePlate.Length >= 1 && licencePlate.Length <= 8;
         bool isNotEmpty = !String.IsNullOrWhiteSpace(licencePlate);
-        bool containsValidSymbols = true; 
+        bool containsValidSymbols = true;
         bool isOnlyUpperCase = true;
 
         for (int i = 0; i < licencePlate.Length; i++)
@@ -244,14 +244,14 @@ public static class IOUtilities
                 containsValidSymbols = false;
                 break;
             }
-            
+
             if (char.IsLetter(licencePlate[i]) && char.IsLower(licencePlate[i]))
             {
                 isOnlyUpperCase = false;
                 break;
             }
         }
-        
+
         bool isCorrectFormat = isValidLength && isNotEmpty && containsValidSymbols && isOnlyUpperCase;
         return isCorrectFormat;
     }

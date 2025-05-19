@@ -1,7 +1,6 @@
 using System;
 using UIComponents;
 using UINavigation;
-using Entities;
 
 namespace UI;
 
@@ -26,12 +25,14 @@ public class CustomerPlaceOrderMenu : IMenu
     // TODO xml
     public void DisplayMenu()
     {
-
         int newOrderNumber = CustomerIO.GetOrderFromCustomer(OrderNumber);
-        if (newOrderNumber != OrderNumber) OrderNumber = newOrderNumber;   // Update order number for future orders
+        if (newOrderNumber != OrderNumber)
+        {
+            OrderNumber = newOrderNumber;   // Update order number for future orders
+            UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+        }
         else
         {
-            IODisplay.DisplayMessage("No restaurant is currently selected, or the restaurant has no menu.");  // ? make const?
             UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
         }
     }

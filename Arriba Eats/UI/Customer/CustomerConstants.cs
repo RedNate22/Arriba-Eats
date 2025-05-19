@@ -34,4 +34,7 @@ public static class CustomerConstants
     public const string SEE_RESTAURANTS_MENU_STR = "1: See this restaurant's menu and place an order";
     public const string SEE_REVIEWS_STR = "2: See reviews for this restaurant";
     public const string RETURN_MAIN_MENU_STR = "3: Return to main menu";
+
+    // CustomerPlaceOrderMenu
+    public const string INVALID_QUANTITY_STR = "Invalid quantity.";
 }
