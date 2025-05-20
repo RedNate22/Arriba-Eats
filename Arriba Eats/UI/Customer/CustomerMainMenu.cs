@@ -72,6 +72,7 @@ public class CustomerMainMenu : IMenu
             case LOG_OUT_INT:
                 _welcomeCount = 0;
                 SessionManager.Logout();
+                UIFlowController.ChangeMenu(MenuState.MainMenu);
                 break;
             
             default:  

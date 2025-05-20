@@ -1,8 +1,7 @@
 using System;
 using Entities;
-using UIComponents;
 
-namespace UINavigation;
+namespace UIComponents;
 
 /// <summary>
 /// Manages the authentication state of a <see cref="User"/> within the application.
@@ -81,7 +80,6 @@ public static class SessionManager
     {
         CurrentUser = null;
         IODisplay.DisplayMessage("You are now logged out.");
-        UIFlowController.ChangeMenu(MenuState.MainMenu);
     }
 
     /// <summary>
