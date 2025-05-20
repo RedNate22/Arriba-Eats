@@ -18,8 +18,6 @@ namespace ArribaEats
         /// </summary>
         static void Main()
         {
-            /*
-            
             // ! Remove below
             // Customer
             string customerName = "CustomerTest";
@@ -66,8 +64,6 @@ namespace ArribaEats
                 if (clientTestRestaurant!.TryRegisterMenuItem(testItemName, testItemPrice)){}        
             }
             // ! Remove above
-            */
-            
 
             MainMenu.WelcomeMessage();
             UIFlowController.RunMenuSystem();

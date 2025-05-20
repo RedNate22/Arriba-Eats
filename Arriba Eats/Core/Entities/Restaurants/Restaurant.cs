@@ -25,11 +25,6 @@ public class Restaurant
     public string Location { get; private set; }
 
     /// <summary>
-    /// Displayed to indicate the <see cref="_restaurantMenu"/> is empty.
-    /// </summary>
-    private const string MENU_EMPTY_STR = "The menu is currently empty.";
-
-    /// <summary>
     /// Called within the <see cref="Client"/> constructor.
     /// <para> Creates a <see cref="Restaurant"/> to hold a <see cref="_restaurantMenu"/>
     /// and allow <see cref="Client"/>'s to register new menu items and manage orders. </para>

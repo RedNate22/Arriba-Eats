@@ -32,10 +32,32 @@ public static class OrderRegistry
         else return false;
     }
 
-    /*
-    public static List<CustomerOrder> TryGetOrders(Restaurant restaurant)
+    // TODO xml
+    public static bool TryGetCustomerOrders(out List<CustomerOrder> getCustomerOrders, Customer customer)
     {
-        foreach ()
+        getCustomerOrders = new List<CustomerOrder>();
+        bool customerHasOrders = false;
+
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Customer == customer)
+            {
+                customerHasOrders = true;
+                break;
+            }
+        }
+
+        if (customerHasOrders == false) return false;
+        else
+        {
+            foreach (CustomerOrder order in _orderRegistry)
+                {
+                    if (order.Customer == customer)
+                    {
+                        getCustomerOrders.Add(order);
+                    }
+                }
+            return true;
+        }
     }
-    */
 }

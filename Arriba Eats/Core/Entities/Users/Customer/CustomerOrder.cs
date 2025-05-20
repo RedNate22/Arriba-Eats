@@ -27,7 +27,16 @@ public class CustomerOrder
     /// Track the current status of the order.
     /// </summary>
     public OrderStatus OrderStatus { get; private set; }
-
+    
+    /// <summary>
+    /// Get the <see cref="Entities.RestaurantReview"/> associated with this order.
+    /// </summary>
+    public RestaurantReview? RestaurantReview { get; private set; }
+    
+    /// <summary>
+    /// Get the <see cref="Entities.Deliverer"/> who has been assigned to deliver the order.
+    /// </summary>
+    public Deliverer? Deliverer { get; private set; }
 
     /// <summary>
     /// The collection of items in the order, stored by:
@@ -90,11 +99,8 @@ public class CustomerOrder
     public void UpdateOrderStatus(OrderStatus orderStatus)
     {
         OrderStatus = orderStatus;
-
-        if (OrderStatus == OrderStatus.Delivered)
-        {
-            // ?
-            // TODO automatically save to Customer's _pastOrders 
-        }
+        // TODO
+        // ???
+        // Add functionality to prevent order status from being rushed to last stage immediately
     }
 }

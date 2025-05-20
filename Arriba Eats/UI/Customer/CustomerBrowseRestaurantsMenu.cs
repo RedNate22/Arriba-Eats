@@ -33,7 +33,6 @@ public class CustomerBrowseRestaurantsMenu : IMenu
         set { _returningFromMenu = value; }
     }
 
-
     /// <summary>
     /// The method to be called in <see cref="DisplayMenu"/>. Depending on the state of
     /// <see cref="ReturningFromMenu"/>, this method is either called after prompting the <see cref="Customer"/>

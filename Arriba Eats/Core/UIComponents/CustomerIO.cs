@@ -141,6 +141,7 @@ public static class CustomerIO
     }
 
     // TODO xml
+    // ? split this up? or condense?
     public static int GetOrderFromCustomer(int orderNumber)
     {
         if (CustomerBrowseRestaurantsMenu.SelectedRestaurant == null) return orderNumber;
