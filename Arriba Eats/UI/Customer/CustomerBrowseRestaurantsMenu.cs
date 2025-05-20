@@ -33,6 +33,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
         set { _returningFromMenu = value; }
     }
 
+
     /// <summary>
     /// The method to be called in <see cref="DisplayMenu"/>. Depending on the state of
     /// <see cref="ReturningFromMenu"/>, this method is either called after prompting the <see cref="Customer"/>
@@ -41,10 +42,11 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     /// </summary>
     public static void DisplayOptions()
     {
-        IODisplay.DisplayMessage($"Placing order from {SelectedRestaurant?.RestaurantName}.");
+        string enterChoice = IOUtilities.EnterChoiceStr(3);
         IODisplay.DisplayMessage(CustomerConstants.SEE_RESTAURANTS_MENU_STR);
         IODisplay.DisplayMessage(CustomerConstants.SEE_REVIEWS_STR);
         IODisplay.DisplayMessage(CustomerConstants.RETURN_MAIN_MENU_STR);
+        IODisplay.DisplayMessage(enterChoice);
 
         const int SEE_RESTAURANTS_MENU_INT = 1, SEE_REVIEWS_INT = 2, RETURN_MAIN_MENU_INT = 3;
 
@@ -58,7 +60,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
 
             case SEE_REVIEWS_INT:
                 // TODO
-                IODisplay.DisplayMessage("(Placeholder) See reviews option selected.");  // !
+                IODisplay.DisplayMessage("No reviews have been left for this restaurant.");
                 break;
 
             case RETURN_MAIN_MENU_INT:
@@ -100,6 +102,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
             else
             {
                 SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing
+                IODisplay.DisplayMessage($"Placing order from {SelectedRestaurant?.RestaurantName}.");
                 DisplayOptions();
             }
         }

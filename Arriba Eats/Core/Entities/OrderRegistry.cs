@@ -10,17 +10,32 @@ namespace Entities;
 /// </summary>
 public static class OrderRegistry
 {
-    // TODO xml
-    private static List<CustomerOrder> _orders = new List<CustomerOrder>();
+    /// <summary>
+    /// A list that contains all the <see cref="CustomerOrder"/>s ever made (confirmed), regardless
+    /// of their <see cref="OrderStatus"/>.
+    /// </summary>
+    private static List<CustomerOrder> _orderRegistry = new List<CustomerOrder>();
 
-    // TODO xml
+    /// <summary>
+    /// Attempts to add a <see cref="CustomerOrder"/> to the <see cref="_orderRegistry"/>. 
+    /// </summary>
+    /// <param name="customerOrder"> The <see cref="CustomerOrder"/> made by a <see cref="Customer"/>. </param>
+    /// <returns> <c>true</c> if the registry does not already contain the <see cref="CustomerOrder"/>,
+    /// and it is then added. Otherwise, <c>false</c>, and the order is not added. </returns>
     public static bool TryAddOrder(CustomerOrder customerOrder)
     {
-        if (!_orders.Contains(customerOrder))
+        if (!_orderRegistry.Contains(customerOrder))
         {
-            _orders.Add(customerOrder);
+            _orderRegistry.Add(customerOrder);
             return true;
         }
         else return false;
     }
+
+    /*
+    public static List<CustomerOrder> TryGetOrders(Restaurant restaurant)
+    {
+        foreach ()
+    }
+    */
 }

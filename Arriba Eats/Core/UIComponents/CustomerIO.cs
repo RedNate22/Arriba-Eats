@@ -154,6 +154,8 @@ public static class CustomerIO
             CustomerOrder customerOrder = new CustomerOrder
                 ((Customer)SessionManager.CurrentUser!, orderNumber, selectedRestaurant);  // * Begin order
 
+            string enterChoiceStr = IOUtilities.EnterChoiceStr(restaurantMenuItems.Count + 2);  // Adjust for confirm/cancel options
+
             while (true)
             {
                 IODisplay.DisplayMessage(string.Format(currentOrderTotalStr, currentOrderTotalDec));
@@ -175,6 +177,7 @@ public static class CustomerIO
 
                 IODisplay.DisplayMessage($"{completeOrder}: Complete order");
                 IODisplay.DisplayMessage($"{cancelOrder}: Cancel order");
+                IODisplay.DisplayMessage(enterChoiceStr);
 
                 int choice = IODisplay.GetChoice();
                 if (choice == completeOrder)
@@ -182,13 +185,20 @@ public static class CustomerIO
                     if (customerOrder.IsOrderEmpty()) IODisplay.DisplayMessage("You have not added any items.");
                     else
                     {
-                        // !
-                        // if (TryAddOrder)
-                        customerOrder.UpdateOrderStatus(OrderStatus.Ordered);
-                        IODisplay.DisplayMessage($"Your order has been placed. Your order number is #{orderNumber}.");
+                        if (OrderRegistry.TryAddOrder(customerOrder))
+                        {
+                            customerOrder.UpdateOrderStatus(OrderStatus.Ordered);
+                            IODisplay.DisplayMessage($"Your order has been placed. Your order number is #{orderNumber}.");
 
-                        orderNumber++;  // * Update order number for future (next) orders
-                        return orderNumber;
+                            orderNumber++;  // * Update order number for future (next) orders
+                            return orderNumber;
+                        }
+
+                        else
+                        {
+                            IODisplay.DisplayMessage("Order could not be confirmed.");
+                            return orderNumber;
+                        }
                     }
                 }
 
@@ -207,6 +217,7 @@ public static class CustomerIO
 
                     while (choice != 0)
                     {
+                        IODisplay.DisplayMessage($"Adding {selectedMenuItemName} to order.");
                         IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
                         choice = GetItemQuantity();
 
@@ -231,15 +242,5 @@ public static class CustomerIO
             IODisplay.DisplayMessage($"{selectedRestaurant.RestaurantName} currently has no items on the menu.");
             return orderNumber;
         }
-    }
-
-    // TODO xml
-    public static bool TryAddOrder(CustomerOrder customerOrder)
-    {
-        if (OrderRegistry.TryAddOrder(customerOrder))
-        {
-            return true;
-        }
-        else return false;
     }
 }

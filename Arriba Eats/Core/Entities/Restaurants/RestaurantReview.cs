@@ -9,6 +9,11 @@ namespace Entities;
 public class RestaurantReview
 {
     /// <summary>
+    /// Get the <see cref="CustomerOrder"/> associated with this order.
+    /// </summary>
+    public CustomerOrder CustomerOrder { get; private set; }
+
+    /// <summary>
     /// The <see cref="Customer"/> who created the review.
     /// </summary>
     public Customer Reviewer { get; private set; }
@@ -30,8 +35,9 @@ public class RestaurantReview
     /// <param name="reviewer"> The <see cref="Customer"/> who is reviewing the order. </param>
     /// <param name="rating"> The rating given by the <see cref="Customer"/>, between 1 and 5, inclusive. </param>
     /// <param name="comment"> The comment for the review given by the <see cref="Customer"/>. </param>
-    public RestaurantReview(Customer reviewer, int rating, string comment)
+    public RestaurantReview(CustomerOrder customerOrder, Customer reviewer, int rating, string comment)
     {
+        CustomerOrder = customerOrder;
         Reviewer = reviewer;
         Rating = rating;
         Comment = comment;

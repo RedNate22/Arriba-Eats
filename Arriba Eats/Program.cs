@@ -18,6 +18,7 @@ namespace ArribaEats
         /// </summary>
         static void Main()
         {
+            /*
             
             // ! Remove below
             // Customer
@@ -65,6 +66,7 @@ namespace ArribaEats
                 if (clientTestRestaurant!.TryRegisterMenuItem(testItemName, testItemPrice)){}        
             }
             // ! Remove above
+            */
             
 
             MainMenu.WelcomeMessage();
