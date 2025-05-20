@@ -96,7 +96,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
 
             int choice = IODisplay.GetChoice();
 
-            if (choice == returnPreviousMenuChoice) UIFlowController.ChangeMenu(MenuState.CustomerSortRestaurantsMenu);
+            if (choice == returnPreviousMenuChoice) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
             else
             {
                 SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing

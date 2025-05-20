@@ -14,7 +14,7 @@ public static class UserRegistry
 {
     /// <summary>
     /// A dictionary that maps <see cref="UserType"/>'s to their corresponding <see cref="User"/> instances.
-    /// <para> Stores instances of users in lists, associated with the <see cref="UserType"/> as the key.</para>
+    /// <para> Stores instances of <see cref="User"/>s in lists, associated with the <see cref="UserType"/> as the key.</para>
     /// </summary>
     private static Dictionary<UserType, List<User>> _userRegistry = new Dictionary<UserType, List<User>>();
 

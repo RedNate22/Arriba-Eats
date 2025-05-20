@@ -151,7 +151,8 @@ public static class CustomerIO
 
         if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
         {
-            CustomerOrder customerOrder = new CustomerOrder(orderNumber);  // * Begin order
+            CustomerOrder customerOrder = new CustomerOrder
+                ((Customer)SessionManager.CurrentUser!, orderNumber, selectedRestaurant);  // * Begin order
 
             while (true)
             {
@@ -181,11 +182,13 @@ public static class CustomerIO
                     if (customerOrder.IsOrderEmpty()) IODisplay.DisplayMessage("You have not added any items.");
                     else
                     {
-                        // ! Doesn't complete order properly
-                        // TODO
-                        //((Customer)SessionManager.CurrentUser!).TryAddCurrentOrder(customerOrder);  // !
-                        orderNumber = orderNumber + 1;
-                        return orderNumber;  // * Update for future (next) orders    
+                        // !
+                        // if (TryAddOrder)
+                        customerOrder.UpdateOrderStatus(OrderStatus.Ordered);
+                        IODisplay.DisplayMessage($"Your order has been placed. Your order number is #{orderNumber}.");
+
+                        orderNumber++;  // * Update order number for future (next) orders
+                        return orderNumber;
                     }
                 }
 
@@ -228,5 +231,15 @@ public static class CustomerIO
             IODisplay.DisplayMessage($"{selectedRestaurant.RestaurantName} currently has no items on the menu.");
             return orderNumber;
         }
+    }
+
+    // TODO xml
+    public static bool TryAddOrder(CustomerOrder customerOrder)
+    {
+        if (OrderRegistry.TryAddOrder(customerOrder))
+        {
+            return true;
+        }
+        else return false;
     }
 }

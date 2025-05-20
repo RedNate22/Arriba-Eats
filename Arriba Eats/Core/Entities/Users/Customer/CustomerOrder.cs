@@ -9,9 +9,25 @@ namespace Entities;
 public class CustomerOrder
 {
     /// <summary>
+    /// Get the <see cref="Entities.Customer"/> associated with the order. 
+    /// </summary>
+    public Customer Customer { get; private set; }
+
+    /// <summary>
     /// The unique order number assigned to the order when confirmed.
     /// </summary>
     public int OrderNumber { get; private set; }
+
+    /// <summary>
+    /// Get the <see cref="Entities.Restaurant"/> the order was placed from.
+    /// </summary>
+    public Restaurant Restaurant { get; private set; }
+
+    /// <summary>
+    /// Track the current status of the order.
+    /// </summary>
+    public OrderStatus OrderStatus { get; private set; }
+
 
     /// <summary>
     /// The collection of items in the order, stored by:
@@ -26,9 +42,11 @@ public class CustomerOrder
     /// unique order number.
     /// </summary>
     /// <param name="orderNumber"> The assigned order ID. </param>
-    public CustomerOrder(int orderNumber)
+    public CustomerOrder(Customer customer, int orderNumber, Restaurant restaurant)
     {
+        Customer = customer;
         OrderNumber = orderNumber;
+        Restaurant = restaurant;
     }
 
     /// <summary>
@@ -63,5 +81,20 @@ public class CustomerOrder
     public bool IsOrderEmpty()
     {
         return ItemsOrdered.Count == 0;
+    }
+
+    /// <summary>
+    /// Allows updating of the <see cref="Entities.OrderStatus"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The <see cref="Entities.OrderStatus"/> of the current order. </param>
+    public void UpdateOrderStatus(OrderStatus orderStatus)
+    {
+        OrderStatus = orderStatus;
+
+        if (OrderStatus == OrderStatus.Delivered)
+        {
+            // ?
+            // TODO automatically save to Customer's _pastOrders 
+        }
     }
 }

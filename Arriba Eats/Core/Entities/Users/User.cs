@@ -13,32 +13,32 @@ public abstract class User
     /// Gets the user's name.
     /// </summary>
     public string Name { get; private set; }
-    
+
     /// <summary>
     /// Gets the user's age.
     /// </summary>
     public int Age { get; private set; }
-    
+
     /// <summary>
     /// Gets the user's email.
     /// </summary>
     public string Email { get; private set; }
-    
+
     /// <summary>
     /// Gets the user's mobile.
     /// </summary>
     public string Mobile { get; private set; }
-    
+
     /// <summary>
     /// Gets the user's password.
     /// </summary>
     public string Password { get; private set; }
-    
+
     /// <summary>
     /// Gets the user's location.
     /// </summary>
     public string Location { get; private set; }
-    
+
     /// <summary>
     /// Initialises a new instance of the <see cref="User"/> class with
     /// the specified details.
@@ -69,7 +69,7 @@ public abstract class User
     {
         UserRegistry.RegisterUser(userType, user);
     }
-    
+
     /// <summary>
     /// Checks whether the provided email exists with the <see cref="UserRegistry._userRegistry"/>.
     /// </summary>
@@ -101,7 +101,7 @@ public abstract class User
         {
             return foundUser;
         }
-        
+
         else return null;
     }
 
@@ -118,5 +118,5 @@ public abstract class User
         return UserRegistry.TryFindUserType(user, out UserType foundUserType)
             ? foundUserType
             : UserType.Default;
-    } 
+    }
 }
