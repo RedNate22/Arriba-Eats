@@ -27,12 +27,12 @@ public class CustomerOrder
     /// Track the current status of the order.
     /// </summary>
     public OrderStatus OrderStatus { get; private set; }
-    
+
     /// <summary>
     /// Get the <see cref="Entities.RestaurantReview"/> associated with this order.
     /// </summary>
     public RestaurantReview? RestaurantReview { get; private set; }
-    
+
     /// <summary>
     /// Get the <see cref="Entities.Deliverer"/> who has been assigned to deliver the order.
     /// </summary>

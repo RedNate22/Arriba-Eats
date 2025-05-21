@@ -14,7 +14,6 @@ public static class MenuConstants
     /// <summary> Used in <see cref="IOUtilities.EnterChoiceStr()"/> to dynmically format the
     /// string to display the correct range of choices. </summary>
     public const string ENTER_CHOICE_TEMPLATE = "Please enter a choice between 1 and {0}:";
-    public const string INVALID_CHOICE_STR = "Invalid choice.";
     public const string DISPLAY_USER_INFO_STR = "1: Display your user information";
     
     /// <summary> Used in <see cref="IOUtilities.LogOutStr()"/> to dynamically format the

@@ -13,7 +13,7 @@ public class MainMenu : IMenu
 {
     private string _enterChoice = IOUtilities.EnterChoiceStr(3);
     private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
-    
+
     /// <summary> 
     /// <para> Displays the welcome message. </para>
     /// <para> To be called seperately from the menu transitions. </para>
@@ -53,7 +53,7 @@ public class MainMenu : IMenu
                 break;
             
             default:  
-                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+                IODisplay.InvalidChoice();
                 break;
         }
     }

@@ -14,4 +14,6 @@ public static class ClientConstants
         5: Finish cooking order
         6: Handle deliverers who have arrived
         """;
+
+    public const string RESTAURANT_HAS_NO_ORDERS_STR = "Your restaurant has no current orders.";
 }

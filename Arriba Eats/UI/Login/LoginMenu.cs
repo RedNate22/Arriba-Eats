@@ -49,7 +49,7 @@ public class LoginMenu : IMenu
                     break;
                 
                 default:
-                    IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+                    IODisplay.InvalidChoice();
                     break;
             }
         }

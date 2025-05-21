@@ -69,7 +69,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
                 break;
 
             default:
-                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+                IODisplay.InvalidChoice();
                 break;
         }
     }
@@ -98,12 +98,15 @@ public class CustomerBrowseRestaurantsMenu : IMenu
             int choice = IODisplay.GetChoice();
 
             if (choice == returnPreviousMenuChoice) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
-            else
+
+            else if (IOUtilities.IsValueInIndexRange(restaurantsList, choice - 1))
             {
                 SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing
                 IODisplay.DisplayMessage($"Placing order from {SelectedRestaurant?.RestaurantName}.");
                 DisplayOptions();
             }
+
+            else IODisplay.InvalidChoice();
         }
         else DisplayOptions();
     }

@@ -1,4 +1,5 @@
 using System;
+using UIComponents;
 
 namespace Entities;
 
@@ -33,7 +34,7 @@ public static class OrderRegistry
     }
 
     // TODO xml
-    public static bool TryGetCustomerOrders(out List<CustomerOrder> getCustomerOrders, Customer customer)
+    public static bool TryGetOrders(out List<CustomerOrder> getCustomerOrders, Customer customer)
     {
         getCustomerOrders = new List<CustomerOrder>();
         bool customerHasOrders = false;
@@ -51,13 +52,45 @@ public static class OrderRegistry
         else
         {
             foreach (CustomerOrder order in _orderRegistry)
+            {
+                if (order.Customer == customer)
                 {
-                    if (order.Customer == customer)
-                    {
-                        getCustomerOrders.Add(order);
-                    }
+                    getCustomerOrders.Add(order);
                 }
+            }
             return true;
         }
+    }
+
+    public static bool TryGetOrders(out List<CustomerOrder> getRestaurantOrders, Client client)
+    {
+        getRestaurantOrders = new List<CustomerOrder>();
+        bool restaurantHasOrders = false;
+
+        if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.TryGetCurrentUser(), out Restaurant? restaurant))
+        {
+            foreach (CustomerOrder order in _orderRegistry)
+            {
+                if (order.Restaurant == restaurant)
+                {
+                    restaurantHasOrders = true;
+                    break;
+                }
+            }
+        }
+        else return false;
+
+        if (restaurantHasOrders)
+        {
+            foreach (CustomerOrder order in _orderRegistry)
+            {
+                if (order.Restaurant == restaurant)
+                {
+                    getRestaurantOrders.Add(order);
+                }
+            }
+            return true;
+        }
+        else return false;
     }
 }

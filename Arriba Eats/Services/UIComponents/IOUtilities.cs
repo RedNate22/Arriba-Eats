@@ -312,4 +312,17 @@ public static class IOUtilities
         bool isValidRange = itemPrice > lowerLimit && itemPrice < upperLimit;
         return isValidRange;
     }
+
+    /// <summary>
+    /// Validates whether the given <see cref="int"/> is within range of the given 
+    /// list.
+    /// </summary>
+    /// <typeparam name="T"> The type of elements contained in the list. Can be any type. </typeparam>
+    /// <param name="list"> The list to check against. </param>
+    /// <param name="index"> The index to check if within range. </param>
+    /// <returns> <c>true</c> if the given index is within range, otherwise, <c>false</c>. </returns>
+    public static bool IsValueInIndexRange<T>(List<T> list, int index)
+    {
+        return index >= 0 && index < list.Count;
+    }
 }

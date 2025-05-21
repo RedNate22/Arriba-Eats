@@ -24,8 +24,6 @@ public static class CustomerConstants
     public const string YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR = "You can order from the following restaurants:";
     public const string NOT_PLACED_ORDERS_STR = "You have not placed any orders.";
     public const string SELECT_PREVIOUS_ORDER_TO_RATE_STR = "Select a previous order to rate the restaurant it came from:";
-
-    // CustomerBrowseRestaurantsMenu
     public const string RESTAURANT_NAME_HEADING_STR = "Restaurant Name";
     public const string LOCATION_HEADING_STR = "Loc";
     public const string DISTANCE_HEADING_STR = "Dist";
@@ -34,7 +32,5 @@ public static class CustomerConstants
     public const string SEE_RESTAURANTS_MENU_STR = "1: See this restaurant's menu and place an order";
     public const string SEE_REVIEWS_STR = "2: See reviews for this restaurant";
     public const string RETURN_MAIN_MENU_STR = "3: Return to main menu";
-
-    // CustomerPlaceOrderMenu
     public const string INVALID_QUANTITY_STR = "Invalid quantity.";
 }

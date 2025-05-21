@@ -54,7 +54,7 @@ public class CustomerMainMenu : IMenu
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                IODisplay.DisplayUserInfo(SessionManager.CurrentUser!);
+                if (SessionManager.CurrentUser != null) IODisplay.DisplayUserInfo(SessionManager.CurrentUser);
                 break;
 
             case SELECT_RESTAURANTS_LIST_INT:
@@ -76,7 +76,7 @@ public class CustomerMainMenu : IMenu
                 break;
             
             default:  
-                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+                IODisplay.InvalidChoice();
                 break;
         }
     }

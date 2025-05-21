@@ -12,7 +12,7 @@ public class CustomerRateRestaurantMenu : IMenu
     {
         IODisplay.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
         //TODO CustomerIO.DisplayRestaurantsToRate(SessionManager.CurrentUser!);
-               
+
         int choice = IODisplay.GetChoice();
 
         switch (choice)
@@ -22,7 +22,7 @@ public class CustomerRateRestaurantMenu : IMenu
                 break;
 
             default:  
-                IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+                IODisplay.InvalidChoice();
                 break;
         }
     }

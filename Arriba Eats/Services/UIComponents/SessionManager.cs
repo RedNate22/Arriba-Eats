@@ -23,6 +23,12 @@ public static class SessionManager
         private set { _currentUser = value; } 
     }
 
+    public static User TryGetCurrentUser()
+    {
+        if (CurrentUser != null) return CurrentUser;
+        else return null!;
+    }
+
     /// <summary>
     /// Updates the application to recognise the current user logged into the application.
     /// <para> Based on the <see cref="UserType"/> of the active user, directs

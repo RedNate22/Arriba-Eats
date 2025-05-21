@@ -24,7 +24,7 @@ public class CustomerOrderStatusMenu : IMenu
     // TODO xml
     public void DisplayMenu()
     {
-        if (OrderRegistry.TryGetCustomerOrders(out List<CustomerOrder> customerOrders, (Customer)SessionManager.CurrentUser!))
+        if (OrderRegistry.TryGetOrders(out List<CustomerOrder> customerOrders, (Customer)SessionManager.CurrentUser!))
         {
             foreach (CustomerOrder order in customerOrders)
             {

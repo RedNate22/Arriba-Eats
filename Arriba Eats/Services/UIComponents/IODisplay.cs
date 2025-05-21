@@ -58,6 +58,14 @@ public static class IODisplay
     }
 
     /// <summary>
+    /// Displays a message informing the <see cref="User"/> of an invalid choice.
+    /// </summary>
+    public static void InvalidChoice()
+    {
+        DisplayMessage("Invalid choice.");
+    }
+
+    /// <summary>
     /// Displays the relevant user information, depending on the <see cref="UserType"/>
     /// of the <see cref="User"/>.
     /// </summary>

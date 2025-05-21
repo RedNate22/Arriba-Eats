@@ -1,6 +1,5 @@
 using System;
 using Entities;
-using UI;
 
 namespace UIComponents;
 
@@ -252,7 +251,7 @@ public static class RegistrationIO
     
     /// <summary>
     /// Continuously reads a string input from the user and attempts to convert it using
-    /// <see cref="GetChoice"/> via the console until it meets the validation criteria.
+    /// <see cref="IODisplay.GetChoice"/> via the console until it meets the validation criteria.
     /// <para> Passes the string to <see cref="IOUtilities.IsValidRestaurantStyle()"/>
     /// to validate whether it meets the criteria. </para>
     /// </summary>
@@ -281,7 +280,7 @@ public static class RegistrationIO
             {
                 return (RestaurantStyles)restaurantStyle;
             }
-            else IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
+            else IODisplay.InvalidChoice();
         }
     }
 }
