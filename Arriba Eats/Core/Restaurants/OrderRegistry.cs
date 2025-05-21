@@ -68,7 +68,7 @@ public static class OrderRegistry
         getRestaurantOrders = new List<CustomerOrder>();
         bool restaurantHasOrders = false;
 
-        if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.TryGetCurrentUser(), out Restaurant? restaurant))
+        if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.ReturnCurrentUser(), out Restaurant? restaurant))
         {
             foreach (CustomerOrder order in _orderRegistry)
             {

@@ -23,18 +23,19 @@ public class CustomerOrderStatusMenu : IMenu
     // TODO xml
     public void DisplayMenu()
     {
-        var customerOrders = CustomerIO.TryGetCustomerOrders();
+        var customerOrders = IODisplay.GetCustomerOrders();
         if (customerOrders.Count != 0)
         {
             foreach (var order in customerOrders)
             {
                 IODisplay.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                     order.Restaurant.RestaurantName, order.OrderStatus));
-                
+
                 if (CustomerIO.IsOrderDelivered(order.OrderStatus))
                 {
                     IODisplay.DisplayMessage(String.Format(_orderDeliveredByStr, order.Deliverer?.Name,
                         order.Deliverer?.LicencePlate));
+                    
                 }
             }
             UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);

@@ -72,7 +72,7 @@ public static class IODisplay
     /// <param name="user"></param>
     public static void DisplayUserInfo(User user)
     {
-        var currentUser = SessionManager.TryGetCurrentUser();
+        var currentUser = SessionManager.ReturnCurrentUser();
         if (currentUser != null)
         {
             UserType userType = SessionManager.ReturnUserType();
@@ -126,7 +126,7 @@ public static class IODisplay
     /// </summary>
     public static void WelcomeUser()
     {
-        var currentUser = SessionManager.TryGetCurrentUser();
+        var currentUser = SessionManager.ReturnCurrentUser();
         if (currentUser != null)
         {
             DisplayMessage($"Welcome back, {currentUser.Name}!");
@@ -162,7 +162,7 @@ public static class IODisplay
         int distance = Math.Abs(u1 - r1) + Math.Abs(u2 - r2);
         return distance;
     }
-    
+
     /// <summary>
     /// Calculates the taxicab distance between two <see cref="User"/>s.
     /// </summary>
@@ -186,4 +186,47 @@ public static class IODisplay
         int distance = Math.Abs(a1 - b1) + Math.Abs(a2 - b2);
         return distance;
     }
+    
+    
+    // TODO xml
+    public static List<CustomerOrder> GetCustomerOrders()
+    {
+        List<CustomerOrder> customerOrders = new List<CustomerOrder>();
+
+        User user = SessionManager.ReturnCurrentUser();
+        var userType = SessionManager.ReturnUserType();
+        if (userType == UserType.Customer)
+        {
+            if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Customer)user))
+            {
+                customerOrders = foundCustomerOrders;
+                return customerOrders;
+            }
+            else return customerOrders;
+        }
+
+        else if (userType == UserType.Client)
+        {
+            if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Client)user))
+            {
+                customerOrders = foundCustomerOrders;
+                return customerOrders;
+            }
+            else return customerOrders;
+        }
+
+        // TODO
+        // else if (userType == UserType.Deliverer)
+        // {
+        //     if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Deliverer)user))
+        //     {
+        //         customerOrders = foundCustomerOrders;
+        //         return customerOrders;
+        //     }
+        //     else return customerOrders;
+        // }
+
+        else return customerOrders;
+    }
+
 }

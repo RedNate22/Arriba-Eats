@@ -35,8 +35,8 @@ public static class CustomerIO
             {
                 static int SortByDistance(Restaurant a, Restaurant b)
                 {
-                    int distanceA = IODisplay.GetDistance(SessionManager.TryGetCurrentUser(), a);
-                    int distanceB = IODisplay.GetDistance(SessionManager.TryGetCurrentUser(), b);
+                    int distanceA = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), a);
+                    int distanceB = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), b);
                     int distanceComparison = distanceA.CompareTo(distanceB);
 
                     // If distances are the same (returning 0), instead sort by name
@@ -109,7 +109,7 @@ public static class CustomerIO
             IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
                 + $"{restaurantsList[i].RestaurantName}".PadRight(maxRestaurantNameWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
-                + $"{IODisplay.GetDistance(SessionManager.TryGetCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
+                + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
                 + "-");
 
@@ -153,7 +153,7 @@ public static class CustomerIO
         if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
         {
             CustomerOrder customerOrder = new CustomerOrder
-                ((Customer)SessionManager.TryGetCurrentUser(), orderNumber, selectedRestaurant);  // * Begin order
+                ((Customer)SessionManager.ReturnCurrentUser(), orderNumber, selectedRestaurant);  // * Begin order
 
             string enterChoiceStr = IOUtilities.EnterChoiceStr(restaurantMenuItems.Count + 2);  // Adjust for confirm/cancel options
 
@@ -243,20 +243,6 @@ public static class CustomerIO
             IODisplay.DisplayMessage($"{selectedRestaurant.RestaurantName} currently has no items on the menu.");
             return orderNumber;
         }
-    }
-
-    // TODO xml
-    public static List<CustomerOrder> TryGetCustomerOrders()
-    {
-        List<CustomerOrder> customerOrders = new List<CustomerOrder>();
-
-        User user = SessionManager.TryGetCurrentUser();
-        if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Customer)user))
-        {
-            customerOrders = foundCustomerOrders;
-            return customerOrders;
-        }
-        else return customerOrders;
     }
 
     // TODO xml

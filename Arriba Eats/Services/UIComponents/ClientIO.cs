@@ -20,7 +20,7 @@ public static class ClientIO
     /// </summary>
     public static void AddItemsToRestaurant()
     {
-        var currentUser = SessionManager.TryGetCurrentUser();
+        var currentUser = SessionManager.ReturnCurrentUser();
         if (currentUser != null)
         {
             if (RestaurantRegistry.TryFindClientsRestaurant(currentUser, out Restaurant? restaurant))

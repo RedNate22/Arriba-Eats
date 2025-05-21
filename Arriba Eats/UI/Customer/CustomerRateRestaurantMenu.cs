@@ -11,7 +11,7 @@ public class CustomerRateRestaurantMenu : IMenu
     public void DisplayMenu()
     {
         IODisplay.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
-        //TODO CustomerIO.DisplayRestaurantsToRate(SessionManager.TryGetCurrentUser());
+        //TODO CustomerIO.DisplayRestaurantsToRate(SessionManager.ReturnCurrentUser());
 
         int choice = IODisplay.GetChoice();
 

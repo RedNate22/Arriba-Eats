@@ -89,7 +89,7 @@ public static class SessionManager
     }
 
     // TODO xml
-    public static User TryGetCurrentUser()
+    public static User ReturnCurrentUser()
     {
         if (_currentUser != null) return _currentUser;
         else return null!;

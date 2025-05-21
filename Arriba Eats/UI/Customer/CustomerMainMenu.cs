@@ -54,7 +54,7 @@ public class CustomerMainMenu : IMenu
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                var currentUser = SessionManager.TryGetCurrentUser();
+                var currentUser = SessionManager.ReturnCurrentUser();
                 if (currentUser != null) IODisplay.DisplayUserInfo(currentUser);
                 break;
 
