@@ -244,4 +244,25 @@ public static class CustomerIO
             return orderNumber;
         }
     }
+
+    // TODO xml
+    public static List<CustomerOrder> TryGetCustomerOrders()
+    {
+        List<CustomerOrder> customerOrders = new List<CustomerOrder>();
+
+        User user = SessionManager.TryGetCurrentUser();
+        if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Customer)user))
+        {
+            customerOrders = foundCustomerOrders;
+            return customerOrders;
+        }
+        else return customerOrders;
+    }
+
+    // TODO xml
+    public static bool IsOrderDelivered(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Delivered) return true;
+        else return false;
+    }
 }

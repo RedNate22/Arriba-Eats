@@ -1,7 +1,6 @@
 using System;
 using UIComponents;
 using UINavigation;
-using Entities;
 
 namespace UI;
 
@@ -24,14 +23,15 @@ public class CustomerOrderStatusMenu : IMenu
     // TODO xml
     public void DisplayMenu()
     {
-        if (OrderRegistry.TryGetOrders(out List<CustomerOrder> customerOrders, (Customer)SessionManager.CurrentUser!))
+        var customerOrders = CustomerIO.TryGetCustomerOrders();
+        if (customerOrders.Count != 0)
         {
-            foreach (CustomerOrder order in customerOrders)
+            foreach (var order in customerOrders)
             {
                 IODisplay.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                     order.Restaurant.RestaurantName, order.OrderStatus));
-
-                if (order.OrderStatus == OrderStatus.Delivered)
+                
+                if (CustomerIO.IsOrderDelivered(order.OrderStatus))
                 {
                     IODisplay.DisplayMessage(String.Format(_orderDeliveredByStr, order.Deliverer?.Name,
                         order.Deliverer?.LicencePlate));

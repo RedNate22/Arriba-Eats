@@ -62,6 +62,7 @@ public static class OrderRegistry
         }
     }
 
+    // TODO xml
     public static bool TryGetOrders(out List<CustomerOrder> getRestaurantOrders, Client client)
     {
         getRestaurantOrders = new List<CustomerOrder>();
