@@ -41,6 +41,3 @@ packages/
 .env/
 .env.*
 local.settings.json
-
-*.csproj
-*.sln
