@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace UIComponents;
 
 /// <summary>
 /// Defines the various types of users within the application.

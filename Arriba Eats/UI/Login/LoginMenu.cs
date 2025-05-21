@@ -1,7 +1,6 @@
 using System;
 using UIComponents;
 using UINavigation;
-using Entities;
 
 namespace UI;
 
@@ -22,7 +21,7 @@ public class LoginMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        User? currentUser = SessionManager.Login();
+        var currentUser = SessionManager.Login();
 
         if (currentUser == null)
         {

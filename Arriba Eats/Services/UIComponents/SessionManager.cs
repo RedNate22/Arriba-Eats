@@ -17,10 +17,10 @@ public static class SessionManager
     /// <summary>
     /// Gets the current <see cref="User"/> logged into the application.
     /// </summary>
-    public static User? CurrentUser 
-    { 
-        get { return _currentUser; } 
-        private set { _currentUser = value; } 
+    public static User? CurrentUser
+    {
+        get { return _currentUser; }
+        private set { _currentUser = value; }
     }
 
     public static User TryGetCurrentUser()
@@ -64,10 +64,10 @@ public static class SessionManager
 
         IODisplay.DisplayMessage(EMAIL_STR);
         string email = IODisplay.ReadInput();
-        
+
         IODisplay.DisplayMessage(PASSWORD_STR);
         string password = IODisplay.ReadInput();
-        
+
         User? user = User.AuthenticateUser(email, password);
         if (user == null)
         {
@@ -89,7 +89,7 @@ public static class SessionManager
     }
 
     /// <summary>
-    /// Retrieves the <see cref="UserType"/> of the currently authenticated user.
+    /// Retrieves the <see cref="UserType"/> of the currently authenticated <see cref="User"/>.
     /// </summary>
     /// <returns> 
     /// The associated <see cref="UserType"/> if a user is logged in,
@@ -98,5 +98,10 @@ public static class SessionManager
     public static UserType ReturnUserType()
     {
         return User.GetUserType(CurrentUser!);
+    }
+
+    public static Restaurant? GetRestaurant()
+    {
+        return null;
     }
 }

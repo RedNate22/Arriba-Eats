@@ -1,4 +1,5 @@
 using System;
+using UIComponents;
 
 namespace Entities;
 
@@ -68,7 +69,7 @@ public static class UserRegistry
     /// <param name="password"> The password to match with the registered user. </param>
     /// <param name="foundUser"> The instance of the user if both email and password match. </param>
     /// <returns> <c>true</c> if a match is found, otherwise, <c>false</c>. </returns>
-    public static bool TryVerifyUserCredentials (string email, string password, out User? foundUser)
+    public static bool TryVerifyUserCredentials(string email, string password, out User? foundUser)
     {
         foreach (List<User> userList in _userRegistry.Values)
         {
@@ -79,7 +80,7 @@ public static class UserRegistry
                     foundUser = user;
                     return true;
                 }
-            }    
+            }
         }
 
         foundUser = null;
@@ -94,7 +95,7 @@ public static class UserRegistry
     /// <param name="foundUserType"> The found <see cref="UserType"/> associated with the user. </param> 
     /// <returns> <c>true</c> if the user is found in the registry and their <see cref="UserType"/>, 
     /// is assigned. Otherwise <c>false</c>, with <see cref="UserType.Default"/> assigned. </returns>
-    public static bool TryFindUserType (User user, out UserType foundUserType)
+    public static bool TryFindUserType(User user, out UserType foundUserType)
     {
         foreach (KeyValuePair<UserType, List<User>> pair in _userRegistry)
         {
@@ -104,7 +105,7 @@ public static class UserRegistry
                 return true;
             }
         }
-        
+
         foundUserType = UserType.Default;
         return false;
     }

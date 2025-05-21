@@ -14,7 +14,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     /// <summary>
     /// The currently selected <see cref="Restaurant"/> by the <see cref="Customer"/>.
     /// </summary>
-    public static Restaurant? SelectedRestaurant { get; private set; }
+    // public static Restaurant? SelectedRestaurant { get; private set; }
 
     /// <summary>
     /// Tracks whether the <see cref="Customer"/> has previously returned from the
@@ -64,7 +64,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
 
             case RETURN_MAIN_MENU_INT:
                 ReturningFromMenu = false;
-                SelectedRestaurant = null;
+                // SelectedRestaurant = null;
                 UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
                 break;
 
@@ -101,7 +101,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
 
             else if (IOUtilities.IsValueInIndexRange(restaurantsList, choice - 1))
             {
-                SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing
+                var SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing
                 IODisplay.DisplayMessage($"Placing order from {SelectedRestaurant?.RestaurantName}.");
                 DisplayOptions();
             }
