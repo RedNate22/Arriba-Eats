@@ -44,7 +44,7 @@ public enum MenuState
     /// Represents the <see cref="UI.CustomerBrowseRestaurantsMenu"/>.
     /// </summary>
     CustomerBrowseRestaurantsMenu,
-    
+
     /// <summary>
     /// Represents the <see cref="UI.CustomerPlaceOrderMenu"/>.
     /// </summary>
@@ -69,4 +69,9 @@ public enum MenuState
     /// Represents the <see cref="UI.ClientMainMenu"/>.
     /// </summary>
     ClientMainMenu,
+    
+    /// <summary>
+    /// Represents the <see cref="UI.ClientSeeCurrentOrdersMenu"/>
+    /// </summary>
+    ClientSeeCurrentOrdersMenu,
 }

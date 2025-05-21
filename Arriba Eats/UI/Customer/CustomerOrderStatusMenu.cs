@@ -4,23 +4,28 @@ using UINavigation;
 
 namespace UI;
 
-// TODO xml
+/// <summary>
+/// Represents the menu where a customer can view the status of all their orders,
+/// both active and past.
+/// </summary>
 public class CustomerOrderStatusMenu : IMenu
 {
     /// <summary>
-    /// Displays the <see cref="CustomerOrder.OrderNumber"/>, <see cref="Restaurant"/> name, and 
-    /// <see cref="OrderStatus"/> of the order.
+    /// Displays the order number, restaurant name, and status of the order.
     /// </summary>
     private string _orderStatusStr = "Order #{0} from {1}: {2}";
 
     /// <summary>
-    /// If the order is marked as <see cref="OrderStatus.Delivered"/>, displays 
-    /// the <see cref="Deliverer"/>'s name and <see cref="Deliverer.LicencePlate"/>
+    /// If the order is marked as delivered, displays the deliverer's name and 
+    /// <see cref="Deliverer.LicencePlate"/>
     /// of the <see cref="Deliverer"/> who delivered the order.
     /// </summary>
     private string _orderDeliveredByStr = "This order was delivered by {0} (licence plate: {1})";
 
-    // TODO xml
+    /// <summary>
+    /// Displays the <see cref="CustomerOrderStatusMenu"/>, then returns back to
+    /// <see cref="CustomerMainMenu"/>.
+    /// </summary>
     public void DisplayMenu()
     {
         var customerOrders = IODisplay.GetCustomerOrders();
@@ -31,12 +36,13 @@ public class CustomerOrderStatusMenu : IMenu
                 IODisplay.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                     order.Restaurant.RestaurantName, order.OrderStatus));
 
-                if (CustomerIO.IsOrderDelivered(order.OrderStatus))
+                if (IODisplay.IsOrderDelivered(order.OrderStatus))
                 {
                     IODisplay.DisplayMessage(String.Format(_orderDeliveredByStr, order.Deliverer?.Name,
                         order.Deliverer?.LicencePlate));
-                    
                 }
+                order.DisplayOrderedItems();
+                IODisplay.DisplayEmptyLine();
             }
             UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
         }

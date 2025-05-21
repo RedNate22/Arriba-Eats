@@ -1,4 +1,5 @@
 using System;
+using UIComponents;
 
 namespace Entities;
 
@@ -43,7 +44,7 @@ public class CustomerOrder
     /// <para> - Key: item name as a string</para>
     /// <para> - Value: (Quantity as an int, price per item as a decimal) </para>
     /// </summary>
-    private Dictionary<string, (int Quantity, decimal ItemPrice)> ItemsOrdered
+    private Dictionary<string, (int Quantity, decimal ItemPrice)> _itemsOrdered
     { get; } = new Dictionary<string, (int Quantity, decimal ItemPrice)>();
 
     /// <summary>
@@ -68,18 +69,18 @@ public class CustomerOrder
     public void AddItemToOrder(string itemName, int quantity, decimal itemPrice)
     {
         // Check if the item already exists in the current order
-        if (ItemsOrdered.ContainsKey(itemName))
+        if (_itemsOrdered.ContainsKey(itemName))
         {
             // Get tuple associated with itemName
-            (int Quantity, decimal ItemPrice) currentItem = ItemsOrdered[itemName];
+            (int Quantity, decimal ItemPrice) currentItem = _itemsOrdered[itemName];
             // Add to quantity, but keep price the same
-            ItemsOrdered[itemName] = (currentItem.Quantity + quantity, currentItem.ItemPrice);
+            _itemsOrdered[itemName] = (currentItem.Quantity + quantity, currentItem.ItemPrice);
         }
 
         // Add a new entry when the item hasn't already been added
         else
         {
-            ItemsOrdered[itemName] = (quantity, itemPrice);
+            _itemsOrdered[itemName] = (quantity, itemPrice);
         }
     }
 
@@ -89,7 +90,7 @@ public class CustomerOrder
     /// <returns> <c>true</c> if the order is empty, otherwise <c>false</c>. </returns>
     public bool IsOrderEmpty()
     {
-        return ItemsOrdered.Count == 0;
+        return _itemsOrdered.Count == 0;
     }
 
     /// <summary>
@@ -102,5 +103,30 @@ public class CustomerOrder
         // TODO
         // ???
         // Add functionality to prevent order status from being rushed to last stage immediately
+    }
+
+    /// <summary>
+    /// Displays each item ordered, along with the quantity.
+    /// </summary>
+    public void DisplayOrderedItems()
+    {
+        foreach (var item in _itemsOrdered)
+        {
+            IODisplay.DisplayMessage($"{item.Value.Quantity} x {item.Key}");
+        }
+    }
+
+    /// <summary>
+    /// Gets the total amount spent on the order.
+    /// </summary>
+    /// <returns> The total amount, in decimal. </returns>
+    public decimal GetTotalSpent()
+    {
+        decimal totalSpent = 0.00M;
+        foreach (var item in _itemsOrdered)
+        {
+            totalSpent += item.Value.Quantity * item.Value.ItemPrice;
+        }
+        return totalSpent;
     }
 }

@@ -63,7 +63,7 @@ public class ClientMainMenu : IMenu
                 break;
 
             case SEE_CURRENT_ORDERS_INT:
-                // TODO
+                UIFlowController.ChangeMenu(MenuState.ClientSeeCurrentOrdersMenu);
                 break;
 
             case START_COOKING_ORDER_INT:

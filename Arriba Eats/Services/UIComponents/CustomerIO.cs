@@ -244,11 +244,4 @@ public static class CustomerIO
             return orderNumber;
         }
     }
-
-    // TODO xml
-    public static bool IsOrderDelivered(OrderStatus orderStatus)
-    {
-        if (orderStatus == OrderStatus.Delivered) return true;
-        else return false;
-    }
 }

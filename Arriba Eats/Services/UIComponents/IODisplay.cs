@@ -69,7 +69,7 @@ public static class IODisplay
     /// Displays the relevant user information, depending on the <see cref="UserType"/>
     /// of the <see cref="User"/>.
     /// </summary>
-    /// <param name="user"></param>
+    /// <param name="user"> The <see cref="User"/> to display the information of. </param>
     public static void DisplayUserInfo(User user)
     {
         var currentUser = SessionManager.ReturnCurrentUser();
@@ -88,7 +88,14 @@ public static class IODisplay
                 case UserType.Customer:
                     var customer = (Customer)user;
                     DisplayMessage($"Location: {customer.Location}");
-                    DisplayMessage($"You've made 0 order(s) and spent a total of $0.00 here.");
+
+                    List<CustomerOrder> customerOrders = GetCustomerOrders();
+                    decimal totalSpent = 0.00M;
+                    foreach (CustomerOrder order in customerOrders)
+                    {
+                        totalSpent += order.GetTotalSpent();
+                    }
+                    DisplayMessage($"You've made {customerOrders.Count} order(s) and spent a total of ${totalSpent:F2} here.");
                     break;
 
                 case UserType.Deliverer:
@@ -186,8 +193,8 @@ public static class IODisplay
         int distance = Math.Abs(a1 - b1) + Math.Abs(a2 - b2);
         return distance;
     }
-    
-    
+
+
     // TODO xml
     public static List<CustomerOrder> GetCustomerOrders()
     {
@@ -229,4 +236,16 @@ public static class IODisplay
         else return customerOrders;
     }
 
+    /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s order has been marked
+    /// as <see cref="OrderStatus.Delivered"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Delivered"/>,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool IsOrderDelivered(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Delivered) return true;
+        else return false;
+    }
 }
