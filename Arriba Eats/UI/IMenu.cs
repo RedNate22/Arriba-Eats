@@ -14,4 +14,3 @@ public interface IMenu
     /// </summary>
     public void DisplayMenu();
 }
-
