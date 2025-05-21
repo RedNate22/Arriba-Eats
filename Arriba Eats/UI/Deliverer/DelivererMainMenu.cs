@@ -54,7 +54,7 @@ public class DelivererMainMenu : IMenu
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                IODisplay.DisplayUserInfo(SessionManager.CurrentUser!);
+                IODisplay.DisplayUserInfo(SessionManager.TryGetCurrentUser());
                 break;
 
             case LIST_ORDERS_AVAILABLE_INT:

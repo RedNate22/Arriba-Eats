@@ -55,7 +55,7 @@ public class ClientMainMenu : IMenu
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                IODisplay.DisplayUserInfo(SessionManager.CurrentUser!);
+                IODisplay.DisplayUserInfo(SessionManager.TryGetCurrentUser());
                 break;
 
             case ADD_ITEM_RESTAURANT_INT:

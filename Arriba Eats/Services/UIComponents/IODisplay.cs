@@ -72,7 +72,8 @@ public static class IODisplay
     /// <param name="user"></param>
     public static void DisplayUserInfo(User user)
     {
-        if (SessionManager.CurrentUser != null)
+        var currentUser = SessionManager.TryGetCurrentUser();
+        if (currentUser != null)
         {
             UserType userType = SessionManager.ReturnUserType();
 
@@ -125,9 +126,10 @@ public static class IODisplay
     /// </summary>
     public static void WelcomeUser()
     {
-        if (SessionManager.CurrentUser != null)
+        var currentUser = SessionManager.TryGetCurrentUser();
+        if (currentUser != null)
         {
-            DisplayMessage($"Welcome back, {SessionManager.CurrentUser.Name}!");
+            DisplayMessage($"Welcome back, {currentUser.Name}!");
         }
 
         else

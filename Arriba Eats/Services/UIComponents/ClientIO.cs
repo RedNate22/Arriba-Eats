@@ -20,9 +20,10 @@ public static class ClientIO
     /// </summary>
     public static void AddItemsToRestaurant()
     {
-        if (SessionManager.CurrentUser != null)
+        var currentUser = SessionManager.TryGetCurrentUser();
+        if (currentUser != null)
         {
-            if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.CurrentUser, out Restaurant? restaurant))
+            if (RestaurantRegistry.TryFindClientsRestaurant(currentUser, out Restaurant? restaurant))
             {
                 IODisplay.DisplayMessage("This is your restaurant's current menu:");
                 restaurant?.DisplayCurrentlyRegisteredMenuItems();

@@ -15,7 +15,7 @@ public class LoginMenu : IMenu
     /// Displays the <see cref="LoginMenu"/> to authenticate the <see cref="User"/>.
     /// <para> - Prompts the user for their <see cref="User.Email"/> and <see cref="User.Password"/>. </para>
     /// <para> - Authenticates the session using <see cref="SessionManager.AuthenticateSession()"/>,
-    /// updating <see cref="SessionManager.CurrentUser"/>. </para>
+    /// updating the tracked user to the current one. </para>
     /// <para> - Determines the user's <see cref="UserType"/> via <see cref="SessionManager.ReturnUserType()"/>. </para>
     /// <para> - Transitions to the appropriate menu based on the user's <see cref="UserType"/>. </para>
     /// </summary>

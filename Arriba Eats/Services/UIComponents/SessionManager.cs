@@ -12,16 +12,10 @@ namespace UIComponents;
 /// </summary>
 public static class SessionManager
 {
-    private static User? _currentUser = null;
-
     /// <summary>
-    /// Gets the current <see cref="User"/> logged into the application.
+    /// Tracks the currently logged in <see cref="User"/>.
     /// </summary>
-    public static User? CurrentUser
-    {
-        get { return _currentUser; }
-        private set { _currentUser = value; }
-    }
+    private static User? _currentUser = null;
 
     /// <summary>
     /// Updates the application to recognise the current user logged into the application.
@@ -32,7 +26,7 @@ public static class SessionManager
     /// <param name="currentUser"> The currently authenticated <see cref="User"/>. </param>
     public static void AuthenticateSession(User currentUser)
     {
-        CurrentUser = currentUser;
+        _currentUser = currentUser;
     }
 
     /// <summary>
@@ -73,12 +67,12 @@ public static class SessionManager
     }
 
     /// <summary>
-    /// Logs the user out by removing the referenced <see cref="User"/> from <see cref="CurrentUser"/>.
+    /// Logs the user out by removing the referenced <see cref="User"/> from <see cref="_currentUser"/>.
     /// Then changes to the Main Menu via <see cref="UIFlowController.ChangeMenu()"/>. 
     /// </summary>
     public static void Logout()
     {
-        CurrentUser = null;
+        _currentUser = null;
         IODisplay.DisplayMessage("You are now logged out.");
     }
 
@@ -91,13 +85,13 @@ public static class SessionManager
     /// </returns>
     public static UserType ReturnUserType()
     {
-        return User.GetUserType(CurrentUser!);
+        return User.GetUserType(_currentUser!);
     }
 
     // TODO xml
     public static User TryGetCurrentUser()
     {
-        if (CurrentUser != null) return CurrentUser;
+        if (_currentUser != null) return _currentUser;
         else return null!;
 
     }

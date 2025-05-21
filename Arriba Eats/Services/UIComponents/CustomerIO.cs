@@ -35,8 +35,8 @@ public static class CustomerIO
             {
                 static int SortByDistance(Restaurant a, Restaurant b)
                 {
-                    int distanceA = IODisplay.GetDistance(SessionManager.CurrentUser!, a);
-                    int distanceB = IODisplay.GetDistance(SessionManager.CurrentUser!, b);
+                    int distanceA = IODisplay.GetDistance(SessionManager.TryGetCurrentUser(), a);
+                    int distanceB = IODisplay.GetDistance(SessionManager.TryGetCurrentUser(), b);
                     int distanceComparison = distanceA.CompareTo(distanceB);
 
                     // If distances are the same (returning 0), instead sort by name
@@ -109,7 +109,7 @@ public static class CustomerIO
             IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
                 + $"{restaurantsList[i].RestaurantName}".PadRight(maxRestaurantNameWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
-                + $"{IODisplay.GetDistance(SessionManager.CurrentUser!, restaurantsList[i])}".PadRight(distanceColumnWidth)
+                + $"{IODisplay.GetDistance(SessionManager.TryGetCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
                 + "-");
 
@@ -153,7 +153,7 @@ public static class CustomerIO
         if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
         {
             CustomerOrder customerOrder = new CustomerOrder
-                ((Customer)SessionManager.CurrentUser!, orderNumber, selectedRestaurant);  // * Begin order
+                ((Customer)SessionManager.TryGetCurrentUser(), orderNumber, selectedRestaurant);  // * Begin order
 
             string enterChoiceStr = IOUtilities.EnterChoiceStr(restaurantMenuItems.Count + 2);  // Adjust for confirm/cancel options
 
