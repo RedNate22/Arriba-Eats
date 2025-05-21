@@ -1,5 +1,5 @@
 using System;
-using UIComponents;
+// using UIComponents;
 
 namespace Entities;
 
@@ -15,28 +15,23 @@ public static class RestaurantRegistry
     private static Dictionary<Client, Restaurant> _restaurantRegistry = new Dictionary<Client, Restaurant>();
 
     /// <summary>
-    /// Registers a new <see cref="Client"/> and their associated <see cref="Restaurant"/>
+    /// Attempts to register a new <see cref="Client"/> and their associated <see cref="Restaurant"/>
     /// into the registry.
     /// <para> To be used to reference the correct <see cref="Restaurant"/> associated with
     /// a <see cref="Client"/> when the client is managing their restaurant's menu and orders. </para>
     /// </summary>
     /// <param name="client"> The <see cref="Client"/> instance being registered. </param>
     /// <param name="restaurant"> The <see cref="Restaurant"/> instance being registered. </param>
-    public static void AddRestaurant(Client client, Restaurant restaurant)
+    /// <returns> <c>false</c> if the <see cref="Client"/> or <see cref="Restaurant"/> are already
+    /// registered, otherwise, <c>true</c>, the registering is complete. </returns>
+    public static bool AddRestaurant(Client client, Restaurant restaurant)
     {
-        if (_restaurantRegistry.ContainsKey(client))
-        {
-            IODisplay.DisplayMessage("This client already owns a restaurant!");
-        }
-
-        else if (_restaurantRegistry.ContainsValue(restaurant))
-        {
-            IODisplay.DisplayMessage("This restaurant is already registered!");
-        }
-
+        if (_restaurantRegistry.ContainsKey(client)) return false;  // Client already registered
+        else if (_restaurantRegistry.ContainsValue(restaurant)) return false;  // Restaurant already registered
         else
         {
             _restaurantRegistry.Add(client, restaurant);
+            return true;
         }
     }
 

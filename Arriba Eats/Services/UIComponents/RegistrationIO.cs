@@ -1,6 +1,6 @@
 using System;
 using Entities;
-using UINavigation;
+using UI;
 
 namespace UIComponents;
 
@@ -281,6 +281,7 @@ public static class RegistrationIO
             {
                 return (RestaurantStyles)restaurantStyle;
             }
+            else IODisplay.DisplayMessage(MenuConstants.INVALID_CHOICE_STR);
         }
     }
 }

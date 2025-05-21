@@ -20,7 +20,8 @@ public class Client : User
 
     /// <summary>
     /// Initialises a new instance of the <see cref="Client"/> class
-    /// with the specified user details.
+    /// with the specified user details and automatically stores the <see cref="Restaurant"/> and
+    /// the the <see cref="Client"/> into the <see cref="RestaurantRegistry"/>.
     /// </summary>
     /// <param name="name"> The client's name. </param>
     /// <param name="age"> The client's age. </param>
