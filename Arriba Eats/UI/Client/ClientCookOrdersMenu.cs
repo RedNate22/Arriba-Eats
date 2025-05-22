@@ -20,21 +20,19 @@ public class ClientCookOrdersMenu : IMenu
         IODisplay.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
         var customerOrders = IODisplay.GetCustomerOrders();
         bool containsReadyOrders = customerOrders.Count != 0 && ClientIO.ContainsOrdered(customerOrders);
-        
+
         // * Default to 1 if no orders are ready
         int choiceIndex = containsReadyOrders ? ClientIO.DisplayOrdersReadyToCook(customerOrders) : 1;
         int returnPreviousMenuInt = choiceIndex;
-        
+
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
         IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-        int choice = IODisplay.GetChoice();
-        if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
         if (containsReadyOrders)
         {
             int choice = IODisplay.GetChoice();
             if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
-            
+
             else if (IOUtilities.IsValueInIndexRange(customerOrders, choice - 1))
             {
                 var selectedOrder = customerOrders[choice - 1];  // * Adjust for index-based referencing
