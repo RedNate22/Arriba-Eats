@@ -65,7 +65,7 @@ namespace ArribaEats
                 if (clientTestRestaurant!.TryRegisterMenuItem(testItemName, testItemPrice)){}        
             }
             // ! Remove above
-            
+
             MainMenu.WelcomeMessage();
             UIFlowController.RunMenuSystem();
         }

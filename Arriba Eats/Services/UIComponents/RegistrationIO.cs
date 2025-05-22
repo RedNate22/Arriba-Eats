@@ -1,5 +1,6 @@
 using System;
 using Entities;
+using UI;
 
 namespace UIComponents;
 
@@ -194,7 +195,7 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your location (in the form of X,Y):");
+            IODisplay.DisplayMessage(MenuConstants.ENTER_LOCATION_STR);
 
             string location = IODisplay.ReadInput();
 

@@ -44,6 +44,9 @@ public class CustomerOrder
     /// </summary>
     public bool DelivererArrived { get; private set; }
 
+    // TODO xml
+    public int TotalDistance { get; private set; }
+
     /// <summary>
     /// The collection of items in the order, stored by:
     /// <para> - Key: item name as a string</para>

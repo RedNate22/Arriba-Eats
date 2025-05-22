@@ -93,11 +93,14 @@ public class CustomerBrowseRestaurantsMenu : IMenu
         if (ReturningFromMenu == false)
         {
             IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
-            List<Restaurant> restaurantsList = CustomerIO.DisplayRestaurantsList(out int returnPreviousMenuChoice);
+            List<Restaurant> restaurantsList = CustomerIO.DisplayRestaurantsList(out int choiceIndex);
+            
+            IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+            IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
             int choice = IODisplay.GetChoice();
 
-            if (choice == returnPreviousMenuChoice) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
+            if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
 
             else if (IOUtilities.IsValueInIndexRange(restaurantsList, choice - 1))
             {

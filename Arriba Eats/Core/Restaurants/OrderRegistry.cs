@@ -37,61 +37,47 @@ public static class OrderRegistry
     public static bool TryGetOrders(out List<CustomerOrder> getCustomerOrders, Customer customer)
     {
         getCustomerOrders = new List<CustomerOrder>();
-        bool customerHasOrders = false;
 
         foreach (CustomerOrder order in _orderRegistry)
         {
             if (order.Customer == customer)
             {
-                customerHasOrders = true;
-                break;
+                getCustomerOrders.Add(order);
             }
         }
-
-        if (customerHasOrders == false) return false;
-        else
-        {
-            foreach (CustomerOrder order in _orderRegistry)
-            {
-                if (order.Customer == customer)
-                {
-                    getCustomerOrders.Add(order);
-                }
-            }
-            return true;
-        }
+        return getCustomerOrders.Count > 0;
     }
 
     // TODO xml
     public static bool TryGetOrders(out List<CustomerOrder> getRestaurantOrders, Client client)
     {
         getRestaurantOrders = new List<CustomerOrder>();
-        bool restaurantHasOrders = false;
 
-        if (RestaurantRegistry.TryFindClientsRestaurant(SessionManager.ReturnCurrentUser(), out Restaurant? restaurant))
+        if (!RestaurantRegistry.TryFindClientsRestaurant(SessionManager.ReturnCurrentUser(), out Restaurant? restaurant))
+            return false;
+
+        foreach (CustomerOrder order in _orderRegistry)
         {
-            foreach (CustomerOrder order in _orderRegistry)
+            if (order.Restaurant == restaurant)
             {
-                if (order.Restaurant == restaurant)
-                {
-                    restaurantHasOrders = true;
-                    break;
-                }
+                getRestaurantOrders.Add(order);
             }
         }
-        else return false;
+        return getRestaurantOrders.Count > 0;
+    }
 
-        if (restaurantHasOrders)
+    // TODO xml
+    public static bool TryGetOrders(out List<CustomerOrder> getOrdersToDeliver, Deliverer deliverer)
+    {
+        getOrdersToDeliver = new List<CustomerOrder>();
+
+        foreach (CustomerOrder order in _orderRegistry)
         {
-            foreach (CustomerOrder order in _orderRegistry)
+            if (order.Deliverer == null)
             {
-                if (order.Restaurant == restaurant)
-                {
-                    getRestaurantOrders.Add(order);
-                }
+                getOrdersToDeliver.Add(order);
             }
-            return true;
         }
-        else return false;
+        return getOrdersToDeliver.Count > 0;
     }
 }

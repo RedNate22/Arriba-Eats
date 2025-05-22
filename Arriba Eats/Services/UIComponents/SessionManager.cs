@@ -88,7 +88,10 @@ public static class SessionManager
         return User.GetUserType(_currentUser!);
     }
 
-    // TODO xml
+    /// <summary>
+    /// Retrieves the currently authenticated <see cref="User"/>.
+    /// </summary>
+    /// <returns> The currently authenticated <see cref="User"/>. </returns>
     public static User ReturnCurrentUser()
     {
         if (_currentUser != null) return _currentUser;

@@ -67,17 +67,15 @@ public static class CustomerIO
     }
 
     /// <summary>
-    /// Gets the list of registered <see cref="Restaurant"/>s via <see cref="GetRestaurantsList()"/>, 
-    /// and then displays the restaurants and their details under the respective headings. 
-    /// The <see cref="Restaurant"/>s are sorted by the <see cref="Customer"/>'s selected <see cref="SortOption"/>
-    /// previously set in <see cref="CustomerSortRestaurantsMenu"/> and the list is then returned.
+    /// Gets the list of registered <see cref="Restaurant"/>s after sorting them via <see cref="SortRestaurants"/>, 
+    /// and then displays the restaurants and their details under their respective headings. 
     /// <para> As the restaurant list is suspectible to dynamically changing whenever a new <see cref="Restaurant"/>
-    /// is registered, the number for selecting the option to return to the previous menu is therefore dynamic, 
-    /// and must be assigned in the <c>out</c> parameter. </para>
+    /// is registered, the index number for the listed options is therefore dynamic, 
+    /// and is assigned in the <c>out</c> parameter to be referenced. </para>
     /// </summary>
-    /// <param name="returnPreviousMenuChoice"> The index number for the option to return to the previous menu. </param>
+    /// <param name="choiceIndex"> The index number for the listed options. </param>
     /// <returns> The list of currently registered <see cref="Restaurant"/>'s. </returns>
-    public static List<Restaurant> DisplayRestaurantsList(out int returnPreviousMenuChoice)
+    public static List<Restaurant> DisplayRestaurantsList(out int choiceIndex)
     {
         List<Restaurant> restaurantsList = SortRestaurants(CustomerSortRestaurantsMenu.SortOption);
 
@@ -95,8 +93,8 @@ public static class CustomerIO
             }
         }
 
-        IODisplay.DisplayMessage("   " +
-            CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
+        IODisplay.DisplayMessage("   "
+            + CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
             + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
             + CustomerConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
             + CustomerConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
@@ -110,16 +108,11 @@ public static class CustomerIO
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
                 + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
+                // TODO 
                 + "-");
-
             restaurantChoiceIndex++;
         }
-
-        returnPreviousMenuChoice = restaurantChoiceIndex;
-        int enterChoiceInt = restaurantChoiceIndex;
-        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(returnPreviousMenuChoice));
-        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(enterChoiceInt));
-
+        choiceIndex = restaurantChoiceIndex;
         return restaurantsList;
     }
 
