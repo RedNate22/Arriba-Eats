@@ -188,7 +188,7 @@ public static class CustomerIO
                     {
                         if (OrderRegistry.TryAddOrder(customerOrder))
                         {
-                            customerOrder.UpdateOrderStatus(OrderStatus.Ordered);
+                            customerOrder.UpdateOrderStatus();
                             IODisplay.DisplayMessage($"Your order has been placed. Your order number is #{orderNumber}.");
 
                             orderNumber++;  // * Update order number for future (next) orders

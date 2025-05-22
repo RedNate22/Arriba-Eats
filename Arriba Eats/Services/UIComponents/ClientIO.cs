@@ -29,7 +29,7 @@ public static class ClientIO
                 restaurant?.DisplayCurrentlyRegisteredMenuItems();
 
                 IODisplay.DisplayMessage("Please enter the name of the new item (blank to cancel):");
-                
+
                 string itemName = IODisplay.ReadInput();
 
                 if (!string.IsNullOrWhiteSpace(itemName))
@@ -42,7 +42,7 @@ public static class ClientIO
                     else IODisplay.DisplayMessage("This item is already added to the menu.");
                 }
             }
-            
+
             else IODisplay.DisplayMessage("You currently have no restaurants.");
         }
 
@@ -81,5 +81,21 @@ public static class ClientIO
 
             else IODisplay.DisplayMessage("Invalid price.");
         }
+    }
+
+    /// <summary>
+    /// Validates whether a list of <see cref="CustomerOrder"/>s contains any orders
+    /// with the order status of <see cref="OrderStatus.Ordered"/>.
+    /// </summary>
+    /// <param name="customerOrders"> The list of customer orders to validate. </param>
+    /// <returns> <c>true</c> if any of the orders are marked as ordered, otherwise,
+    /// <c>false</c>. </returns>
+    public static bool ContainsOrdered(List<CustomerOrder> customerOrders)
+    {
+        foreach (CustomerOrder order in customerOrders)
+        {
+            if (IODisplay.IsOrdered(order.OrderStatus)) return true;
+        }
+        return false;
     }
 }

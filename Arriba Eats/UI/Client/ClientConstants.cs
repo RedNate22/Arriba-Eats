@@ -16,4 +16,5 @@ public static class ClientConstants
         """;
 
     public const string RESTAURANT_HAS_NO_ORDERS_STR = "Your restaurant has no current orders.";
+    public const string SELECT_ORDER_TO_COOK_STR = "Select an order once you are ready to start cooking:";
 }

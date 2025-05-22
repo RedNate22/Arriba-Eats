@@ -45,7 +45,7 @@ public class CustomerOrder
     /// <para> - Value: (Quantity as an int, price per item as a decimal) </para>
     /// </summary>
     private Dictionary<string, (int Quantity, decimal ItemPrice)> _itemsOrdered
-    { get; } = new Dictionary<string, (int Quantity, decimal ItemPrice)>();
+        = new Dictionary<string, (int Quantity, decimal ItemPrice)>();
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomerOrder"/> class, storing the
@@ -57,6 +57,7 @@ public class CustomerOrder
         Customer = customer;
         OrderNumber = orderNumber;
         Restaurant = restaurant;
+        OrderStatus = OrderStatus.NotOrdered;
     }
 
     /// <summary>
@@ -95,14 +96,40 @@ public class CustomerOrder
 
     /// <summary>
     /// Allows updating of the <see cref="Entities.OrderStatus"/>.
+    /// <para> Orders go in order as: </para>
+    /// <para> - Ordered </para>
+    /// <para> - Cooking </para>
+    /// <para> - Cooked </para>
+    /// <para> - BeingDelivered </para>
+    /// <para> - Delivered </para>
     /// </summary>
     /// <param name="orderStatus"> The <see cref="Entities.OrderStatus"/> of the current order. </param>
-    public void UpdateOrderStatus(OrderStatus orderStatus)
+    public void UpdateOrderStatus()
     {
-        OrderStatus = orderStatus;
-        // TODO
-        // ???
-        // Add functionality to prevent order status from being rushed to last stage immediately
+        OrderStatus currentOrderStatus = OrderStatus;
+
+        switch (currentOrderStatus)
+        {   
+            case (OrderStatus)0:  // * Marked as not ordered by default.
+                OrderStatus = OrderStatus.Ordered;
+                break;
+
+            case (OrderStatus)1:
+                OrderStatus = OrderStatus.Cooking;
+                break;
+
+            case (OrderStatus)2:
+                OrderStatus = OrderStatus.Cooked;
+                break;
+
+            case (OrderStatus)3:
+                OrderStatus = OrderStatus.BeingDelivered;
+                break;
+
+            case (OrderStatus)4:
+                OrderStatus = OrderStatus.Delivered;
+                break;
+        }
     }
 
     /// <summary>
