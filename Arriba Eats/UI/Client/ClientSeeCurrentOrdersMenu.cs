@@ -15,8 +15,9 @@ public class ClientSeeCurrentOrdersMenu : IMenu
     private string _orderStatusStr = "Order #{0} for {1}: {2}";
 
     /// <summary>
-    /// Displays the <see cref="ClientSeeCurrentOrdersMenu"/>, then returns back to
-    /// <see cref="ClientMainMenu"/>.
+    /// Displays the <see cref="ClientSeeCurrentOrdersMenu"/>.
+    /// Any orders made (and still yet to be cooked) are displayed.
+    /// The client is then taken back to <see cref="ClientMainMenu"/> automatically.
     /// </summary>
     public void DisplayMenu()
     {

@@ -38,6 +38,11 @@ public class CustomerOrder
     /// Get the <see cref="Entities.Deliverer"/> who has been assigned to deliver the order.
     /// </summary>
     public Deliverer? Deliverer { get; private set; }
+    
+    /// <summary>
+    /// Tracks whether the <see cref="Entities.Deliverer"/> has arrived to pick up the order.
+    /// </summary>
+    public bool DelivererArrived { get; private set; }
 
     /// <summary>
     /// The collection of items in the order, stored by:
@@ -58,6 +63,7 @@ public class CustomerOrder
         OrderNumber = orderNumber;
         Restaurant = restaurant;
         OrderStatus = OrderStatus.NotOrdered;
+        DelivererArrived = false;
     }
 
     /// <summary>

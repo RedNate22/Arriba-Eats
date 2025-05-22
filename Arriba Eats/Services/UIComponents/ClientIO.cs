@@ -79,6 +79,19 @@ public static class ClientIO
     }
 
     /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.Ordered"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Ordered"/>,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool IsOrdered(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Ordered) return true;
+        else return false;
+    }
+    
+    /// <summary>
     /// Validates whether a list of <see cref="CustomerOrder"/>s contains any orders
     /// with the order status of <see cref="OrderStatus.Ordered"/>.
     /// </summary>
@@ -89,7 +102,36 @@ public static class ClientIO
     {
         foreach (CustomerOrder order in customerOrders)
         {
-            if (IODisplay.IsOrdered(order.OrderStatus)) return true;
+            if (IsOrdered(order.OrderStatus)) return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.Cooking"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Cooking"/>,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool IsCooking(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Cooking) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Validates whether a list of <see cref="CustomerOrder"/>s contains any orders
+    /// with the order status of <see cref="OrderStatus.Cooking"/>.
+    /// </summary>
+    /// <param name="customerOrders"> The list of customer orders to validate. </param>
+    /// <returns> <c>true</c> if any of the orders are marked as cooking, otherwise,
+    /// <c>false</c>. </returns>
+    public static bool ContainsCooking(List<CustomerOrder> customerOrders)
+    {
+        foreach (CustomerOrder order in customerOrders)
+        {
+            if (IsCooking(order.OrderStatus)) return true;
         }
         return false;
     }
@@ -108,7 +150,31 @@ public static class ClientIO
 
         foreach (CustomerOrder order in customerOrders)
         {
-            if (IODisplay.IsOrdered(order.OrderStatus))
+            if (IsOrdered(order.OrderStatus))
+            {
+                IODisplay.DisplayMessage(String.Format(displayOrdersStr, choiceIndex,
+                    order.OrderNumber, order.Customer.Name));
+                choiceIndex++;
+            }
+        }
+        return choiceIndex;
+    }
+    
+    /// <summary>
+    /// Iterates through the given list of <see cref="CustomerOrder"/>s
+    /// and displays them dynamically with an indexed number, the order number,
+    /// and customer's name. Then returns the final value of the index.
+    /// </summary>
+    /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
+    /// <returns> The final value of the index. </returns>
+    public static int DisplayOrdersReadyToFinish(List<CustomerOrder> customerOrders)
+    {
+        int choiceIndex = 1;
+        string displayOrdersStr = "{0}: Order #{1} for {2}";
+
+        foreach (CustomerOrder order in customerOrders)
+        {
+            if (IsCooking(order.OrderStatus))
             {
                 IODisplay.DisplayMessage(String.Format(displayOrdersStr, choiceIndex,
                     order.OrderNumber, order.Customer.Name));

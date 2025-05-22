@@ -232,19 +232,6 @@ public static class IODisplay
 
     /// <summary>
     /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
-    /// as <see cref="OrderStatus.Ordered"/>.
-    /// </summary>
-    /// <param name="orderStatus"> The status of the order to validate. </param>
-    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Ordered"/>,
-    /// otherwise, <c>false</c>. </returns>
-    public static bool IsOrdered(OrderStatus orderStatus)
-    {
-        if (orderStatus == OrderStatus.Ordered) return true;
-        else return false;
-    }
-
-    /// <summary>
-    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
     /// as <see cref="OrderStatus.Delivered"/>.
     /// </summary>
     /// <param name="orderStatus"> The status of the order to validate. </param>
