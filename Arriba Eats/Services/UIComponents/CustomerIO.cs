@@ -137,8 +137,8 @@ public static class CustomerIO
     // ? split this up? or condense?
     public static int GetOrderFromCustomer(int orderNumber)
     {
-        if (CustomerBrowseRestaurantsMenu.SelectedRestaurant == null) return orderNumber;
-        Restaurant selectedRestaurant = CustomerBrowseRestaurantsMenu.SelectedRestaurant;
+        if (SessionManager.SelectedRestaurant == null) return orderNumber;
+        Restaurant selectedRestaurant = SessionManager.SelectedRestaurant;
 
         string currentOrderTotalStr = "Current order total: ${0:F2}";
         decimal currentOrderTotalDec = 0.00M;

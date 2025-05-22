@@ -107,4 +107,10 @@ public static class SessionManager
         if (_currentUser != null) return (Deliverer)_currentUser;
         else return null!;
     }
+
+    /// <summary>
+    /// Tracks the currently selected <see cref="Restaurant"/> by a <see cref="Customer"/>
+    /// in <see cref="UI.CustomerBrowseRestaurantsMenu"/>.
+    /// </summary>
+    public static Restaurant? SelectedRestaurant { get; set; }
 }

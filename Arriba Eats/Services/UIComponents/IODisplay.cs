@@ -216,16 +216,15 @@ public static class IODisplay
             else return customerOrders;
         }
 
-        // TODO
-        // else if (userType == UserType.Deliverer)
-        // {
-        //     if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Deliverer)user))
-        //     {
-        //         customerOrders = foundCustomerOrders;
-        //         return customerOrders;
-        //     }
-        //     else return customerOrders;
-        // }
+        else if (userType == UserType.Deliverer)
+        {
+            if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Deliverer)user))
+            {
+                customerOrders = foundCustomerOrders;
+                return customerOrders;
+            }
+            else return customerOrders;
+        }
 
         else return customerOrders;
     }

@@ -175,6 +175,6 @@ public class CustomerOrder
     /// <param name="deliverer"></param>
     public void AssignDeliverer(Deliverer deliverer)
     {
-        if (Deliverer == null) Deliverer = deliverer;
+        Deliverer ??= deliverer;
     }
 }

@@ -29,8 +29,7 @@ public static class DelivererIO
     /// assigned a <see cref="Deliverer"/>. </returns>
     public static List<CustomerOrder> DisplayOrdersList(out int choiceIndex)
     {
-        OrderRegistry.TryGetOrders
-            (out List<CustomerOrder> customerOrdersList, (Deliverer)SessionManager.ReturnCurrentUser());
+        var customerOrdersList = IODisplay.GetCustomerOrders();
 
         int orderColumnWidth = DelivererConstants.ORDER_HEADING_STR.Length + 2;
         int restaurantColumnWidth = DelivererConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
