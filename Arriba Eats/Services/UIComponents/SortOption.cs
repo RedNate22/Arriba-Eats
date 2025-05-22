@@ -12,23 +12,23 @@ public enum SortOption
     /// Sort <see cref="Entities.Restaurant"/>s alphabetically
     /// by <see cref="Entities.Restaurant.RestaurantName"/>.
     /// </summary>
-    Alphabetically,
+    Alphabetically = 1,
     
     /// <summary>
     /// Sort <see cref="Entities.Restaurant"/>s by
     /// distance between restaurant and the <see cref="Entities.User"/>.
     /// </summary>
-    ByDistance,
+    ByDistance = 2,
     
     /// <summary>
     /// Sort <see cref="Entities.Restaurant"/>s by their
     /// <see cref="Entities.Restaurant.RestaurantStyle"/>.
     /// </summary>
-    ByStyle,
+    ByStyle = 3,
     
     /// <summary>
     /// Sort <see cref="Entities.Restaurant"/>s by their
     /// average rating.
     /// </summary>
-    ByAverageRating
+    ByAverageRating = 4
 }

@@ -134,15 +134,8 @@ public static class IODisplay
     public static void WelcomeUser()
     {
         var currentUser = SessionManager.ReturnCurrentUser();
-        if (currentUser != null)
-        {
-            DisplayMessage($"Welcome back, {currentUser.Name}!");
-        }
-
-        else
-        {
-            DisplayMessage("No user is currently logged in.");
-        }
+        if (currentUser != null) DisplayMessage($"Welcome back, {currentUser.Name}!");
+        else DisplayMessage("No user is currently logged in.");
     }
 
     /// <summary>
@@ -196,6 +189,7 @@ public static class IODisplay
 
 
     // TODO xml
+    // ? overload?
     public static List<CustomerOrder> GetCustomerOrders()
     {
         List<CustomerOrder> customerOrders = new List<CustomerOrder>();

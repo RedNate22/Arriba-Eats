@@ -8,12 +8,6 @@ namespace UI;
 public class ClientCookOrdersMenu : IMenu
 {
     /// <summary>
-    /// Dynamically displays the orders marked as Ordered. The index number, order number, and
-    /// customer name are included.
-    /// </summary>
-    private string _displayOrdersStr = "{0}: Order #{1} for {2}";
-
-    /// <summary>
     /// Displays a prompt to the <see cref="Entities.Client"/>, informing them that the
     /// <see cref="Entities.CustomerOrder"/> has been marked as cooking.
     /// </summary>
@@ -30,19 +24,10 @@ public class ClientCookOrdersMenu : IMenu
         var customerOrders = IODisplay.GetCustomerOrders();
         if (customerOrders.Count != 0 && ClientIO.ContainsOrdered(customerOrders))
         {
-            foreach (var order in customerOrders)
-            {
-                // ? split into method
-                if (IODisplay.IsOrdered(order.OrderStatus))
-                {
-                    IODisplay.DisplayMessage(String.Format(_displayOrdersStr, choiceIndex,
-                        order.OrderNumber, order.Customer.Name));
-                    choiceIndex++;
-                }
-            }
+            choiceIndex = ClientIO.DisplayOrderedOrders(customerOrders);
+            int returnPreviousMenuInt = choiceIndex;
 
-            int returnPreviousMenuChoiceInt = choiceIndex;
-            string returnPreviousMenuChoiceStr = IOUtilities.ReturnToPreviousMenuStr(returnPreviousMenuChoiceInt);
+            string returnPreviousMenuChoiceStr = IOUtilities.ReturnToPreviousMenuStr(returnPreviousMenuInt);
             string enterChoiceStr = IOUtilities.EnterChoiceStr(choiceIndex);
 
             IODisplay.DisplayMessage(returnPreviousMenuChoiceStr);
@@ -50,7 +35,7 @@ public class ClientCookOrdersMenu : IMenu
 
             choice = IODisplay.GetChoice();
 
-            if (choice == returnPreviousMenuChoiceInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
+            if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
 
             else if (IOUtilities.IsValueInIndexRange(customerOrders, choice - 1))
             {

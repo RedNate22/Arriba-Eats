@@ -6,60 +6,60 @@ using UI;
 namespace UIComponents;
 
 /// <summary>
-/// Contains various static methods for handling IO with <see cref="Customer"/> users. 
+/// Contains various static methods for handling I/O with <see cref="Customer"/> users. 
 /// Uses <see cref="IOUtilities"/> for input and output formatting and validation. 
 /// </summary>
 public static class CustomerIO
 {
     /// <summary>
+    /// To be called by <see cref="DisplayRestaurantsList"/>.
     /// Extracts a list of the currently registered <see cref="Restaurant"/>s from
     /// <see cref="RestaurantRegistry"/> using <see cref="RestaurantRegistry.TryListRestaurants()"/>. 
     /// Based on the parsed <see cref="SortOption"/>, sorts the list appropriately.
     /// </summary>
     /// <param name="sortType"> The <see cref="SortOption"/> to be selected for ordering the list. </param>
     /// <returns> The sorted <see cref="Restaurant"/>s list, ordered by the given <see cref="SortOption"/>. </returns>
-    public static List<Restaurant> GetRestaurantsList(SortOption sortType)
+    private static List<Restaurant> SortRestaurants(SortOption sortType)
     {
         if (RestaurantRegistry.TryListRestaurants(out List<Restaurant> restaurantsList))
         {
-            if (sortType == SortOption.Alphabetically)
+            switch (sortType)
             {
-                static int SortAlphabetically(Restaurant a, Restaurant b)
-                {
-                    return a.RestaurantName.CompareTo(b.RestaurantName);
-                }
-                restaurantsList.Sort(SortAlphabetically);
-            }
+                case (SortOption) 1:
+                    static int SortAlphabetically(Restaurant a, Restaurant b)
+                    {
+                        return a.RestaurantName.CompareTo(b.RestaurantName);
+                    }
+                    restaurantsList.Sort(SortAlphabetically);
+                    break;
 
-            else if (sortType == SortOption.ByDistance)
-            {
-                static int SortByDistance(Restaurant a, Restaurant b)
-                {
-                    int distanceA = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), a);
-                    int distanceB = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), b);
-                    int distanceComparison = distanceA.CompareTo(distanceB);
+                case (SortOption) 2:
+                    static int SortByDistance(Restaurant a, Restaurant b)
+                    {
+                        int distanceA = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), a);
+                        int distanceB = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), b);
+                        int distanceComparison = distanceA.CompareTo(distanceB);
 
-                    // If distances are the same (returning 0), instead sort by name
-                    return distanceComparison != 0 ? distanceComparison : a.RestaurantName.CompareTo(b.RestaurantName);
-                }
-                restaurantsList.Sort(SortByDistance);
-            }
+                        // * If distances are the same (returning 0), instead sort by name
+                        return distanceComparison != 0 ? distanceComparison : a.RestaurantName.CompareTo(b.RestaurantName);
+                    }
+                    restaurantsList.Sort(SortByDistance);
+                    break;
 
-            else if (sortType == SortOption.ByStyle)
-            {
-                static int SortByStyle(Restaurant a, Restaurant b)
-                {
-                    int styleComparison = a.RestaurantStyle.CompareTo(b.RestaurantStyle);
+                case (SortOption) 3:
+                    static int SortByStyle(Restaurant a, Restaurant b)
+                    {
+                        int styleComparison = a.RestaurantStyle.CompareTo(b.RestaurantStyle);
 
-                    // If styles are the same (returning 0), instead sort by name 
-                    return styleComparison != 0 ? styleComparison : a.RestaurantName.CompareTo(b.RestaurantName);
-                }
-                restaurantsList.Sort(SortByStyle);
-            }
+                        // * If styles are the same (returning 0), instead sort by name 
+                        return styleComparison != 0 ? styleComparison : a.RestaurantName.CompareTo(b.RestaurantName);
+                    }
+                    restaurantsList.Sort(SortByStyle);
+                    break;
 
-            else if (sortType == SortOption.ByAverageRating)
-            {
-                // TODO
+                case (SortOption) 4:
+                    // TODO average rating sort
+                    break;
             }
             return restaurantsList;
         }
@@ -79,7 +79,7 @@ public static class CustomerIO
     /// <returns> The list of currently registered <see cref="Restaurant"/>'s. </returns>
     public static List<Restaurant> DisplayRestaurantsList(out int returnPreviousMenuChoice)
     {
-        List<Restaurant> restaurantsList = GetRestaurantsList(CustomerSortRestaurantsMenu.SortOption);
+        List<Restaurant> restaurantsList = SortRestaurants(CustomerSortRestaurantsMenu.SortOption);
 
         int restaurantColumnWidth = 7;
         int locationColumnWidth = CustomerConstants.LOCATION_HEADING_STR.Length + 4;
@@ -125,11 +125,12 @@ public static class CustomerIO
     }
 
     /// <summary>
+    /// To be called by <see cref="GetOrderFromCustomer"/>.
     /// Reads a string input from the user via the console.
     /// <para> Attempts to convert the input into an integer. </para>
     /// </summary>
     /// <returns> The valid integer quantity, otherwise <c>-1</c>. </returns>
-    public static int GetItemQuantity()
+    private static int GetItemQuantity()
     {
         string? quantity = IODisplay.ReadInput();
 

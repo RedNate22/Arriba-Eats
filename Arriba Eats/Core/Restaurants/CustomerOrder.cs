@@ -95,8 +95,9 @@ public class CustomerOrder
     }
 
     /// <summary>
-    /// Allows updating of the <see cref="Entities.OrderStatus"/>.
+    /// Progresses the <see cref="Entities.OrderStatus"/> on each call.
     /// <para> Orders go in order as: </para>
+    /// <para> - NotOrdered (default) </para>
     /// <para> - Ordered </para>
     /// <para> - Cooking </para>
     /// <para> - Cooked </para>
@@ -110,23 +111,23 @@ public class CustomerOrder
 
         switch (currentOrderStatus)
         {   
-            case (OrderStatus)0:  // * Marked as not ordered by default.
+            case (OrderStatus) 0:  // * Marked as not ordered by default.
                 OrderStatus = OrderStatus.Ordered;
                 break;
 
-            case (OrderStatus)1:
+            case (OrderStatus) 1:
                 OrderStatus = OrderStatus.Cooking;
                 break;
 
-            case (OrderStatus)2:
+            case (OrderStatus) 2:
                 OrderStatus = OrderStatus.Cooked;
                 break;
 
-            case (OrderStatus)3:
+            case (OrderStatus) 3:
                 OrderStatus = OrderStatus.BeingDelivered;
                 break;
 
-            case (OrderStatus)4:
+            case (OrderStatus) 4:
                 OrderStatus = OrderStatus.Delivered;
                 break;
         }
