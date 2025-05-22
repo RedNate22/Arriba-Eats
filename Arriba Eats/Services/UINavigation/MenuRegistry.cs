@@ -28,6 +28,7 @@ public static class MenuRegistry
         { MenuState.ClientSeeCurrentOrdersMenu, new ClientSeeCurrentOrdersMenu() },
         { MenuState.ClientStartCookingMenu, new ClientStartCookingMenu() },
         { MenuState.ClientFinishCookingMenu, new ClientFinishCookingMenu() },
+        { MenuState.ClientHandleDeliverersMenu, new ClientHandleDeliverersMenu() },
         { MenuState.DelivererMainMenu, new DelivererMainMenu() },
     };
 }

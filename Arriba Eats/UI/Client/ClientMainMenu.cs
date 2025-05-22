@@ -75,7 +75,7 @@ public class ClientMainMenu : IMenu
                 break;
 
             case HANDLE_DELIVERERS_INT:
-                // TODO
+                UIFlowController.ChangeMenu(MenuState.ClientHandleDeliverersMenu);
                 break;
 
             case LOG_OUT_INT:

@@ -110,30 +110,29 @@ public class CustomerOrder
     /// <para> - BeingDelivered </para>
     /// <para> - Delivered </para>
     /// </summary>
-    /// <param name="orderStatus"> The <see cref="Entities.OrderStatus"/> of the current order. </param>
     public void UpdateOrderStatus()
     {
         OrderStatus currentOrderStatus = OrderStatus;
 
         switch (currentOrderStatus)
         {   
-            case (OrderStatus) 0:  // * Marked as not ordered by default.
+            case (OrderStatus) 0:  // Not ordered
                 OrderStatus = OrderStatus.Ordered;
                 break;
 
-            case (OrderStatus) 1:
+            case (OrderStatus) 1:  // Ordered
                 OrderStatus = OrderStatus.Cooking;
                 break;
 
-            case (OrderStatus) 2:
+            case (OrderStatus) 2:  // Cooking
                 OrderStatus = OrderStatus.Cooked;
                 break;
 
-            case (OrderStatus) 3:
+            case (OrderStatus) 3:  // Cooked
                 OrderStatus = OrderStatus.BeingDelivered;
                 break;
 
-            case (OrderStatus) 4:
+            case (OrderStatus) 4:  // Being Delivered
                 OrderStatus = OrderStatus.Delivered;
                 break;
         }

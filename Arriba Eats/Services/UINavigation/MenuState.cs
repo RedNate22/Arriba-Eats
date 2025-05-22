@@ -71,17 +71,22 @@ public enum MenuState
     ClientMainMenu,
 
     /// <summary>
-    /// Represents the <see cref="UI.ClientSeeCurrentOrdersMenu"/>
+    /// Represents the <see cref="UI.ClientSeeCurrentOrdersMenu"/>.
     /// </summary>
     ClientSeeCurrentOrdersMenu,
 
     /// <summary>
-    /// Represents the <see cref="UI.ClientStartCookingMenu"/>
+    /// Represents the <see cref="UI.ClientStartCookingMenu"/>.
     /// </summary>
     ClientStartCookingMenu,
+
+    /// <summary>
+    /// Represents the <see cref="UI.ClientFinishCookingMenu"/>.
+    /// </summary>
+    ClientFinishCookingMenu,
     
     /// <summary>
-    /// Represents the <see cref="UI.ClientFinishCookingMenu"/>
+    /// Represents the <see cref="UI.ClientHandleDeliverersMenu"/>.
     /// </summary>
-    ClientFinishCookingMenu
+    ClientHandleDeliverersMenu
 }
