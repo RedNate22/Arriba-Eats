@@ -81,23 +81,22 @@ public static class CustomerIO
     {
         List<Restaurant> restaurantsList = SortRestaurants(CustomerSortRestaurantsMenu.SortOption);
 
-        int restaurantColumnWidth = 7;
+        int restaurantColumnWidth = CustomerConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
         int locationColumnWidth = CustomerConstants.LOCATION_HEADING_STR.Length + 4;
         int distanceColumnWidth = CustomerConstants.DISTANCE_HEADING_STR.Length + 2;
         int styleColumnWidth = CustomerConstants.STYLE_HEADING_STR.Length + 7;
 
         // Dynamically increase width of restaurant name column
-        int maxRestaurantNameWidth = CustomerConstants.RESTAURANT_NAME_HEADING_STR.Length + restaurantColumnWidth;
         foreach (Restaurant restaurant in restaurantsList)
         {
-            if (restaurant.RestaurantName.Length > maxRestaurantNameWidth)
+            if (restaurant.RestaurantName.Length > restaurantColumnWidth)
             {
-                maxRestaurantNameWidth = restaurant.RestaurantName.Length + 1;
+                restaurantColumnWidth = restaurant.RestaurantName.Length + 1;
             }
         }
 
         IODisplay.DisplayMessage("   " +
-            CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(maxRestaurantNameWidth)
+            CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
             + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
             + CustomerConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
             + CustomerConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
@@ -107,7 +106,7 @@ public static class CustomerIO
         for (int i = 0; i < restaurantsList.Count(); i++)
         {
             IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
-                + $"{restaurantsList[i].RestaurantName}".PadRight(maxRestaurantNameWidth)
+                + $"{restaurantsList[i].RestaurantName}".PadRight(restaurantColumnWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
                 + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)

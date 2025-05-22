@@ -20,26 +20,24 @@ public class ClientCookOrdersMenu : IMenu
         IODisplay.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
         int choiceIndex = 1;
         int choice;
-
+        
         var customerOrders = IODisplay.GetCustomerOrders();
-        if (customerOrders.Count != 0 && ClientIO.ContainsOrdered(customerOrders))
+        bool containsReadyOrders = customerOrders.Count != 0 && ClientIO.ContainsOrdered(customerOrders);
+
+        if (containsReadyOrders)
         {
             choiceIndex = ClientIO.DisplayOrderedOrders(customerOrders);
             int returnPreviousMenuInt = choiceIndex;
 
-            string returnPreviousMenuChoiceStr = IOUtilities.ReturnToPreviousMenuStr(returnPreviousMenuInt);
-            string enterChoiceStr = IOUtilities.EnterChoiceStr(choiceIndex);
-
-            IODisplay.DisplayMessage(returnPreviousMenuChoiceStr);
-            IODisplay.DisplayMessage(enterChoiceStr);
+            IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+            IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
             choice = IODisplay.GetChoice();
 
             if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
-
             else if (IOUtilities.IsValueInIndexRange(customerOrders, choice - 1))
             {
-                var selectedOrder = customerOrders[choice - 1];  // Adjust for index-based referencing
+                var selectedOrder = customerOrders[choice - 1];  // * Adjust for index-based referencing
                 selectedOrder.UpdateOrderStatus();
                 IODisplay.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));
             }
@@ -47,7 +45,7 @@ public class ClientCookOrdersMenu : IMenu
             else IODisplay.InvalidChoice();
         }
 
-        else  // No orders
+        else
         {
             string returnPreviousMenuStr = IOUtilities.ReturnToPreviousMenuStr(choiceIndex);
             string enterChoiceNoOrdersStr = IOUtilities.EnterChoiceStr(choiceIndex);

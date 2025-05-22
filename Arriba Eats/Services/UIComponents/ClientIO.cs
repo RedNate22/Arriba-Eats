@@ -106,7 +106,7 @@ public static class ClientIO
         int choiceIndex = 1;
         string displayOrdersStr = "{0}: Order #{1} for {2}";
 
-        foreach (var order in customerOrders)
+        foreach (CustomerOrder order in customerOrders)
         {
             if (IODisplay.IsOrdered(order.OrderStatus))
             {

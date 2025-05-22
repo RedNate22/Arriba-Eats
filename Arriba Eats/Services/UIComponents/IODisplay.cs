@@ -195,7 +195,7 @@ public static class IODisplay
         List<CustomerOrder> customerOrders = new List<CustomerOrder>();
 
         User user = SessionManager.ReturnCurrentUser();
-        var userType = SessionManager.ReturnUserType();
+        UserType userType = SessionManager.ReturnUserType();
         if (userType == UserType.Customer)
         {
             if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Customer)user))
