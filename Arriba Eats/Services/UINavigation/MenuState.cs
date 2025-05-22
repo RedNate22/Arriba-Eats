@@ -61,11 +61,6 @@ public enum MenuState
     CustomerRateRestaurantMenu,
 
     /// <summary>
-    /// Represents the <see cref="UI.DelivererMainMenu"/>.
-    /// </summary>
-    DelivererMainMenu,
-
-    /// <summary>
     /// Represents the <see cref="UI.ClientMainMenu"/>.
     /// </summary>
     ClientMainMenu,
@@ -88,5 +83,15 @@ public enum MenuState
     /// <summary>
     /// Represents the <see cref="UI.ClientHandleDeliverersMenu"/>.
     /// </summary>
-    ClientHandleDeliverersMenu
+    ClientHandleDeliverersMenu,
+
+    /// <summary>
+    /// Represents the <see cref="UI.DelivererMainMenu"/>.
+    /// </summary>
+    DelivererMainMenu,
+    
+    /// <summary>
+    /// Represents the <see cref="UI.DelivererListOrdersAvailableMenu"/>
+    /// </summary>
+    DelivererListOrdersAvailableMenu,
 }

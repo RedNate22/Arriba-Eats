@@ -30,5 +30,6 @@ public static class MenuRegistry
         { MenuState.ClientFinishCookingMenu, new ClientFinishCookingMenu() },
         { MenuState.ClientHandleDeliverersMenu, new ClientHandleDeliverersMenu() },
         { MenuState.DelivererMainMenu, new DelivererMainMenu() },
+        { MenuState.DelivererListOrdersAvailableMenu, new DelivererListOrdersAvailableMenu() }
     };
 }

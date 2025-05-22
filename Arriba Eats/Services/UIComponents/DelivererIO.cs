@@ -11,6 +11,12 @@ namespace UIComponents;
 /// </summary>
 public static class DelivererIO
 {
+    public static bool DelivererAlreadyAssignedToOrder()
+    {
+        Deliverer user = SessionManager.ReturnCurrentDeliverer();
+        return OrderRegistry.TryFindAssignedOrder(user);
+    }
+
     /// <summary>
     /// Gets the list of registered <see cref="CustomerOrder"/>s ready to be assigned to a <see cref="Deliverer"/>, 
     /// and then displays the orers and their details under their respective headings. 
@@ -18,10 +24,10 @@ public static class DelivererIO
     /// is registered, the index number for the listed options is therefore dynamic, 
     /// and is assigned in the <c>out</c> parameter to be referenced. </para>
     /// </summary>
-    /// <param name="returnPreviousMenuChoice"> The index number for the listed options. </param>
+    /// <param name="choiceIndex"> The index number for the listed options. </param>
     /// <returns> The list of currently registered <see cref="CustomerOrder"/>s ready to be
     /// assigned a <see cref="Deliverer"/>. </returns>
-    public static List<CustomerOrder> DisplayOrdersList(out int returnPreviousMenuChoice)
+    public static List<CustomerOrder> DisplayOrdersList(out int choiceIndex)
     {
         OrderRegistry.TryGetOrders
             (out List<CustomerOrder> customerOrdersList, (Deliverer)SessionManager.ReturnCurrentUser());
@@ -60,7 +66,7 @@ public static class DelivererIO
                 + $"{customerOrdersList[i].TotalDistance}");
             orderChoiceIndex++;
         }
-        returnPreviousMenuChoice = orderChoiceIndex;
+        choiceIndex = orderChoiceIndex;
         return customerOrdersList;
     }
 }

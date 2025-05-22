@@ -96,6 +96,15 @@ public static class SessionManager
     {
         if (_currentUser != null) return _currentUser;
         else return null!;
+    }
 
+    /// <summary>
+    /// Retrieves the currently authenticated <see cref="Deliverer"/>.
+    /// </summary>
+    /// <returns> The currently authenticated <see cref="Deliverer"/>. </returns>
+    public static Deliverer ReturnCurrentDeliverer()
+    {
+        if (_currentUser != null) return (Deliverer)_currentUser;
+        else return null!;
     }
 }

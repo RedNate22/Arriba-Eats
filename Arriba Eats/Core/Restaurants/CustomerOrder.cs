@@ -38,13 +38,16 @@ public class CustomerOrder
     /// Get the <see cref="Entities.Deliverer"/> who has been assigned to deliver the order.
     /// </summary>
     public Deliverer? Deliverer { get; private set; }
-    
+
     /// <summary>
     /// Tracks whether the <see cref="Entities.Deliverer"/> has arrived to pick up the order.
     /// </summary>
     public bool DelivererArrived { get; private set; }
 
-    // TODO xml
+    /// <summary>
+    /// Gets the total taxicab distance a <see cref="Entities.Deliverer"/> must travel
+    /// to pick up and deliver an order.
+    /// </summary>
     public int TotalDistance { get; private set; }
 
     /// <summary>
@@ -118,24 +121,24 @@ public class CustomerOrder
         OrderStatus currentOrderStatus = OrderStatus;
 
         switch (currentOrderStatus)
-        {   
-            case (OrderStatus) 0:  // Not ordered
+        {
+            case (OrderStatus)0:  // Not ordered
                 OrderStatus = OrderStatus.Ordered;
                 break;
 
-            case (OrderStatus) 1:  // Ordered
+            case (OrderStatus)1:  // Ordered
                 OrderStatus = OrderStatus.Cooking;
                 break;
 
-            case (OrderStatus) 2:  // Cooking
+            case (OrderStatus)2:  // Cooking
                 OrderStatus = OrderStatus.Cooked;
                 break;
 
-            case (OrderStatus) 3:  // Cooked
+            case (OrderStatus)3:  // Cooked
                 OrderStatus = OrderStatus.BeingDelivered;
                 break;
 
-            case (OrderStatus) 4:  // Being Delivered
+            case (OrderStatus)4:  // Being Delivered
                 OrderStatus = OrderStatus.Delivered;
                 break;
         }
@@ -164,5 +167,14 @@ public class CustomerOrder
             totalSpent += item.Value.Quantity * item.Value.ItemPrice;
         }
         return totalSpent;
+    }
+
+    /// <summary>
+    /// Assigns a <see cref="Entities.Deliverer"/> to the order.
+    /// </summary>
+    /// <param name="deliverer"></param>
+    public void AssignDeliverer(Deliverer deliverer)
+    {
+        if (Deliverer == null) Deliverer = deliverer;
     }
 }

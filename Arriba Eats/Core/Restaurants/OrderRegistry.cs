@@ -80,4 +80,23 @@ public static class OrderRegistry
         }
         return getOrdersToDeliver.Count > 0;
     }
+
+    /// <summary>
+    /// Attempts to locate the given <see cref="Deliverer"/> and if they are currently assigned
+    /// to an active order.
+    /// </summary>
+    /// <param name="deliverer"> The <see cref="Deliverer"/> to locate. </param>
+    /// <returns> <c>true</c> if the <see cref="Deliverer"/> is found to be assigned to an active order,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool TryFindAssignedOrder(Deliverer deliverer)
+    {
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Deliverer == deliverer && order.OrderStatus != OrderStatus.Delivered)
+            {
+                return true;
+            }
+        }
+        return false;
+    } 
 }

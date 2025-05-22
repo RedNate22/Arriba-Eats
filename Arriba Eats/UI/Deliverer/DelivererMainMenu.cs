@@ -58,7 +58,7 @@ public class DelivererMainMenu : IMenu
                 break;
 
             case LIST_ORDERS_AVAILABLE_INT:
-                // TODO
+                UIFlowController.ChangeMenu(MenuState.DelivererListOrdersAvailableMenu);
                 break;
 
             case ARRIVED_RESTAURANT_INT:
