@@ -101,7 +101,7 @@ public static class ClientIO
     /// </summary>
     /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
     /// <returns> The final value of the index. </returns>
-    public static int DisplayOrderedOrders(List<CustomerOrder> customerOrders)
+    public static int DisplayOrdersReadyToCook(List<CustomerOrder> customerOrders)
     {
         int choiceIndex = 1;
         string displayOrdersStr = "{0}: Order #{1} for {2}";
