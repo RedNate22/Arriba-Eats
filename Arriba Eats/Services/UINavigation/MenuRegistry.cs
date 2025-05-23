@@ -11,7 +11,7 @@ public static class MenuRegistry
     /// <summary>
     /// Maps each <see cref="MenuState"/> to its corresponding <see cref="IMenu"/> instance.
     /// <para> Allows dynamic menu selection based on the current state of <see cref="UIFlowController.CurrentState"/>. </para>
-    /// <para> E.g. <see cref="MainMenu.DisplayMenu()"/>.</para>
+    /// <para> E.g. <see cref="UIFlowController.ChangeMenu(MenuState)"/>.</para>
     /// </summary>
     public static Dictionary<MenuState, IMenu> menuMap = new Dictionary<MenuState, IMenu>
     {
@@ -30,6 +30,7 @@ public static class MenuRegistry
         { MenuState.ClientFinishCookingMenu, new ClientFinishCookingMenu() },
         { MenuState.ClientHandleDeliverersMenu, new ClientHandleDeliverersMenu() },
         { MenuState.DelivererMainMenu, new DelivererMainMenu() },
-        { MenuState.DelivererListOrdersAvailableMenu, new DelivererListOrdersAvailableMenu() }
+        { MenuState.DelivererListOrdersAvailableMenu, new DelivererListOrdersAvailableMenu() },
+        { MenuState.DelivererArrivedAtRestaurantMenu, new DelivererArrivedAtRestaurantMenu() },
     };
 }

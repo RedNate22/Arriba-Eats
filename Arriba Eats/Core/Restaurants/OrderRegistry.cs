@@ -82,13 +82,35 @@ public static class OrderRegistry
     }
 
     /// <summary>
+    /// Attempts to find the currently assigned order for the given <see cref="Deliverer"/>,
+    /// then assigns this order to the <c>out</c> parameter. If no order is found, <c>null</c> is returned.
+    /// </summary>
+    /// <param name="deliverer"> The <see cref="Deliverer"/> to find the <see cref="CustomerOrder"/> for. </param>
+    /// <param name="currentOrder"> The currently assigned <see cref="CustomerOrder"/> for the <see cref="Deliverer"/>. </param>
+    /// <returns> <c>true</c>, and assigns the currently assigned order, otherwise, <c>false</c>, and
+    /// <c>null</c> is assigned. </returns>
+    public static bool TryGetCurrentlyAssignedOrder(Deliverer deliverer, out CustomerOrder currentOrder)
+    {
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Deliverer == deliverer && order.OrderStatus != OrderStatus.Delivered)
+            {
+                currentOrder = order;
+                return true;
+            }
+        }
+        currentOrder = null!;
+        return false;
+    }
+
+    /// <summary>
     /// Attempts to locate the given <see cref="Deliverer"/> and if they are currently assigned
     /// to an active order.
     /// </summary>
     /// <param name="deliverer"> The <see cref="Deliverer"/> to locate. </param>
     /// <returns> <c>true</c> if the <see cref="Deliverer"/> is found to be assigned to an active order,
     /// otherwise, <c>false</c>. </returns>
-    public static bool TryFindAssignedOrder(Deliverer deliverer)
+    public static bool TryFindAlreadyAssignedOrder(Deliverer deliverer)
     {
         foreach (CustomerOrder order in _orderRegistry)
         {
@@ -98,5 +120,43 @@ public static class OrderRegistry
             }
         }
         return false;
-    } 
+    }
+
+    /// <summary>
+    /// Attempts to locate the given <see cref="Deliverer"/> and if they are currently assigned
+    /// to an active order, as well as in the process of delivering it.
+    /// </summary>
+    /// <param name="deliverer"> The <see cref="Deliverer"/> to locate. </param>
+    /// <returns> <c>true</c> if the <see cref="Deliverer"/> is found and is currently delivering
+    /// the order, otherwise, <c>false</c>. </returns>
+    public static bool TryFindPickedUpOrder(Deliverer deliverer)
+    {
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Deliverer == deliverer && order.OrderStatus == OrderStatus.BeingDelivered)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Attempts to validate whether the given <see cref="Deliverer"/> has already arrived at
+    /// the <see cref="Restaurant"/> for the currently assigned order.
+    /// </summary>
+    /// <param name="deliverer"> The <see cref="Deliverer"/> to validate. </param>
+    /// <returns> <c>true</c> if the <see cref="Deliverer"/> has already arrived, otherwise, <c>false</c>. </returns>
+    public static bool TryFindDelivererAlreadyArrived(Deliverer deliverer)
+    {
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Deliverer == deliverer && order.OrderStatus != OrderStatus.Delivered
+                && order.HasDelivererArrivedAtRestaurant())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

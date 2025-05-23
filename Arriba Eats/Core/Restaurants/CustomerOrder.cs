@@ -40,9 +40,10 @@ public class CustomerOrder
     public Deliverer? Deliverer { get; private set; }
 
     /// <summary>
-    /// Tracks whether the <see cref="Entities.Deliverer"/> has arrived to pick up the order.
+    /// Tracks whether the <see cref="Entities.Deliverer"/> has arrived at the
+    /// <see cref="Entities.Restaurant"/> to pick up the order.
     /// </summary>
-    public bool DelivererArrived { get; private set; }
+    public bool DelivererArrivedAtRestaurant { get; private set; }
 
     /// <summary>
     /// Gets the total taxicab distance a <see cref="Entities.Deliverer"/> must travel
@@ -69,7 +70,7 @@ public class CustomerOrder
         OrderNumber = orderNumber;
         Restaurant = restaurant;
         OrderStatus = OrderStatus.NotOrdered;
-        DelivererArrived = false;
+        DelivererArrivedAtRestaurant = false;
     }
 
     /// <summary>
@@ -176,5 +177,34 @@ public class CustomerOrder
     public void AssignDeliverer(Deliverer deliverer)
     {
         Deliverer ??= deliverer;
+    }
+
+    /// <summary>
+    /// Updates the total taxicab distance for the <see cref="Entities.Deliverer"/> to 
+    /// reach the <see cref="Entities.Customer"/> with the order.
+    /// </summary>
+    /// <param name="totalDistance"> The new total taxicab distance. </param>
+    public void UpdateTotalDistance(int totalDistance)
+    {
+        TotalDistance = totalDistance;
+    }
+
+    /// <summary>
+    /// Updates the order details to mark the <see cref="Entities.Deliverer"/> has arrived at the 
+    /// <see cref="Entities.Restaurant"/>.
+    /// </summary>
+    public void DelivererAtRestaurant()
+    {
+        DelivererArrivedAtRestaurant = true;
+    }
+
+    /// <summary>
+    /// Validates whether the <see cref="Entities.Deliverer"/> has arrived at the
+    /// <see cref="Entities.Restaurant"/> to pick up the order. 
+    /// </summary>
+    /// <returns></returns>
+    public bool HasDelivererArrivedAtRestaurant()
+    {
+        return DelivererArrivedAtRestaurant;
     }
 }

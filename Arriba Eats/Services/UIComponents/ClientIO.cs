@@ -5,7 +5,7 @@ using UI;
 namespace UIComponents;
 
 /// <summary>
-/// Contains various static methods for handling I/O with <see cref="Client"/> users.
+/// Contains various static methods for handling I/O specific to <see cref="Client"/> users.
 /// Uses <see cref="IOUtilities"/> for input and output formatting and validation.
 /// </summary>
 public static class ClientIO

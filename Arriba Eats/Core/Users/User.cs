@@ -120,4 +120,13 @@ public abstract class User
             ? foundUserType
             : UserType.Default;
     }
+
+    /// <summary>
+    /// Updates the current <see cref="User"/>'s location to the new value.
+    /// </summary>
+    /// <param name="newLocation"> The new location to update to. </param>
+    public void UpdateLocation(string newLocation)
+    {
+        Location = newLocation;
+    }
 }

@@ -4,7 +4,7 @@ using Entities;
 namespace UIComponents;
 
 /// <summary>
-/// Contains various static methods for handling general I/O with the user.
+/// Contains various static methods for handling general I/O with any users, regardless of type.
 /// </summary>
 public static class IODisplay
 {
@@ -168,7 +168,7 @@ public static class IODisplay
     /// </summary>
     /// <param name="userA"> The first user whose location will be compared. </param>
     /// <param name="userB"> The second user whose location will be compared. </param>
-    /// <returns> The taxicab distance between the user and the restaurant. </returns>
+    /// <returns> The taxicab distance between both users. </returns>
     public static int GetDistance(User userA, User userB)
     {
         // userA A1, A2
@@ -186,7 +186,6 @@ public static class IODisplay
         int distance = Math.Abs(a1 - b1) + Math.Abs(a2 - b2);
         return distance;
     }
-
 
     // TODO xml
     // ? overload?
@@ -240,5 +239,18 @@ public static class IODisplay
     {
         if (orderStatus == OrderStatus.Delivered) return true;
         else return false;
+    }
+
+    /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.Ordered"/> or <see cref="OrderStatus.Cooking"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Ordered"/>
+    /// or <see cref="OrderStatus.Cooking"/>, otherwise, <c>false</c>. </returns>
+    public static bool IsOrderBeingPrepared(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Ordered || orderStatus == OrderStatus.Cooking) return true;
+        else return true;
     }
 }

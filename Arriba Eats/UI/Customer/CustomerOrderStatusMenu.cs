@@ -5,7 +5,7 @@ using UINavigation;
 namespace UI;
 
 /// <summary>
-/// Represents the menu where a customer can view the status of all their orders,
+/// Represents the menu where a <see cref="Entities.Customer"/> can view the status of all their orders,
 /// both active and past.
 /// </summary>
 public class CustomerOrderStatusMenu : IMenu
@@ -16,9 +16,8 @@ public class CustomerOrderStatusMenu : IMenu
     private string _orderStatusStr = "Order #{0} from {1}: {2}";
 
     /// <summary>
-    /// If the order is marked as delivered, displays the deliverer's name and 
-    /// <see cref="Deliverer.LicencePlate"/>
-    /// of the <see cref="Deliverer"/> who delivered the order.
+    /// If the order is marked as delivered, displays a prompt with the 
+    /// <see cref="Entities.Deliverer"/>'s name and licence plate.
     /// </summary>
     private string _orderDeliveredByStr = "This order was delivered by {0} (licence plate: {1})";
 

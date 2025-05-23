@@ -4,10 +4,20 @@ using UINavigation;
 
 namespace UI;
 
-// TODO xml
+/// <summary>
+/// Represents the menu where a <see cref="Entities.Deliverer"/> can view all the currently
+/// active <see cref="Entities.CustomerOrder"/>s and accept them.
+/// </summary>
 public class DelivererListOrdersAvailableMenu : IMenu
 {
-    // TODO xml
+    /// <summary>
+    /// Displays the <see cref="DelivererListOrdersAvailableMenu"/>, which displays all the currently
+    /// active <see cref="Entities.CustomerOrder"/>s, along with the relevant information a <see cref="Entities.Deliverer"/>
+    /// may need. 
+    /// <para> The deliverer can then accept one of the orders, and is then returned to the
+    /// <see cref="DelivererMainMenu"/>. If the deliverer has already been assigned to an active order,
+    /// they are returned back to the <see cref="DelivererMainMenu"/> automatically. </para>
+    /// </summary>
     public void DisplayMenu()
     {
         if (DelivererIO.DelivererAlreadyAssignedToOrder())
@@ -18,6 +28,10 @@ public class DelivererListOrdersAvailableMenu : IMenu
 
         else
         {
+            string delivererLocation = RegistrationIO.GetLocation();
+            DelivererIO.DelivererChangeLocation(delivererLocation);
+
+            // Display active orders
             IODisplay.DisplayMessage(DelivererConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
             var customerOrdersList = DelivererIO.DisplayOrdersList(out int choiceIndex);
             IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));

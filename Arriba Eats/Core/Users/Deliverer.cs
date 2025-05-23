@@ -11,8 +11,8 @@ public class Deliverer : User
     /// <summary>
     /// Get the deliverer's license place.
     /// </summary>
-    public string LicencePlate { get; private set;}
-    
+    public string LicencePlate { get; private set; }
+
     /// <summary>
     /// Initialises a new instance of the <see cref="User"/> class
     /// with the specified details.
@@ -25,10 +25,10 @@ public class Deliverer : User
     /// <param name="mobile"> The deliverer's mobile. </param>
     /// <param name="password"> The deliverer's password. </param>
     /// <param name="location"> The deliverer's location. Defaults to 0,0. </param>
-    public Deliverer(string name, int age, string email, string mobile, string password, 
-        string licencePlate, string location = "0,0") 
+    public Deliverer(string name, int age, string email, string mobile, string password,
+        string licencePlate, string location = "0,0")
         : base(name, age, email, mobile, password, location)
-        {
-            LicencePlate = licencePlate;
-        }
+    {
+        LicencePlate = licencePlate;
+    }
 }

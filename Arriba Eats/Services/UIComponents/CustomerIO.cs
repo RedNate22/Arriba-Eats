@@ -93,6 +93,7 @@ public static class CustomerIO
             }
         }
 
+        // Display the headings
         IODisplay.DisplayMessage("   "
             + CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
             + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
@@ -100,6 +101,7 @@ public static class CustomerIO
             + CustomerConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
             + CustomerConstants.RATING_HEADING_STR);
 
+        // Display the restaurants
         int restaurantChoiceIndex = 1;
         for (int i = 0; i < restaurantsList.Count(); i++)
         {
