@@ -38,4 +38,8 @@ public static class DelivererConstants
         """;
     public const string ORDER_STILL_BEING_PREPARED_STR = "The order is still being prepared, so please wait patiently until it is ready.";
     public const string PLEASE_DELIVER_STR = "When you have the order, please deliver it to {0} at {1}.";
+
+    // DelivererMarkDeliveryCompleteMenu
+    public const string NOT_PICKED_UP_ORDER_STR = "You have not yet picked up this order.";
+    public const string THANK_YOU_FOR_DELIVERING_STR = "Thank you for making the delivery.";
 }

@@ -62,11 +62,11 @@ public class DelivererMainMenu : IMenu
                 break;
 
             case ARRIVED_RESTAURANT_INT:
-                // TODO
+                UIFlowController.ChangeMenu(MenuState.DelivererArrivedAtRestaurantMenu);
                 break;
 
             case MARK_DELIVERY_COMPLETE_INT:
-                // TODO
+                UIFlowController.ChangeMenu(MenuState.DelivererMarkDeliveryCompleteMenu);
                 break;
 
             case LOG_OUT_INT:

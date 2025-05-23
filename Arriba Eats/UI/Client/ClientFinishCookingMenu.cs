@@ -45,7 +45,7 @@ public class ClientFinishCookingMenu : IMenu
                 IODisplay.DisplayMessage(ClientConstants.NO_DELIVERER_ASSIGNED_STR);
             }
 
-            else if (selectedOrder.DelivererArrived == true)
+            else if (selectedOrder.DelivererArrivedAtRestaurant == true)
             {
                 IODisplay.DisplayMessage(String.Format(ClientConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
             }

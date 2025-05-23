@@ -253,4 +253,17 @@ public static class IODisplay
         if (orderStatus == OrderStatus.Ordered || orderStatus == OrderStatus.Cooking) return true;
         else return true;
     }
+
+    /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.BeingDelivered"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.BeingDelivered"/>,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool IsOrderBeingDelivered(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.BeingDelivered) return true;
+        else return false;
+    }
 }

@@ -152,7 +152,7 @@ public static class OrderRegistry
         foreach (CustomerOrder order in _orderRegistry)
         {
             if (order.Deliverer == deliverer && order.OrderStatus != OrderStatus.Delivered
-                && order.HasDelivererArrivedAtRestaurant())
+                && order.DelivererArrivedAtRestaurant == true)
             {
                 return true;
             }

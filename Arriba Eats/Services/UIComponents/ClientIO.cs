@@ -157,11 +157,14 @@ public static class ClientIO
     /// <param name="customerOrders"> The list of customer orders to validate. </param>
     /// <returns> <c>true</c> if any of the orders are marked as cooked, otherwise,
     /// <c>false</c>. </returns>
-    public static bool ContainsCooked(List<CustomerOrder> customerOrders)
+    public static bool ContainsActiveOrders (List<CustomerOrder> customerOrders)
     {
         foreach (CustomerOrder order in customerOrders)
         {
-            if (IsCooked(order.OrderStatus)) return true;
+            if (IsOrdered(order.OrderStatus) || IsCooked(order.OrderStatus) || IsCooking(order.OrderStatus))
+            {
+               return true;
+            }
         }
         return false;
     }
@@ -229,14 +232,16 @@ public static class ClientIO
     public static int DisplayAllActiveOrders(List<CustomerOrder> customerOrders)
     {
         int choiceIndex = 1;
-
+        // bool trueValue = true;
         foreach (CustomerOrder order in customerOrders)
         {
-            if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) ||
-                IsCooked(order.OrderStatus)) && order.DelivererArrived == true)
+            // if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) ||
+            //     IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant)
+            // if (trueValue)
+            if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) || IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant == true)
             {
                 IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_DETAILS_STR, choiceIndex,
-                    order.OrderNumber, order.Customer.Name));
+                    order.OrderNumber, order.Customer.Name, order.Deliverer!.LicencePlate, order.OrderStatus));
                 choiceIndex++;
             }
         }

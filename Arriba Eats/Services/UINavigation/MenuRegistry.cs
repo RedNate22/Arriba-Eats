@@ -32,5 +32,6 @@ public static class MenuRegistry
         { MenuState.DelivererMainMenu, new DelivererMainMenu() },
         { MenuState.DelivererListOrdersAvailableMenu, new DelivererListOrdersAvailableMenu() },
         { MenuState.DelivererArrivedAtRestaurantMenu, new DelivererArrivedAtRestaurantMenu() },
+        { MenuState.DelivererMarkDeliveryCompleteMenu, new DelivererMarkDeliveryCompleteMenu() }
     };
 }

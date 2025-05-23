@@ -20,7 +20,7 @@ public class DelivererListOrdersAvailableMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        if (DelivererIO.DelivererAlreadyAssignedToOrder())
+        if (DelivererIO.FindCurrentOrder(out var currentOrder))
         {
             IODisplay.DisplayMessage(DelivererConstants.ALREADY_SELECTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);

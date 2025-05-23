@@ -21,19 +21,19 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        if (!DelivererIO.DelivererAlreadyAssignedToOrder())
+        if (!DelivererIO.FindCurrentOrder(out var currentOrder))
         {
             IODisplay.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
-        else if (DelivererIO.DelivererAlreadyPickedUpOrder())
+        else if (IODisplay.IsOrderBeingDelivered(currentOrder.OrderStatus))
         {
             IODisplay.DisplayMessage(DelivererConstants.ALREADY_PICKED_UP_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
-        else if (DelivererIO.DelivererArrivedAlready())
+        else if (currentOrder.DelivererArrivedAtRestaurant == true)
         {
             IODisplay.DisplayMessage(DelivererConstants.ALREADY_AT_RESTAURANT_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
@@ -41,7 +41,6 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
 
         else
         {
-            DelivererIO.FindCurrentOrder(out var currentOrder);
             currentOrder.DelivererAtRestaurant();
             IODisplay.DisplayMessage(String.Format(DelivererConstants.ARRIVED_AT_RESTAURANT_STR,
                 currentOrder.Restaurant.RestaurantName, currentOrder.OrderNumber));
@@ -53,7 +52,7 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
 
             IODisplay.DisplayMessage(String.Format(DelivererConstants.PLEASE_DELIVER_STR,
                 currentOrder.Customer.Name, currentOrder.Customer.Location));
-            UIFlowController.ChangeMenu(MenuState.DelivererMainMenu); 
+            UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
     }
 }

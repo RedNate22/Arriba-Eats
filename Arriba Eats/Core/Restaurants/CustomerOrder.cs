@@ -197,14 +197,4 @@ public class CustomerOrder
     {
         DelivererArrivedAtRestaurant = true;
     }
-
-    /// <summary>
-    /// Validates whether the <see cref="Entities.Deliverer"/> has arrived at the
-    /// <see cref="Entities.Restaurant"/> to pick up the order. 
-    /// </summary>
-    /// <returns></returns>
-    public bool HasDelivererArrivedAtRestaurant()
-    {
-        return DelivererArrivedAtRestaurant;
-    }
 }

@@ -26,10 +26,11 @@ public class ClientHandleDeliverersMenu : IMenu
         IODisplay.DisplayMessage(ClientConstants.SELECT_COLLECTED_ORDERS_STR);
 
         var customerOrders = IODisplay.GetCustomerOrders();
-        bool containsOrdersCooked = customerOrders.Count != 0 && ClientIO.ContainsCooked(customerOrders);
+        bool containsActiveOrders = customerOrders.Count != 0 && ClientIO.ContainsActiveOrders(customerOrders);
         
-        // * Check if any orders are ordered, cooking, or cooked, and display them - updating the index
-        int choiceIndex = containsOrdersCooked ? ClientIO.DisplayAllActiveOrders(customerOrders) : 1;
+        // * Check if any orders are ordered, cooking, or cooked, and the deliverer has arrived,
+        // * and display them - updating the index
+        int choiceIndex = containsActiveOrders ? ClientIO.DisplayAllActiveOrders(customerOrders) : 1;
         int returnPreviousMenuInt = choiceIndex;
 
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
@@ -43,14 +44,12 @@ public class ClientHandleDeliverersMenu : IMenu
         {
             var selectedOrder = customerOrders[choice - 1];  // * Adjust for index-based referencing
 
-            IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
-
             if (!ClientIO.IsCooked(selectedOrder.OrderStatus))
             {
                 IODisplay.DisplayMessage(ClientConstants.ORDER_NOT_COOKED_STR);
             }
 
-            else 
+            else if (selectedOrder.DelivererArrivedAtRestaurant == true)
             {
                 selectedOrder.UpdateOrderStatus();  // Updates to 'BeingDelivered'
                 IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));

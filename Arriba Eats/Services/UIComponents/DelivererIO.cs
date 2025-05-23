@@ -12,28 +12,21 @@ namespace UIComponents;
 public static class DelivererIO
 {
     /// <summary>
-    /// Gets the currently authenticated <see cref="Deliverer"/>, then
-    /// determines whether they are already assigned to an active order.
+    /// Attempts to find the current <see cref="CustomerOrder"/> assigned to the
+    /// currently authenticated <see cref="Deliverer"/>, then assigns this to the <c>out</c> parameter.
     /// </summary>
-    /// <returns> <c>true</c> if the <see cref="Deliverer"/> is assigned to
-    /// an active order, otherwise, <c>false</c>. </returns>
-    public static bool DelivererAlreadyAssignedToOrder()
+    /// <param name="customerOrder"> The found <see cref="CustomerOrder"/> assigned to the <see cref="Deliverer"/>. </param>
+    /// <returns> <c>true</c> if the order is found and assigned, otherwise, <c>false</c>. </returns>
+    public static bool FindCurrentOrder(out CustomerOrder customerOrder)
     {
         Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
-        return OrderRegistry.TryFindAlreadyAssignedOrder(deliverer);
-    }
-
-    /// <summary>
-    /// Gets the currently authenticated <see cref="Deliverer"/>, then
-    /// determines whether they are already in the process of delivering
-    /// an active order.
-    /// </summary>
-    /// <returns> <c>true</c> if the <see cref="Deliverer"/> is currently
-    /// delivering an active order, otherwise, <c>false</c>. </returns>
-    public static bool DelivererAlreadyPickedUpOrder()
-    {
-        Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
-        return OrderRegistry.TryFindPickedUpOrder(deliverer);
+        if (OrderRegistry.TryGetCurrentlyAssignedOrder(deliverer, out CustomerOrder foundOrder))
+        {
+            customerOrder = foundOrder;
+            return true;
+        }
+        customerOrder = null!;
+        return false;
     }
 
     /// <summary>
@@ -47,6 +40,19 @@ public static class DelivererIO
     {
         Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
         return OrderRegistry.TryFindDelivererAlreadyArrived(deliverer);
+    }
+
+    /// <summary>
+    /// Gets the currently authenticated <see cref="Deliverer"/>, then
+    /// determines whether they are already in the process of delivering
+    /// an active order.
+    /// </summary>
+    /// <returns> <c>true</c> if the <see cref="Deliverer"/> is currently
+    /// delivering an active order, otherwise, <c>false</c>. </returns>
+    public static bool DelivererAlreadyPickedUpOrder()
+    {
+        Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
+        return OrderRegistry.TryFindPickedUpOrder(deliverer);
     }
 
     /// <summary>
@@ -138,23 +144,5 @@ public static class DelivererIO
         int totalDistance = delivererToRestaurantDist + restaurantToCustomer;
 
         return totalDistance;
-    }
-
-    /// <summary>
-    /// Attempts to find the current <see cref="CustomerOrder"/> assigned to the
-    /// currently authenticated <see cref="Deliverer"/>, then assigns this to the <c>out</c> parameter.
-    /// </summary>
-    /// <param name="customerOrder"> The found <see cref="CustomerOrder"/> assigned to the <see cref="Deliverer"/>. </param>
-    /// <returns> <c>true</c> if the order is found and assigned, otherwise, <c>false</c>. </returns>
-    public static bool FindCurrentOrder(out CustomerOrder customerOrder)
-    {
-        Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
-        if (OrderRegistry.TryGetCurrentlyAssignedOrder(deliverer, out CustomerOrder foundOrder))
-        {
-            customerOrder = foundOrder;
-            return true;
-        }
-        customerOrder = null!;
-        return false;
     }
 }
