@@ -282,14 +282,14 @@ public static class CustomerIO
                     return ratingInt;
                 }
 
-                else if (ratingInt > 0 || ratingInt < 6)
+                else if (ratingInt > 0 && ratingInt < 6)
                 {
                     return ratingInt;
                 }
 
                 else
                 {
-                    IODisplay.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                    IODisplay.DisplayMessage(CustomerConstants.INVALID_RATING_STR);
                     continue;
                 }
             }
@@ -308,4 +308,28 @@ public static class CustomerIO
         RestaurantReview restaurantReview = new RestaurantReview(rating, comment);
         order.AddReviewToOrder(restaurantReview);
     }
+
+    /// <summary>
+    /// Attempts to locate the currently selected <see cref="Restaurant"/>'s <see cref="RestaurantReview"/>s 
+    /// by matching any <see cref="CustomerOrder"/>s attached to the restaurant, containing a review.
+    /// The reviews are then displayed with the <see cref="Customer.Name"/>, <see cref="RestaurantReview.Rating"/>,
+    /// and <see cref="RestaurantReview.Comment"/>.
+    /// </summary>
+    /// <param name="customerOrders"></param>
+    /// <returns></returns>
+    public static bool GetRestaurantReviews(List<CustomerOrder> customerOrders)
+    {
+        bool containsReviews = false;
+
+        foreach (CustomerOrder order in customerOrders)
+        {
+            if (order.Restaurant == SessionManager.SelectedRestaurant && order.RestaurantReview != null)
+            {
+                IODisplay.DisplayMessage(String.Format(CustomerConstants.REVIEW_DETAILS_STR,
+                    order.Customer.Name, order.RestaurantReview.RatingInStars, order.RestaurantReview.Comment));
+                containsReviews = true;
+            }
+        }
+        return containsReviews;
+    } 
 }

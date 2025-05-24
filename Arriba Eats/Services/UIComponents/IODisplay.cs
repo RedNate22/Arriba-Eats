@@ -70,7 +70,7 @@ public static class IODisplay
     /// of the <see cref="User"/>.
     /// </summary>
     /// <param name="user"> The <see cref="User"/> to display the information of. </param>
-    public static void DisplayUserInfo(User user)
+    public static void DisplayUserInfo(User user)  // TODO make this an overload, 3 methods
     {
         var currentUser = SessionManager.ReturnCurrentUser();
         if (currentUser != null)
@@ -102,14 +102,13 @@ public static class IODisplay
                     var deliverer = (Deliverer)user;
                     DisplayMessage($"Licence plate: {deliverer.LicencePlate}");
 
-                    // If (the deliverer has an order not yet delivered)
-                    /*
-                    DisplayMessage($"""
-                        Current delivery:
-                        Order #ORDER_NO from RESTAURANT_NAME at RX,RY.
-                        To be delivered to CUSTOMER_NAME at CX,CY.
-                        """);
-                    */
+                    OrderRegistry.TryGetCurrentlyAssignedOrder(deliverer, out CustomerOrder activeOrder);
+                    if (activeOrder != null)
+                    {
+                        DisplayMessage("Current delivery:");
+                        DisplayMessage($"Order #{activeOrder.OrderNumber} from {activeOrder.Restaurant.RestaurantName} at {activeOrder.Restaurant.Location}.");
+                        DisplayMessage($"To be delivered to {activeOrder.Customer.Name} at {activeOrder.Customer.Location}.");
+                    }
                     break;
 
                 case UserType.Client:
@@ -120,12 +119,11 @@ public static class IODisplay
                     break;
 
                 default:
-                    DisplayMessage("User's type is not defined.");  // ? turn this into a const?
+                    DisplayMessage("User's type is not defined.");
                     break;
             }
         }
-
-        else DisplayMessage("No user is currently logged in.");  // ? turn this into a const?
+        else DisplayMessage("No user is currently logged in.");  
     }
 
     /// <summary>

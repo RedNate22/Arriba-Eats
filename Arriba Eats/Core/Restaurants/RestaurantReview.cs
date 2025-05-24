@@ -15,19 +15,57 @@ public class RestaurantReview
     public int Rating { get; private set; }
 
     /// <summary>
+    /// The rating given by the <see cref="Customer"/>, displayed in a range of stars, <c>*</c>,
+    /// one for each numbered rating. E.g., a <see cref="Rating"/> of 3 becomes <c>***</c>.
+    /// </summary>
+    public string? RatingInStars { get; private set; }
+
+    /// <summary>
     /// The comment given by the <see cref="Customer"/>.
     /// </summary>
     public string Comment { get; private set; }
 
     /// <summary>
     /// Initialises a new instance of the <see cref="RestaurantReview"/> class, representing
-    /// a <see cref="Customer"/>'s review and rating of an order from a <see cref="Restaurant."/>
+    /// a <see cref="Customer"/>'s review and rating of an order from a <see cref="Restaurant."/>.
+    /// <para> The rating is also converted to asterisks, <c>*</c>, denoting stars. </para>
     /// </summary>
-    /// <param name="rating"></param>
-    /// <param name="comment"></param>
+    /// <param name="rating"> The integar rating for the <see cref="Restaurant"/>, numbered 
+    /// between 1 to 5 (inclusive. </param>
+    /// <param name="comment"> The string comment for the <see cref="RestaurantReview"/>, of
+    /// any length. </param>
     public RestaurantReview(int rating, string comment)
     {
         Rating = rating;
         Comment = comment;
+
+        string oneStars = "*";
+        string twoStars = "**";
+        string threeStars = "***";
+        string fourStars = "****";
+        string fiveStars = "*****";
+
+        switch (rating)
+        {
+            case 1:
+                RatingInStars = oneStars;
+                break;
+
+            case 2:
+                RatingInStars = twoStars;
+                break;
+            
+            case 3:
+                RatingInStars = threeStars;
+                break;
+            
+            case 4:
+                RatingInStars = fourStars;
+                break;
+            
+            case 5:
+                RatingInStars = fiveStars;
+                break;
+        }
     }
 }

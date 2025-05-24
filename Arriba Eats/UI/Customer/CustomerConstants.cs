@@ -27,6 +27,14 @@ public static class CustomerConstants
     public const string YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR = "You can order from the following restaurants:";
     public const string ORDER_DETAILS_FOR_REVIEW_STR = "{0}: Order #{1} from {2}";
 
+    // CustomerSeeReviewsMenu
+    public const string NO_REVIEWS_STR = "No reviews have been left for this restaurant.";
+    public const string REVIEW_DETAILS_STR = """
+        Reviewer: {0}
+        Rating: {1}
+        Comment: {2}
+        """;
+
     // CustomerOrderStatusMenu
     public const string NOT_PLACED_ORDERS_STR = "You have not placed any orders.";
 

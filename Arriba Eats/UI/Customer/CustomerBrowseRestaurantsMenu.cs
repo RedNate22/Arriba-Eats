@@ -52,8 +52,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
                 break;
 
             case SEE_REVIEWS_INT:
-                // TODO
-                IODisplay.DisplayMessage("No reviews have been left for this restaurant.");
+                UIFlowController.ChangeMenu(MenuState.CustomerSeeReviewsMenu);
                 break;
 
             case RETURN_MAIN_MENU_INT:

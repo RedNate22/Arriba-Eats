@@ -19,7 +19,7 @@ public class DelivererMarkDeliveryCompleteMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        if (!DelivererIO.FindCurrentOrder(out var currentOrder1))
+        if (DelivererIO.FindCurrentOrder(out var currentOrder1) == false)
         {
             IODisplay.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
@@ -31,6 +31,7 @@ public class DelivererMarkDeliveryCompleteMenu : IMenu
             {
                 currentOrder2.UpdateOrderStatus();
                 IODisplay.DisplayMessage(DelivererConstants.THANK_YOU_FOR_DELIVERING_STR);
+                UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
             }
 
             else
