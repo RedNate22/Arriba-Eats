@@ -27,16 +27,16 @@ public class DelivererMarkDeliveryCompleteMenu : IMenu
 
         else if (DelivererIO.FindCurrentOrder(out var currentOrder2))
         {
-            if (!IODisplay.IsOrderBeingDelivered(currentOrder2.OrderStatus))  // Not picked up
+            if (IODisplay.IsOrderBeingDelivered(currentOrder2.OrderStatus))  // Not picked up
             {
-                IODisplay.DisplayMessage(DelivererConstants.NOT_PICKED_UP_ORDER_STR);
-                UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
+                currentOrder2.UpdateOrderStatus();
+                IODisplay.DisplayMessage(DelivererConstants.THANK_YOU_FOR_DELIVERING_STR);
             }
 
             else
             {
-                currentOrder2.UpdateOrderStatus();
-                IODisplay.DisplayMessage(DelivererConstants.THANK_YOU_FOR_DELIVERING_STR);
+                IODisplay.DisplayMessage(DelivererConstants.NOT_PICKED_UP_ORDER_STR);
+                UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
             }
         }
     }

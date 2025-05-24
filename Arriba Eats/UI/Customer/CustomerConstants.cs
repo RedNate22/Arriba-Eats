@@ -13,7 +13,8 @@ public static class CustomerConstants
         3: See the status of your orders
         4: Rate a restaurant you've ordered from
         """;
-
+    
+    // CustomerSortRestaurantsMenu
     public const string RESTAURANT_LIST_ORDERED_STR = """
         How would you like the list of restaurants ordered?
         1: Sorted alphabetically by name
@@ -22,9 +23,22 @@ public static class CustomerConstants
         4: Sorted by average rating
         """;
 
+    // CustomerBrowseRestaurantsMenu
     public const string YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR = "You can order from the following restaurants:";
+    public const string ORDER_DETAILS_FOR_REVIEW_STR = "{0}: Order #{1} from {2}";
+
+    // CustomerOrderStatusMenu
     public const string NOT_PLACED_ORDERS_STR = "You have not placed any orders.";
+
+    // CustomerRateRestaurantMenu
     public const string SELECT_PREVIOUS_ORDER_TO_RATE_STR = "Select a previous order to rate the restaurant it came from:";
+    public const string YOU_ARE_RATING_STR = "You are rating order #{0} from {1}:";
+    public const string PLEASE_ENTER_RATING_STR = "Please enter a rating for this restaurant (1-5, 0 to cancel):";
+    public const string INVALID_RATING_STR = "Invalid rating.";
+    public const string ENTER_COMMENT_STR = "Please enter a comment to accompany this rating:";
+    public const string THANK_YOU_FOR_RATING_STR = "Thank you for rating {0}.";
+
+    // 
     public const string RESTAURANT_NAME_HEADING_STR = "Restaurant Name";
     public const string LOCATION_HEADING_STR = "Loc";
     public const string DISTANCE_HEADING_STR = "Dist";

@@ -119,6 +119,19 @@ public static class ClientIO
     }
 
     /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.Delivered"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Delivered"/>,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool IsDelivered(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Delivered) return true;
+        else return false;
+    }
+
+    /// <summary>
     /// Validates whether a list of <see cref="CustomerOrder"/>s contains any orders
     /// with the order status of <see cref="OrderStatus.Ordered"/>.
     /// </summary>
@@ -146,25 +159,6 @@ public static class ClientIO
         foreach (CustomerOrder order in customerOrders)
         {
             if (IsCooking(order.OrderStatus)) return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Validates whether a list of <see cref="CustomerOrder"/>s contains any orders
-    /// with the order status of <see cref="OrderStatus.Cooked"/>.
-    /// </summary>
-    /// <param name="customerOrders"> The list of customer orders to validate. </param>
-    /// <returns> <c>true</c> if any of the orders are marked as cooked, otherwise,
-    /// <c>false</c>. </returns>
-    public static bool ContainsActiveOrders (List<CustomerOrder> customerOrders)
-    {
-        foreach (CustomerOrder order in customerOrders)
-        {
-            if (IsOrdered(order.OrderStatus) || IsCooked(order.OrderStatus) || IsCooking(order.OrderStatus))
-            {
-               return true;
-            }
         }
         return false;
     }

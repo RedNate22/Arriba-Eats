@@ -25,7 +25,7 @@ public static class CustomerIO
         {
             switch (sortType)
             {
-                case (SortOption) 1:
+                case (SortOption)1:
                     static int SortAlphabetically(Restaurant a, Restaurant b)
                     {
                         return a.RestaurantName.CompareTo(b.RestaurantName);
@@ -33,7 +33,7 @@ public static class CustomerIO
                     restaurantsList.Sort(SortAlphabetically);
                     break;
 
-                case (SortOption) 2:
+                case (SortOption)2:
                     static int SortByDistance(Restaurant a, Restaurant b)
                     {
                         int distanceA = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), a);
@@ -46,7 +46,7 @@ public static class CustomerIO
                     restaurantsList.Sort(SortByDistance);
                     break;
 
-                case (SortOption) 3:
+                case (SortOption)3:
                     static int SortByStyle(Restaurant a, Restaurant b)
                     {
                         int styleComparison = a.RestaurantStyle.CompareTo(b.RestaurantStyle);
@@ -57,7 +57,7 @@ public static class CustomerIO
                     restaurantsList.Sort(SortByStyle);
                     break;
 
-                case (SortOption) 4:
+                case (SortOption)4:
                     // TODO average rating sort
                     break;
             }
@@ -238,5 +238,74 @@ public static class CustomerIO
             IODisplay.DisplayMessage($"{selectedRestaurant.RestaurantName} currently has no items on the menu.");
             return orderNumber;
         }
+    }
+
+    /// <summary>
+    /// Iterates through the given list of <see cref="CustomerOrder"/>s,
+    /// finding any orders marked as <see cref="OrderStatus.Delivered"/> and
+    /// there have been no reviews for them yet.
+    /// Then displays them dynamically with an indexed number, the order number,
+    /// and the <see cref="Restaurant"/>'s name. Then returns the final value of the index.
+    /// </summary>
+    /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
+    /// <returns> The final value of the index. </returns>
+    public static int DisplayOrdersReadyToReview(out List<CustomerOrder> foundOrdersToReview, List<CustomerOrder> customerOrders)
+    {
+        List<CustomerOrder> ordersToReview = new();
+        int choiceIndex = 1;
+
+        foreach (CustomerOrder order in customerOrders)
+        {
+            if (ClientIO.IsDelivered(order.OrderStatus) && order.RestaurantReview == null)
+            {
+                IODisplay.DisplayMessage(String.Format(CustomerConstants.ORDER_DETAILS_FOR_REVIEW_STR,
+                    choiceIndex, order.OrderNumber, order.Restaurant.RestaurantName));
+                ordersToReview.Add(order);
+                choiceIndex++;
+            }
+        }
+        foundOrdersToReview = ordersToReview;
+        return choiceIndex;
+    }
+
+    // TODO xml
+    public static int GetRating()
+    {
+        while (true)
+        {
+            string? ratingString = IODisplay.ReadInput();
+
+            if (int.TryParse(ratingString, out int ratingInt))
+            {
+                if (ratingInt == 0)
+                {
+                    return ratingInt;
+                }
+
+                else if (ratingInt > 0 || ratingInt < 6)
+                {
+                    return ratingInt;
+                }
+
+                else
+                {
+                    IODisplay.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                    continue;
+                }
+            }
+
+            else
+            {
+                IODisplay.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                continue;
+            }
+        }
+    }
+
+    // TODO xml
+    public static void GetReview(CustomerOrder order, int rating, string comment)
+    {
+        RestaurantReview restaurantReview = new RestaurantReview(rating, comment);
+        order.AddReviewToOrder(restaurantReview);
     }
 }

@@ -34,6 +34,7 @@ public static class OrderRegistry
     }
 
     // TODO xml
+    // ? Make these reusable? like instead of the later methods, use the IO to then check the list
     public static bool TryGetOrders(out List<CustomerOrder> getCustomerOrders, Customer customer)
     {
         getCustomerOrders = new List<CustomerOrder>();

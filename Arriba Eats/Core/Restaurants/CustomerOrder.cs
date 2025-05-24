@@ -4,8 +4,9 @@ using UIComponents;
 namespace Entities;
 
 /// <summary>
-/// Holds the details of a confirmed order from a <see cref="Customer"/> for any <see cref="Restaurant"/>.
-/// The item names, price per unit, and quantities are all stored. 
+/// Holds the details of a confirmed order from a <see cref="Entities.Customer"/> for any <see cref="Entities.Restaurant"/>.
+/// The item names, price per unit, and quantities are all stored, as well as the attached <see cref="Entities.Customer"/>, <see cref="Entities.Deliverer"/>
+/// and <see cref="Entities.RestaurantReview"/> for quick reference. 
 /// </summary>
 public class CustomerOrder
 {
@@ -196,5 +197,14 @@ public class CustomerOrder
     public void DelivererAtRestaurant()
     {
         DelivererArrivedAtRestaurant = true;
+    }
+
+    /// <summary>
+    /// Attaches a <see cref="Entities.RestaurantReview"/> the <see cref="CustomerOrder"/>.
+    /// </summary>
+    /// <param name="review"> The <see cref="Entities.RestaurantReview"/> to add. </param>
+    public void AddReviewToOrder(RestaurantReview review)
+    {
+        RestaurantReview = review;
     }
 }
