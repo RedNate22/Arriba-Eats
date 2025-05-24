@@ -172,8 +172,10 @@ public static class ClientIO
     /// </summary>
     /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
     /// <returns> The final value of the index. </returns>
-    public static int DisplayOrdersReadyToCook(List<CustomerOrder> customerOrders)
+    public static int DisplayOrdersReadyToCook(List<CustomerOrder> customerOrders, out List<dynamic> ordersToCook)
     {
+        ordersToCook = new List<dynamic> ();
+
         int choiceIndex = 1;
 
         foreach (CustomerOrder order in customerOrders)
@@ -182,6 +184,8 @@ public static class ClientIO
             {
                 IODisplay.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
                     order.OrderNumber, order.Customer.Name));
+
+                ordersToCook.Add(order);
                 choiceIndex++;
             }
         }

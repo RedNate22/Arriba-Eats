@@ -26,11 +26,11 @@ public static class CustomerIO
             switch (sortType)
             {
                 case (SortOption)1:
-                    static int SortAlphabetically(Restaurant a, Restaurant b)
+                    static int SortByName(Restaurant a, Restaurant b)
                     {
                         return a.RestaurantName.CompareTo(b.RestaurantName);
                     }
-                    restaurantsList.Sort(SortAlphabetically);
+                    restaurantsList.Sort(SortByName);
                     break;
 
                 case (SortOption)2:
@@ -50,7 +50,6 @@ public static class CustomerIO
                     static int SortByStyle(Restaurant a, Restaurant b)
                     {
                         int styleComparison = a.RestaurantStyle.CompareTo(b.RestaurantStyle);
-
                         // * If styles are the same (returning 0), instead sort by name 
                         return styleComparison != 0 ? styleComparison : a.RestaurantName.CompareTo(b.RestaurantName);
                     }
@@ -58,7 +57,16 @@ public static class CustomerIO
                     break;
 
                 case (SortOption)4:
-                    // TODO average rating sort
+                    static int SortByRating(Restaurant a, Restaurant b)
+                    {
+                        int averageRatingA = RestaurantIO.GetAverageRestaurantRating(a);
+                        int averageRatingB = RestaurantIO.GetAverageRestaurantRating(b);
+
+                        int ratingComparison = averageRatingB.CompareTo(averageRatingA);
+                        // * If ratings are the same (returning 0), instead sort by name 
+                        return ratingComparison != 0 ? ratingComparison : b.RestaurantName.CompareTo(a.RestaurantName);
+                    }
+                    restaurantsList.Sort(SortByRating);
                     break;
             }
             return restaurantsList;
@@ -105,13 +113,16 @@ public static class CustomerIO
         int restaurantChoiceIndex = 1;
         for (int i = 0; i < restaurantsList.Count(); i++)
         {
+            // * Get average rating, if 0, then use "-"
+            int averageRating = RestaurantIO.GetAverageRestaurantRating(restaurantsList[i]);
+            string rating = averageRating != 0 ? averageRating.ToString() : "-";
+
             IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
                 + $"{restaurantsList[i].RestaurantName}".PadRight(restaurantColumnWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
                 + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
-                // TODO 
-                + "-");
+                + $"{rating}".PadRight(styleColumnWidth));
             restaurantChoiceIndex++;
         }
         choiceIndex = restaurantChoiceIndex;

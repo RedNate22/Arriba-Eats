@@ -26,7 +26,23 @@ public class ClientStartCookingMenu : IMenu
         bool containsOrdersReady = customerOrders.Count != 0 && ClientIO.ContainsOrdered(customerOrders);
 
         // * Check if any orders are ready to cook and display them - updating the index
-        int choiceIndex = containsOrdersReady ? ClientIO.DisplayOrdersReadyToCook(customerOrders) : 1;
+        // int choiceIndex = containsOrdersReady ? ClientIO.DisplayOrdersReadyToCook(customerOrders,
+        //     out var ordersToCook) : 1;
+        // TODO test below
+
+        List<dynamic> ordersToCook;
+        int choiceIndex = 1;
+
+        if (containsOrdersReady)
+        {
+            choiceIndex = ClientIO.DisplayOrdersReadyToCook(customerOrders, out ordersToCook);
+        }
+
+        else
+        {
+            ordersToCook = new List<dynamic>();
+            choiceIndex = 1;
+        }
         int returnPreviousMenuInt = choiceIndex;
 
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
@@ -38,7 +54,7 @@ public class ClientStartCookingMenu : IMenu
 
         else if (IOUtilities.IsValueInIndexRange(customerOrders, choice - 1))  // Valid input
         {
-            var selectedOrder = customerOrders[choice - 1];  // * Adjust for index-based referencing
+            var selectedOrder = ordersToCook[choice - 1];  // * Adjust for index-based referencing
 
             selectedOrder.UpdateOrderStatus();  // Updates to 'Cooking'
             IODisplay.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));

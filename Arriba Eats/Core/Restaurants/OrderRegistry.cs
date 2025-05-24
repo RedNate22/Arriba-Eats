@@ -82,6 +82,21 @@ public static class OrderRegistry
         return getOrdersToDeliver.Count > 0;
     }
 
+    // TODO xml
+    public static bool TryGetOrders(out List<CustomerOrder> getOrdersForReviews, Restaurant restaurant)
+    {
+        getOrdersForReviews = new List<CustomerOrder>();
+
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Restaurant == restaurant)
+            {
+                getOrdersForReviews.Add(order);
+            }
+        }
+        return getOrdersForReviews.Count > 0;
+    }
+
     /// <summary>
     /// Attempts to find the currently assigned order for the given <see cref="Deliverer"/>,
     /// then assigns this order to the <c>out</c> parameter. If no order is found, <c>null</c> is returned.
