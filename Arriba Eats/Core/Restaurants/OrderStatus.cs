@@ -38,3 +38,38 @@ public enum OrderStatus
     /// </summary>
     Delivered = 5
 }
+
+/// <summary>
+/// A public class to hold the method for returning the string equivalent of
+/// an <see cref="OrderStatus"/>. 
+/// </summary>
+public static class DisplayOrderStatus
+{
+    /// <summary>
+    /// Parses the given <see cref="OrderStatus"/> and returns the equivalent
+    /// string, for properly displaying the status.
+    /// </summary>
+    /// <param name="orderStatus"> The <see cref="OrderStatus"/> to get the string of. </param>
+    /// <returns> The string equivalent of the given <see cref="OrderStatus"/>, otherwise
+    /// if the status does not exist, returns an empty string. </returns>
+    public static string DisplayStatus(OrderStatus orderStatus)
+    {
+        switch (orderStatus)
+        {
+            case OrderStatus.NotOrdered:
+                return "Not Ordered";
+            case OrderStatus.Ordered:
+                return "Ordered";
+            case OrderStatus.Cooking:
+                return "Cooking";
+            case OrderStatus.Cooked:
+                return "Cooked";
+            case OrderStatus.BeingDelivered:
+                return "Being Delivered";
+            case OrderStatus.Delivered:
+                return "Delivered";
+            default:
+                return "";
+        }
+    }   
+}

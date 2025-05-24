@@ -35,6 +35,12 @@ public static class CustomerConstants
         Comment: {2}
         """;
 
+    // CustomerPlaceOrderMenu
+    public const string CURRENT_ORDER_TOTAL_STR = "Current order total: ${0:F2}";
+    public const string ORDER_PLACED_STR = "Your order has been placed. Your order number is #{0}.";
+    public const string ORDER_NOT_CONFIRMED_STR = "Order could not be confirmed.";
+    public const string RESTAURANT_HAS_NO_MENU_STR = "{0} currently has no items on the menu.";
+
     // CustomerOrderStatusMenu
     public const string NOT_PLACED_ORDERS_STR = "You have not placed any orders.";
 

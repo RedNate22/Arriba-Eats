@@ -142,7 +142,6 @@ public static class CustomerIO
         if (SessionManager.SelectedRestaurant == null) return orderNumber;
         Restaurant selectedRestaurant = SessionManager.SelectedRestaurant;
 
-        string currentOrderTotalStr = "Current order total: ${0:F2}";
         decimal currentOrderTotalDec = 0.00M;
 
         if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
@@ -154,7 +153,7 @@ public static class CustomerIO
 
             while (true)
             {
-                IODisplay.DisplayMessage(string.Format(currentOrderTotalStr, currentOrderTotalDec));
+                IODisplay.DisplayMessage(string.Format(CustomerConstants.CURRENT_ORDER_TOTAL_STR, currentOrderTotalDec));
 
                 int choiceIndex = 1;
                 int menuIndex = 0;
@@ -183,16 +182,15 @@ public static class CustomerIO
                     {
                         if (OrderRegistry.TryAddOrder(customerOrder))
                         {
-                            customerOrder.UpdateOrderStatus();
-                            IODisplay.DisplayMessage($"Your order has been placed. Your order number is #{orderNumber}.");
+                            customerOrder.UpdateOrderStatus();  // Updates status to 'Ordered'
+                            IODisplay.DisplayMessage(String.Format(CustomerConstants.ORDER_PLACED_STR, orderNumber));
 
                             orderNumber++;  // * Update order number for future (next) orders
                             return orderNumber;
                         }
-
                         else
                         {
-                            IODisplay.DisplayMessage("Order could not be confirmed.");
+                            IODisplay.DisplayMessage(CustomerConstants.ORDER_NOT_CONFIRMED_STR);
                             return orderNumber;
                         }
                     }
@@ -235,7 +233,7 @@ public static class CustomerIO
         }
         else
         {
-            IODisplay.DisplayMessage($"{selectedRestaurant.RestaurantName} currently has no items on the menu.");
+            IODisplay.DisplayMessage(String.Format(CustomerConstants.RESTAURANT_HAS_NO_MENU_STR, selectedRestaurant.RestaurantName));
             return orderNumber;
         }
     }
