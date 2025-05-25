@@ -26,10 +26,6 @@ public class ClientStartCookingMenu : IMenu
         bool containsOrdersReady = customerOrders.Count != 0 && OrderIO.ContainsOrdered(customerOrders);
 
         // * Check if any orders are ready to cook and display them - updating the index
-        // int choiceIndex = containsOrdersReady ? ClientIO.DisplayOrdersReadyToCook(customerOrders,
-        //     out var ordersToCook) : 1;
-        // TODO test below
-
         List<dynamic> ordersToCook;
         int choiceIndex = 1;
 

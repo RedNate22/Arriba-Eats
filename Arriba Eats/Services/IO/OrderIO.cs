@@ -10,7 +10,12 @@ namespace UIComponents;
 /// </summary>
 public class OrderIO
 {
-    // TODO xml
+    /// <summary>
+    /// Updates the <see cref="OrderStatus"/> of the given <see cref="CustomerOrder"/>
+    /// to the next stage.
+    /// </summary>
+    /// <param name="customerOrder"> The <see cref="CustomerOrder"/> to update the status of. </param>
+    /// <returns> <c>true</c> if the status is updated successfully, otherwise, <c>false</c>. </returns>
     public static bool UpdateOrder(CustomerOrder customerOrder)
     {
         if (customerOrder is CustomerOrder)
@@ -21,7 +26,12 @@ public class OrderIO
         else return false;
     }
 
-    // TODO xml
+    /// <summary>
+    /// Retrieves <see cref="CustomerOrder"/>s based on the current <see cref="User"/>'s
+    /// <see cref="UserType"/>.
+    /// </summary>
+    /// <returns> A list of <see cref="CustomerOrder"/>s associated with the current 
+    /// <see cref="User"/>. If no orders exist, returns an empty list. </returns>
     public static List<CustomerOrder> GetCustomerOrders()
     {
         List<CustomerOrder> customerOrders = new List<CustomerOrder>();
@@ -123,7 +133,6 @@ public class OrderIO
 
                 else if (choice == cancelOrder)
                 {
-                    customerOrder = null!;  // Empties the cart
                     UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
                     return orderNumber;  // * Return original order number, to be reused until a confirmed order
                 }
@@ -162,13 +171,17 @@ public class OrderIO
             return orderNumber;
         }
     }
-    
+
     /// <summary>
-    /// To be called by <see cref="GetOrderFromCustomer"/>.
-    /// Reads a string input from the user via the console.
-    /// <para> Attempts to convert the input into an integer. </para>
+    /// Gets the quantity of the currently selected menu item from the <see cref="Customer"/>.
     /// </summary>
-    /// <returns> The valid integer quantity, otherwise <c>-1</c>. </returns>
+    /// <remarks>
+    /// This method is intended to be called by <see cref="GetOrderFromCustomer"/>.
+    /// If conversion fails, <c>-1</c> is returned to indicate invalid input.
+    /// </remarks>
+    /// <returns>
+    /// The valid integer quantity entered by the user, or <c>-1</c> if the input is invalid.
+    /// </returns>
     private static int GetItemQuantity()
     {
         string? quantity = DisplayIO.ReadInput();
@@ -377,7 +390,6 @@ public class OrderIO
         return false;
     }
 
-    // ? Make these overloads?
     /// <summary>
     /// Iterates through the given list of <see cref="CustomerOrder"/>s,
     /// finding any orders marked as <see cref="OrderStatus.Ordered"/>, then

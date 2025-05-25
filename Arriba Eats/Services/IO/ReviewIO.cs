@@ -9,14 +9,31 @@ namespace UIComponents;
 /// </summary>
 public class ReviewIO
 {
-    // TODO xml
-    public static void GetReview(CustomerOrder order, int rating, string comment)
+    /// <summary>
+    /// Creates a <see cref="RestaurantReview"/> for the given <see cref="CustomerOrder"/>,
+    /// with the given rating and comment from the <see cref="Customer"/>.
+    /// </summary>
+    /// <param name="order"> The <see cref="CustomerOrder"/> the review is for. </param>
+    /// <param name="rating"> The rating of the <see cref="CustomerOrder"/> / <see cref="Restaurant"/>. </param>
+    /// <param name="comment"> The comment of the review, justifying the rating. </param>
+    public static void CreateReview(CustomerOrder order, int rating, string comment)
     {
         RestaurantReview restaurantReview = new RestaurantReview(rating, comment);
         order.AddReviewToOrder(restaurantReview);
     }
 
-    // TODO xml
+    /// <summary>
+    /// Continuously prompts the <see cref="User"/> for a rating until a valid input is provided.
+    /// </summary>
+    /// <remarks>
+    /// The input is retrieved using <see cref="DisplayIO.ReadInput()"/> and validated using <see cref="int.TryParse(string, out int)"/>.
+    /// If conversion succeeds, the integer rating is checked to ensure it is between 0 and 5.
+    /// If the input is invalid, an error message is displayed, and the process repeats.
+    /// This method loops until a valid rating is entered.
+    /// </remarks>
+    /// <returns>
+    /// A validated integer rating between 0 and 5.
+    /// </returns>
     public static int GetRating()
     {
         while (true)

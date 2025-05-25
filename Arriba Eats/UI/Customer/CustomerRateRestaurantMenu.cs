@@ -48,7 +48,7 @@ public class CustomerRateRestaurantMenu : IMenu
             {
                 DisplayIO.DisplayMessage(CustomerConstants.ENTER_COMMENT_STR);
                 string orderComment = DisplayIO.ReadInput();
-                ReviewIO.GetReview(selectedOrder, orderRating, orderComment);
+                ReviewIO.CreateReview(selectedOrder, orderRating, orderComment);
 
                 DisplayIO.DisplayMessage(String.Format(CustomerConstants.THANK_YOU_FOR_RATING_STR,
                     selectedOrder.Restaurant.RestaurantName));

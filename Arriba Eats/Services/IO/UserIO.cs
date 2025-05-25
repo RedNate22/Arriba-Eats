@@ -35,7 +35,7 @@ public class UserIO
     /// of the <see cref="User"/>.
     /// </summary>
     /// <param name="user"> The <see cref="User"/> to display the information of. </param>
-    public static void DisplayUserInfo(User user)  // TODO make this an overload, 3 methods
+    public static void DisplayUserInfo(User user)
     {
         var currentUser = SessionManager.ReturnCurrentUser();
         if (currentUser != null)
