@@ -75,11 +75,10 @@ public class OrderIO
     // ? split this up? or condense?
     public static int GetOrderFromCustomer(int orderNumber)
     {
-        if (SessionManager.SelectedRestaurant == null) return orderNumber;
+        if (SessionManager.SelectedRestaurant == null) return orderNumber;  // No restaurant selected
         Restaurant selectedRestaurant = SessionManager.SelectedRestaurant;
 
         decimal currentOrderTotalDec = 0.00M;
-
         if (selectedRestaurant.TryGetMenu(out List<decimal> restaurantMenuPrices, out List<string> restaurantMenuItems))
         {
             CustomerOrder customerOrder = new CustomerOrder
@@ -89,11 +88,10 @@ public class OrderIO
 
             while (true)
             {
-                DisplayIO.DisplayMessage(string.Format(CustomerConstants.CURRENT_ORDER_TOTAL_STR, currentOrderTotalDec));
+                DisplayIO.DisplayMessage(string.Format("Current order total: ${0:F2}", currentOrderTotalDec));
 
-                int choiceIndex = 1;
+                int choiceIndex = 1;  // The displayed number for the option
                 int menuIndex = 0;
-
                 foreach (string item in restaurantMenuItems)
                 {
                     DisplayIO.DisplayMessage($"{choiceIndex}:   ${restaurantMenuPrices[menuIndex]}  {restaurantMenuItems[menuIndex]}");
@@ -118,14 +116,14 @@ public class OrderIO
                     {
                         if (OrderRegistry.TryAddOrder(customerOrder) && UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
                         {
-                            DisplayIO.DisplayMessage(String.Format(CustomerConstants.ORDER_PLACED_STR, orderNumber));
+                            DisplayIO.DisplayMessage(String.Format("Your order has been placed. Your order number is #{0}.", orderNumber));
 
                             orderNumber++;  // * Update order number for future (next) orders
                             return orderNumber;
                         }
                         else
                         {
-                            DisplayIO.DisplayMessage(CustomerConstants.ORDER_NOT_CONFIRMED_STR);
+                            DisplayIO.DisplayMessage("Order could not be confirmed.");
                             return orderNumber;
                         }
                     }
@@ -167,7 +165,7 @@ public class OrderIO
         }
         else
         {
-            DisplayIO.DisplayMessage(String.Format(CustomerConstants.RESTAURANT_HAS_NO_MENU_STR, selectedRestaurant.RestaurantName));
+            DisplayIO.DisplayMessage(String.Format("{0} currently has no items on the menu.", selectedRestaurant.RestaurantName));
             return orderNumber;
         }
     }
