@@ -71,8 +71,20 @@ public class OrderIO
         else return customerOrders;
     }
 
-    // TODO xml
-    // ? split this up? or condense?
+    /// <summary>
+    /// Initiates the order placement process for a <see cref="Customer"/> at the currently selected <see cref="Restaurant"/>.
+    /// </summary>
+    /// <remarks>
+    /// Displays the <see cref="Restaurant"/>'s menu and allows the <see cref="Customer"/> to select items, view the current order total, 
+    /// and either confirm or cancel the order.
+    /// The method loops until the user completes or cancels their order.
+    /// Upon completion, a new order number is returned.
+    /// </remarks>
+    /// <param name="orderNumber"> The unique number assigned to the customer's order. </param>
+    /// <returns>
+    /// The updated order number if the order is successfully placed.
+    /// If the order is canceled or unsuccessful, the original order number is returned.
+    /// </returns>
     public static int GetOrderFromCustomer(int orderNumber)
     {
         if (SessionManager.SelectedRestaurant == null) return orderNumber;  // No restaurant selected
@@ -123,29 +135,9 @@ public class OrderIO
 
                 else
                 {
-                    // * Adjust for index-based referencing
-                    decimal selectedMenuItemPrice = restaurantMenuPrices[choice - 1];
-                    string selectedMenuItemName = restaurantMenuItems[choice - 1];
-
-                    while (choice != 0)
-                    {
-                        DisplayIO.DisplayMessage($"Adding {selectedMenuItemName} to order.");
-                        DisplayIO.DisplayMessage("Please enter quantity (0 to cancel):");
-                        choice = GetItemQuantity();
-
-                        if (choice > 0)
-                        {
-                            customerOrder.AddItemToOrder(selectedMenuItemName, choice, selectedMenuItemPrice);
-                            currentOrderTotalDec += choice * selectedMenuItemPrice;  // * Update cart total
-                            DisplayIO.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
-                            break;
-                        }
-
-                        else if (choice != 0)
-                        {
-                            DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
-                        }
-                    }
+                    AddItemToOrder(customerOrder, currentOrderTotalDec, choice, restaurantMenuPrices,
+                        restaurantMenuItems, out decimal newOrderTotalDec);
+                    currentOrderTotalDec = newOrderTotalDec;
                 }
             }
         }
@@ -156,6 +148,20 @@ public class OrderIO
         }
     }
 
+    /// <summary>
+    /// Attempts to finalise a <see cref="Customer"/>'s order by adding it to the <see cref="OrderRegistry"/>.
+    /// </summary>
+    /// <remarks>
+    /// If the order contains no items, an error message is displayed, and the process is halted.
+    /// If the order is successfully added, its status is updated to <see cref="OrderStatus.Ordered"/> and a new order 
+    /// number is assigned.
+    /// </remarks>
+    /// <param name="customerOrder"> The <see cref="Customer"/>'s order to be finalised. </param>
+    /// <param name="orderNumber"> The current order number before confirmation. </param>
+    /// <param name="newOrderNumber">
+    /// <c>Out</c> parameter that will contain the updated order number if the order is successfully placed.
+    /// If unsuccessful, the original order number is retained.
+    /// </param>
     private static void CompleteOrder(CustomerOrder customerOrder, int orderNumber, out int newOrderNumber)
     {
         if (customerOrder.IsOrderEmpty())
@@ -179,6 +185,51 @@ public class OrderIO
                 newOrderNumber = orderNumber;
             }
         }
+    }
+
+    /// <summary>
+    /// Adds a selected menu item to the customer's order.
+    /// </summary>
+    /// <remarks>
+    /// Displays the selected item, prompts the user for a quantity, and updates the order total.
+    /// The method loops until a valid quantity is entered.
+    /// </remarks>
+    /// <param name="customerOrder"> The <see cref="Customer"/>'s order to which the item is being added. </param>
+    /// <param name="currentOrderTotalDec"> The current total price of the order before adding the item. </param>
+    /// <param name="choice"> The menu item selection index, corresponding to the <see cref="Customer"/>'s choice. </param>
+    /// <param name="restaurantMenuPrices"> A list of item prices for the <see cref="Restaurant"/>'s menu. </param>
+    /// <param name="restaurantMenuItems"> A list of item names for the <see cref="Restaurant"/>'s menu. </param>
+    /// <param name="newOrderTotalDec">
+    /// <c> Out</c> parameter that will contain the updated order total after the item is added.
+    /// </param>
+    private static void AddItemToOrder(CustomerOrder customerOrder, decimal currentOrderTotalDec, int choice,
+        List<decimal> restaurantMenuPrices, List<string> restaurantMenuItems, out decimal newOrderTotalDec)
+    {
+        // * Adjust for index-based referencing
+        decimal selectedMenuItemPrice = restaurantMenuPrices[choice - 1];
+        string selectedMenuItemName = restaurantMenuItems[choice - 1];
+
+        while (choice != 0)
+        {
+            DisplayIO.DisplayMessage($"Adding {selectedMenuItemName} to order.");
+            DisplayIO.DisplayMessage("Please enter quantity (0 to cancel):");
+            choice = GetItemQuantity();
+
+            if (choice > 0)
+            {
+                customerOrder.AddItemToOrder(selectedMenuItemName, choice, selectedMenuItemPrice);
+                currentOrderTotalDec += choice * selectedMenuItemPrice;  // * Update cart total
+                newOrderTotalDec = currentOrderTotalDec;
+                DisplayIO.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
+                break;
+            }
+
+            else if (choice != 0)
+            {
+                DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+            }
+        }
+        newOrderTotalDec = currentOrderTotalDec;
     }
 
     /// <summary>
