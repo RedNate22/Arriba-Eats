@@ -113,6 +113,31 @@ public class UserIO
     }
 
     /// <summary>
+    /// Calculates the taxicab distance between a <see cref="User"/> and
+    /// a <see cref="Restaurant"/>.
+    /// </summary>
+    /// <param name="user"> The user whose location will be compared. </param>
+    /// <param name="restaurant"> The restaurant whose location will be compared. </param>
+    /// <returns> The taxicab distance between the user and the restaurant. </returns>
+    public static int GetDistance(User user, Restaurant restaurant)
+    {
+        // user u1, u2
+        // restaurant r1, r2
+        // Distance = (u1 - r1) + (u2 - r2)   
+
+        string[] userCoords = user.Location.Split(',');
+        string[] restaurantCoords = restaurant.Location.Split(',');
+
+        int u1 = int.Parse(userCoords[0]);
+        int u2 = int.Parse(userCoords[1]);
+        int r1 = int.Parse(restaurantCoords[0]);
+        int r2 = int.Parse(restaurantCoords[1]);
+
+        int distance = Math.Abs(u1 - r1) + Math.Abs(u2 - r2);
+        return distance;
+    }
+
+    /// <summary>
     /// Calculates the total taxicab distance for the currently authenticated <see cref="Deliverer"/>
     /// to travel for the order.
     /// <para> The total distance is the sum of the distance between the <see cref="Deliverer"/>
