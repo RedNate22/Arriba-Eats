@@ -41,7 +41,7 @@ public class ClientSeeCurrentOrdersMenu : IMenu
 
         else
         {
-            DisplayIO.DisplayMessage(ClientConstants.RESTAURANT_HAS_NO_ORDERS_STR);
+            DisplayIO.DisplayMessage(MenuConstants.RESTAURANT_HAS_NO_ORDERS_STR);
             UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
         }
     }

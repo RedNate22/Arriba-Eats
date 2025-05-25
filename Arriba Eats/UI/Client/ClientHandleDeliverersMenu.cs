@@ -22,8 +22,8 @@ public class ClientHandleDeliverersMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        DisplayIO.DisplayMessage(ClientConstants.THESE_DELIVERERS_ARRIVED_STR);
-        DisplayIO.DisplayMessage(ClientConstants.SELECT_COLLECTED_ORDERS_STR);
+        DisplayIO.DisplayMessage(MenuConstants.THESE_DELIVERERS_ARRIVED_STR);
+        DisplayIO.DisplayMessage(MenuConstants.SELECT_COLLECTED_ORDERS_STR);
 
         var customerOrders = OrderIO.GetCustomerOrders();
 
@@ -44,13 +44,13 @@ public class ClientHandleDeliverersMenu : IMenu
 
             if (!OrderIO.IsCooked(selectedOrder.OrderStatus))
             {
-                DisplayIO.DisplayMessage(ClientConstants.ORDER_NOT_COOKED_STR);
+                DisplayIO.DisplayMessage(MenuConstants.ORDER_NOT_COOKED_STR);
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
 
             else if (selectedOrder.DelivererArrivedAtRestaurant == true && OrderIO.UpdateOrder(selectedOrder))  // * Updates to 'Being Delivered'
             {
-                DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
         }

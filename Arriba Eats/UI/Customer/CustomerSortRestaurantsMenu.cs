@@ -31,7 +31,7 @@ public class CustomerSortRestaurantsMenu: IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        DisplayIO.DisplayMessage(CustomerConstants.RESTAURANT_LIST_ORDERED_STR);
+        DisplayIO.DisplayMessage(MenuConstants.RESTAURANT_LIST_ORDERED_STR);
         DisplayIO.DisplayMessage(_returnPreviousMenu);
         DisplayIO.DisplayMessage(_enterChoice);
         

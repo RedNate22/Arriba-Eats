@@ -85,10 +85,10 @@ public static class RestaurantIO
     {
         List<Restaurant> restaurantsList = SortRestaurants(CustomerSortRestaurantsMenu.SortOption);
 
-        int restaurantColumnWidth = CustomerConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
-        int locationColumnWidth = CustomerConstants.LOCATION_HEADING_STR.Length + 4;
-        int distanceColumnWidth = CustomerConstants.DISTANCE_HEADING_STR.Length + 2;
-        int styleColumnWidth = CustomerConstants.STYLE_HEADING_STR.Length + 7;
+        int restaurantColumnWidth = MenuConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
+        int locationColumnWidth = MenuConstants.LOCATION_HEADING_STR.Length + 4;
+        int distanceColumnWidth = MenuConstants.DISTANCE_HEADING_STR.Length + 2;
+        int styleColumnWidth = MenuConstants.STYLE_HEADING_STR.Length + 7;
 
         // Dynamically increase width of restaurant name column
         foreach (Restaurant restaurant in restaurantsList)
@@ -101,11 +101,11 @@ public static class RestaurantIO
 
         // Display the headings
         DisplayIO.DisplayMessage("   "
-            + CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
-            + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
-            + CustomerConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
-            + CustomerConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
-            + CustomerConstants.RATING_HEADING_STR);
+            + MenuConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
+            + MenuConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
+            + MenuConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
+            + MenuConstants.STYLE_HEADING_STR.PadRight(styleColumnWidth)
+            + MenuConstants.RATING_HEADING_STR);
 
         // Display the restaurants
         int restaurantChoiceIndex = 1;

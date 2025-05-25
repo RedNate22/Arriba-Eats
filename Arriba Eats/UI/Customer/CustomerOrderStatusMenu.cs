@@ -48,7 +48,7 @@ public class CustomerOrderStatusMenu : IMenu
 
         else
         {
-            DisplayIO.DisplayMessage(CustomerConstants.NOT_PLACED_ORDERS_STR);
+            DisplayIO.DisplayMessage(MenuConstants.NOT_PLACED_ORDERS_STR);
             UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
         }
     }

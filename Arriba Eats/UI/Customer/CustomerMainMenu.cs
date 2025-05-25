@@ -45,7 +45,7 @@ public class CustomerMainMenu : IMenu
 
         DisplayIO.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
         DisplayIO.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
-        DisplayIO.DisplayMessage(CustomerConstants.CUSTOMER_MAIN_MENU_CHOICES_STR);
+        DisplayIO.DisplayMessage(MenuConstants.CUSTOMER_MAIN_MENU_CHOICES_STR);
         DisplayIO.DisplayMessage(_logOut);
         DisplayIO.DisplayMessage(_enterChoice);
 

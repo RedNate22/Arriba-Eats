@@ -23,34 +23,34 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
     {
         if (!OrderIO.FindCurrentOrder(out var currentOrder))
         {
-            DisplayIO.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
+            DisplayIO.DisplayMessage(MenuConstants.NOT_YET_ACCEPTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
         else if (OrderIO.IsBeingDelivered(currentOrder.OrderStatus))
         {
-            DisplayIO.DisplayMessage(DelivererConstants.ALREADY_PICKED_UP_ORDER_STR);
+            DisplayIO.DisplayMessage(MenuConstants.ALREADY_PICKED_UP_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
         else if (currentOrder.DelivererArrivedAtRestaurant == true)
         {
-            DisplayIO.DisplayMessage(DelivererConstants.ALREADY_AT_RESTAURANT_STR);
+            DisplayIO.DisplayMessage(MenuConstants.ALREADY_AT_RESTAURANT_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
         else
         {
             currentOrder.DelivererAtRestaurant();
-            DisplayIO.DisplayMessage(String.Format(DelivererConstants.ARRIVED_AT_RESTAURANT_STR,
+            DisplayIO.DisplayMessage(String.Format(MenuConstants.ARRIVED_AT_RESTAURANT_STR,
                 currentOrder.Restaurant.RestaurantName, currentOrder.OrderNumber));
 
             if (OrderIO.IsBeingPrepared(currentOrder.OrderStatus))
             {
-                DisplayIO.DisplayMessage(DelivererConstants.ORDER_STILL_BEING_PREPARED_STR);
+                DisplayIO.DisplayMessage(MenuConstants.ORDER_STILL_BEING_PREPARED_STR);
             }
 
-            DisplayIO.DisplayMessage(String.Format(DelivererConstants.PLEASE_DELIVER_STR,
+            DisplayIO.DisplayMessage(String.Format(MenuConstants.PLEASE_DELIVER_STR,
                 currentOrder.Customer.Name, currentOrder.Customer.Location));
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }

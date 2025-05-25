@@ -45,7 +45,7 @@ public class ReviewIO
                 if (ratingInt >= 0 && ratingInt < 6) return ratingInt;
             }
 
-            DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+            DisplayIO.DisplayMessage(MenuConstants.INVALID_QUANTITY_STR);
             continue;
         }
     }
@@ -76,7 +76,7 @@ public class ReviewIO
         {
             if (order.Restaurant == SessionManager.SelectedRestaurant && order.RestaurantReview != null)
             {
-                DisplayIO.DisplayMessage(String.Format(CustomerConstants.REVIEW_DETAILS_STR,
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.REVIEW_DETAILS_STR,
                     order.Customer.Name, order.RestaurantReview.RatingInStars, order.RestaurantReview.Comment));
 
                 DisplayIO.DisplayEmptyLine();
@@ -105,7 +105,7 @@ public class ReviewIO
         {
             if (OrderIO.IsDelivered(order.OrderStatus) && order.RestaurantReview == null)
             {
-                DisplayIO.DisplayMessage(String.Format(CustomerConstants.ORDER_DETAILS_FOR_REVIEW_STR,
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.ORDER_DETAILS_FOR_REVIEW_STR,
                     choiceIndex, order.OrderNumber, order.Restaurant.RestaurantName));
                 ordersToReview.Add(order);
                 choiceIndex++;

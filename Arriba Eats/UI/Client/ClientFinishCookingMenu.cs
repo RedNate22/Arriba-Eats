@@ -18,7 +18,7 @@ public class ClientFinishCookingMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        DisplayIO.DisplayMessage(ClientConstants.SELECT_ORDER_TO_FINISH_STR);
+        DisplayIO.DisplayMessage(MenuConstants.SELECT_ORDER_TO_FINISH_STR);
 
         var customerOrders = OrderIO.GetCustomerOrders();
 
@@ -38,19 +38,19 @@ public class ClientFinishCookingMenu : IMenu
 
             if (OrderIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooked'
             {
-                DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
 
                 if (selectedOrder.Deliverer == null)
                 {
-                    DisplayIO.DisplayMessage(ClientConstants.NO_DELIVERER_ASSIGNED_STR);
+                    DisplayIO.DisplayMessage(MenuConstants.NO_DELIVERER_ASSIGNED_STR);
                 }
 
                 else if (selectedOrder.DelivererArrivedAtRestaurant == true)
                 {
-                    DisplayIO.DisplayMessage(String.Format(ClientConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
+                    DisplayIO.DisplayMessage(String.Format(MenuConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
                 }
 
-                else DisplayIO.DisplayMessage(String.Format(ClientConstants.DELIVERER_ARRIVING_SOON_STR, selectedOrder.Deliverer.LicencePlate));
+                else DisplayIO.DisplayMessage(String.Format(MenuConstants.DELIVERER_ARRIVING_SOON_STR, selectedOrder.Deliverer.LicencePlate));
 
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }

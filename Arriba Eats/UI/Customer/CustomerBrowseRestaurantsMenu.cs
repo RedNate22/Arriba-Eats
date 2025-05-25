@@ -36,9 +36,9 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     public static void DisplayOptions()
     {
         string enterChoice = DisplayIO.EnterChoiceStr(3);
-        DisplayIO.DisplayMessage(CustomerConstants.SEE_RESTAURANTS_MENU_STR);
-        DisplayIO.DisplayMessage(CustomerConstants.SEE_REVIEWS_STR);
-        DisplayIO.DisplayMessage(CustomerConstants.RETURN_MAIN_MENU_STR);
+        DisplayIO.DisplayMessage(MenuConstants.SEE_RESTAURANTS_MENU_STR);
+        DisplayIO.DisplayMessage(MenuConstants.SEE_REVIEWS_STR);
+        DisplayIO.DisplayMessage(MenuConstants.RETURN_MAIN_MENU_STR);
         DisplayIO.DisplayMessage(enterChoice);
 
         const int SEE_RESTAURANTS_MENU_INT = 1, SEE_REVIEWS_INT = 2, RETURN_MAIN_MENU_INT = 3;
@@ -85,7 +85,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     {
         if (ReturningFromMenu == false)
         {
-            DisplayIO.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+            DisplayIO.DisplayMessage(MenuConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
             var restaurantsList = RestaurantIO.DisplayRestaurantsList(out int choiceIndex);
             
             DisplayIO.DisplayMessage(DisplayIO.ReturnToPreviousMenuStr(choiceIndex));

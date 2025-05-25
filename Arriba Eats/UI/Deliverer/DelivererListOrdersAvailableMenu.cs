@@ -22,7 +22,7 @@ public class DelivererListOrdersAvailableMenu : IMenu
     {
         if (OrderIO.FindCurrentOrder(out var currentOrder))
         {
-            DisplayIO.DisplayMessage(DelivererConstants.ALREADY_SELECTED_ORDER_STR);
+            DisplayIO.DisplayMessage(MenuConstants.ALREADY_SELECTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
@@ -32,7 +32,7 @@ public class DelivererListOrdersAvailableMenu : IMenu
             UserIO.DelivererChangeLocation(delivererLocation);
 
             // Display active orders
-            DisplayIO.DisplayMessage(DelivererConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
+            DisplayIO.DisplayMessage(MenuConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
             var customerOrdersList = OrderIO.DisplayOrdersList(out int choiceIndex);
             DisplayIO.DisplayMessage(DisplayIO.ReturnToPreviousMenuStr(choiceIndex));
             DisplayIO.DisplayMessage(DisplayIO.EnterChoiceStr(choiceIndex));
@@ -46,7 +46,7 @@ public class DelivererListOrdersAvailableMenu : IMenu
                 var selectedOrder = customerOrdersList[choice - 1];
                 selectedOrder.AssignDeliverer(SessionManager.ReturnCurrentDeliverer());
 
-                DisplayIO.DisplayMessage(String.Format(DelivererConstants.THANKS_FOR_ACCEPTING_ORDER_STR,
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.THANKS_FOR_ACCEPTING_ORDER_STR,
                     selectedOrder.Restaurant.RestaurantName, selectedOrder.Restaurant.Location));
 
                 UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);

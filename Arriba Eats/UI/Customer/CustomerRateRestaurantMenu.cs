@@ -17,7 +17,7 @@ public class CustomerRateRestaurantMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        DisplayIO.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
+        DisplayIO.DisplayMessage(MenuConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
 
         var customerOrders = OrderIO.GetCustomerOrders();
 
@@ -36,21 +36,21 @@ public class CustomerRateRestaurantMenu : IMenu
         {
             var selectedOrder = ordersToReview[choice - 1];  // * Adjust for index-based referencing
 
-            DisplayIO.DisplayMessage(String.Format(CustomerConstants.YOU_ARE_RATING_STR,
+            DisplayIO.DisplayMessage(String.Format(MenuConstants.YOU_ARE_RATING_STR,
                 selectedOrder.OrderNumber, selectedOrder.Restaurant.RestaurantName));
             selectedOrder.DisplayOrderedItems();
 
-            DisplayIO.DisplayMessage(CustomerConstants.PLEASE_ENTER_RATING_STR);
+            DisplayIO.DisplayMessage(MenuConstants.PLEASE_ENTER_RATING_STR);
             int orderRating = ReviewIO.GetRating();
 
             if (orderRating == 0) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
             else
             {
-                DisplayIO.DisplayMessage(CustomerConstants.ENTER_COMMENT_STR);
+                DisplayIO.DisplayMessage(MenuConstants.ENTER_COMMENT_STR);
                 string orderComment = DisplayIO.ReadInput();
                 ReviewIO.CreateReview(selectedOrder, orderRating, orderComment);
 
-                DisplayIO.DisplayMessage(String.Format(CustomerConstants.THANK_YOU_FOR_RATING_STR,
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.THANK_YOU_FOR_RATING_STR,
                     selectedOrder.Restaurant.RestaurantName));
                 UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
             }

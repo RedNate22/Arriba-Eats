@@ -226,7 +226,7 @@ public class OrderIO
 
             else if (choice != 0)
             {
-                DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                DisplayIO.DisplayMessage(MenuConstants.INVALID_QUANTITY_STR);
             }
         }
         newOrderTotalDec = currentOrderTotalDec;
@@ -267,10 +267,10 @@ public class OrderIO
     {
         List<CustomerOrder> customerOrdersList = GetCustomerOrders();
 
-        int orderColumnWidth = DelivererConstants.ORDER_HEADING_STR.Length + 2;
-        int restaurantColumnWidth = DelivererConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
-        int locationColumnWidth = DelivererConstants.LOC_HEADING_STR.Length + 4;
-        int customerColumnWidth = DelivererConstants.CUSTOMER_NAME_HEADING_STR.Length + 4;
+        int orderColumnWidth = MenuConstants.ORDER_HEADING_STR.Length + 2;
+        int restaurantColumnWidth = MenuConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
+        int locationColumnWidth = MenuConstants.LOC_HEADING_STR.Length + 4;
+        int customerColumnWidth = MenuConstants.CUSTOMER_NAME_HEADING_STR.Length + 4;
 
         // Dynamically increase width of restaurant name column
         foreach (CustomerOrder order in customerOrdersList)
@@ -283,12 +283,12 @@ public class OrderIO
 
         // Display the headings
         DisplayIO.DisplayMessage("   "
-            + DelivererConstants.ORDER_HEADING_STR.PadRight(orderColumnWidth)
-            + DelivererConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
-            + DelivererConstants.LOC_HEADING_STR.PadRight(locationColumnWidth)
-            + DelivererConstants.CUSTOMER_NAME_HEADING_STR.PadRight(customerColumnWidth)
-            + DelivererConstants.LOC_HEADING_STR.PadRight(locationColumnWidth)
-            + DelivererConstants.DISTANCE_HEADING_STR);
+            + MenuConstants.ORDER_HEADING_STR.PadRight(orderColumnWidth)
+            + MenuConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
+            + MenuConstants.LOC_HEADING_STR.PadRight(locationColumnWidth)
+            + MenuConstants.CUSTOMER_NAME_HEADING_STR.PadRight(customerColumnWidth)
+            + MenuConstants.LOC_HEADING_STR.PadRight(locationColumnWidth)
+            + MenuConstants.DISTANCE_HEADING_STR);
 
         // Display the currently active orders
         int orderChoiceIndex = 1;
@@ -469,7 +469,7 @@ public class OrderIO
         {
             if (IsOrdered(order.OrderStatus))
             {
-                DisplayIO.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.DISPLAY_ORDER_STR, choiceIndex,
                     order.OrderNumber, order.Customer.Name));
 
                 ordersToCook.Add(order);
@@ -497,7 +497,7 @@ public class OrderIO
         {
             if (IsCooking(order.OrderStatus))
             {
-                DisplayIO.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
+                DisplayIO.DisplayMessage(String.Format(MenuConstants.DISPLAY_ORDER_STR, choiceIndex,
                     order.OrderNumber, order.Customer.Name));
 
                 ordersToFinish.Add(order);
@@ -531,7 +531,7 @@ public class OrderIO
             {
                 if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) || IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant == true)
                 {
-                    DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_DETAILS_STR, choiceIndex,
+                    DisplayIO.DisplayMessage(String.Format(MenuConstants.ORDER_DETAILS_STR, choiceIndex,
                         order.OrderNumber, order.Customer.Name, order.Deliverer!.LicencePlate, order.OrderStatus));
 
                     ordersForCollection.Add(order);

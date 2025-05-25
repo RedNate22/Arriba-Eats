@@ -36,8 +36,8 @@ public class RegistrationMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        DisplayIO.DisplayMessage(RegistrationConstants.WHICH_TYPE_USER_STR);
-        DisplayIO.DisplayMessage(RegistrationConstants.REGISTRATION_MENU_CHOICES_STR);
+        DisplayIO.DisplayMessage(MenuConstants.WHICH_TYPE_USER_STR);
+        DisplayIO.DisplayMessage(MenuConstants.REGISTRATION_MENU_CHOICES_STR);
         DisplayIO.DisplayMessage(_returnPreviousMenu);
         DisplayIO.DisplayMessage(_enterChoice);
 
@@ -46,17 +46,17 @@ public class RegistrationMenu : IMenu
         switch (choice)
         {
             case CUSTOMER_INT:
-                RegistrationProcess.Register(RegistrationConstants.CUSTOMER_CHOICE);
+                RegistrationProcess.Register(MenuConstants.CUSTOMER_CHOICE);
                 UIFlowController.ChangeMenu(MenuState.MainMenu);
                 break;
             
             case DELIVERER_INT:
-                RegistrationProcess.Register(RegistrationConstants.DELIVERER_CHOICE);
+                RegistrationProcess.Register(MenuConstants.DELIVERER_CHOICE);
                 UIFlowController.ChangeMenu(MenuState.MainMenu); 
                 break;
             
             case CLIENT_INT:
-                RegistrationProcess.Register(RegistrationConstants.CLIENT_CHOICE);
+                RegistrationProcess.Register(MenuConstants.CLIENT_CHOICE);
                 UIFlowController.ChangeMenu(MenuState.MainMenu);
                 break;
             

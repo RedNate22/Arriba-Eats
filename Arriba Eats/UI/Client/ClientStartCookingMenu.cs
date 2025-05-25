@@ -21,7 +21,7 @@ public class ClientStartCookingMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        DisplayIO.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
+        DisplayIO.DisplayMessage(MenuConstants.SELECT_ORDER_TO_COOK_STR);
         var customerOrders = OrderIO.GetCustomerOrders();
         bool containsOrdersReady = customerOrders.Count != 0 && OrderIO.ContainsOrdered(customerOrders);
 
