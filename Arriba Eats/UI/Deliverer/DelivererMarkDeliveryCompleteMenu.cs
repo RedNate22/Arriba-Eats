@@ -27,7 +27,7 @@ public class DelivererMarkDeliveryCompleteMenu : IMenu
 
         else if (OrderIO.FindCurrentOrder(out var orderFound) == true)
         {
-            if (DisplayIO.IsOrderBeingDelivered(orderFound.OrderStatus) && DisplayIO.UpdateOrder(orderFound))  // * Updates to 'Delivered'
+            if (OrderIO.IsBeingDelivered(orderFound.OrderStatus) && OrderIO.UpdateOrder(orderFound))  // * Updates to 'Delivered'
             {
                 DisplayIO.DisplayMessage(DelivererConstants.THANK_YOU_FOR_DELIVERING_STR);
                 UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);

@@ -25,7 +25,7 @@ public class ClientHandleDeliverersMenu : IMenu
         DisplayIO.DisplayMessage(ClientConstants.THESE_DELIVERERS_ARRIVED_STR);
         DisplayIO.DisplayMessage(ClientConstants.SELECT_COLLECTED_ORDERS_STR);
 
-        var customerOrders = DisplayIO.GetCustomerOrders();
+        var customerOrders = OrderIO.GetCustomerOrders();
 
         // * Check if any orders are ordered, cooking, or cooked, and the deliverer has arrived,
         // * and display them - updating the index
@@ -48,7 +48,7 @@ public class ClientHandleDeliverersMenu : IMenu
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
 
-            else if (selectedOrder.DelivererArrivedAtRestaurant == true && DisplayIO.UpdateOrder(selectedOrder))  // * Updates to 'Being Delivered'
+            else if (selectedOrder.DelivererArrivedAtRestaurant == true && OrderIO.UpdateOrder(selectedOrder))  // * Updates to 'Being Delivered'
             {
                 DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);

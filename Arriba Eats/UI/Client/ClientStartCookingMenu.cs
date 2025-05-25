@@ -22,7 +22,7 @@ public class ClientStartCookingMenu : IMenu
     public void DisplayMenu()
     {
         DisplayIO.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
-        var customerOrders = DisplayIO.GetCustomerOrders();
+        var customerOrders = OrderIO.GetCustomerOrders();
         bool containsOrdersReady = customerOrders.Count != 0 && OrderIO.ContainsOrdered(customerOrders);
 
         // * Check if any orders are ready to cook and display them - updating the index
@@ -56,7 +56,7 @@ public class ClientStartCookingMenu : IMenu
         {
             var selectedOrder = ordersToCook[choice - 1];  // * Adjust for index-based referencing
 
-            if (DisplayIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooking'
+            if (OrderIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooking'
             {
                 DisplayIO.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));
                 selectedOrder.DisplayOrderedItems();

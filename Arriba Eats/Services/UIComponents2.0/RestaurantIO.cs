@@ -32,8 +32,8 @@ public static class RestaurantIO
                 case (SortOption)2:
                     static int SortByDistance(Restaurant a, Restaurant b)
                     {
-                        int distanceA = DisplayIO.GetDistance(SessionManager.ReturnCurrentUser(), a);
-                        int distanceB = DisplayIO.GetDistance(SessionManager.ReturnCurrentUser(), b);
+                        int distanceA = GetDistance(SessionManager.ReturnCurrentUser(), a);
+                        int distanceB = GetDistance(SessionManager.ReturnCurrentUser(), b);
                         int distanceComparison = distanceA.CompareTo(distanceB);
 
                         // * If distances are the same (returning 0), instead sort by name
@@ -116,7 +116,7 @@ public static class RestaurantIO
             DisplayIO.DisplayMessage($"{restaurantChoiceIndex}: "
                 + $"{restaurantsList[i].RestaurantName}".PadRight(restaurantColumnWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
-                + $"{DisplayIO.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
+                + $"{GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
                 + $"{rating}".PadRight(3));
             restaurantChoiceIndex++;
@@ -125,6 +125,46 @@ public static class RestaurantIO
         return restaurantsList;
     }
     
+    /// <summary>
+    /// Allows the logged-in (<see cref="Client"/>) <see cref="User"/> to add a new item to their <see cref="Restaurant._restaurantMenu"/>.
+    /// If the user owns a restaurant, displays the current menu and prompts for a new item.
+    /// <para> If the user enters a non-blank input, this becomes the item name, and it then prompts for an 
+    /// item price using <see cref="GetMenuItemPrice()"/>. </para>
+    /// <para> 
+    /// The item name and price are then registered into the <see cref="Restaurant._restaurantMenu"/>. 
+    /// </para> 
+    /// </summary>
+    public static void AddItemsToRestaurant()
+    {
+        var currentUser = SessionManager.ReturnCurrentUser();
+        if (currentUser != null)
+        {
+            if (RestaurantRegistry.TryFindClientsRestaurant(currentUser, out Restaurant? restaurant))
+            {
+                DisplayIO.DisplayMessage("This is your restaurant's current menu:");
+                restaurant?.DisplayCurrentlyRegisteredMenuItems();
+
+                DisplayIO.DisplayMessage("Please enter the name of the new item (blank to cancel):");
+
+                string itemName = DisplayIO.ReadInput();
+
+                if (!string.IsNullOrWhiteSpace(itemName))
+                {
+                    decimal itemPrice = GetMenuItemPrice();
+                    if (restaurant!.TryRegisterMenuItem(itemName, itemPrice))
+                    {
+                        DisplayIO.DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
+                    }
+                    else DisplayIO.DisplayMessage("This item is already added to the menu.");
+                }
+            }
+
+            else DisplayIO.DisplayMessage("You currently have no restaurants.");
+        }
+
+        else DisplayIO.DisplayMessage("No user is currently logged in.");
+    }
+
     /// <summary>
     /// Calculates the average rating for a given <see cref="Restaurant"/> based on
     /// all <see cref="RestaurantReview.Rating"/>s for the <see cref="Restaurant"/>.
@@ -181,42 +221,28 @@ public static class RestaurantIO
     }
 
     /// <summary>
-    /// Allows the logged-in (<see cref="Client"/>) <see cref="User"/> to add a new item to their <see cref="Restaurant._restaurantMenu"/>.
-    /// If the user owns a restaurant, displays the current menu and prompts for a new item.
-    /// <para> If the user enters a non-blank input, this becomes the item name, and it then prompts for an 
-    /// item price using <see cref="GetMenuItemPrice()"/>. </para>
-    /// <para> 
-    /// The item name and price are then registered into the <see cref="Restaurant._restaurantMenu"/>. 
-    /// </para> 
+    /// Calculates the taxicab distance between a <see cref="User"/> and
+    /// a <see cref="Restaurant"/>.
     /// </summary>
-    public static void AddItemsToRestaurant()
+    /// <param name="user"> The user whose location will be compared. </param>
+    /// <param name="restaurant"> The restaurant whose location will be compared. </param>
+    /// <returns> The taxicab distance between the user and the restaurant. </returns>
+    public static int GetDistance(User user, Restaurant restaurant)
     {
-        var currentUser = SessionManager.ReturnCurrentUser();
-        if (currentUser != null)
-        {
-            if (RestaurantRegistry.TryFindClientsRestaurant(currentUser, out Restaurant? restaurant))
-            {
-                DisplayIO.DisplayMessage("This is your restaurant's current menu:");
-                restaurant?.DisplayCurrentlyRegisteredMenuItems();
+        // user u1, u2
+        // restaurant r1, r2
+        // Distance = (u1 - r1) + (u2 - r2)   
 
-                DisplayIO.DisplayMessage("Please enter the name of the new item (blank to cancel):");
+        string[] userCoords = user.Location.Split(',');
+        string[] restaurantCoords = restaurant.Location.Split(',');
 
-                string itemName = DisplayIO.ReadInput();
+        int u1 = int.Parse(userCoords[0]);
+        int u2 = int.Parse(userCoords[1]);
+        int r1 = int.Parse(restaurantCoords[0]);
+        int r2 = int.Parse(restaurantCoords[1]);
 
-                if (!string.IsNullOrWhiteSpace(itemName))
-                {
-                    decimal itemPrice = GetMenuItemPrice();
-                    if (restaurant!.TryRegisterMenuItem(itemName, itemPrice))
-                    {
-                        DisplayIO.DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
-                    }
-                    else DisplayIO.DisplayMessage("This item is already added to the menu.");
-                }
-            }
-
-            else DisplayIO.DisplayMessage("You currently have no restaurants.");
-        }
-
-        else DisplayIO.DisplayMessage("No user is currently logged in.");
+        int distance = Math.Abs(u1 - r1) + Math.Abs(u2 - r2);
+        return distance;
     }
+
 }

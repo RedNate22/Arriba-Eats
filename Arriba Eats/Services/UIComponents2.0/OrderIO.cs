@@ -9,6 +9,58 @@ namespace UIComponents;
 public class OrderIO
 {
     // TODO xml
+    public static bool UpdateOrder(CustomerOrder customerOrder)
+    {
+        if (customerOrder is CustomerOrder)
+        {
+            customerOrder.UpdateOrderStatus();
+            return true;
+        }
+        else return false;
+    }
+
+    // TODO xml
+    // ? overload?
+    public static List<CustomerOrder> GetCustomerOrders()
+    {
+        List<CustomerOrder> customerOrders = new List<CustomerOrder>();
+
+        User user = SessionManager.ReturnCurrentUser();
+        UserType userType = SessionManager.ReturnUserType();
+        if (userType == UserType.Customer)
+        {
+            if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Customer)user))
+            {
+                customerOrders = foundCustomerOrders;
+                return customerOrders;
+            }
+            else return customerOrders;
+        }
+
+        else if (userType == UserType.Client)
+        {
+            if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Client)user))
+            {
+                customerOrders = foundCustomerOrders;
+                return customerOrders;
+            }
+            else return customerOrders;
+        }
+
+        else if (userType == UserType.Deliverer)
+        {
+            if (OrderRegistry.TryGetOrders(out List<CustomerOrder> foundCustomerOrders, (Deliverer)user))
+            {
+                customerOrders = foundCustomerOrders;
+                return customerOrders;
+            }
+            else return customerOrders;
+        }
+
+        else return customerOrders;
+    }
+
+    // TODO xml
     // ? split this up? or condense?
     public static int GetOrderFromCustomer(int orderNumber)
     {
@@ -53,7 +105,7 @@ public class OrderIO
                     if (customerOrder.IsOrderEmpty()) DisplayIO.DisplayMessage("You have not added any items.");
                     else
                     {
-                        if (OrderRegistry.TryAddOrder(customerOrder) && DisplayIO.UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
+                        if (OrderRegistry.TryAddOrder(customerOrder) && UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
                         {
                             DisplayIO.DisplayMessage(String.Format(CustomerConstants.ORDER_PLACED_STR, orderNumber));
 
@@ -139,7 +191,7 @@ public class OrderIO
     /// assigned a <see cref="Deliverer"/>. </returns>
     public static List<CustomerOrder> DisplayOrdersList(out int choiceIndex)
     {
-        List<CustomerOrder> customerOrdersList = DisplayIO.GetCustomerOrders();
+        List<CustomerOrder> customerOrdersList = GetCustomerOrders();
 
         int orderColumnWidth = DelivererConstants.ORDER_HEADING_STR.Length + 2;
         int restaurantColumnWidth = DelivererConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
@@ -232,6 +284,19 @@ public class OrderIO
 
     /// <summary>
     /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.Ordered"/> or <see cref="OrderStatus.Cooking"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.Ordered"/>
+    /// or <see cref="OrderStatus.Cooking"/>, otherwise, <c>false</c>. </returns>
+    public static bool IsBeingPrepared(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.Ordered || orderStatus == OrderStatus.Cooking) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
     /// as <see cref="OrderStatus.Ordered"/>.
     /// </summary>
     /// <param name="orderStatus"> The status of the order to validate. </param>
@@ -266,6 +331,19 @@ public class OrderIO
     public static bool IsCooked(OrderStatus orderStatus)
     {
         if (orderStatus == OrderStatus.Cooked) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
+    /// as <see cref="OrderStatus.BeingDelivered"/>.
+    /// </summary>
+    /// <param name="orderStatus"> The status of the order to validate. </param>
+    /// <returns> <c>true</c> if the status is marked as <see cref="OrderStatus.BeingDelivered"/>,
+    /// otherwise, <c>false</c>. </returns>
+    public static bool IsBeingDelivered(OrderStatus orderStatus)
+    {
+        if (orderStatus == OrderStatus.BeingDelivered) return true;
         else return false;
     }
 

@@ -21,12 +21,12 @@ public class ClientSeeCurrentOrdersMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        var customerOrders = DisplayIO.GetCustomerOrders();
+        var customerOrders = OrderIO.GetCustomerOrders();
         if (customerOrders.Count != 0)
         {
             foreach (var order in customerOrders)
             {
-                if (!DisplayIO.IsOrderDelivered(order.OrderStatus))
+                if (!OrderIO.IsDelivered(order.OrderStatus))
                 {
                     DisplayIO.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                         order.Customer.Name, order.OrderStatus));

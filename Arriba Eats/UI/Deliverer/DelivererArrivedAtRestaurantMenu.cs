@@ -27,7 +27,7 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
-        else if (DisplayIO.IsOrderBeingDelivered(currentOrder.OrderStatus))
+        else if (OrderIO.IsBeingDelivered(currentOrder.OrderStatus))
         {
             DisplayIO.DisplayMessage(DelivererConstants.ALREADY_PICKED_UP_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
@@ -45,7 +45,7 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
             DisplayIO.DisplayMessage(String.Format(DelivererConstants.ARRIVED_AT_RESTAURANT_STR,
                 currentOrder.Restaurant.RestaurantName, currentOrder.OrderNumber));
 
-            if (DisplayIO.IsOrderBeingPrepared(currentOrder.OrderStatus))
+            if (OrderIO.IsBeingPrepared(currentOrder.OrderStatus))
             {
                 DisplayIO.DisplayMessage(DelivererConstants.ORDER_STILL_BEING_PREPARED_STR);
             }

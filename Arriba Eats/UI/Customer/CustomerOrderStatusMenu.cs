@@ -27,7 +27,7 @@ public class CustomerOrderStatusMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        var customerOrders = DisplayIO.GetCustomerOrders();
+        var customerOrders = OrderIO.GetCustomerOrders();
         if (customerOrders.Count != 0)
         {
             foreach (var order in customerOrders)
@@ -35,7 +35,7 @@ public class CustomerOrderStatusMenu : IMenu
                 DisplayIO.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                     order.Restaurant.RestaurantName, order.OrderStatus));
 
-                if (DisplayIO.IsOrderDelivered(order.OrderStatus))
+                if (OrderIO.IsDelivered(order.OrderStatus))
                 {
                     DisplayIO.DisplayMessage(String.Format(_orderDeliveredByStr, order.Deliverer?.Name,
                         order.Deliverer?.LicencePlate));

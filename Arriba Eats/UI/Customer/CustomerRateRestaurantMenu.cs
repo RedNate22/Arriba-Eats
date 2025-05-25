@@ -19,7 +19,7 @@ public class CustomerRateRestaurantMenu : IMenu
     {
         DisplayIO.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
 
-        var customerOrders = DisplayIO.GetCustomerOrders();
+        var customerOrders = OrderIO.GetCustomerOrders();
 
         // * Check if any orders are marked delivered, and there are no reviews for them yet
         // * Then display these orders - updating the index

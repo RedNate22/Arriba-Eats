@@ -39,7 +39,7 @@ public class DelivererMainMenu : IMenu
     {
         if (_welcomeCount == 0)
         {
-            DisplayIO.WelcomeUser();
+            UserIO.WelcomeUser();
             _welcomeCount++;
         }
 
@@ -54,7 +54,7 @@ public class DelivererMainMenu : IMenu
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                DisplayIO.DisplayUserInfo(SessionManager.ReturnCurrentUser());
+                UserIO.DisplayUserInfo(SessionManager.ReturnCurrentUser());
                 break;
 
             case LIST_ORDERS_AVAILABLE_INT:

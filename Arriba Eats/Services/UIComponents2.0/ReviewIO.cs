@@ -23,28 +23,11 @@ public class ReviewIO
 
             if (int.TryParse(ratingString, out int ratingInt))
             {
-                if (ratingInt == 0)
-                {
-                    return ratingInt;
-                }
-
-                else if (ratingInt > 0 && ratingInt < 6)
-                {
-                    return ratingInt;
-                }
-
-                else
-                {
-                    DisplayIO.DisplayMessage(CustomerConstants.INVALID_RATING_STR);
-                    continue;
-                }
+                if (ratingInt >= 0 && ratingInt < 6) return ratingInt;
             }
 
-            else
-            {
-                DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
-                continue;
-            }
+            DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+            continue;
         }
     }
 

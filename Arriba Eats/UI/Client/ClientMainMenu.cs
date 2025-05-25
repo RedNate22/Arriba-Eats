@@ -40,7 +40,7 @@ public class ClientMainMenu : IMenu
     {
         if (_welcomeCount == 0)
         {
-            DisplayIO.WelcomeUser();
+            UserIO.WelcomeUser();
             _welcomeCount++;
         }
 
@@ -55,7 +55,7 @@ public class ClientMainMenu : IMenu
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                DisplayIO.DisplayUserInfo(SessionManager.ReturnCurrentUser());
+                UserIO.DisplayUserInfo(SessionManager.ReturnCurrentUser());
                 break;
 
             case ADD_ITEM_RESTAURANT_INT:

@@ -20,7 +20,7 @@ public class ClientFinishCookingMenu : IMenu
     {
         DisplayIO.DisplayMessage(ClientConstants.SELECT_ORDER_TO_FINISH_STR);
 
-        var customerOrders = DisplayIO.GetCustomerOrders();
+        var customerOrders = OrderIO.GetCustomerOrders();
 
         // * Check if any orders are cooking and display them - updating the index
         int choiceIndex = OrderIO.DisplayOrdersReadyToFinishCooking(customerOrders, out List<dynamic> ordersToFinish);
@@ -36,7 +36,7 @@ public class ClientFinishCookingMenu : IMenu
         {
             var selectedOrder = ordersToFinish[choice - 1];
 
-            if (DisplayIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooked'
+            if (OrderIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooked'
             {
                 DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
 
