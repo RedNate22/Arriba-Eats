@@ -24,8 +24,8 @@ public class UserIO
     /// <returns> The formatted string, with the correctly numbered position. </returns>
     public static string LogOutStr(int menuChoiceNum)
     {
-        string logOutStr = "{0}: Log out";
-        return string.Format(logOutStr, menuChoiceNum);
+        const string LOG_OUT_STR = "{0}: Log out";
+        return string.Format(LOG_OUT_STR, menuChoiceNum);
     }
 
     /// <summary>

@@ -18,8 +18,5 @@ public class Customer : User
     /// <param name="password"> The customer's password. </param>
     /// <param name="location"> The customer's location. </param>
     public Customer(string name, int age, string email, string mobile, string password, string location)
-        : base(name, age, email, mobile, password, location)
-    {
-
-    }
+        : base(name, age, email, mobile, password, location){}
 }

@@ -41,6 +41,4 @@ public class Client : User
             Restaurant restaurant = new Restaurant(restaurantName, restaurantStyle, location);
             RestaurantRegistry.AddRestaurant(this, restaurant);
         }
-    
-    
 }

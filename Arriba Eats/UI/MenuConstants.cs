@@ -8,12 +8,10 @@ namespace UI;
 /// </summary>
 public static class MenuConstants
 {
-    public const string ENTER_LOCATION_STR = "Please enter your location (in the form of X,Y):";
+    // TODO xml
     public const string WELCOME_STR = "Welcome to Arriba Eats!";
     public const string MAKE_CHOICE_STR = "Please make a choice from the menu below:";
-
     public const string DISPLAY_USER_INFO_STR = "1: Display your user information";
-
     public const string MAIN_MENU_CHOICES_STR = """
         1: Login as a registered user
         2: Register as a new user

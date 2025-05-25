@@ -193,9 +193,11 @@ public static class RegistrationIO
     /// until a valid input is provided. </returns>
     public static string GetLocation()
     {
+        const string ENTER_LOCATION_STR = "Please enter your location (in the form of X,Y):";
+
         while (true)
         {
-            DisplayIO.DisplayMessage(MenuConstants.ENTER_LOCATION_STR);
+            DisplayIO.DisplayMessage(ENTER_LOCATION_STR);
 
             string location = DisplayIO.ReadInput();
 
@@ -260,7 +262,7 @@ public static class RegistrationIO
     /// This method loops until a valid input is provided. </returns>
     public static RestaurantStyles GetRestaurantStyle()
     {
-        const string STYLE_PROMPT = """
+        const string STYLE_PROMPT_STR = """
             Please select your restaurant's style:
             1: Italian
             2: French
@@ -273,7 +275,7 @@ public static class RegistrationIO
 
         while (true)
         {
-            DisplayIO.DisplayMessage(STYLE_PROMPT);
+            DisplayIO.DisplayMessage(STYLE_PROMPT_STR);
 
             int restaurantStyle = DisplayIO.GetChoice();
 
