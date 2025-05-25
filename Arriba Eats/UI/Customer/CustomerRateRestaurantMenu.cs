@@ -25,8 +25,8 @@ public class CustomerRateRestaurantMenu : IMenu
         // * Then display these orders - updating the index
         int choiceIndex = ReviewIO.DisplayOrdersReadyToReview(out var ordersToReview, customerOrders);
 
-        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(DisplayIO.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(DisplayIO.EnterChoiceStr(choiceIndex));
 
         int choice = DisplayIO.GetChoice();
 

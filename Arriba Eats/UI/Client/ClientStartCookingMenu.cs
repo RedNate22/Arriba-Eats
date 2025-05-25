@@ -45,8 +45,8 @@ public class ClientStartCookingMenu : IMenu
         }
         int returnPreviousMenuInt = choiceIndex;
 
-        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(DisplayIO.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(DisplayIO.EnterChoiceStr(choiceIndex));
 
         int choice = DisplayIO.GetChoice();
         

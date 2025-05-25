@@ -15,8 +15,8 @@ namespace UI;
 /// </summary>
 public class ClientMainMenu : IMenu
 {  
-    private string _logOut = IOUtilities.LogOutStr(7);
-    private string _enterChoice = IOUtilities.EnterChoiceStr(7);
+    private string _logOut = UserIO.LogOutStr(7);
+    private string _enterChoice = DisplayIO.EnterChoiceStr(7);
 
     /// <summary>
     /// Defines the <see cref="int"/> constants representing menu options for use in a

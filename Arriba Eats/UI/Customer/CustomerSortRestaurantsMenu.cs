@@ -10,8 +10,8 @@ namespace UI;
 /// </summary>
 public class CustomerSortRestaurantsMenu: IMenu
 {
-    private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(5);
-    private string _enterChoice = IOUtilities.EnterChoiceStr(5);
+    private string _returnPreviousMenu = DisplayIO.ReturnToPreviousMenuStr(5);
+    private string _enterChoice = DisplayIO.EnterChoiceStr(5);
 
     /// <summary>
     /// Gets the <see cref="UIComponents.SortOption"/> from the <see cref="Entities.Customer"/>.

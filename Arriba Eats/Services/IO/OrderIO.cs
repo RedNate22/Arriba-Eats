@@ -74,7 +74,7 @@ public class OrderIO
             CustomerOrder customerOrder = new CustomerOrder
                 ((Customer)SessionManager.ReturnCurrentUser(), orderNumber, selectedRestaurant);  // * Begin order
 
-            string enterChoiceStr = IOUtilities.EnterChoiceStr(restaurantMenuItems.Count + 2);  // Adjust for confirm/cancel options
+            string enterChoiceStr = DisplayIO.EnterChoiceStr(restaurantMenuItems.Count + 2);  // Adjust for confirm/cancel options
 
             while (true)
             {

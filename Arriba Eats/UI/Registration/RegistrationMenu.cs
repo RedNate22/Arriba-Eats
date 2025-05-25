@@ -14,8 +14,8 @@ namespace UI;
 /// </summary>
 public class RegistrationMenu : IMenu
 {
-    private string _returnPreviousMenu = IOUtilities.ReturnToPreviousMenuStr(4);
-    private string _enterChoice = IOUtilities.EnterChoiceStr(4);
+    private string _returnPreviousMenu = DisplayIO.ReturnToPreviousMenuStr(4);
+    private string _enterChoice = DisplayIO.EnterChoiceStr(4);
 
     /// <summary>
     /// Defines the <see cref="int"/> constants representing menu options for use in a

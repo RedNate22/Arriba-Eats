@@ -57,4 +57,28 @@ public static class DisplayIO
     {
         DisplayMessage("Invalid choice.");
     }
+
+    /// <summary>
+    /// Generates a string prompt asking for input within a specified range.
+    /// <para> Formats a message based on the provided upper limit for user choices. </para>
+    /// </summary>
+    /// <param name="maxChoice"> The maximum valid choice a user can select. </param>
+    /// <returns> The formatted string, prompting the user to enter a valid choice. </returns>
+    public static string EnterChoiceStr(int maxChoice)
+    {
+        string enterChoiceStr = "Please enter a choice between 1 and {0}:";
+        return string.Format(enterChoiceStr, maxChoice);
+    }
+
+    /// <summary>
+    /// Formats the <see cref="MenuConstants.RETURN_PREVIOUS_MENU_TEMPLATE"/> string
+    /// to dynamically display it in the correctly numbered position of the menu.
+    /// </summary>
+    /// <param name="menuChoiceNum"> The position number for the Return to previous menu option. </param>
+    /// <returns> The formatted string, with the correctly numbered position. </returns>
+    public static string ReturnToPreviousMenuStr(int menuChoiceNum)
+    {
+        string returnPreviousMenuStr = "{0}: Return to the previous menu";
+        return string.Format(returnPreviousMenuStr, menuChoiceNum);
+    }
 }

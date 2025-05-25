@@ -11,7 +11,7 @@ namespace UI;
 /// </summary>
 public class MainMenu : IMenu
 {
-    private string _enterChoice = IOUtilities.EnterChoiceStr(3);
+    private string _enterChoice = DisplayIO.EnterChoiceStr(3);
     private const int LOGIN_INT = 1, REGISTER_INT = 2, EXIT_INT = 3;
 
     /// <summary> 

@@ -25,8 +25,8 @@ public class ClientFinishCookingMenu : IMenu
         // * Check if any orders are cooking and display them - updating the index
         int choiceIndex = OrderIO.DisplayOrdersReadyToFinishCooking(customerOrders, out List<dynamic> ordersToFinish);
 
-        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(DisplayIO.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(DisplayIO.EnterChoiceStr(choiceIndex));
 
         int choice = DisplayIO.GetChoice();
 

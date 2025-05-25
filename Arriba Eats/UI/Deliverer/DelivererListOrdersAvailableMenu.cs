@@ -34,8 +34,8 @@ public class DelivererListOrdersAvailableMenu : IMenu
             // Display active orders
             DisplayIO.DisplayMessage(DelivererConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
             var customerOrdersList = OrderIO.DisplayOrdersList(out int choiceIndex);
-            DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-            DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+            DisplayIO.DisplayMessage(DisplayIO.ReturnToPreviousMenuStr(choiceIndex));
+            DisplayIO.DisplayMessage(DisplayIO.EnterChoiceStr(choiceIndex));
 
             int choice = DisplayIO.GetChoice();
 

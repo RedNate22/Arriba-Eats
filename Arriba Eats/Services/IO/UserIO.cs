@@ -17,6 +17,18 @@ public class UserIO
     }
 
     /// <summary>
+    /// Formats the <see cref="MenuConstants.LOG_OUT_TEMPLATE"/> string
+    /// to dynamically display it in the correctly numbered position of the menu.
+    /// </summary>
+    /// <param name="menuChoiceNum"> The position number for the Log out option. </param>
+    /// <returns> The formatted string, with the correctly numbered position. </returns>
+    public static string LogOutStr(int menuChoiceNum)
+    {
+        string logOutStr = "{0}: Log out";
+        return string.Format(logOutStr, menuChoiceNum);
+    }
+
+    /// <summary>
     /// Displays the relevant user information, depending on the <see cref="UserType"/>
     /// of the <see cref="User"/>.
     /// </summary>
