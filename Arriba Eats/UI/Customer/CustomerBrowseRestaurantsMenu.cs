@@ -5,8 +5,8 @@ using UINavigation;
 namespace UI;
 
 /// <summary>
-/// Represents the menu where a <see cref="Customer"/> can view all the currently registered
-/// <see cref="Restaurant"/>s to order from, sorted by one of the options in <see cref="UIComponents.SortOption"/>s.
+/// Represents the menu where a <see cref="Entities.Customer"/> can view all the currently registered
+/// <see cref="Entities.Restaurant"/>s to order from, sorted by one of the options in <see cref="UIComponents.SortOption"/>s.
 /// </summary>
 public class CustomerBrowseRestaurantsMenu : IMenu
 {
@@ -30,7 +30,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     /// <summary>
     /// The method to be called in <see cref="DisplayMenu"/>. Depending on the state of
     /// <see cref="ReturningFromMenu"/>, this method is either called after prompting the <see cref="Customer"/>
-    /// to choose a <see cref="Restaurant"/>, or by itself when the <see cref="Customer"/> is returning from
+    /// to choose a <see cref="Entities.Restaurant"/>, or by itself when the <see cref="Entities.Customer"/> is returning from
     /// <see cref="CustomerPlaceOrderMenu"/>.
     /// </summary>
     public static void DisplayOptions()
@@ -69,15 +69,15 @@ public class CustomerBrowseRestaurantsMenu : IMenu
 
     /// <summary>
     /// Displays the <see cref="CustomerBrowseRestaurantsMenu"/> menu.
-    /// <para> Gets the <see cref="Restaurant"/>s as a list from <see cref="CustomerIO.DisplayRestaurantsList"/>, 
-    /// then prompts the <see cref="Customer"/> to either choose a <see cref="Restaurant"/> from the list or return to
+    /// <para> Gets the <see cref="Entities.Restaurant"/>s as a list from <see cref="CustomerIO.DisplayRestaurantsList"/>, 
+    /// then prompts the <see cref="Entities.Customer"/> to either choose a <see cref="Entities.Restaurant"/> from the list or return to
     /// the previous menu, taking them back to <see cref="CustomerSortRestaurantsMenu"/>. </para>
-    /// <para> After selecting a restaurant, the <see cref="Customer"/> can view its menu (taking them to
+    /// <para> After selecting a restaurant, the <see cref="Entities.Customer"/> can view its menu (taking them to
     /// <see cref="CustomerPlaceOrderMenu"/>) or check reviews. </para>
-    /// <para> Based on the state of <see cref="ReturningFromMenu"/>, if <c>true</c>, the <see cref="Customer"/>
-    /// is not prompted to choose a <see cref="Restaurant"/>, and instead is taken directly to the previously selected
+    /// <para> Based on the state of <see cref="ReturningFromMenu"/>, if <c>true</c>, the <see cref="Entities.Customer"/>
+    /// is not prompted to choose a <see cref="Entities.Restaurant"/>, and instead is taken directly to the previously selected
     /// restaurant's menu. Otherwise, if <c>false</c>, the <see cref="DisplayOptions"/> method is called. The 
-    /// <see cref="Customer"/> must select a <see cref="Restaurant"/>. The value of this field is set in 
+    /// <see cref="Entities.Customer"/> must select a <see cref="Entities.Restaurant"/>. The value of this field is set in 
     /// <see cref="CustomerPlaceOrderMenu"/> to track whether they are returning from 
     /// this menu or not. </para>
     /// </summary>

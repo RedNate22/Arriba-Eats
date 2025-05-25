@@ -46,8 +46,8 @@ public static class SessionManager
     /// <returns> The user instance of the authenticated user, otherwise <c>null</c>. </returns>
     public static User? Login()
     {
-        const string EMAIL_STR = "Email: ";
-        const string PASSWORD_STR = "Password: ";
+        const string EMAIL_STR = "Email:";
+        const string PASSWORD_STR = "Password:";
         const string INVALID_EMAIL_PASSWORD = "Invalid email or password.";
 
         IODisplay.DisplayMessage(EMAIL_STR);

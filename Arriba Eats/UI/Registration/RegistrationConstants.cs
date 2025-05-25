@@ -7,8 +7,8 @@ namespace UI;
 /// </summary>
 public static class RegistrationConstants
 {
+    public const string WHICH_TYPE_USER_STR = "Which type of user would you like to register as?";       
     public const string REGISTRATION_MENU_CHOICES_STR = """
-        Which type of user would you like to register as?       
         1: Customer
         2: Deliverer
         3: Client

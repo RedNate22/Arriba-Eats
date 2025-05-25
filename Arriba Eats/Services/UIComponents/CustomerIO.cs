@@ -59,8 +59,8 @@ public static class CustomerIO
                 case (SortOption)4:
                     static int SortByRating(Restaurant a, Restaurant b)
                     {
-                        int averageRatingA = RestaurantIO.GetAverageRestaurantRating(a);
-                        int averageRatingB = RestaurantIO.GetAverageRestaurantRating(b);
+                        double averageRatingA = RestaurantIO.GetAverageRestaurantRating(a);
+                        double averageRatingB = RestaurantIO.GetAverageRestaurantRating(b);
 
                         int ratingComparison = averageRatingB.CompareTo(averageRatingA);
                         // * If ratings are the same (returning 0), instead sort by name 
@@ -114,15 +114,15 @@ public static class CustomerIO
         for (int i = 0; i < restaurantsList.Count(); i++)
         {
             // * Get average rating, if 0, then use "-"
-            int averageRating = RestaurantIO.GetAverageRestaurantRating(restaurantsList[i]);
-            string rating = averageRating != 0 ? averageRating.ToString() : "-";
+            double averageRating = RestaurantIO.GetAverageRestaurantRating(restaurantsList[i]);
+            string rating = averageRating != 0 ? $"{averageRating:F1}" : "-";
 
             IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
                 + $"{restaurantsList[i].RestaurantName}".PadRight(restaurantColumnWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
                 + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
-                + $"{rating}".PadRight(styleColumnWidth));
+                + $"{rating}");
             restaurantChoiceIndex++;
         }
         choiceIndex = restaurantChoiceIndex;
@@ -326,9 +326,18 @@ public static class CustomerIO
     /// </summary>
     /// <param name="customerOrders"></param>
     /// <returns></returns>
-    public static bool GetRestaurantReviews(List<CustomerOrder> customerOrders)
+    public static bool DisplayRestaurantReviews(List<CustomerOrder> customerOrders)
     {
         bool containsReviews = false;
+
+        if (customerOrders.Count > 1)  // * Sort by rating, descending order
+        {
+            static int SortByRating(CustomerOrder a, CustomerOrder b)
+                {
+                    return b.RestaurantReview!.Rating.CompareTo(a.RestaurantReview!.Rating);
+                }
+            customerOrders.Sort(SortByRating);
+        }
 
         foreach (CustomerOrder order in customerOrders)
         {
@@ -336,6 +345,9 @@ public static class CustomerIO
             {
                 IODisplay.DisplayMessage(String.Format(CustomerConstants.REVIEW_DETAILS_STR,
                     order.Customer.Name, order.RestaurantReview.RatingInStars, order.RestaurantReview.Comment));
+
+                IODisplay.DisplayEmptyLine();
+
                 containsReviews = true;
             }
         }

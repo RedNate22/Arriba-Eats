@@ -19,23 +19,22 @@ public class ClientFinishCookingMenu : IMenu
     public void DisplayMenu()
     {
         IODisplay.DisplayMessage(ClientConstants.SELECT_ORDER_TO_FINISH_STR);
+
         var customerOrders = IODisplay.GetCustomerOrders();
-        bool containsOrdersCooking = customerOrders.Count != 0 && ClientIO.ContainsCooking(customerOrders);
 
         // * Check if any orders are cooking and display them - updating the index
-        int choiceIndex = containsOrdersCooking ? ClientIO.DisplayOrdersReadyToFinishCooking(customerOrders) : 1;
-        int returnPreviousMenuInt = choiceIndex;
+        int choiceIndex = ClientIO.DisplayOrdersReadyToFinishCooking(customerOrders, out List<dynamic> ordersToFinish);
 
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
         IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
         int choice = IODisplay.GetChoice();
 
-        if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
+        if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
 
-        else if (IOUtilities.IsValueInIndexRange(customerOrders, choice - 1))  // Valid input
+        else if (IOUtilities.IsValueInIndexRange(ordersToFinish, choice - 1))  // Valid input
         {
-            var selectedOrder = customerOrders[choice - 1];  // * Adjust for index-based referencing
+            var selectedOrder = ordersToFinish[choice - 1];
 
             selectedOrder.UpdateOrderStatus();  // Updates to 'Cooked'
             IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));

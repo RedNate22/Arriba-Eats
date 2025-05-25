@@ -15,7 +15,7 @@ public static class RestaurantIO
     /// <param name="restaurant"> The <see cref="Restaurant"/> to find the average rating for. </param>
     /// <returns> The average rating of a <see cref="Restaurant"/>, based on <see cref="RestaurantReview"/>s.
     /// If no reviews exist, returns <c>0</c>. </returns>
-    public static int GetAverageRestaurantRating(Restaurant restaurant)
+    public static double GetAverageRestaurantRating(Restaurant restaurant)
     {
         int totalRating = 0;
         int reviewsCount = 0;
@@ -31,6 +31,6 @@ public static class RestaurantIO
                 }
             }
         }
-        return reviewsCount > 0 ? totalRating / reviewsCount : 0;
+        return reviewsCount > 0 ? Math.Round((double)totalRating / reviewsCount, 1) : 0;
     }
 }

@@ -249,7 +249,7 @@ public static class IODisplay
     public static bool IsOrderBeingPrepared(OrderStatus orderStatus)
     {
         if (orderStatus == OrderStatus.Ordered || orderStatus == OrderStatus.Cooking) return true;
-        else return true;
+        else return false;
     }
 
     /// <summary>

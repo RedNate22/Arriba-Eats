@@ -38,12 +38,10 @@ public class MainMenu : IMenu
         switch (choice)
         {
             case LOGIN_INT:  
-                IODisplay.DisplayEmptyLine();
                 UIFlowController.ChangeMenu(MenuState.LoginMenu);
                 break;
             
             case REGISTER_INT:  
-                IODisplay.DisplayEmptyLine();
                 UIFlowController.ChangeMenu(MenuState.RegistrationMenu);
                 break;
             

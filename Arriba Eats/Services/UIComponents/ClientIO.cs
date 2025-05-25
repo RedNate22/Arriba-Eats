@@ -147,22 +147,6 @@ public static class ClientIO
         return false;
     }
 
-    /// <summary>
-    /// Validates whether a list of <see cref="CustomerOrder"/>s contains any orders
-    /// with the order status of <see cref="OrderStatus.Cooking"/>.
-    /// </summary>
-    /// <param name="customerOrders"> The list of customer orders to validate. </param>
-    /// <returns> <c>true</c> if any of the orders are marked as cooking, otherwise,
-    /// <c>false</c>. </returns>
-    public static bool ContainsCooking(List<CustomerOrder> customerOrders)
-    {
-        foreach (CustomerOrder order in customerOrders)
-        {
-            if (IsCooking(order.OrderStatus)) return true;
-        }
-        return false;
-    }
-
     // ? Make these overloads?
     /// <summary>
     /// Iterates through the given list of <see cref="CustomerOrder"/>s,
@@ -171,6 +155,7 @@ public static class ClientIO
     /// and <see cref="Customer"/>'s name. Then returns the final value of the index.
     /// </summary>
     /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
+    /// <param name="ordersToCook"> The list of <see cref="CustomerOrder"/>s marked as <see cref="OrderStatus.Ordered"/>. </param>
     /// <returns> The final value of the index. </returns>
     public static int DisplayOrdersReadyToCook(List<CustomerOrder> customerOrders, out List<dynamic> ordersToCook)
     {
@@ -199,9 +184,11 @@ public static class ClientIO
     /// and <see cref="Customer"/>'s name. Then returns the final value of the index.
     /// </summary>
     /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
+    /// <param name="ordersToFinish"> The list of <see cref="CustomerOrder"/>s marked as <see cref="OrderStatus.Cooking"/>. </param>
     /// <returns> The final value of the index. </returns>
-    public static int DisplayOrdersReadyToFinishCooking(List<CustomerOrder> customerOrders)
+    public static int DisplayOrdersReadyToFinishCooking(List<CustomerOrder> customerOrders, out List<dynamic> ordersToFinish)
     {
+        ordersToFinish = new List<dynamic>();
         int choiceIndex = 1;
 
         foreach (CustomerOrder order in customerOrders)
@@ -210,6 +197,8 @@ public static class ClientIO
             {
                 IODisplay.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
                     order.OrderNumber, order.Customer.Name));
+
+                ordersToFinish.Add(order);
                 choiceIndex++;
             }
         }
@@ -226,21 +215,26 @@ public static class ClientIO
     /// Then returns the final value of the index.
     /// </summary>
     /// <param name="customerOrders"> The list of <see cref="CustomerOrder"/>s to iterate through. </param>
+    /// <param name="ordersForCollection"> The list of <see cref="CustomerOrder"/>s marked as <see cref="OrderStatus.Ordered"/>,
+    /// <see cref="OrderStatus.Cooking"/>, and <see cref="OrderStatus.Cooked"/>.</param>
     /// <returns> The final value of the index. </returns>
-    public static int DisplayAllActiveOrders(List<CustomerOrder> customerOrders)
+    public static int DisplayOrdersReadyForCollection(List<CustomerOrder> customerOrders, out List<dynamic> ordersForCollection)
     {
+        ordersForCollection = new List<dynamic>();
         int choiceIndex = 1;
-        // bool trueValue = true;
+        
         foreach (CustomerOrder order in customerOrders)
         {
-            // if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) ||
-            //     IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant)
-            // if (trueValue)
-            if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) || IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant == true)
+            if (order.Deliverer != null)
             {
-                IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_DETAILS_STR, choiceIndex,
-                    order.OrderNumber, order.Customer.Name, order.Deliverer!.LicencePlate, order.OrderStatus));
-                choiceIndex++;
+                if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) || IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant == true)
+                {
+                    IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_DETAILS_STR, choiceIndex,
+                        order.OrderNumber, order.Customer.Name, order.Deliverer!.LicencePlate, order.OrderStatus));
+
+                    ordersForCollection.Add(order);
+                    choiceIndex++;
+                }
             }
         }
         return choiceIndex;

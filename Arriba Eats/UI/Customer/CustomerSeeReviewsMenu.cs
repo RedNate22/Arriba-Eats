@@ -23,7 +23,7 @@ public class CustomerSeeReviewsMenu : IMenu
         CustomerBrowseRestaurantsMenu.ReturningFromMenu = true;
 
         var customerOrders = IODisplay.GetCustomerOrders();
-        if (CustomerIO.GetRestaurantReviews(customerOrders))
+        if (CustomerIO.DisplayRestaurantReviews(customerOrders))
         {
             UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
         }

@@ -9,7 +9,7 @@ public static class CustomerConstants
 {
     // TODO xml
     public const string CUSTOMER_MAIN_MENU_CHOICES_STR = """
-        2: Select a list of restaurants to order from       
+        2: Select a list of restaurants to order from
         3: See the status of your orders
         4: Rate a restaurant you've ordered from
         """;
