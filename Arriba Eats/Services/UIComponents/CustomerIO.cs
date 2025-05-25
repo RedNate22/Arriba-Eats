@@ -122,7 +122,7 @@ public static class CustomerIO
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
                 + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
-                + $"{rating}");
+                + $"{rating}".PadRight(3));
             restaurantChoiceIndex++;
         }
         choiceIndex = restaurantChoiceIndex;
@@ -191,9 +191,8 @@ public static class CustomerIO
                     if (customerOrder.IsOrderEmpty()) IODisplay.DisplayMessage("You have not added any items.");
                     else
                     {
-                        if (OrderRegistry.TryAddOrder(customerOrder))
+                        if (OrderRegistry.TryAddOrder(customerOrder) && IODisplay.UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
                         {
-                            customerOrder.UpdateOrderStatus();  // Updates status to 'Ordered'
                             IODisplay.DisplayMessage(String.Format(CustomerConstants.ORDER_PLACED_STR, orderNumber));
 
                             orderNumber++;  // * Update order number for future (next) orders
@@ -319,27 +318,46 @@ public static class CustomerIO
     }
 
     /// <summary>
+    /// Attempts to locate any <see cref="RestaurantReview"/>s for the currently selected
+    /// <see cref="Restaurant"/> and assign the <see cref="CustomerOrder"/>s containing them to a list
+    /// via the <c>out</c> parameter.
+    /// </summary>
+    /// <returns> The list of <see cref="CustomerOrder"/>s containing <see cref="RestaurantReview"/>s. </returns>
+    public static List<CustomerOrder> GetOrdersWithReviews()
+    {
+        if (SessionManager.SelectedRestaurant != null)
+        {
+            if (OrderRegistry.TryGetOrdersWithReviews(SessionManager.SelectedRestaurant, out List<CustomerOrder> ordersWithReviews))
+            {
+                return ordersWithReviews;
+            }
+            return new List<CustomerOrder>();
+        }
+        else return new List<CustomerOrder>();
+    }
+    /// <summary>
     /// Attempts to locate the currently selected <see cref="Restaurant"/>'s <see cref="RestaurantReview"/>s 
     /// by matching any <see cref="CustomerOrder"/>s attached to the restaurant, containing a review.
     /// The reviews are then displayed with the <see cref="Customer.Name"/>, <see cref="RestaurantReview.Rating"/>,
     /// and <see cref="RestaurantReview.Comment"/>.
     /// </summary>
-    /// <param name="customerOrders"></param>
-    /// <returns></returns>
-    public static bool DisplayRestaurantReviews(List<CustomerOrder> customerOrders)
+    /// <param name="ordersWithReviews"> </param>
+    /// <returns> <c>true</c> if the <see cref="Restaurant"/>'s <see cref="CustomerOrder"/>s,
+    /// contain any reviews, otherwise, <c>false</c>. </returns>
+    public static bool DisplayRestaurantReviews(List<CustomerOrder> ordersWithReviews)
     {
         bool containsReviews = false;
 
-        if (customerOrders.Count > 1)  // * Sort by rating, descending order
+        if (ordersWithReviews.Count > 1)  // * Sort by rating, descending order
         {
             static int SortByRating(CustomerOrder a, CustomerOrder b)
-                {
-                    return b.RestaurantReview!.Rating.CompareTo(a.RestaurantReview!.Rating);
-                }
-            customerOrders.Sort(SortByRating);
+            {
+                return b.RestaurantReview!.Rating.CompareTo(a.RestaurantReview!.Rating);
+            }
+            ordersWithReviews.Sort(SortByRating);
         }
 
-        foreach (CustomerOrder order in customerOrders)
+        foreach (CustomerOrder order in ordersWithReviews)
         {
             if (order.Restaurant == SessionManager.SelectedRestaurant && order.RestaurantReview != null)
             {

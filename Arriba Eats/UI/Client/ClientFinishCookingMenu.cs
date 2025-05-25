@@ -36,22 +36,24 @@ public class ClientFinishCookingMenu : IMenu
         {
             var selectedOrder = ordersToFinish[choice - 1];
 
-            selectedOrder.UpdateOrderStatus();  // Updates to 'Cooked'
-            IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
-
-            if (selectedOrder.Deliverer == null)
+            if (IODisplay.UpdateOrder(selectedOrder))  // * Updates to 'Cooked'
             {
-                IODisplay.DisplayMessage(ClientConstants.NO_DELIVERER_ASSIGNED_STR);
+                IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
+
+                if (selectedOrder.Deliverer == null)
+                {
+                    IODisplay.DisplayMessage(ClientConstants.NO_DELIVERER_ASSIGNED_STR);
+                }
+
+                else if (selectedOrder.DelivererArrivedAtRestaurant == true)
+                {
+                    IODisplay.DisplayMessage(String.Format(ClientConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
+                }
+
+                else IODisplay.DisplayMessage(String.Format(ClientConstants.DELIVERER_ARRIVING_SOON_STR, selectedOrder.Deliverer.LicencePlate));
+
+                UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
-
-            else if (selectedOrder.DelivererArrivedAtRestaurant == true)
-            {
-                IODisplay.DisplayMessage(String.Format(ClientConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
-            }
-
-            else IODisplay.DisplayMessage(String.Format(ClientConstants.DELIVERER_ARRIVING_SOON_STR, selectedOrder.Deliverer.LicencePlate));
-
-            UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
         }
         else IODisplay.InvalidChoice();
     }

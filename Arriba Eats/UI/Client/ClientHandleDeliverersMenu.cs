@@ -48,9 +48,8 @@ public class ClientHandleDeliverersMenu : IMenu
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
 
-            else if (selectedOrder.DelivererArrivedAtRestaurant == true)
+            else if (selectedOrder.DelivererArrivedAtRestaurant == true && IODisplay.UpdateOrder(selectedOrder))  // * Updates to 'Being Delivered'
             {
-                selectedOrder.UpdateOrderStatus();  // Updates to 'BeingDelivered'
                 IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }

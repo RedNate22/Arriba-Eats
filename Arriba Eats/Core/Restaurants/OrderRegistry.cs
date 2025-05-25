@@ -120,6 +120,27 @@ public static class OrderRegistry
     }
 
     /// <summary>
+    /// Attempts to find any <see cref="CustomerOrder"/>s relating to the given <see cref="Restaurant"/>
+    /// and containing a <see cref="RestaurantReview"/>. If any are found, they are added to the list
+    /// in the <c>out</c> parameter.
+    /// </summary>
+    /// <param name="restaurant"> The <see cref="Restaurant"/> to find <see cref="RestaurantReview"/>s for. </param>
+    /// <param name="ordersWithReviews"> The list of <see cref="CustomerOrder"/>s with <see cref="RestaurantReview"/>s. </param>
+    /// <returns> <c>true</c> if any <see cref="RestaurantReview"/>s are found, otherwise, <c>false</c>. </returns>
+    public static bool TryGetOrdersWithReviews(Restaurant restaurant, out List<CustomerOrder> ordersWithReviews)
+    {
+        ordersWithReviews = new List<CustomerOrder>();
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Restaurant == restaurant && order.RestaurantReview != null)
+            {
+                ordersWithReviews.Add(order);
+            }
+        }
+        return ordersWithReviews.Count > 0;
+    }
+
+    /// <summary>
     /// Attempts to locate the given <see cref="Deliverer"/> and if they are currently assigned
     /// to an active order.
     /// </summary>

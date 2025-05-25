@@ -124,7 +124,7 @@ public class CustomerOrder
 
         switch (currentOrderStatus)
         {
-            case (OrderStatus)0:  // Not ordered
+            case 0:  // Not ordered
                 OrderStatus = OrderStatus.Ordered;
                 break;
 

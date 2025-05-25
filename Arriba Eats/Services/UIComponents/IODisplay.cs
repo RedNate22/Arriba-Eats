@@ -123,7 +123,7 @@ public static class IODisplay
                     break;
             }
         }
-        else DisplayMessage("No user is currently logged in.");  
+        else DisplayMessage("No user is currently logged in.");
     }
 
     /// <summary>
@@ -262,6 +262,17 @@ public static class IODisplay
     public static bool IsOrderBeingDelivered(OrderStatus orderStatus)
     {
         if (orderStatus == OrderStatus.BeingDelivered) return true;
+        else return false;
+    }
+
+    // TODO xml
+    public static bool UpdateOrder(CustomerOrder customerOrder)
+    {
+        if (customerOrder is CustomerOrder)
+        {
+            customerOrder.UpdateOrderStatus();
+            return true;
+        }
         else return false;
     }
 }
