@@ -3,7 +3,10 @@ using System;
 namespace Entities;
 
 /// <summary>
-/// Defines the various statuses of a <see cref="CustomerOrder"/>.
+/// Defines the various states of a <see cref="CustomerOrder"/>.
+/// <para> On each phase of an order, the status must be updated.
+/// i.e. When a customer confirms their order, the status becomes
+/// <see cref="Ordered"/>. </para>
 /// </summary>
 public enum OrderStatus
 {   

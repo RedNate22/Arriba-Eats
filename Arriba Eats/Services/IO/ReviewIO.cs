@@ -4,7 +4,9 @@ using UI;
 
 namespace UIComponents;
 
-// TODO xml
+/// <summary>
+/// Contains various static methods for I/O associated with <see cref="CustomerOrder"/> reviews.
+/// </summary>
 public class ReviewIO
 {
     // TODO xml

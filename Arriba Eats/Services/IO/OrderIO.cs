@@ -5,7 +5,9 @@ using UI;
 
 namespace UIComponents;
 
-// TODO xml
+/// <summary>
+/// Contains various static methods for I/O associated with <see cref="CustomerOrder"/>s.
+/// </summary>
 public class OrderIO
 {
     // TODO xml
@@ -20,7 +22,6 @@ public class OrderIO
     }
 
     // TODO xml
-    // ? overload?
     public static List<CustomerOrder> GetCustomerOrders()
     {
         List<CustomerOrder> customerOrders = new List<CustomerOrder>();

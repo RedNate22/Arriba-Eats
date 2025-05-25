@@ -1,5 +1,4 @@
 using System;
-// using UIComponents;
 
 namespace Entities;
 
@@ -53,7 +52,6 @@ public static class RestaurantRegistry
                 return true;
             }
         }
-
         foundRestaurant = null;
         return false;
     }
@@ -73,7 +71,6 @@ public static class RestaurantRegistry
         {
             restaurantsList.Add(restaurant);
         }
-
         return restaurantsList.Count > 0;
     }
 }

@@ -3,7 +3,7 @@ using System;
 namespace Entities;
 
 /// <summary>
-/// Defines the various styles of restaurants.
+/// Defines the various styles of <see cref="Restaurant"/>s.
 /// <para> Used to classify the style of cuisine for the restaurant. </para>
 /// </summary>
 public enum RestaurantStyles

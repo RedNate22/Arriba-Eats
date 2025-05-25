@@ -4,7 +4,9 @@ namespace Entities;
 
 /// <summary>
 /// Represents a delivery person, inheriting from the <see cref="User"/> class.
-/// <para> A delivery person has a licence plate for their vehicle. </para> 
+/// <para> A deliverer can take accept delivery jobs from <see cref="Restaurant"/>s
+/// to deliver orders to a <see cref="Customer"/>. 
+/// A deliverer has a licence plate for their vehicle. </para> 
 /// </summary>
 public class Deliverer : User
 {

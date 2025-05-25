@@ -5,9 +5,7 @@ using UI;
 namespace UIComponents;
 
 /// <summary>
-/// Contains various static methods for handling I/O with the user 
-/// during the <see cref="UI.RegistrationProcess"/>.
-/// <para> Uses <see cref="IOUtilities"/> for input & output formatting and validation. </para>
+/// Contains various static methods for handling I/O associated with the <see cref="RegistrationProcess"/>.
 /// </summary>
 public static class RegistrationIO
 {

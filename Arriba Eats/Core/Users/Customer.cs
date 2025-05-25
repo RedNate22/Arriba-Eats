@@ -4,6 +4,8 @@ namespace Entities;
 
 /// <summary>
 /// Represents a customer, inheriting from the <see cref="User"/> class.
+/// <para> A customer can browse <see cref="Restaurant"/>'s menus and reviews, place orders,
+/// and write reviews. </para>
 /// </summary>
 public class Customer : User
 {

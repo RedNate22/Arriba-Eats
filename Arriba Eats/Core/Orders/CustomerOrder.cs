@@ -111,12 +111,12 @@ public class CustomerOrder
     /// <summary>
     /// Progresses the <see cref="Entities.OrderStatus"/> on each call.
     /// <para> Orders go in order as: </para>
-    /// <para> - NotOrdered (default) </para>
-    /// <para> - Ordered </para>
-    /// <para> - Cooking </para>
-    /// <para> - Cooked </para>
-    /// <para> - BeingDelivered </para>
-    /// <para> - Delivered </para>
+    /// <para> - <see cref="OrderStatus.NotOrdered"/> (default) </para>
+    /// <para> - <see cref="OrderStatus.Ordered"/> </para>
+    /// <para> - <see cref="OrderStatus.Cooking"/> </para>
+    /// <para> - <see cref="OrderStatus.Cooked"/> </para>
+    /// <para> - <see cref="OrderStatus.BeingDelivered"/> </para>
+    /// <para> - <see cref="OrderStatus.Delivered"/> </para>
     /// </summary>
     public void UpdateOrderStatus()
     {

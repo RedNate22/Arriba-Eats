@@ -15,17 +15,17 @@ public enum UserType
     Default,
 
     /// <summary>
-    /// Represents a standard customer who places orders from restaurants.
+    /// Represents a standard <see cref="Entities.Customer"/> who places orders from restaurants.
     /// </summary>
     Customer,
 
     /// <summary>
-    /// Represents a delivery person who transports orders from restaurants to the customers.
+    /// Represents a <see cref="Entities.Deliverer"/> who transports orders from restaurants to the customers.
     /// </summary>
     Deliverer,
 
     /// <summary>
-    /// Represents a restaurant owner or manager responsible for cooking orders and handing 
+    /// Represents a <see cref="Entities.Restaurant"/> owner or manager responsible for cooking orders and handing 
     /// them to the delivery person. 
     /// </summary>
     Client

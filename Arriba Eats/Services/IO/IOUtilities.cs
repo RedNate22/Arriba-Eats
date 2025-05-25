@@ -1,14 +1,12 @@
 using System;
-using UI;
 
 namespace UIComponents;
 
 /// <summary>
-/// Provides helper methods for managing user interface interactions.
+/// Provides helper methods for managing user interface interactions by validating user inputs.
 /// </summary>
 public static class IOUtilities
 {
-
     /// <summary>
     /// Validates whether the provided string input meets the following criteria:
     /// - Consists of at least one letter.

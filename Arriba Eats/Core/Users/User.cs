@@ -6,7 +6,7 @@ namespace Entities;
 /// <summary>
 /// Represents a user with essential details such as name, age, email, mobile
 /// password, and location.
-/// <para> Serves as an abstract base class for specified user types. </para> 
+/// <para> Serves as an abstract base class for specified <see cref="UserType"/>s. </para> 
 /// </summary>
 public abstract class User
 {

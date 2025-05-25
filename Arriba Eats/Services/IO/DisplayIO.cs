@@ -1,5 +1,4 @@
 using System;
-using Entities;
 
 namespace UIComponents;
 
@@ -24,8 +23,7 @@ public static class DisplayIO
     }
 
     /// <summary>
-    /// Uses <see cref="Console.ReadLine"/> to read an input from the user and 
-    /// returns this as a string.
+    /// Reads a line from the user and returns this as a string.
     /// <para> Trims any leading and trailing whitespace from the string. </para>
     /// <para> Assigns an empty value if the original input is empty. </para>
     /// </summary>
@@ -51,7 +49,7 @@ public static class DisplayIO
     }
 
     /// <summary>
-    /// Displays a message informing the <see cref="User"/> of an invalid choice.
+    /// Displays a message informing the user of an invalid choice.
     /// </summary>
     public static void InvalidChoice()
     {
@@ -59,7 +57,7 @@ public static class DisplayIO
     }
 
     /// <summary>
-    /// Generates a string prompt asking for input within a specified range.
+    /// Generates a string prompt asking for a numbered input within a specified range.
     /// <para> Formats a message based on the provided upper limit for user choices. </para>
     /// </summary>
     /// <param name="maxChoice"> The maximum valid choice a user can select. </param>
@@ -71,8 +69,8 @@ public static class DisplayIO
     }
 
     /// <summary>
-    /// Formats the <see cref="MenuConstants.RETURN_PREVIOUS_MENU_TEMPLATE"/> string
-    /// to dynamically display it in the correctly numbered position of the menu.
+    /// Generates a string to represent the 'return to previous menu' option,
+    /// with the given integer interpolated as the index. 
     /// </summary>
     /// <param name="menuChoiceNum"> The position number for the Return to previous menu option. </param>
     /// <returns> The formatted string, with the correctly numbered position. </returns>

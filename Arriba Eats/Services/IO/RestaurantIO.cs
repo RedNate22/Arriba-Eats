@@ -4,7 +4,9 @@ using UI;
 
 namespace UIComponents;
 
-// TODO xml
+/// <summary>
+/// Contains various static methods for I/O associated with a <see cref="Restaurant"/>.
+/// </summary>
 public static class RestaurantIO
 {
     /// <summary>

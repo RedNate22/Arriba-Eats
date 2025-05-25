@@ -3,8 +3,7 @@ using System;
 namespace UIComponents;
 
 /// <summary>
-/// Defines the various sorthing methods when 
-/// calling <see cref="CustomerIO.DisplayRestaurantsList()"/>.
+/// Defines the various sorting methods for when browsing <see cref="Entities.Restaurant"/>s. 
 /// </summary>
 public enum SortOption
 {

@@ -33,26 +33,57 @@ public static class OrderRegistry
         else return false;
     }
 
-    // TODO xml
-    // ? Make these reusable? like instead of the later methods, use the IO to then check the list
-    public static bool TryGetOrders(out List<CustomerOrder> getCustomerOrders, Customer customer)
+    /// <summary>
+    /// Retrieves a list of customer orders associated with a specified <see cref="Customer"/>.
+    /// </summary>
+    /// <param name="ordersFromCustomer"> Output parameter that will contain the list of orders. </param>
+    /// <param name="customer"> The customer whose orders need to be retrieved. </param>
+    /// <returns></returns>
+    public static bool TryGetOrders(out List<CustomerOrder> ordersFromCustomer, Customer customer)
     {
-        getCustomerOrders = new List<CustomerOrder>();
+        ordersFromCustomer = new List<CustomerOrder>();
 
         foreach (CustomerOrder order in _orderRegistry)
         {
             if (order.Customer == customer)
             {
-                getCustomerOrders.Add(order);
+                ordersFromCustomer.Add(order);
             }
         }
-        return getCustomerOrders.Count > 0;
+        return ordersFromCustomer.Count > 0;
     }
 
-    // TODO xml
-    public static bool TryGetOrders(out List<CustomerOrder> getRestaurantOrders, Client client)
+    /// <summary>
+    /// Retrieves a list of available orders that do not yet have an assigned <see cref="Deliverer"/>.
+    /// </summary>
+    /// <param name="ordersToDeliver"> Output parameter that will contain the list of orders. </param>
+    /// <param name="deliverer"> The deliverer requesting available orders. </param>
+    /// <returns> <c>true</c> if there are orders available for delivery, otherwise <c>false</c>. </returns>
+    public static bool TryGetOrders(out List<CustomerOrder> ordersToDeliver, Deliverer deliverer)
     {
-        getRestaurantOrders = new List<CustomerOrder>();
+        ordersToDeliver = new List<CustomerOrder>();
+
+        foreach (CustomerOrder order in _orderRegistry)
+        {
+            if (order.Deliverer == null)
+            {
+                ordersToDeliver.Add(order);
+            }
+        }
+        return ordersToDeliver.Count > 0;
+    }
+
+    /// <summary>
+    /// Retrieves a list of customer orders associated with the current <see cref="Client"/>.
+    /// The client must be linked to a <see cref="Restaurant"/> for orders to be found.
+    /// </summary>
+    /// <param name="ordersForRestaurant"> Output parameter that will contain the list of orders. </param>
+    /// <param name="client"> The client requesting the <see cref="Restaurant"/>'s orders. </param>
+    /// <returns> <c>true</c> if orders exist for the <see cref="Client"/>'s <see cref="Restaurant"/>, 
+    /// otherwise <c>false</c>. </returns>
+    public static bool TryGetOrders(out List<CustomerOrder> ordersForRestaurant, Client client)
+    {
+        ordersForRestaurant = new List<CustomerOrder>();
 
         if (!RestaurantRegistry.TryFindClientsRestaurant(SessionManager.ReturnCurrentUser(), out Restaurant? restaurant))
             return false;
@@ -61,40 +92,30 @@ public static class OrderRegistry
         {
             if (order.Restaurant == restaurant)
             {
-                getRestaurantOrders.Add(order);
+                ordersForRestaurant.Add(order);
             }
         }
-        return getRestaurantOrders.Count > 0;
+        return ordersForRestaurant.Count > 0;
     }
 
-    // TODO xml
-    public static bool TryGetOrders(out List<CustomerOrder> getOrdersToDeliver, Deliverer deliverer)
+    /// <summary>
+    /// Retrieves a list of customer orders associated with a specified <see cref="Restaurant"/>.
+    /// </summary>
+    /// <param name="ordersForRestaurant"> Output parameter that will contain the list of orders for reviews. </param>
+    /// <param name="restaurant"> The restaurant whose orders need to be retrieved. </param>
+    /// <returns> <c>true</c> if orders exist for the restaurant, otherwise <c>false</c>. </returns>
+    public static bool TryGetOrders(out List<CustomerOrder> ordersForRestaurant, Restaurant restaurant)
     {
-        getOrdersToDeliver = new List<CustomerOrder>();
-
-        foreach (CustomerOrder order in _orderRegistry)
-        {
-            if (order.Deliverer == null)
-            {
-                getOrdersToDeliver.Add(order);
-            }
-        }
-        return getOrdersToDeliver.Count > 0;
-    }
-
-    // TODO xml
-    public static bool TryGetOrders(out List<CustomerOrder> getOrdersForReviews, Restaurant restaurant)
-    {
-        getOrdersForReviews = new List<CustomerOrder>();
+        ordersForRestaurant = new List<CustomerOrder>();
 
         foreach (CustomerOrder order in _orderRegistry)
         {
             if (order.Restaurant == restaurant)
             {
-                getOrdersForReviews.Add(order);
+                ordersForRestaurant.Add(order);
             }
         }
-        return getOrdersForReviews.Count > 0;
+        return ordersForRestaurant.Count > 0;
     }
 
     /// <summary>
@@ -138,25 +159,6 @@ public static class OrderRegistry
             }
         }
         return ordersWithReviews.Count > 0;
-    }
-
-    /// <summary>
-    /// Attempts to locate the given <see cref="Deliverer"/> and if they are currently assigned
-    /// to an active order.
-    /// </summary>
-    /// <param name="deliverer"> The <see cref="Deliverer"/> to locate. </param>
-    /// <returns> <c>true</c> if the <see cref="Deliverer"/> is found to be assigned to an active order,
-    /// otherwise, <c>false</c>. </returns>
-    public static bool TryFindAlreadyAssignedOrder(Deliverer deliverer)
-    {
-        foreach (CustomerOrder order in _orderRegistry)
-        {
-            if (order.Deliverer == deliverer && order.OrderStatus != OrderStatus.Delivered)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     /// <summary>

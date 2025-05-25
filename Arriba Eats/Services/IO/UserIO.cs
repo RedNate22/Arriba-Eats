@@ -3,7 +3,9 @@ using Entities;
 
 namespace UIComponents;
 
-// TODO xml
+/// <summary>
+/// Contains various static methods for I/O associated with the <see cref="User"/>, regardless of type.
+/// </summary>
 public class UserIO
 {
     /// <summary>
@@ -39,7 +41,6 @@ public class UserIO
         if (currentUser != null)
         {
             UserType userType = SessionManager.ReturnUserType();
-
             DisplayIO.DisplayMessage("Your user details are as follows:");
             DisplayIO.DisplayMessage($"Name: {user.Name}");
             DisplayIO.DisplayMessage($"Age: {user.Age}");
@@ -108,10 +109,6 @@ public class UserIO
     /// <returns> The taxicab distance between both users. </returns>
     public static int GetDistance(User userA, User userB)
     {
-        // userA A1, A2
-        // userB B1, B2
-        // Distance = (A1 - B1) + (A2 - B2)   
-
         string[] userACoords = userA.Location.Split(',');
         string[] userBCoords = userB.Location.Split(',');
 
@@ -133,10 +130,6 @@ public class UserIO
     /// <returns> The taxicab distance between the user and the restaurant. </returns>
     public static int GetDistance(User user, Restaurant restaurant)
     {
-        // user u1, u2
-        // restaurant r1, r2
-        // Distance = (u1 - r1) + (u2 - r2)   
-
         string[] userCoords = user.Location.Split(',');
         string[] restaurantCoords = restaurant.Location.Split(',');
 
