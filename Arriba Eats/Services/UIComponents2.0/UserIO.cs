@@ -1,7 +1,5 @@
 using System;
 using Entities;
-using UINavigation;
-using UI;
 
 namespace UIComponents;
 
@@ -33,8 +31,8 @@ public class UserIO
     {
         Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
 
-        int delivererToRestaurantDist = IODisplay.GetDistance(deliverer, restaurant);
-        int restaurantToCustomer = IODisplay.GetDistance(customer, restaurant);
+        int delivererToRestaurantDist = DisplayIO.GetDistance(deliverer, restaurant);
+        int restaurantToCustomer = DisplayIO.GetDistance(customer, restaurant);
         int totalDistance = delivererToRestaurantDist + restaurantToCustomer;
 
         return totalDistance;

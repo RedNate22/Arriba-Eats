@@ -21,19 +21,19 @@ public class ClientSeeCurrentOrdersMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        var customerOrders = IODisplay.GetCustomerOrders();
+        var customerOrders = DisplayIO.GetCustomerOrders();
         if (customerOrders.Count != 0)
         {
             foreach (var order in customerOrders)
             {
-                if (!IODisplay.IsOrderDelivered(order.OrderStatus))
+                if (!DisplayIO.IsOrderDelivered(order.OrderStatus))
                 {
-                    IODisplay.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
+                    DisplayIO.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                         order.Customer.Name, order.OrderStatus));
 
                     order.DisplayOrderedItems();
 
-                    IODisplay.DisplayEmptyLine();
+                    DisplayIO.DisplayEmptyLine();
                 }
             }
             UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
@@ -41,7 +41,7 @@ public class ClientSeeCurrentOrdersMenu : IMenu
 
         else
         {
-            IODisplay.DisplayMessage(ClientConstants.RESTAURANT_HAS_NO_ORDERS_STR);
+            DisplayIO.DisplayMessage(ClientConstants.RESTAURANT_HAS_NO_ORDERS_STR);
             UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
         }
     }

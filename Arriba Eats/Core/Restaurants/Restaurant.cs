@@ -72,7 +72,7 @@ public class Restaurant
         {
             foreach (KeyValuePair<string, decimal> menuItem in _restaurantMenu)
             {
-                IODisplay.DisplayMessage($"${menuItem.Value} {menuItem.Key,7:F2}");
+                DisplayIO.DisplayMessage($"${menuItem.Value} {menuItem.Key,7:F2}");
             }
         }
     }

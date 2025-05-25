@@ -26,14 +26,14 @@ public class OrderIO
 
             while (true)
             {
-                IODisplay.DisplayMessage(string.Format(CustomerConstants.CURRENT_ORDER_TOTAL_STR, currentOrderTotalDec));
+                DisplayIO.DisplayMessage(string.Format(CustomerConstants.CURRENT_ORDER_TOTAL_STR, currentOrderTotalDec));
 
                 int choiceIndex = 1;
                 int menuIndex = 0;
 
                 foreach (string item in restaurantMenuItems)
                 {
-                    IODisplay.DisplayMessage($"{choiceIndex}:   ${restaurantMenuPrices[menuIndex]}  {restaurantMenuItems[menuIndex]}");
+                    DisplayIO.DisplayMessage($"{choiceIndex}:   ${restaurantMenuPrices[menuIndex]}  {restaurantMenuItems[menuIndex]}");
                     choiceIndex++;
                     menuIndex++;
                 }
@@ -43,26 +43,26 @@ public class OrderIO
                 int completeOrder = choiceIndex;
                 int cancelOrder = choiceIndex + 1;
 
-                IODisplay.DisplayMessage($"{completeOrder}: Complete order");
-                IODisplay.DisplayMessage($"{cancelOrder}: Cancel order");
-                IODisplay.DisplayMessage(enterChoiceStr);
+                DisplayIO.DisplayMessage($"{completeOrder}: Complete order");
+                DisplayIO.DisplayMessage($"{cancelOrder}: Cancel order");
+                DisplayIO.DisplayMessage(enterChoiceStr);
 
-                int choice = IODisplay.GetChoice();
+                int choice = DisplayIO.GetChoice();
                 if (choice == completeOrder)
                 {
-                    if (customerOrder.IsOrderEmpty()) IODisplay.DisplayMessage("You have not added any items.");
+                    if (customerOrder.IsOrderEmpty()) DisplayIO.DisplayMessage("You have not added any items.");
                     else
                     {
-                        if (OrderRegistry.TryAddOrder(customerOrder) && IODisplay.UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
+                        if (OrderRegistry.TryAddOrder(customerOrder) && DisplayIO.UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
                         {
-                            IODisplay.DisplayMessage(String.Format(CustomerConstants.ORDER_PLACED_STR, orderNumber));
+                            DisplayIO.DisplayMessage(String.Format(CustomerConstants.ORDER_PLACED_STR, orderNumber));
 
                             orderNumber++;  // * Update order number for future (next) orders
                             return orderNumber;
                         }
                         else
                         {
-                            IODisplay.DisplayMessage(CustomerConstants.ORDER_NOT_CONFIRMED_STR);
+                            DisplayIO.DisplayMessage(CustomerConstants.ORDER_NOT_CONFIRMED_STR);
                             return orderNumber;
                         }
                     }
@@ -83,21 +83,21 @@ public class OrderIO
 
                     while (choice != 0)
                     {
-                        IODisplay.DisplayMessage($"Adding {selectedMenuItemName} to order.");
-                        IODisplay.DisplayMessage("Please enter quantity (0 to cancel):");
+                        DisplayIO.DisplayMessage($"Adding {selectedMenuItemName} to order.");
+                        DisplayIO.DisplayMessage("Please enter quantity (0 to cancel):");
                         choice = GetItemQuantity();
 
                         if (choice > 0)
                         {
                             customerOrder.AddItemToOrder(selectedMenuItemName, choice, selectedMenuItemPrice);
                             currentOrderTotalDec += choice * selectedMenuItemPrice;  // * Update cart total
-                            IODisplay.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
+                            DisplayIO.DisplayMessage($"Added {choice} x {selectedMenuItemName} to order.");
                             break;
                         }
 
                         else if (choice != 0)
                         {
-                            IODisplay.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                            DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
                         }
                     }
                 }
@@ -105,7 +105,7 @@ public class OrderIO
         }
         else
         {
-            IODisplay.DisplayMessage(String.Format(CustomerConstants.RESTAURANT_HAS_NO_MENU_STR, selectedRestaurant.RestaurantName));
+            DisplayIO.DisplayMessage(String.Format(CustomerConstants.RESTAURANT_HAS_NO_MENU_STR, selectedRestaurant.RestaurantName));
             return orderNumber;
         }
     }
@@ -118,7 +118,7 @@ public class OrderIO
     /// <returns> The valid integer quantity, otherwise <c>-1</c>. </returns>
     private static int GetItemQuantity()
     {
-        string? quantity = IODisplay.ReadInput();
+        string? quantity = DisplayIO.ReadInput();
 
         if (int.TryParse(quantity, out int result)) return result;
         else
@@ -139,7 +139,7 @@ public class OrderIO
     /// assigned a <see cref="Deliverer"/>. </returns>
     public static List<CustomerOrder> DisplayOrdersList(out int choiceIndex)
     {
-        List<CustomerOrder> customerOrdersList = IODisplay.GetCustomerOrders();
+        List<CustomerOrder> customerOrdersList = DisplayIO.GetCustomerOrders();
 
         int orderColumnWidth = DelivererConstants.ORDER_HEADING_STR.Length + 2;
         int restaurantColumnWidth = DelivererConstants.RESTAURANT_NAME_HEADING_STR.Length + 7;
@@ -156,7 +156,7 @@ public class OrderIO
         }
 
         // Display the headings
-        IODisplay.DisplayMessage("   "
+        DisplayIO.DisplayMessage("   "
             + DelivererConstants.ORDER_HEADING_STR.PadRight(orderColumnWidth)
             + DelivererConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
             + DelivererConstants.LOC_HEADING_STR.PadRight(locationColumnWidth)
@@ -173,7 +173,7 @@ public class OrderIO
                 customerOrdersList[i].Customer);
             customerOrdersList[i].UpdateTotalDistance(totalDistance);
 
-            IODisplay.DisplayMessage($"{orderChoiceIndex}: "
+            DisplayIO.DisplayMessage($"{orderChoiceIndex}: "
                 + $"{customerOrdersList[i].OrderNumber}".PadRight(orderColumnWidth)
                 + $"{customerOrdersList[i].Restaurant.RestaurantName}".PadRight(restaurantColumnWidth)
                 + $"{customerOrdersList[i].Restaurant.Location}".PadRight(locationColumnWidth)
@@ -229,7 +229,7 @@ public class OrderIO
         Deliverer deliverer = SessionManager.ReturnCurrentDeliverer();
         return OrderRegistry.TryFindPickedUpOrder(deliverer);
     }
-    
+
     /// <summary>
     /// Validates whether a <see cref="Customer"/>'s <see cref="CustomerOrder"/> has been marked
     /// as <see cref="OrderStatus.Ordered"/>.
@@ -318,7 +318,7 @@ public class OrderIO
         {
             if (IsOrdered(order.OrderStatus))
             {
-                IODisplay.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
+                DisplayIO.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
                     order.OrderNumber, order.Customer.Name));
 
                 ordersToCook.Add(order);
@@ -346,7 +346,7 @@ public class OrderIO
         {
             if (IsCooking(order.OrderStatus))
             {
-                IODisplay.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
+                DisplayIO.DisplayMessage(String.Format(ClientConstants.DISPLAY_ORDER_STR, choiceIndex,
                     order.OrderNumber, order.Customer.Name));
 
                 ordersToFinish.Add(order);
@@ -380,7 +380,7 @@ public class OrderIO
             {
                 if ((IsOrdered(order.OrderStatus) || IsCooking(order.OrderStatus) || IsCooked(order.OrderStatus)) && order.DelivererArrivedAtRestaurant == true)
                 {
-                    IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_DETAILS_STR, choiceIndex,
+                    DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_DETAILS_STR, choiceIndex,
                         order.OrderNumber, order.Customer.Name, order.Deliverer!.LicencePlate, order.OrderStatus));
 
                     ordersForCollection.Add(order);

@@ -31,11 +31,11 @@ public class CustomerSortRestaurantsMenu: IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(CustomerConstants.RESTAURANT_LIST_ORDERED_STR);
-        IODisplay.DisplayMessage(_returnPreviousMenu);
-        IODisplay.DisplayMessage(_enterChoice);
+        DisplayIO.DisplayMessage(CustomerConstants.RESTAURANT_LIST_ORDERED_STR);
+        DisplayIO.DisplayMessage(_returnPreviousMenu);
+        DisplayIO.DisplayMessage(_enterChoice);
         
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         switch (choice)
         {
@@ -64,7 +64,7 @@ public class CustomerSortRestaurantsMenu: IMenu
                 break;
 
             default:
-                IODisplay.InvalidChoice();
+                DisplayIO.InvalidChoice();
                 break;
         }
     }    

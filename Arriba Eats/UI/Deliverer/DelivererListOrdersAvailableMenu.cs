@@ -22,7 +22,7 @@ public class DelivererListOrdersAvailableMenu : IMenu
     {
         if (OrderIO.FindCurrentOrder(out var currentOrder))
         {
-            IODisplay.DisplayMessage(DelivererConstants.ALREADY_SELECTED_ORDER_STR);
+            DisplayIO.DisplayMessage(DelivererConstants.ALREADY_SELECTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
@@ -32,12 +32,12 @@ public class DelivererListOrdersAvailableMenu : IMenu
             UserIO.DelivererChangeLocation(delivererLocation);
 
             // Display active orders
-            IODisplay.DisplayMessage(DelivererConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
+            DisplayIO.DisplayMessage(DelivererConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
             var customerOrdersList = OrderIO.DisplayOrdersList(out int choiceIndex);
-            IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-            IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+            DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+            DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-            int choice = IODisplay.GetChoice();
+            int choice = DisplayIO.GetChoice();
 
             if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
 
@@ -46,13 +46,13 @@ public class DelivererListOrdersAvailableMenu : IMenu
                 var selectedOrder = customerOrdersList[choice - 1];
                 selectedOrder.AssignDeliverer(SessionManager.ReturnCurrentDeliverer());
 
-                IODisplay.DisplayMessage(String.Format(DelivererConstants.THANKS_FOR_ACCEPTING_ORDER_STR,
+                DisplayIO.DisplayMessage(String.Format(DelivererConstants.THANKS_FOR_ACCEPTING_ORDER_STR,
                     selectedOrder.Restaurant.RestaurantName, selectedOrder.Restaurant.Location));
 
                 UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
             }
 
-            else IODisplay.InvalidChoice();
+            else DisplayIO.InvalidChoice();
         }
     }
 }

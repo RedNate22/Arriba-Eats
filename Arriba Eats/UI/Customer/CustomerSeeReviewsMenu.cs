@@ -30,7 +30,7 @@ public class CustomerSeeReviewsMenu : IMenu
 
         else
         {
-            IODisplay.DisplayMessage(CustomerConstants.NO_REVIEWS_STR);
+            DisplayIO.DisplayMessage(CustomerConstants.NO_REVIEWS_STR);
             UIFlowController.ChangeMenu(MenuState.CustomerBrowseRestaurantsMenu);
         }
     }

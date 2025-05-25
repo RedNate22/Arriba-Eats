@@ -1,6 +1,5 @@
 using System;
 using Entities;
-using UINavigation;
 using UI;
 
 namespace UIComponents;
@@ -20,7 +19,7 @@ public class ReviewIO
     {
         while (true)
         {
-            string? ratingString = IODisplay.ReadInput();
+            string? ratingString = DisplayIO.ReadInput();
 
             if (int.TryParse(ratingString, out int ratingInt))
             {
@@ -36,14 +35,14 @@ public class ReviewIO
 
                 else
                 {
-                    IODisplay.DisplayMessage(CustomerConstants.INVALID_RATING_STR);
+                    DisplayIO.DisplayMessage(CustomerConstants.INVALID_RATING_STR);
                     continue;
                 }
             }
 
             else
             {
-                IODisplay.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
+                DisplayIO.DisplayMessage(CustomerConstants.INVALID_QUANTITY_STR);
                 continue;
             }
         }
@@ -75,10 +74,10 @@ public class ReviewIO
         {
             if (order.Restaurant == SessionManager.SelectedRestaurant && order.RestaurantReview != null)
             {
-                IODisplay.DisplayMessage(String.Format(CustomerConstants.REVIEW_DETAILS_STR,
+                DisplayIO.DisplayMessage(String.Format(CustomerConstants.REVIEW_DETAILS_STR,
                     order.Customer.Name, order.RestaurantReview.RatingInStars, order.RestaurantReview.Comment));
 
-                IODisplay.DisplayEmptyLine();
+                DisplayIO.DisplayEmptyLine();
 
                 containsReviews = true;
             }
@@ -104,7 +103,7 @@ public class ReviewIO
         {
             if (OrderIO.IsDelivered(order.OrderStatus) && order.RestaurantReview == null)
             {
-                IODisplay.DisplayMessage(String.Format(CustomerConstants.ORDER_DETAILS_FOR_REVIEW_STR,
+                DisplayIO.DisplayMessage(String.Format(CustomerConstants.ORDER_DETAILS_FOR_REVIEW_STR,
                     choiceIndex, order.OrderNumber, order.Restaurant.RestaurantName));
                 ordersToReview.Add(order);
                 choiceIndex++;

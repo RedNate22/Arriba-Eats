@@ -27,28 +27,28 @@ public class CustomerOrderStatusMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        var customerOrders = IODisplay.GetCustomerOrders();
+        var customerOrders = DisplayIO.GetCustomerOrders();
         if (customerOrders.Count != 0)
         {
             foreach (var order in customerOrders)
             {
-                IODisplay.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
+                DisplayIO.DisplayMessage(String.Format(_orderStatusStr, order.OrderNumber,
                     order.Restaurant.RestaurantName, order.OrderStatus));
 
-                if (IODisplay.IsOrderDelivered(order.OrderStatus))
+                if (DisplayIO.IsOrderDelivered(order.OrderStatus))
                 {
-                    IODisplay.DisplayMessage(String.Format(_orderDeliveredByStr, order.Deliverer?.Name,
+                    DisplayIO.DisplayMessage(String.Format(_orderDeliveredByStr, order.Deliverer?.Name,
                         order.Deliverer?.LicencePlate));
                 }
                 order.DisplayOrderedItems();
-                IODisplay.DisplayEmptyLine();
+                DisplayIO.DisplayEmptyLine();
             }
             UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
         }
 
         else
         {
-            IODisplay.DisplayMessage(CustomerConstants.NOT_PLACED_ORDERS_STR);
+            DisplayIO.DisplayMessage(CustomerConstants.NOT_PLACED_ORDERS_STR);
             UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
         }
     }

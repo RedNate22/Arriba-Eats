@@ -36,14 +36,14 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     public static void DisplayOptions()
     {
         string enterChoice = IOUtilities.EnterChoiceStr(3);
-        IODisplay.DisplayMessage(CustomerConstants.SEE_RESTAURANTS_MENU_STR);
-        IODisplay.DisplayMessage(CustomerConstants.SEE_REVIEWS_STR);
-        IODisplay.DisplayMessage(CustomerConstants.RETURN_MAIN_MENU_STR);
-        IODisplay.DisplayMessage(enterChoice);
+        DisplayIO.DisplayMessage(CustomerConstants.SEE_RESTAURANTS_MENU_STR);
+        DisplayIO.DisplayMessage(CustomerConstants.SEE_REVIEWS_STR);
+        DisplayIO.DisplayMessage(CustomerConstants.RETURN_MAIN_MENU_STR);
+        DisplayIO.DisplayMessage(enterChoice);
 
         const int SEE_RESTAURANTS_MENU_INT = 1, SEE_REVIEWS_INT = 2, RETURN_MAIN_MENU_INT = 3;
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         switch (choice)
         {
@@ -62,7 +62,7 @@ public class CustomerBrowseRestaurantsMenu : IMenu
                 break;
 
             default:
-                IODisplay.InvalidChoice();
+                DisplayIO.InvalidChoice();
                 break;
         }
     }
@@ -85,24 +85,24 @@ public class CustomerBrowseRestaurantsMenu : IMenu
     {
         if (ReturningFromMenu == false)
         {
-            IODisplay.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
+            DisplayIO.DisplayMessage(CustomerConstants.YOU_CAN_ORDER_FROM_THE_FOLLOWING_STR);
             var restaurantsList = RestaurantIO.DisplayRestaurantsList(out int choiceIndex);
             
-            IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-            IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+            DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+            DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-            int choice = IODisplay.GetChoice();
+            int choice = DisplayIO.GetChoice();
 
             if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
 
             else if (IOUtilities.IsValueInIndexRange(restaurantsList, choice - 1))
             {
                 SessionManager.SelectedRestaurant = restaurantsList[choice - 1];  // Adjust for index-based referencing
-                IODisplay.DisplayMessage($"Placing order from {SessionManager.SelectedRestaurant?.RestaurantName}.");
+                DisplayIO.DisplayMessage($"Placing order from {SessionManager.SelectedRestaurant?.RestaurantName}.");
                 DisplayOptions();
             }
 
-            else IODisplay.InvalidChoice();
+            else DisplayIO.InvalidChoice();
         }
         else DisplayOptions();
     }

@@ -153,7 +153,7 @@ public class CustomerOrder
     {
         foreach (var item in _itemsOrdered)
         {
-            IODisplay.DisplayMessage($"{item.Value.Quantity} x {item.Key}");
+            DisplayIO.DisplayMessage($"{item.Value.Quantity} x {item.Key}");
         }
     }
 

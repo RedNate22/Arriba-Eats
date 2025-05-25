@@ -18,17 +18,17 @@ public class ClientFinishCookingMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(ClientConstants.SELECT_ORDER_TO_FINISH_STR);
+        DisplayIO.DisplayMessage(ClientConstants.SELECT_ORDER_TO_FINISH_STR);
 
-        var customerOrders = IODisplay.GetCustomerOrders();
+        var customerOrders = DisplayIO.GetCustomerOrders();
 
         // * Check if any orders are cooking and display them - updating the index
         int choiceIndex = OrderIO.DisplayOrdersReadyToFinishCooking(customerOrders, out List<dynamic> ordersToFinish);
 
-        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
 
@@ -36,25 +36,25 @@ public class ClientFinishCookingMenu : IMenu
         {
             var selectedOrder = ordersToFinish[choice - 1];
 
-            if (IODisplay.UpdateOrder(selectedOrder))  // * Updates to 'Cooked'
+            if (DisplayIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooked'
             {
-                IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
+                DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_READY_FOR_COLLECTION_STR, selectedOrder.OrderNumber));
 
                 if (selectedOrder.Deliverer == null)
                 {
-                    IODisplay.DisplayMessage(ClientConstants.NO_DELIVERER_ASSIGNED_STR);
+                    DisplayIO.DisplayMessage(ClientConstants.NO_DELIVERER_ASSIGNED_STR);
                 }
 
                 else if (selectedOrder.DelivererArrivedAtRestaurant == true)
                 {
-                    IODisplay.DisplayMessage(String.Format(ClientConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
+                    DisplayIO.DisplayMessage(String.Format(ClientConstants.TAKE_TO_DELIVERER_STR, selectedOrder.Deliverer.LicencePlate));
                 }
 
-                else IODisplay.DisplayMessage(String.Format(ClientConstants.DELIVERER_ARRIVING_SOON_STR, selectedOrder.Deliverer.LicencePlate));
+                else DisplayIO.DisplayMessage(String.Format(ClientConstants.DELIVERER_ARRIVING_SOON_STR, selectedOrder.Deliverer.LicencePlate));
 
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
         }
-        else IODisplay.InvalidChoice();
+        else DisplayIO.InvalidChoice();
     }
 }

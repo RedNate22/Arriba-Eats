@@ -25,7 +25,7 @@ public class CustomerMainMenu : IMenu
         RATE_RESTAURANT_INT = 4, LOG_OUT_INT = 5;
     
     /// <summary>
-    /// A count to track if the <see cref="IODisplay.WelcomeUser()"/>
+    /// A count to track if the <see cref="DisplayIO.WelcomeUser()"/>
     /// method has been run. This is to prevent the message from being displayed
     /// more than once.
     /// </summary>
@@ -39,22 +39,22 @@ public class CustomerMainMenu : IMenu
     {
         if (_welcomeCount == 0)
         {
-            IODisplay.WelcomeUser();
+            DisplayIO.WelcomeUser();
             _welcomeCount++;
         }
 
-        IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
-        IODisplay.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
-        IODisplay.DisplayMessage(CustomerConstants.CUSTOMER_MAIN_MENU_CHOICES_STR);
-        IODisplay.DisplayMessage(_logOut);
-        IODisplay.DisplayMessage(_enterChoice);
+        DisplayIO.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
+        DisplayIO.DisplayMessage(MenuConstants.DISPLAY_USER_INFO_STR);
+        DisplayIO.DisplayMessage(CustomerConstants.CUSTOMER_MAIN_MENU_CHOICES_STR);
+        DisplayIO.DisplayMessage(_logOut);
+        DisplayIO.DisplayMessage(_enterChoice);
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         switch (choice)
         {
             case DISPLAY_USER_INFO_INT:
-                IODisplay.DisplayUserInfo(SessionManager.ReturnCurrentUser());
+                DisplayIO.DisplayUserInfo(SessionManager.ReturnCurrentUser());
                 break;
 
             case SELECT_RESTAURANTS_LIST_INT:
@@ -76,7 +76,7 @@ public class CustomerMainMenu : IMenu
                 break;
             
             default:  
-                IODisplay.InvalidChoice();
+                DisplayIO.InvalidChoice();
                 break;
         }
     }

@@ -6,7 +6,7 @@ namespace UIComponents;
 /// <summary>
 /// Contains various static methods for handling general I/O with any users, regardless of type.
 /// </summary>
-public static class IODisplay
+public static class DisplayIO
 {
     /// <summary>
     /// Writes an empty line to the screen, to be used as a line break between selections and menus.

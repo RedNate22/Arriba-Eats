@@ -50,16 +50,16 @@ public static class SessionManager
         const string PASSWORD_STR = "Password:";
         const string INVALID_EMAIL_PASSWORD = "Invalid email or password.";
 
-        IODisplay.DisplayMessage(EMAIL_STR);
-        string email = IODisplay.ReadInput();
+        DisplayIO.DisplayMessage(EMAIL_STR);
+        string email = DisplayIO.ReadInput();
 
-        IODisplay.DisplayMessage(PASSWORD_STR);
-        string password = IODisplay.ReadInput();
+        DisplayIO.DisplayMessage(PASSWORD_STR);
+        string password = DisplayIO.ReadInput();
 
         User? user = User.AuthenticateUser(email, password);
         if (user == null)
         {
-            IODisplay.DisplayMessage(INVALID_EMAIL_PASSWORD);
+            DisplayIO.DisplayMessage(INVALID_EMAIL_PASSWORD);
             return null;
         }
 
@@ -73,7 +73,7 @@ public static class SessionManager
     public static void Logout()
     {
         _currentUser = null;
-        IODisplay.DisplayMessage("You are now logged out.");
+        DisplayIO.DisplayMessage("You are now logged out.");
     }
 
     /// <summary>

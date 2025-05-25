@@ -17,18 +17,18 @@ public class CustomerRateRestaurantMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
+        DisplayIO.DisplayMessage(CustomerConstants.SELECT_PREVIOUS_ORDER_TO_RATE_STR);
 
-        var customerOrders = IODisplay.GetCustomerOrders();
+        var customerOrders = DisplayIO.GetCustomerOrders();
 
         // * Check if any orders are marked delivered, and there are no reviews for them yet
         // * Then display these orders - updating the index
         int choiceIndex = ReviewIO.DisplayOrdersReadyToReview(out var ordersToReview, customerOrders);
 
-        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
 
@@ -36,25 +36,25 @@ public class CustomerRateRestaurantMenu : IMenu
         {
             var selectedOrder = ordersToReview[choice - 1];  // * Adjust for index-based referencing
 
-            IODisplay.DisplayMessage(String.Format(CustomerConstants.YOU_ARE_RATING_STR,
+            DisplayIO.DisplayMessage(String.Format(CustomerConstants.YOU_ARE_RATING_STR,
                 selectedOrder.OrderNumber, selectedOrder.Restaurant.RestaurantName));
             selectedOrder.DisplayOrderedItems();
 
-            IODisplay.DisplayMessage(CustomerConstants.PLEASE_ENTER_RATING_STR);
+            DisplayIO.DisplayMessage(CustomerConstants.PLEASE_ENTER_RATING_STR);
             int orderRating = ReviewIO.GetRating();
 
             if (orderRating == 0) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
             else
             {
-                IODisplay.DisplayMessage(CustomerConstants.ENTER_COMMENT_STR);
-                string orderComment = IODisplay.ReadInput();
+                DisplayIO.DisplayMessage(CustomerConstants.ENTER_COMMENT_STR);
+                string orderComment = DisplayIO.ReadInput();
                 ReviewIO.GetReview(selectedOrder, orderRating, orderComment);
 
-                IODisplay.DisplayMessage(String.Format(CustomerConstants.THANK_YOU_FOR_RATING_STR,
+                DisplayIO.DisplayMessage(String.Format(CustomerConstants.THANK_YOU_FOR_RATING_STR,
                     selectedOrder.Restaurant.RestaurantName));
                 UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
             }
         }
-        else IODisplay.InvalidChoice();
+        else DisplayIO.InvalidChoice();
     }
 }

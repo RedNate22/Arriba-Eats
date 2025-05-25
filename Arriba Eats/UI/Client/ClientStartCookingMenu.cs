@@ -21,8 +21,8 @@ public class ClientStartCookingMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
-        var customerOrders = IODisplay.GetCustomerOrders();
+        DisplayIO.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
+        var customerOrders = DisplayIO.GetCustomerOrders();
         bool containsOrdersReady = customerOrders.Count != 0 && OrderIO.ContainsOrdered(customerOrders);
 
         // * Check if any orders are ready to cook and display them - updating the index
@@ -45,10 +45,10 @@ public class ClientStartCookingMenu : IMenu
         }
         int returnPreviousMenuInt = choiceIndex;
 
-        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
         
         if (choice == returnPreviousMenuInt) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
 
@@ -56,13 +56,13 @@ public class ClientStartCookingMenu : IMenu
         {
             var selectedOrder = ordersToCook[choice - 1];  // * Adjust for index-based referencing
 
-            if (IODisplay.UpdateOrder(selectedOrder))  // * Updates to 'Cooking'
+            if (DisplayIO.UpdateOrder(selectedOrder))  // * Updates to 'Cooking'
             {
-                IODisplay.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));
+                DisplayIO.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));
                 selectedOrder.DisplayOrderedItems();
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
         }
-        else IODisplay.InvalidChoice();
+        else DisplayIO.InvalidChoice();
     }
 }

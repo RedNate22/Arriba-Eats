@@ -48,7 +48,7 @@ public class LoginMenu : IMenu
                     break;
                 
                 default:
-                    IODisplay.InvalidChoice();
+                    DisplayIO.InvalidChoice();
                     break;
             }
         }

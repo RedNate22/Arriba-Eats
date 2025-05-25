@@ -21,21 +21,21 @@ public class DelivererMarkDeliveryCompleteMenu : IMenu
     {
         if (OrderIO.FindCurrentOrder(out var orderNotFound) == false)
         {
-            IODisplay.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
+            DisplayIO.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
         else if (OrderIO.FindCurrentOrder(out var orderFound) == true)
         {
-            if (IODisplay.IsOrderBeingDelivered(orderFound.OrderStatus) && IODisplay.UpdateOrder(orderFound))  // * Updates to 'Delivered'
+            if (DisplayIO.IsOrderBeingDelivered(orderFound.OrderStatus) && DisplayIO.UpdateOrder(orderFound))  // * Updates to 'Delivered'
             {
-                IODisplay.DisplayMessage(DelivererConstants.THANK_YOU_FOR_DELIVERING_STR);
+                DisplayIO.DisplayMessage(DelivererConstants.THANK_YOU_FOR_DELIVERING_STR);
                 UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
             }
 
             else
             {
-                IODisplay.DisplayMessage(DelivererConstants.NOT_PICKED_UP_ORDER_STR);
+                DisplayIO.DisplayMessage(DelivererConstants.NOT_PICKED_UP_ORDER_STR);
                 UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
             }
         }

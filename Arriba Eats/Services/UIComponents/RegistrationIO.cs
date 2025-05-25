@@ -27,12 +27,12 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your name:");
+            DisplayIO.DisplayMessage("Please enter your name:");
             
-            string name = IODisplay.ReadInput();
+            string name = DisplayIO.ReadInput();
 
             if (IOUtilities.IsValidName(name)) return name;
-            else IODisplay.DisplayMessage("Invalid name.");
+            else DisplayIO.DisplayMessage("Invalid name.");
         }
     }
     
@@ -53,15 +53,15 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your age (18-100):");
+            DisplayIO.DisplayMessage("Please enter your age (18-100):");
 
-            if (int.TryParse(IODisplay.ReadInput(), out int age))
+            if (int.TryParse(DisplayIO.ReadInput(), out int age))
             {
                 if (IOUtilities.IsValidAge(age)) return age;
-                else IODisplay.DisplayMessage("Invalid age.");
+                else DisplayIO.DisplayMessage("Invalid age.");
             }
             
-            else IODisplay.DisplayMessage("Invalid age.");
+            else DisplayIO.DisplayMessage("Invalid age.");
         }
     }
 
@@ -83,22 +83,22 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your email address:");
+            DisplayIO.DisplayMessage("Please enter your email address:");
 
-            string email = IODisplay.ReadInput();
+            string email = DisplayIO.ReadInput();
             
             if (IOUtilities.IsValidEmail(email))
             {
                 if (User.EmailExists(email))
                 {
-                    IODisplay.DisplayMessage("This email address is already in use.");
+                    DisplayIO.DisplayMessage("This email address is already in use.");
                     continue;
                 }
 
                 else return email;
             }
             
-            else IODisplay.DisplayMessage("Invalid email address.");
+            else DisplayIO.DisplayMessage("Invalid email address.");
         }
     }
 
@@ -118,12 +118,12 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your mobile phone number:");
+            DisplayIO.DisplayMessage("Please enter your mobile phone number:");
 
-            string mobile = IODisplay.ReadInput();
+            string mobile = DisplayIO.ReadInput();
 
             if (IOUtilities.IsValidMobile(mobile)) return mobile;
-            else IODisplay.DisplayMessage("Invalid phone number.");
+            else DisplayIO.DisplayMessage("Invalid phone number.");
         }
     }
 
@@ -156,14 +156,14 @@ public static class RegistrationIO
 
         while (true)
         {
-            IODisplay.DisplayMessage(PASSWORD_PROMPT);
+            DisplayIO.DisplayMessage(PASSWORD_PROMPT);
 
-            string firstPasswordInput = IODisplay.ReadInput();
+            string firstPasswordInput = DisplayIO.ReadInput();
 
             if (IOUtilities.IsValidPassword(firstPasswordInput))
             {
-                IODisplay.DisplayMessage("Please confirm your password:");
-                string secondPasswordInput = IODisplay.ReadInput();
+                DisplayIO.DisplayMessage("Please confirm your password:");
+                string secondPasswordInput = DisplayIO.ReadInput();
 
                 if (IOUtilities.IsValidPasswordMatch(firstPasswordInput, secondPasswordInput))
                 {
@@ -172,12 +172,12 @@ public static class RegistrationIO
 
                 else
                 {
-                    IODisplay.DisplayMessage("Passwords do not match.");
+                    DisplayIO.DisplayMessage("Passwords do not match.");
                     continue;
                 }
             }
 
-            else IODisplay.DisplayMessage("Invalid password.");
+            else DisplayIO.DisplayMessage("Invalid password.");
         }
     }
 
@@ -195,12 +195,12 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage(MenuConstants.ENTER_LOCATION_STR);
+            DisplayIO.DisplayMessage(MenuConstants.ENTER_LOCATION_STR);
 
-            string location = IODisplay.ReadInput();
+            string location = DisplayIO.ReadInput();
 
             if (IOUtilities.IsValidLocation(location)) return location;
-            else IODisplay.DisplayMessage("Invalid location.");
+            else DisplayIO.DisplayMessage("Invalid location.");
         }
     }
 
@@ -218,12 +218,12 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your licence plate:");
+            DisplayIO.DisplayMessage("Please enter your licence plate:");
 
-            string licencePlate = IODisplay.ReadInput();
+            string licencePlate = DisplayIO.ReadInput();
 
             if (IOUtilities.IsValidLicencePlate(licencePlate)) return licencePlate;
-            else IODisplay.DisplayMessage("Invalid licence plate.");
+            else DisplayIO.DisplayMessage("Invalid licence plate.");
         }
     }
 
@@ -241,18 +241,18 @@ public static class RegistrationIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter your restaurant's name:");
+            DisplayIO.DisplayMessage("Please enter your restaurant's name:");
 
-            string restaurantName = IODisplay.ReadInput();
+            string restaurantName = DisplayIO.ReadInput();
 
             if (IOUtilities.IsValidRestaurantName(restaurantName)) return restaurantName;
-            else IODisplay.DisplayMessage("Invalid restaurant name.");
+            else DisplayIO.DisplayMessage("Invalid restaurant name.");
         }
     }
     
     /// <summary>
     /// Continuously reads a string input from the user and attempts to convert it using
-    /// <see cref="IODisplay.GetChoice"/> via the console until it meets the validation criteria.
+    /// <see cref="DisplayIO.GetChoice"/> via the console until it meets the validation criteria.
     /// <para> Passes the string to <see cref="IOUtilities.IsValidRestaurantStyle()"/>
     /// to validate whether it meets the criteria. </para>
     /// </summary>
@@ -273,15 +273,15 @@ public static class RegistrationIO
 
         while (true)
         {
-            IODisplay.DisplayMessage(STYLE_PROMPT);
+            DisplayIO.DisplayMessage(STYLE_PROMPT);
 
-            int restaurantStyle = IODisplay.GetChoice();
+            int restaurantStyle = DisplayIO.GetChoice();
 
             if (IOUtilities.IsValidRestaurantStyle(restaurantStyle))
             {
                 return (RestaurantStyles)restaurantStyle;
             }
-            else IODisplay.InvalidChoice();
+            else DisplayIO.InvalidChoice();
         }
     }
 }

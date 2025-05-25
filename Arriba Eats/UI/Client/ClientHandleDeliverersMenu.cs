@@ -22,19 +22,19 @@ public class ClientHandleDeliverersMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(ClientConstants.THESE_DELIVERERS_ARRIVED_STR);
-        IODisplay.DisplayMessage(ClientConstants.SELECT_COLLECTED_ORDERS_STR);
+        DisplayIO.DisplayMessage(ClientConstants.THESE_DELIVERERS_ARRIVED_STR);
+        DisplayIO.DisplayMessage(ClientConstants.SELECT_COLLECTED_ORDERS_STR);
 
-        var customerOrders = IODisplay.GetCustomerOrders();
+        var customerOrders = DisplayIO.GetCustomerOrders();
 
         // * Check if any orders are ordered, cooking, or cooked, and the deliverer has arrived,
         // * and display them - updating the index
         int choiceIndex = OrderIO.DisplayOrdersReadyForCollection(customerOrders, out List<dynamic> ordersForCollection);
 
-        IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
-        IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
+        DisplayIO.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         if (choice == choiceIndex) UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
 
@@ -44,17 +44,17 @@ public class ClientHandleDeliverersMenu : IMenu
 
             if (!OrderIO.IsCooked(selectedOrder.OrderStatus))
             {
-                IODisplay.DisplayMessage(ClientConstants.ORDER_NOT_COOKED_STR);
+                DisplayIO.DisplayMessage(ClientConstants.ORDER_NOT_COOKED_STR);
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
 
-            else if (selectedOrder.DelivererArrivedAtRestaurant == true && IODisplay.UpdateOrder(selectedOrder))  // * Updates to 'Being Delivered'
+            else if (selectedOrder.DelivererArrivedAtRestaurant == true && DisplayIO.UpdateOrder(selectedOrder))  // * Updates to 'Being Delivered'
             {
-                IODisplay.DisplayMessage(String.Format(ClientConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));
+                DisplayIO.DisplayMessage(String.Format(ClientConstants.ORDER_NOW_BEING_DELIVERED, selectedOrder.OrderNumber));
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
             }
         }
-        else IODisplay.InvalidChoice();
+        else DisplayIO.InvalidChoice();
         
     }
 }

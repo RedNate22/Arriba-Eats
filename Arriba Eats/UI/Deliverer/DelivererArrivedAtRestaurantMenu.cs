@@ -23,34 +23,34 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
     {
         if (!OrderIO.FindCurrentOrder(out var currentOrder))
         {
-            IODisplay.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
+            DisplayIO.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
-        else if (IODisplay.IsOrderBeingDelivered(currentOrder.OrderStatus))
+        else if (DisplayIO.IsOrderBeingDelivered(currentOrder.OrderStatus))
         {
-            IODisplay.DisplayMessage(DelivererConstants.ALREADY_PICKED_UP_ORDER_STR);
+            DisplayIO.DisplayMessage(DelivererConstants.ALREADY_PICKED_UP_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
         else if (currentOrder.DelivererArrivedAtRestaurant == true)
         {
-            IODisplay.DisplayMessage(DelivererConstants.ALREADY_AT_RESTAURANT_STR);
+            DisplayIO.DisplayMessage(DelivererConstants.ALREADY_AT_RESTAURANT_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }
 
         else
         {
             currentOrder.DelivererAtRestaurant();
-            IODisplay.DisplayMessage(String.Format(DelivererConstants.ARRIVED_AT_RESTAURANT_STR,
+            DisplayIO.DisplayMessage(String.Format(DelivererConstants.ARRIVED_AT_RESTAURANT_STR,
                 currentOrder.Restaurant.RestaurantName, currentOrder.OrderNumber));
 
-            if (IODisplay.IsOrderBeingPrepared(currentOrder.OrderStatus))
+            if (DisplayIO.IsOrderBeingPrepared(currentOrder.OrderStatus))
             {
-                IODisplay.DisplayMessage(DelivererConstants.ORDER_STILL_BEING_PREPARED_STR);
+                DisplayIO.DisplayMessage(DelivererConstants.ORDER_STILL_BEING_PREPARED_STR);
             }
 
-            IODisplay.DisplayMessage(String.Format(DelivererConstants.PLEASE_DELIVER_STR,
+            DisplayIO.DisplayMessage(String.Format(DelivererConstants.PLEASE_DELIVER_STR,
                 currentOrder.Customer.Name, currentOrder.Customer.Location));
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
         }

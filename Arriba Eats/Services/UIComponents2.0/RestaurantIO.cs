@@ -1,6 +1,5 @@
 using System;
 using Entities;
-using UINavigation;
 using UI;
 
 namespace UIComponents;
@@ -33,8 +32,8 @@ public static class RestaurantIO
                 case (SortOption)2:
                     static int SortByDistance(Restaurant a, Restaurant b)
                     {
-                        int distanceA = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), a);
-                        int distanceB = IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), b);
+                        int distanceA = DisplayIO.GetDistance(SessionManager.ReturnCurrentUser(), a);
+                        int distanceB = DisplayIO.GetDistance(SessionManager.ReturnCurrentUser(), b);
                         int distanceComparison = distanceA.CompareTo(distanceB);
 
                         // * If distances are the same (returning 0), instead sort by name
@@ -99,7 +98,7 @@ public static class RestaurantIO
         }
 
         // Display the headings
-        IODisplay.DisplayMessage("   "
+        DisplayIO.DisplayMessage("   "
             + CustomerConstants.RESTAURANT_NAME_HEADING_STR.PadRight(restaurantColumnWidth)
             + CustomerConstants.LOCATION_HEADING_STR.PadRight(locationColumnWidth)
             + CustomerConstants.DISTANCE_HEADING_STR.PadRight(distanceColumnWidth)
@@ -114,10 +113,10 @@ public static class RestaurantIO
             double averageRating = RestaurantIO.GetAverageRestaurantRating(restaurantsList[i]);
             string rating = averageRating != 0 ? $"{averageRating:F1}" : "-";
 
-            IODisplay.DisplayMessage($"{restaurantChoiceIndex}: "
+            DisplayIO.DisplayMessage($"{restaurantChoiceIndex}: "
                 + $"{restaurantsList[i].RestaurantName}".PadRight(restaurantColumnWidth)
                 + $"{restaurantsList[i].Location}".PadRight(locationColumnWidth)
-                + $"{IODisplay.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
+                + $"{DisplayIO.GetDistance(SessionManager.ReturnCurrentUser(), restaurantsList[i])}".PadRight(distanceColumnWidth)
                 + $"{restaurantsList[i].RestaurantStyle}".PadRight(styleColumnWidth)
                 + $"{rating}".PadRight(3));
             restaurantChoiceIndex++;
@@ -164,20 +163,20 @@ public static class RestaurantIO
     {
         while (true)
         {
-            IODisplay.DisplayMessage("Please enter the price of the new item (without the $):");
+            DisplayIO.DisplayMessage("Please enter the price of the new item (without the $):");
 
-            if (decimal.TryParse(IODisplay.ReadInput(), out decimal itemPriceInput))
+            if (decimal.TryParse(DisplayIO.ReadInput(), out decimal itemPriceInput))
             {
                 decimal itemPrice = itemPriceInput;
 
                 if (IOUtilities.IsValidItemPrice(itemPrice)) return itemPrice;
                 else
                 {
-                    IODisplay.DisplayMessage("Invalid price.");
+                    DisplayIO.DisplayMessage("Invalid price.");
                     continue;
                 }
             }
-            else IODisplay.DisplayMessage("Invalid price.");
+            else DisplayIO.DisplayMessage("Invalid price.");
         }
     }
 
@@ -197,27 +196,27 @@ public static class RestaurantIO
         {
             if (RestaurantRegistry.TryFindClientsRestaurant(currentUser, out Restaurant? restaurant))
             {
-                IODisplay.DisplayMessage("This is your restaurant's current menu:");
+                DisplayIO.DisplayMessage("This is your restaurant's current menu:");
                 restaurant?.DisplayCurrentlyRegisteredMenuItems();
 
-                IODisplay.DisplayMessage("Please enter the name of the new item (blank to cancel):");
+                DisplayIO.DisplayMessage("Please enter the name of the new item (blank to cancel):");
 
-                string itemName = IODisplay.ReadInput();
+                string itemName = DisplayIO.ReadInput();
 
                 if (!string.IsNullOrWhiteSpace(itemName))
                 {
                     decimal itemPrice = GetMenuItemPrice();
                     if (restaurant!.TryRegisterMenuItem(itemName, itemPrice))
                     {
-                        IODisplay.DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
+                        DisplayIO.DisplayMessage($"Successfully added {itemName} (${itemPrice:F2}) to menu.");
                     }
-                    else IODisplay.DisplayMessage("This item is already added to the menu.");
+                    else DisplayIO.DisplayMessage("This item is already added to the menu.");
                 }
             }
 
-            else IODisplay.DisplayMessage("You currently have no restaurants.");
+            else DisplayIO.DisplayMessage("You currently have no restaurants.");
         }
 
-        else IODisplay.DisplayMessage("No user is currently logged in.");
+        else DisplayIO.DisplayMessage("No user is currently logged in.");
     }
 }

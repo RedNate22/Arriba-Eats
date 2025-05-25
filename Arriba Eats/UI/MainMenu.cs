@@ -20,7 +20,7 @@ public class MainMenu : IMenu
     /// </summary>
     public static void WelcomeMessage()
     {
-        IODisplay.DisplayMessage(MenuConstants.WELCOME_STR);
+        DisplayIO.DisplayMessage(MenuConstants.WELCOME_STR);
     }
 
     /// <summary> 
@@ -29,11 +29,11 @@ public class MainMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
-        IODisplay.DisplayMessage(MenuConstants.MAIN_MENU_CHOICES_STR);
-        IODisplay.DisplayMessage(_enterChoice);
+        DisplayIO.DisplayMessage(MenuConstants.MAKE_CHOICE_STR);
+        DisplayIO.DisplayMessage(MenuConstants.MAIN_MENU_CHOICES_STR);
+        DisplayIO.DisplayMessage(_enterChoice);
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         switch (choice)
         {
@@ -46,12 +46,12 @@ public class MainMenu : IMenu
                 break;
             
             case EXIT_INT:  
-                IODisplay.DisplayMessage(MenuConstants.GOODBYE_STR);
+                DisplayIO.DisplayMessage(MenuConstants.GOODBYE_STR);
                 UIFlowController.ChangeMenu(MenuState.Exit);
                 break;
             
             default:  
-                IODisplay.InvalidChoice();
+                DisplayIO.InvalidChoice();
                 break;
         }
     }

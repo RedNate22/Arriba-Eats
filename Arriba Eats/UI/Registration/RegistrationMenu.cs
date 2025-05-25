@@ -26,8 +26,8 @@ public class RegistrationMenu : IMenu
     /// <summary>
     /// Displays the <see cref="RegistrationMenu"/> options and prompts the <see cref="Entities.User"/> to select a user type to register as.
     /// <para> The appropriate user type is registered depending on the user's choice. </para>
-    /// <para> Uses <see cref="IODisplay.DisplayMessage()"/> to display the options. </para>
-    /// <para> Uses <see cref="IODisplay.GetChoice()"/> to get a choice from the user in the form
+    /// <para> Uses <see cref="DisplayIO.DisplayMessage()"/> to display the options. </para>
+    /// <para> Uses <see cref="DisplayIO.GetChoice()"/> to get a choice from the user in the form
     /// of an integer. </para>
     /// <para> Matches the given integer with the associated menu option and passes the correct
     /// argument to <see cref="RegistrationProcess.Register"/> to begin the registration
@@ -36,12 +36,12 @@ public class RegistrationMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        IODisplay.DisplayMessage(RegistrationConstants.WHICH_TYPE_USER_STR);
-        IODisplay.DisplayMessage(RegistrationConstants.REGISTRATION_MENU_CHOICES_STR);
-        IODisplay.DisplayMessage(_returnPreviousMenu);
-        IODisplay.DisplayMessage(_enterChoice);
+        DisplayIO.DisplayMessage(RegistrationConstants.WHICH_TYPE_USER_STR);
+        DisplayIO.DisplayMessage(RegistrationConstants.REGISTRATION_MENU_CHOICES_STR);
+        DisplayIO.DisplayMessage(_returnPreviousMenu);
+        DisplayIO.DisplayMessage(_enterChoice);
 
-        int choice = IODisplay.GetChoice();
+        int choice = DisplayIO.GetChoice();
 
         switch (choice)
         {
@@ -65,7 +65,7 @@ public class RegistrationMenu : IMenu
                 break;
             
             default:
-                IODisplay.InvalidChoice();
+                DisplayIO.InvalidChoice();
                 break;
         }
     }
