@@ -56,11 +56,12 @@ public class ClientStartCookingMenu : IMenu
         {
             var selectedOrder = ordersToCook[choice - 1];  // * Adjust for index-based referencing
 
-            selectedOrder.UpdateOrderStatus();  // Updates to 'Cooking'
-            IODisplay.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));
-            selectedOrder.DisplayOrderedItems();
-
-            UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
+            if (IODisplay.UpdateOrder(selectedOrder))  // * Updates to 'Cooking'
+            {
+                IODisplay.DisplayMessage(String.Format(_orderMarkedAsCookingStr, selectedOrder.OrderNumber));
+                selectedOrder.DisplayOrderedItems();
+                UIFlowController.ChangeMenu(MenuState.ClientMainMenu);
+            }
         }
         else IODisplay.InvalidChoice();
     }

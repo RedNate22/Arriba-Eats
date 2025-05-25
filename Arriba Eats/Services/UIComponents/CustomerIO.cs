@@ -64,7 +64,7 @@ public static class CustomerIO
 
                         int ratingComparison = averageRatingB.CompareTo(averageRatingA);
                         // * If ratings are the same (returning 0), instead sort by name 
-                        return ratingComparison != 0 ? ratingComparison : b.RestaurantName.CompareTo(a.RestaurantName);
+                        return ratingComparison != 0 ? ratingComparison : a.RestaurantName.CompareTo(b.RestaurantName);
                     }
                     restaurantsList.Sort(SortByRating);
                     break;
