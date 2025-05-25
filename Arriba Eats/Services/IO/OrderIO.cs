@@ -111,22 +111,8 @@ public class OrderIO
                 int choice = DisplayIO.GetChoice();
                 if (choice == completeOrder)
                 {
-                    if (customerOrder.IsOrderEmpty()) DisplayIO.DisplayMessage("You have not added any items.");
-                    else
-                    {
-                        if (OrderRegistry.TryAddOrder(customerOrder) && UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
-                        {
-                            DisplayIO.DisplayMessage(String.Format("Your order has been placed. Your order number is #{0}.", orderNumber));
-
-                            orderNumber++;  // * Update order number for future (next) orders
-                            return orderNumber;
-                        }
-                        else
-                        {
-                            DisplayIO.DisplayMessage("Order could not be confirmed.");
-                            return orderNumber;
-                        }
-                    }
+                    CompleteOrder(customerOrder, orderNumber, out int newOrderNumber);
+                    return newOrderNumber;
                 }
 
                 else if (choice == cancelOrder)
@@ -167,6 +153,31 @@ public class OrderIO
         {
             DisplayIO.DisplayMessage(String.Format("{0} currently has no items on the menu.", selectedRestaurant.RestaurantName));
             return orderNumber;
+        }
+    }
+
+    private static void CompleteOrder(CustomerOrder customerOrder, int orderNumber, out int newOrderNumber)
+    {
+        if (customerOrder.IsOrderEmpty())
+        {
+            DisplayIO.DisplayMessage("You have not added any items.");
+            newOrderNumber = orderNumber;
+        }
+        else
+        {
+            if (OrderRegistry.TryAddOrder(customerOrder) && UpdateOrder(customerOrder))  // * Updates status to 'Ordered'
+            {
+                DisplayIO.DisplayMessage(String.Format("Your order has been placed. Your order number is #{0}.", orderNumber));
+
+                orderNumber++;  // * Update order number for future (next) orders
+                newOrderNumber = orderNumber;
+            }
+
+            else
+            {
+                DisplayIO.DisplayMessage("Order could not be confirmed.");
+                newOrderNumber = orderNumber;
+            }
         }
     }
 
