@@ -23,7 +23,7 @@ public class CustomerRateRestaurantMenu : IMenu
 
         // * Check if any orders are marked delivered, and there are no reviews for them yet
         // * Then display these orders - updating the index
-        int choiceIndex = CustomerIO.DisplayOrdersReadyToReview(out var ordersToReview, customerOrders);
+        int choiceIndex = ReviewIO.DisplayOrdersReadyToReview(out var ordersToReview, customerOrders);
 
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
         IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
@@ -41,14 +41,14 @@ public class CustomerRateRestaurantMenu : IMenu
             selectedOrder.DisplayOrderedItems();
 
             IODisplay.DisplayMessage(CustomerConstants.PLEASE_ENTER_RATING_STR);
-            int orderRating = CustomerIO.GetRating();
+            int orderRating = ReviewIO.GetRating();
 
             if (orderRating == 0) UIFlowController.ChangeMenu(MenuState.CustomerMainMenu);
             else
             {
                 IODisplay.DisplayMessage(CustomerConstants.ENTER_COMMENT_STR);
                 string orderComment = IODisplay.ReadInput();
-                CustomerIO.GetReview(selectedOrder, orderRating, orderComment);
+                ReviewIO.GetReview(selectedOrder, orderRating, orderComment);
 
                 IODisplay.DisplayMessage(String.Format(CustomerConstants.THANK_YOU_FOR_RATING_STR,
                     selectedOrder.Restaurant.RestaurantName));

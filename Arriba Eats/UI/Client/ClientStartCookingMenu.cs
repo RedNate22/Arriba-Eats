@@ -23,7 +23,7 @@ public class ClientStartCookingMenu : IMenu
     {
         IODisplay.DisplayMessage(ClientConstants.SELECT_ORDER_TO_COOK_STR);
         var customerOrders = IODisplay.GetCustomerOrders();
-        bool containsOrdersReady = customerOrders.Count != 0 && ClientIO.ContainsOrdered(customerOrders);
+        bool containsOrdersReady = customerOrders.Count != 0 && OrderIO.ContainsOrdered(customerOrders);
 
         // * Check if any orders are ready to cook and display them - updating the index
         // int choiceIndex = containsOrdersReady ? ClientIO.DisplayOrdersReadyToCook(customerOrders,
@@ -35,7 +35,7 @@ public class ClientStartCookingMenu : IMenu
 
         if (containsOrdersReady)
         {
-            choiceIndex = ClientIO.DisplayOrdersReadyToCook(customerOrders, out ordersToCook);
+            choiceIndex = OrderIO.DisplayOrdersReadyToCook(customerOrders, out ordersToCook);
         }
 
         else

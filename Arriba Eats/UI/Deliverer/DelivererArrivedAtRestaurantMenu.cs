@@ -21,7 +21,7 @@ public class DelivererArrivedAtRestaurantMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        if (!DelivererIO.FindCurrentOrder(out var currentOrder))
+        if (!OrderIO.FindCurrentOrder(out var currentOrder))
         {
             IODisplay.DisplayMessage(DelivererConstants.NOT_YET_ACCEPTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);

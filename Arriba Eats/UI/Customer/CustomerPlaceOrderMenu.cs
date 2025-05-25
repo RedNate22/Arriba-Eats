@@ -17,7 +17,7 @@ public class CustomerPlaceOrderMenu : IMenu
     
     /// <summary>
     /// Get and set <see cref="_orderNumber"/>. A new number must be returned from 
-    /// <see cref="CustomerIO.GetOrderFromCustomer"/> and assigned to keep every order no. unique.
+    /// <see cref="OrderIO.GetOrderFromCustomer"/> and assigned to keep every order no. unique.
     /// </summary>
     public int OrderNumber
     {
@@ -28,7 +28,7 @@ public class CustomerPlaceOrderMenu : IMenu
     /// <summary>
     /// Displays the <see cref="Entities.Restaurant"/>'s menu, the current order total amount, and option to
     /// either complete or cancel the order.
-    /// <para> This method calls the <see cref="CustomerIO.GetOrderFromCustomer"/> method to assign an order
+    /// <para> This method calls the <see cref="OrderIO.GetOrderFromCustomer"/> method to assign an order
     /// number to the new <see cref="Entities.CustomerOrder"/>. If the order is successful, a new order
     /// number is returned. This new number can be compared to determine the order was confirmed. 
     /// The <see cref="Entities.Customer"/> is then taken back to the <see cref="CustomerBrowseRestaurantsMenu"/>
@@ -38,7 +38,7 @@ public class CustomerPlaceOrderMenu : IMenu
     public void DisplayMenu()
     {
         // * Returns a new order number if order is confirmed
-        int newOrderNumber = CustomerIO.GetOrderFromCustomer(OrderNumber);
+        int newOrderNumber = OrderIO.GetOrderFromCustomer(OrderNumber);
         
         CustomerBrowseRestaurantsMenu.ReturningFromMenu = true;
         if (newOrderNumber != OrderNumber)

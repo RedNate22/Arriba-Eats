@@ -23,7 +23,7 @@ public class ClientFinishCookingMenu : IMenu
         var customerOrders = IODisplay.GetCustomerOrders();
 
         // * Check if any orders are cooking and display them - updating the index
-        int choiceIndex = ClientIO.DisplayOrdersReadyToFinishCooking(customerOrders, out List<dynamic> ordersToFinish);
+        int choiceIndex = OrderIO.DisplayOrdersReadyToFinishCooking(customerOrders, out List<dynamic> ordersToFinish);
 
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
         IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));

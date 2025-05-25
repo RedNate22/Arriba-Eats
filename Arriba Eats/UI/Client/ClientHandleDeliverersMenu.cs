@@ -29,7 +29,7 @@ public class ClientHandleDeliverersMenu : IMenu
 
         // * Check if any orders are ordered, cooking, or cooked, and the deliverer has arrived,
         // * and display them - updating the index
-        int choiceIndex = ClientIO.DisplayOrdersReadyForCollection(customerOrders, out List<dynamic> ordersForCollection);
+        int choiceIndex = OrderIO.DisplayOrdersReadyForCollection(customerOrders, out List<dynamic> ordersForCollection);
 
         IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
         IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
@@ -42,7 +42,7 @@ public class ClientHandleDeliverersMenu : IMenu
         {
             var selectedOrder = ordersForCollection[choice - 1];
 
-            if (!ClientIO.IsCooked(selectedOrder.OrderStatus))
+            if (!OrderIO.IsCooked(selectedOrder.OrderStatus))
             {
                 IODisplay.DisplayMessage(ClientConstants.ORDER_NOT_COOKED_STR);
                 UIFlowController.ChangeMenu(MenuState.ClientMainMenu);

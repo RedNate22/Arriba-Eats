@@ -20,7 +20,7 @@ public class DelivererListOrdersAvailableMenu : IMenu
     /// </summary>
     public void DisplayMenu()
     {
-        if (DelivererIO.FindCurrentOrder(out var currentOrder))
+        if (OrderIO.FindCurrentOrder(out var currentOrder))
         {
             IODisplay.DisplayMessage(DelivererConstants.ALREADY_SELECTED_ORDER_STR);
             UIFlowController.ChangeMenu(MenuState.DelivererMainMenu);
@@ -29,11 +29,11 @@ public class DelivererListOrdersAvailableMenu : IMenu
         else
         {
             string delivererLocation = RegistrationIO.GetLocation();
-            DelivererIO.DelivererChangeLocation(delivererLocation);
+            UserIO.DelivererChangeLocation(delivererLocation);
 
             // Display active orders
             IODisplay.DisplayMessage(DelivererConstants.ORDERS_AVAILABLE_TO_DELIVER_STR);
-            var customerOrdersList = DelivererIO.DisplayOrdersList(out int choiceIndex);
+            var customerOrdersList = OrderIO.DisplayOrdersList(out int choiceIndex);
             IODisplay.DisplayMessage(IOUtilities.ReturnToPreviousMenuStr(choiceIndex));
             IODisplay.DisplayMessage(IOUtilities.EnterChoiceStr(choiceIndex));
 

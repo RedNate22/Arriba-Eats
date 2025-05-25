@@ -59,7 +59,7 @@ public class ClientMainMenu : IMenu
                 break;
 
             case ADD_ITEM_RESTAURANT_INT:
-                ClientIO.AddItemsToRestaurant();
+                RestaurantIO.AddItemsToRestaurant();
                 break;
 
             case SEE_CURRENT_ORDERS_INT:
